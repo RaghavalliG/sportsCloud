@@ -515,13 +515,13 @@ console.log("volenteer",volenteerData)
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents manger="manger" />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => {
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
                                 <select onChange={change} >
@@ -534,39 +534,39 @@ console.log("volenteer",volenteerData)
                                         })}
                                 </select>
                                 <div className="dropBtn">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         ACCOUNT
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a class="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
-                                            <li><a class="dropdown-item" href="#">My Account</a></li>
+                                            <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Credit" }} >
-                                            <li><a class="dropdown-item" href="#">Credits</a></li>
+                                            <li><a className="dropdown-item" href="#">Credits</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Household" }} >
-                                            <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                                            <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Biling" }} >
-                                            <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                                            <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/CreateTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Create New Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/SignOut" }} >
-                                            <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                                            <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                                         </Link>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="profile-head">
-                                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
                                         <img src={`${pic}${profilePic.profile_image}`} alt="" />
@@ -574,16 +574,16 @@ console.log("volenteer",volenteerData)
 
                                 </div>
                             </div>
-                            <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                         </div>
 
-                        <div class="prefarance-page">
-                            <div class="page-header">
-                                <h2 class="page-title">Assignments</h2>
-                                <div class="right-head-buttons">
-                                    <a href="#" class="add-new-btn" data-toggle="modal" data-target="#addassignment" onClick={() => setModalValue(true)}>Add New</a>
-                                    <a href="#" class="view-preferance" data-toggle="modal" data-target="#assignmentpreferance">View Preferences</a>
+                        <div className="prefarance-page">
+                            <div className="page-header">
+                                <h2 className="page-title">Assignments</h2>
+                                <div className="right-head-buttons">
+                                    <a href="#" className="add-new-btn" data-toggle="modal" data-target="#addassignment" onClick={() => setModalValue(true)}>Add New</a>
+                                    <a href="#" className="view-preferance" data-toggle="modal" data-target="#assignmentpreferance">View Preferences</a>
                                 </div>
                             </div>
 
@@ -616,11 +616,11 @@ console.log("volenteer",volenteerData)
                                     </select>
 
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Date</h2>
-                                    <div class="input-select" style={{ width: "27%" }}>
+                                    <div className="input-select" style={{ width: "27%" }}>
                                         <DatePicker selected={startDate} show="false" onChange={(date) => setStartDate(date)} className="abc" />
                                     </div>
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Time</h2>
-                                    <div class="input-select" style={{ width: "80%", marginLeft: "11%", borderRadius: "10px", border: "1px solid black" }}>
+                                    <div className="input-select" style={{ width: "80%", marginLeft: "11%", borderRadius: "10px", border: "1px solid black" }}>
                                         <TimePicker
                                             onChange={setTime}
                                             value={time}
@@ -652,8 +652,8 @@ console.log("volenteer",volenteerData)
 
                                     </select>
 
-                                    <button class="add-links" style={{ margin: "10px" }} onClick={(e) => setModalValue(false)}>Cancel</button>
-                                    <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiionSave}>Save</button>
+                                    <button className="add-links" style={{ margin: "10px" }} onClick={(e) => setModalValue(false)}>Cancel</button>
+                                    <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiionSave}>Save</button>
                                     <button style={{ backgroundColor: "#1d1b1b", padding: "13px", borderRadius: "30px", margin: "10px", color: "white", width: "338px" }}>+Save and Create Another</button>
                                 </Modal.Body>
 
@@ -692,11 +692,11 @@ console.log("volenteer",volenteerData)
                                     </select>
 
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Date</h2>
-                                    <div class="input-select" style={{ width: "27%" }}>
+                                    <div className="input-select" style={{ width: "27%" }}>
                                         <DatePicker selected={startDate} defaultValue={assignment[id].date} show="false" onChange={(date) => setStartDate(date)} className="abc" />
                                     </div>
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Time</h2>
-                                    <div class="input-select" style={{ width: "80%", marginLeft: "11%", borderRadius: "10px", border: "1px solid black" }}>
+                                    <div className="input-select" style={{ width: "80%", marginLeft: "11%", borderRadius: "10px", border: "1px solid black" }}>
                                         <TimePicker
                                             onChange={setTime}
                                             value={assignment[id].time}
@@ -729,8 +729,8 @@ console.log("volenteer",volenteerData)
 
                                     </select>
 
-                                    <button class="add-links" style={{ margin: "10px" }} onClick={(e) => setModeValue(false)}>Cancel</button>
-                                    <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiionUpdate}>Save</button>
+                                    <button className="add-links" style={{ margin: "10px" }} onClick={(e) => setModeValue(false)}>Cancel</button>
+                                    <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiionUpdate}>Save</button>
                                     <button style={{ backgroundColor: "#1d1b1b", padding: "13px", borderRadius: "30px", margin: "10px", color: "white", width: "338px" }}>+Save and Create Another</button>
                                 </Modal.Body>
 
@@ -738,8 +738,8 @@ console.log("volenteer",volenteerData)
 
 
 
-                            <div class="prefarance-box">
-                                <div class="team-payment team-assesment">
+                            <div className="prefarance-box">
+                                <div className="team-payment team-assesment">
                                     <table>
                                         <tr>
                                             <th>Game/ Event</th>
@@ -753,11 +753,11 @@ console.log("volenteer",volenteerData)
                                             return (
                                                 <tr >
                                                     <td>
-                                                        <div class="flag-prac">
+                                                        <div className="flag-prac">
                                                             <img src={flag} alt="" />
-                                                            <button class="practice">{assignment.eventGameDetails.event_type}</button>
+                                                            <button className="practice">{assignment.eventGameDetails.event_type}</button>
                                                         </div>
-                                                        <div class="game-name">
+                                                        <div className="game-name">
                                                             {assignment.eventGameDetails.name}</div>
                                                     </td>
                                                     <td><span>{assignment.date}</span></td>
@@ -768,17 +768,17 @@ console.log("volenteer",volenteerData)
                                                         <span>{assignment.location}</span>
                                                     </td>
                                                     <td>{assignment.assignment}
-                                                        {/* <div class="add-btn">
+                                                        {/* <div className="add-btn">
                                                 <button><img src={add} alt="" /></button>
                                             </div> */}
                                                     </td>
                                                     <td>
-                                                        <div class="last-row">
+                                                        <div className="last-row">
                                                             <p>{assignment.volunteer}</p>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="last-row">
+                                                        <div className="last-row">
                                                             <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteAssignmentData(assignment._id)}><img src={Delect} /></button>
                                                             <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => updateModalValue(id, assignment._id)}><img src={pencil} /></button>
                                                         </div>
@@ -812,11 +812,11 @@ export default TeamAssignments;
 {/* 
                                         <tr>
                                             <td>
-                                                <div class="flag-prac">
+                                                <div className="flag-prac">
                                                     <img src={flag} alt="" />
-                                                    <button class="practice">Practice</button>
+                                                    <button className="practice">Practice</button>
                                                 </div>
-                                                <div class="game-name">
+                                                <div className="game-name">
                                                     Dubcity Basketball
 Practice</div>
                                             </td>
@@ -830,12 +830,12 @@ Practice</div>
 Fallon Middle Schoo</span>
                                             </td>
                                             <td>Scorekeeper
-                                    <div class="add-btn">
+                                    <div className="add-btn">
                                                     <button><img src={add} alt="" /></button>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <p>Avaneesh Shetti</p> <button><img src={Delect} /></button> <button><img src={pencil} /></button>
                                                 </div>
                                             </td>
@@ -843,11 +843,11 @@ Fallon Middle Schoo</span>
 
                                         <tr>
                                             <td>
-                                                <div class="flag-prac">
+                                                <div className="flag-prac">
                                                     <img src={flag} alt="" />
-                                                    <button class="practice">Practice</button>
+                                                    <button className="practice">Practice</button>
                                                 </div>
-                                                <div class="game-name">
+                                                <div className="game-name">
                                                     Dubcity Basketball
 Practice</div>
                                             </td>
@@ -861,12 +861,12 @@ Practice</div>
 Fallon Middle Schoo</span>
                                             </td>
                                             <td>Scorekeeper
-                                    <div class="add-btn">
+                                    <div className="add-btn">
                                                     <button><img src={add} alt="" /></button>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <p>Avaneesh Shetti</p> <button><img src={Delect} /></button> <button><img src={pencil} /></button>
                                                 </div>
                                             </td>
@@ -874,11 +874,11 @@ Fallon Middle Schoo</span>
 
                                         <tr>
                                             <td>
-                                                <div class="flag-prac">
+                                                <div className="flag-prac">
                                                     <img src={flag} alt="" />
-                                                    <button class="practice">Practice</button>
+                                                    <button className="practice">Practice</button>
                                                 </div>
-                                                <div class="game-name">
+                                                <div className="game-name">
                                                     Dubcity Basketball
 Practice</div>
                                             </td>
@@ -892,12 +892,12 @@ Practice</div>
 Fallon Middle Schoo</span>
                                             </td>
                                             <td>Scorekeeper
-                                    <div class="add-btn">
+                                    <div className="add-btn">
                                                     <button><img src={add} alt="" /></button>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <p>Avaneesh Shetti</p> <button><img src={Delect} /></button> <button><img src={pencil} /></button>
                                                 </div>
                                             </td>

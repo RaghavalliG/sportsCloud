@@ -24,31 +24,31 @@ const AlertSent = () => {
         post:false
     })
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
             <SideNav name="Alert"/>
-            <div class="tab-content">
-                <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                    <div class="prefarance-tab-content">
+            <div className="tab-content">
+                <div className="tab-pane active" id="tabs-1" role="tabpanel">
+                    <div className="prefarance-tab-content">
 
-                        <div class="prefarance-form playerinfo-form">
+                        <div className="prefarance-form playerinfo-form">
 
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="prefarance-form-list">
+                            <div className="row">
+                                <div className="col-md-9">
+                                    <div className="prefarance-form-list">
 
                                         <input type="checkbox" style={{ height: "15px", width: "17px" }} />
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="prefarance-form-list">
-                                        <button class="add-links" style={{ margin: "10px" }}>Delete</button>
+                                <div className="col-md-3">
+                                    <div className="prefarance-form-list">
+                                        <button className="add-links" style={{ margin: "10px" }}>Delete</button>
                                     </div>
                                 </div>
                             </div>
 
                             
-                            <div class="team-payment team-assesment">
+                            <div className="team-payment team-assesment">
 
                                 <table  >
                                     <thead >

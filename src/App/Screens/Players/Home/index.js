@@ -229,12 +229,12 @@ function HomeComponents(props) {
   return (
     <div>
 
-      <div class="dashboard-container">
-        <div class="dashboard-main">
+      <div className="dashboard-container">
+        <div className="dashboard-main">
           <SideMenuComponents />
-          <div class="dashboard-main-content">
-            <div class="dashboard-head">
-              <div class="teams-select">
+          <div className="dashboard-main-content">
+            <div className="dashboard-head">
+              <div className="teams-select">
                 <select>
                   {team.map((team) => {
                     return (
@@ -244,18 +244,18 @@ function HomeComponents(props) {
                 </select>
               </div>
               {/* <!--
-                   <div class="create-teams">
+                   <div className="create-teams">
                 <button><img src="images/add-team.png" alt="" /> Create New Team</button>
               </div>
               --> */}
-              <div class="profile-head">
+              <div className="profile-head">
                 {profilePic.fname ?
-                  <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
-                  <div class="profile-head-name">Loading...</div>
+                  <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
+                  <div className="profile-head-name">Loading...</div>
 
                 }
 
-                <div class="profile-head-img">
+                <div className="profile-head-img">
                   {profilePic.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
                     <img src={`${pic1}${profilePic.profile_image}`} alt="" />
@@ -263,18 +263,18 @@ function HomeComponents(props) {
 
                 </div>
               </div>
-              <div class="login-account">
+              <div className="login-account">
                 <ul>
                   <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                   {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
                 </ul>
               </div>
             </div>
-            <div class="dashboard-top-content">
-              <div class="dashboard-top-content-left">
-                <div class="dashboard-top-content-left-top">
-                  <div class="team-profile">
-                    <div class="team-profile-img">
+            <div className="dashboard-top-content">
+              <div className="dashboard-top-content-left">
+                <div className="dashboard-top-content-left-top">
+                  <div className="team-profile">
+                    <div className="team-profile-img">
                       {profilePic.profile_image == null ?
                         <img src={BigUserProfile} alt="" /> :
                         <img src={`${pic1}${profilePic.profile_image}`} alt="" />
@@ -282,25 +282,25 @@ function HomeComponents(props) {
                     </div>
                     {
                       profilePic.fname ?
-                        <div class="team-profile-name">
+                        <div className="team-profile-name">
                           {profilePic.fname + " " + profilePic.lname}
                         </div> :
-                        <div class="team-profile-name">
+                        <div className="team-profile-name">
                           Loading...
                         </div>
 
                     }
 
-                    <div class="update-team-photo">
+                    <div className="update-team-photo">
                       Update Player Photo
                       <input type="file" onChange={(event) => handleChange(event)} />
                     </div>
                   </div>
 
-                  <div class="invoice-due">
-                    <div class="ionice-due-inner">
+                  <div className="invoice-due">
+                    <div className="ionice-due-inner">
                       <h2>Invoices Due</h2>
-                      <div class="invoice-icon">
+                      <div className="invoice-icon">
                         <img src={Invoice} alt="" />
                       </div>
 
@@ -311,63 +311,63 @@ function HomeComponents(props) {
                   </div>
 
                 </div>
-                <div class="dashboard-top-content-left-bottom">
-                  <div class="dublin-weather">
+                <div className="dashboard-top-content-left-bottom">
+                  <div className="dublin-weather">
                     <h2>Local Weather</h2>
                     {degree.length == 0 ?
                       <div>
-                        <div class="dublin-weather-bottom">
-                          <div class="dublin-weather-bottom-boxes">
+                        <div className="dublin-weather-bottom">
+                          <div className="dublin-weather-bottom-boxes">
                             <h3>Today</h3>
                             <img src={Cloudy} alt="" />
 
-                            <div class="active-degree">
+                            <div className="active-degree">
                               <p>34˚/30˚</p>
 
                             </div>
                           </div>
-                          <div class="dublin-weather-bottom-boxes">
+                          <div className="dublin-weather-bottom-boxes">
                             <h3>Sat</h3>
                             <img src={Cloudy} alt="" />
                             <p>34˚/30˚</p>
 
                           </div>
-                          <div class="dublin-weather-bottom-boxes">
+                          <div className="dublin-weather-bottom-boxes">
                             <h3>Sun</h3>
                             <img src={Cloudy} alt="" />
                             <p>34˚/30˚</p>
 
                           </div>
-                          <div class="dublin-weather-bottom-boxes">
+                          <div className="dublin-weather-bottom-boxes">
                             <h3>Mon</h3>
                             <img src={Cloudy} alt="" />
                             <p>34˚/30˚</p>
 
                           </div>
                         </div></div> :
-                      <div><div class="dublin-weather-bottom">
-                        <div class="dublin-weather-bottom-boxes">
+                      <div><div className="dublin-weather-bottom">
+                        <div className="dublin-weather-bottom-boxes">
                           <h3>Today</h3>
                           <img src={Cloudy} alt="" />
 
-                          <div class="active-degree">
+                          <div className="active-degree">
                             <p>{degree[0].temp.max}˚/{degree[0].temp.min}˚</p>
 
                           </div>
                         </div>
-                        <div class="dublin-weather-bottom-boxes">
+                        <div className="dublin-weather-bottom-boxes">
                           <h3>Sat</h3>
                           <img src={Cloudy} alt="" />
                           <p>{degree[1].temp.max}˚/{degree[1].temp.min}˚</p>
 
                         </div>
-                        <div class="dublin-weather-bottom-boxes">
+                        <div className="dublin-weather-bottom-boxes">
                           <h3>Sun</h3>
                           <img src={Cloudy} alt="" />
                           <p>{degree[2].temp.max}˚/{degree[2].temp.min}˚</p>
 
                         </div>
-                        <div class="dublin-weather-bottom-boxes">
+                        <div className="dublin-weather-bottom-boxes">
                           <h3>Mon</h3>
                           <img src={Cloudy} alt="" />
                           <p>{degree[3].temp.max}˚/{degree[3].temp.min}˚</p>
@@ -377,26 +377,26 @@ function HomeComponents(props) {
                   </div>
                 </div>
               </div>
-              <div class="dashboard-top-content-right">
-                <div class="team-list-head">
+              <div className="dashboard-top-content-right">
+                <div className="team-list-head">
                   <h2>Team Roster</h2>
                   <a href="#">View All</a>
                 </div>
-                <div class="team-list-section">
+                <div className="team-list-section">
 
                   {
                     newplayerdata.map((player) => {
 
                       return (
-                        <div class="team-list-box">
-                          <div class="team-list-box-img">
+                        <div className="team-list-box">
+                          <div className="team-list-box-img">
                             {
                               player.member_id.profile_image == null ?
                                 <img src={teamList} alt="" /> :
                                 <img src={`${pic1}${player.member_id.profile_image}`} alt="" />
                             }
                           </div>
-                          <div class="team-list-box-text">
+                          <div className="team-list-box-text">
                             <h4>{player.member_id.fname} {player.member_id.lname}</h4>
                             <h5>{player.member_type}</h5>
                             <a href="#">{player.position}</a>
@@ -406,31 +406,31 @@ function HomeComponents(props) {
                     })
 
                   }
-                  {/* <div class="team-list-box">
-                    <div class="team-list-box-img">
+                  {/* <div className="team-list-box">
+                    <div className="team-list-box-img">
                       <img src={teamList} alt="" />
                     </div>
-                    <div class="team-list-box-text">
+                    <div className="team-list-box-text">
                       <h4>Boston Nets</h4>
                       <h5>Tab D’souza  <span>Manager</span></h5>
                       <a href="#">Go to Users Details</a>
                     </div>
                   </div>
-                  <div class="team-list-box">
-                    <div class="team-list-box-img">
+                  <div className="team-list-box">
+                    <div className="team-list-box-img">
                       <img src={teamList} alt="" />
                     </div>
-                    <div class="team-list-box-text">
+                    <div className="team-list-box-text">
                       <h4>Brooklyn Nets</h4>
                       <h5>Tab D’souza  <span>Player</span></h5>
                       <a href="#">Go to Users Details</a>
                     </div>
                   </div>
-                  <div class="team-list-box">
-                    <div class="team-list-box-img">
+                  <div className="team-list-box">
+                    <div className="team-list-box-img">
                       <img src={teamList} alt="" />
                     </div>
-                    <div class="team-list-box-text">
+                    <div className="team-list-box-text">
                       <h4>Golden State Warriors</h4>
                       <h5>Tab D’souza  <span>Administrative</span></h5>
                       <a href="#">Go to Users Details</a>
@@ -447,13 +447,13 @@ function HomeComponents(props) {
 
               </div>
             </div>
-            <div class="player-schedule-section">
-              <div class="record-standing-box">
-                <div class="record-standing-head">
+            <div className="player-schedule-section">
+              <div className="record-standing-box">
+                <div className="record-standing-head">
                   Player Status
                 </div>
-                <div class="record-standing-box-inner">
-                  <div class="standing-table">
+                <div className="record-standing-box-inner">
+                  <div className="standing-table">
                     <table>
                       <tr>
                         <th>Team</th>
@@ -504,25 +504,25 @@ function HomeComponents(props) {
                 </div>
               </div>
 
-              <div class="dashboard-schedule-section">
-                <div class="dashboard-schedule-head">
+              <div className="dashboard-schedule-section">
+                <div className="dashboard-schedule-head">
                   <h2>Schedule</h2>
                   <a href="#">View Full Schedule</a>
                 </div>
-                <div class="dashboard-schedule-main-box">
-                  <div class="dashboard-schedule-main-box-option">
-                    <label class="options-radio">Game
+                <div className="dashboard-schedule-main-box">
+                  <div className="dashboard-schedule-main-box-option">
+                    <label className="options-radio">Game
                       <input type="radio" name="radio" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                     </label>
 
-                    <label class="options-radio">Event
+                    <label className="options-radio">Event
                       <input type="radio" name="radio" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                     </label>
                   </div>
-                  {/* <div class="dashboard-schedule-game-event">
-                    <div class="dashboard-schedule-game-event-calender">
+                  {/* <div className="dashboard-schedule-game-event">
+                    <div className="dashboard-schedule-game-event-calender">
                       <img src={Calender} alt="" />
                     </div>
 
@@ -534,33 +534,33 @@ function HomeComponents(props) {
 
             </div>
 
-            <div class="record-save-section">
-              <div class="record-save-box">
-                <div class="record-standing-head">
+            <div className="record-save-section">
+              <div className="record-save-box">
+                <div className="record-standing-head">
                   Record
                 </div>
-                <div class="record-save-box-inner">
-                  <div class="record-main-top">
+                <div className="record-save-box-inner">
+                  <div className="record-main-top">
                     <button>Last Game</button>
                     <h4>vs. HuskiesTS Grey</h4>
                     <span>Sat, Mar 14, 10:15 AM</span>
 
                   </div>
-                  <div class="record-line-bar">
+                  <div className="record-line-bar">
                     <img src={lineBar} alt="" />
                   </div>
-                  <div class="enter-result">
-                    <button class="enter-result-btn">Enter Result</button>
+                  <div className="enter-result">
+                    <button className="enter-result-btn">Enter Result</button>
                   </div>
                 </div>
               </div>
-              <div class="save-travel">
-                <div class="record-standing-head">
+              <div className="save-travel">
+                <div className="record-standing-head">
                   Save on Travel
                 </div>
-                <div class="record-save-box-inner">
-                  <div class="save-on-travel">
-                    <div class="save-on-travel-img">
+                <div className="record-save-box-inner">
+                  <div className="save-on-travel">
+                    <div className="save-on-travel-img">
                       <img src={saveTravel} alt="" />
                     </div>
                     <h4>TeamSnap for Clubs & Leagues</h4>
@@ -571,29 +571,29 @@ function HomeComponents(props) {
               </div>
 
             </div>
-            <div class="myteam-teamsnap-section">
-              <div class="record-save-box">
-                <div class="record-standing-head">
+            <div className="myteam-teamsnap-section">
+              <div className="record-save-box">
+                <div className="record-standing-head">
                   My Teams
                 </div>
-                <div class="myteam-list-section">
+                <div className="myteam-list-section">
                   {
                     team.map((team) => {
                       console.log('team ----', team);
                       return (
-                        <div class="team-list-box" key={team.id}>
-                          <div class="team-list-box-img" >
+                        <div className="team-list-box" key={team.id}>
+                          <div className="team-list-box-img" >
                             {team.team_id.image == null ?
                               <img src={UserProfile} alt="" /> :
                               <img src={`${pic}${team.team_id.image}`} alt="" />
                             }
                           </div>
-                          <div class="team-list-box-text">
+                          <div className="team-list-box-text">
                             <h4>{team.team_id.team_name}</h4>
-                            {/* <div class="my-team-details">
-                        <div class="name">John Doe</div>
-                        <div class="category">Player</div>
-                        <div class="season">Spring Season</div>
+                            {/* <div className="my-team-details">
+                        <div className="name">John Doe</div>
+                        <div className="category">Player</div>
+                        <div className="season">Spring Season</div>
                       </div> */}
 
                           </div>
@@ -611,25 +611,25 @@ function HomeComponents(props) {
 
                 </div>
               </div>
-              <div class="teamsnap-section">
-                <div class="teamsnap-section-head">
+              <div className="teamsnap-section">
+                <div className="teamsnap-section-head">
                   <h2>The TeamSnap Blog</h2>
                   <a href="#">View All</a>
                 </div>
-                <div class="teamsnap-section-main">
-                  <div class="teamsnap-list-box">
+                <div className="teamsnap-section-main">
+                  <div className="teamsnap-list-box">
                     <p>You Can Help Save Youth Sports in 30 Seconds.</p>
                     <span>May 7, 2021</span>
                   </div>
-                  <div class="teamsnap-list-box">
+                  <div className="teamsnap-list-box">
                     <p>You Can Help Save Youth Sports in 30 Seconds.</p>
                     <span>May 7, 2021</span>
                   </div>
-                  <div class="teamsnap-list-box">
+                  <div className="teamsnap-list-box">
                     <p>You Can Help Save Youth Sports in 30 Seconds.</p>
                     <span>May 7, 2021</span>
                   </div>
-                  <div class="teamsnap-list-box">
+                  <div className="teamsnap-list-box">
                     <p>You Can Help Save Youth Sports in 30 Seconds.</p>
                     <span>May 7, 2021</span>
                   </div>

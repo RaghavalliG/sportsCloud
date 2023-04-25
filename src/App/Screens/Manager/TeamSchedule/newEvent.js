@@ -367,12 +367,12 @@ const NewEvent = () => {
 
 
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
-            <div class="dashboard-main-content">
-                <div class="dashboard-head">
-                    <div class="teams-select">
-                        <button class="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
+            <div className="dashboard-main-content">
+                <div className="dashboard-head">
+                    <div className="teams-select">
+                        <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
                         <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                             {dropdown.map((dropdown) => {
@@ -390,9 +390,9 @@ const NewEvent = () => {
                 </select>
                     </div>
 
-                    <div class="profile-head">
-                        <div class="profile-head-name">{user ? user.fname : null}</div>
-                        <div class="profile-head-img">
+                    <div className="profile-head">
+                        <div className="profile-head-name">{user ? user.fname : null}</div>
+                        <div className="profile-head-img">
                             {
                                 user ?
                                     <img src={user.profile_image} alt="" /> :
@@ -401,71 +401,71 @@ const NewEvent = () => {
 
                         </div>
                     </div>
-                    <div class="login-account">
+                    <div className="login-account">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                             {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
                         </ul>
                     </div>
                 </div>
-                <div class="prefarance-box" style={{ overflow: "auto" }} >
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "35px" }}>New {state}</h1> </a>
+                <div className="prefarance-box" style={{ overflow: "auto" }} >
+                    <ul className="nav nav-tabs" role="tablist">
+                        <li className="nav-item">
+                            <a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "35px" }}>New {state}</h1> </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">{state} Details</a>
+                        <li className="nav-item">
+                            <a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab">{state} Details</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Optional {state} Info</a>
+                        <li className="nav-item">
+                            <a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Optional {state} Info</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Assignment</a>
+                        <li className="nav-item">
+                            <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Assignment</a>
                         </li>
 
                     </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <div class="prefarance-tab-content">
+                    <div className="tab-content">
+                        <div className="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div className="prefarance-tab-content">
 
-                                <div class="prefarance-form playerinfo-form">
+                                <div className="prefarance-form playerinfo-form">
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label> Name of {state}</label>
-                                                <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setName(e.target.value)} />
+                                                <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setName(e.target.value)} />
                                             </div>
                                         </div>
 
 
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Short Lebel</label>
-                                                <input type="text" class="input-select" placeholder="e.g ,Practice,BBQ,Meeting,etc" onChange={(e) => setLebel(e.target.value)} />
+                                                <input type="text" className="input-select" placeholder="e.g ,Practice,BBQ,Meeting,etc" onChange={(e) => setLebel(e.target.value)} />
                                                 <p style={{ color: "gray" }}>A short lebel to identify the types of event, 10 character max</p>
                                             </div>
                                         </div>
                                       
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                             <label>Date</label>
-                                            <input type="date"  onChange={(e) => setStartDate(e.target.value)} class="input-select"/>
+                                            <input type="date"  onChange={(e) => setStartDate(e.target.value)} className="input-select"/>
                                             </div>
                                         </div>
                                    
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                             <label>Time <span style={{ color: "gray" }}>(Leave Blank for "TBD")</span></label>
-                                            <input type="time"  onChange={(e) => setTime(e.target.value)} class="input-select"/>
+                                            <input type="time"  onChange={(e) => setTime(e.target.value)} className="input-select"/>
                                             <p style={{ color: "gray" }}>Pacific Time (US & Canada)<span style={{ color: "red" }}>Change</span></p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Team</label>
-                                                {/* <input type="text" class="input-select" onChange={(e) => setOponent(e.target.value)} /> */}
-                                                <select class="input-select" onChange={changeTeam}>
+                                                {/* <input type="text" className="input-select" onChange={(e) => setOponent(e.target.value)} /> */}
+                                                <select className="input-select" onChange={changeTeam}>
                                                     <option value="">Select A Team </option>
                                                     {dropdown.map((dropdown) => {
                                                         return (
@@ -478,11 +478,11 @@ const NewEvent = () => {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Oponent</label>
-                                                {/* <input type="text" class="input-select" onChange={(e) => setOponent(e.target.value)} /> */}
-                                                <select class="input-select" onChange={changeOponent} >
+                                                {/* <input type="text" className="input-select" onChange={(e) => setOponent(e.target.value)} /> */}
+                                                <select className="input-select" onChange={changeOponent} >
                                                     <option value="">Select Oponent Team </option>
                                                     {dropdown.map((dropdown) => {
                                                         return (
@@ -495,48 +495,48 @@ const NewEvent = () => {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Location</label>
-                                                <input type="text" class="input-select" onChange={(e) => setLocation(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setLocation(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Location Details</label>
-                                                <input type="text" class="input-select" onChange={(e) => setLocationDetails(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setLocationDetails(e.target.value)} />
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-3">
+                                            <div className="prefarance-form-list">
                                                 <label>Start Time</label>
-                                                <input type="time" class="input-select" onChange={(e) => setStartTime(e.target.value)} />
+                                                <input type="time" className="input-select" onChange={(e) => setStartTime(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-3">
+                                            <div className="prefarance-form-list">
                                                 <label >End Time</label>
-                                                <input type="time" class="input-select" onChange={(e) => setEndTime(e.target.value)} />
+                                                <input type="time" className="input-select" onChange={(e) => setEndTime(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Arrival Time</label>
-                                                <input type="time" class="input-select" onChange={(e) => setArrivalTime(e.target.value)} />
+                                                <input type="time" className="input-select" onChange={(e) => setArrivalTime(e.target.value)} />
                                                 <p style={{ color: "gray" }}> minutes befor the starting  time</p>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Display Icon</label>
 
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <div style={{ display: "flex" }}>
                                                     {flag.map((flag) => {
                                                         return (
@@ -552,51 +552,51 @@ const NewEvent = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list">
                                                 <label >Notes</label>
-                                                <input type="text" class="input-select" style={{ height: "150px" }} onChange={(e) => setNote(e.target.value)} />
+                                                <input type="text" className="input-select" style={{ height: "150px" }} onChange={(e) => setNote(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list">
                                                 <label >Availability</label>
                                                 <input type="checkbox" style={{ height: "15px", width: "17px" }} onChange={(e) => setAvalability(e.target.value)} />
                                                 <span style={{ color: "white" }}>Track availability on the Availability tab</span>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Assignment</label>
-                                                <input type="text" class="input-select" onChange={(e) => setAssingment(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setAssingment(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Uniform</label>
-                                                <input type="text" class="input-select" onChange={(e) => setUniform(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setUniform(e.target.value)} />
                                                 <p style={{ color: "red", fontSize: "15px", float: "right" }}>+Add Another</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list">
                                                 <input type="checkbox" style={{ height: "15px", width: "17px" }} onClick={() => setCheck(check == "true" ? "false" : "true")} />
                                                 <span style={{ color: "white" }}> Notify Your Team?</span>
-                                                <button class="add-links" style={{ margin: "10px" }}>Cancel</button>
-                                                <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiion}>Save</button>
+                                                <button className="add-links" style={{ margin: "10px" }}>Cancel</button>
+                                                <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiion}>Save</button>
                                                 <button style={{ backgroundColor: "#1d1b1b", padding: "13px", borderRadius: "30px", margin: "10px", color: "white" }}>+Save and Create Another</button>
                                             </div>
                                         </div>
-                                        {/* <div class="col-md-6">
-                                                        <div class="prefarance-form-list">
+                                        {/* <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
                                                             <label>Links</label>
-                                                            <button class="add-links">Add Links</button>
+                                                            <button className="add-links">Add Links</button>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="prefarance-form-list">
+                                                    <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
                                                             <label>Files</label>
-                                                            <button class="add-links">Add Files</button>
+                                                            <button className="add-links">Add Files</button>
                                                         </div>
                                                     </div> */}
                                     </div>

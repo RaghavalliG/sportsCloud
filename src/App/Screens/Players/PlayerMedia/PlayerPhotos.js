@@ -51,12 +51,12 @@ function PlayerPhotos(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
                                 <select>
                                     <option>My Teams</option>
                                     <option>My Teams 2</option>
@@ -64,9 +64,9 @@ function PlayerPhotos(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -75,7 +75,7 @@ function PlayerPhotos(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -83,33 +83,33 @@ function PlayerPhotos(props) {
                             </div>
                         </div>
 
-                 <div class="prefarance-page">
-                   <div class="player-info-head">
-                    <h2 class="page-title">Photo Albums</h2>
-                        <div class="player-info-head-right">    
-                        <div class="streming-head-right">
-                            <div class="stream-tab">
+                 <div className="prefarance-page">
+                   <div className="player-info-head">
+                    <h2 className="page-title">Photo Albums</h2>
+                        <div className="player-info-head-right">    
+                        <div className="streming-head-right">
+                            <div className="stream-tab">
                                 <ul>
                                     <li onClick={() => history.push("./PlayerMedia")}><a href="#">Stream</a></li>
-                                    <li><a class="active" href="#">Photos</a></li>
+                                    <li><a className="active" href="#">Photos</a></li>
                                     <li onClick={() => history.push("./PlayerVideos")}><a href="#">Videos</a></li>
                                     <li onClick={() => history.push("./PlayerFiles")}><a href="#">Files</a></li>
                                 </ul>
                             </div>
-                            <button class="start-stream-btn actvUpld">Upload New Photo</button>
-                            <button class="start-stream-btn">Make Album Private</button>
+                            <button className="start-stream-btn actvUpld">Upload New Photo</button>
+                            <button className="start-stream-btn">Make Album Private</button>
                         </div>
                         </div>
                     </div>
 
-                    <div class="prefarance-form-list">
-                            <label class="options-check-family">Select All
+                    <div className="prefarance-form-list">
+                            <label className="options-check-family">Select All
                             <input type="checkbox"/>
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                             </label>
                     </div>
 
-                    <div class="prefarance-box playerPhotopage">                      
+                    <div className="prefarance-box playerPhotopage">                      
                         <div className="ppHead">
                             <span>&nbsp;</span>
                             <select>

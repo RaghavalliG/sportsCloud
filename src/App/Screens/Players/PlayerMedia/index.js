@@ -50,12 +50,12 @@ function PlayerMedia(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
                                 <select>
                                     <option>My Teams</option>
                                     <option>My Teams 2</option>
@@ -63,9 +63,9 @@ function PlayerMedia(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -74,7 +74,7 @@ function PlayerMedia(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -82,78 +82,78 @@ function PlayerMedia(props) {
                             </div>
                         </div>
 
-                 <div class="prefarance-page">
-                   <div class="player-info-head">
-                    <h2 class="page-title">Stream</h2>
-                    <div class="player-info-head-right">
+                 <div className="prefarance-page">
+                   <div className="player-info-head">
+                    <h2 className="page-title">Stream</h2>
+                    <div className="player-info-head-right">
     
-                      <div class="streming-head-right">
-                       <div class="stream-tab">
+                      <div className="streming-head-right">
+                       <div className="stream-tab">
                            <ul>
-                               <li><a class="active" href="#">Stream</a></li>
+                               <li><a className="active" href="#">Stream</a></li>
                                <li onClick={() => history.push("./PlayerPhotos")}><a href="#">Photos</a></li>
                                <li><a href="#" onClick={() => history.push("./PlayerVideos")}>Videos</a></li>
                                <li><a href="#" onClick={() => history.push("./PlayerFiles")}>Files</a></li>
                            </ul>
                        </div>
                        
-                       <button class="start-stream-btn">Start Stream</button>
+                       <button className="start-stream-btn">Start Stream</button>
                        </div>
                     </div>
                     </div>
-                    <div class="prefarance-box streaming-section">
-                      <div class="strame-chat-section">
-                          <div class="strame-main">
-                              <div class="strame-main-inner">
+                    <div className="prefarance-box streaming-section">
+                      <div className="strame-chat-section">
+                          <div className="strame-main">
+                              <div className="strame-main-inner">
                                   <h3>Connect streaming software to go live</h3>
                                   <p>Viewers will be able to find your stream once you go live</p>
                               </div>
                           </div>
-                          <div class="chat-main">
+                          <div className="chat-main">
                               <h4>Live Chat</h4>
-                              <div class="chat-main-input">
-                                  <input type="text" placeholder="say something..." class="input-field"/>
-                                  <button class="chat-send-btn"><img src="images/send-btn.png" alt=""/></button>
+                              <div className="chat-main-input">
+                                  <input type="text" placeholder="say something..." className="input-field"/>
+                                  <button className="chat-send-btn"><img src="images/send-btn.png" alt=""/></button>
                               </div>
                           </div>
                       </div>
                       
-                      <div class="streaming-form-section playerinfo-form">
-                          <div class="streaming-form-field-set">
-                              <div class="streaming-form-field-left">
-                                  <div class="prefarance-form-list">
+                      <div className="streaming-form-section playerinfo-form">
+                          <div className="streaming-form-field-set">
+                              <div className="streaming-form-field-left">
+                                  <div className="prefarance-form-list">
                         <label>Title</label>
-                        <input type="text" class="input-select"/>
+                        <input type="text" className="input-select"/>
                     </div>
                               </div>
-                              <div class="streaming-form-field-right">
-                                  <div class="prefarance-form-list">
+                              <div className="streaming-form-field-right">
+                                  <div className="prefarance-form-list">
                         <label>Game</label>
-                        <input type="text" class="input-select"/>
+                        <input type="text" className="input-select"/>
                     </div>
                               </div>
-                              <div class="streaming-form-field-left">
-                                  <div class="prefarance-form-list">
+                              <div className="streaming-form-field-left">
+                                  <div className="prefarance-form-list">
                         <label>Game Description</label>
-                        <textarea class="input-textarea"> </textarea>
+                        <textarea className="input-textarea"> </textarea>
                     </div>
                               </div>
-                              <div class="streaming-form-field-right">
-                                  <div class="prefarance-form-list">
+                              <div className="streaming-form-field-right">
+                                  <div className="prefarance-form-list">
                         <label>Team</label>
-                        <input type="text" class="input-select"/>
+                        <input type="text" className="input-select"/>
                          </div>
-                          <div class="prefarance-form-list">
+                          <div className="prefarance-form-list">
                         <label>Privacy</label>
-                        <input type="text" class="input-select"/>
+                        <input type="text" className="input-select"/>
                                   </div>
                    
                               </div>
                           </div>
-                          <div class="prefarance-form-list">
-                        <label class="options-check-family">Start sending us your video from your streaming software to go live
+                          <div className="prefarance-form-list">
+                        <label className="options-check-family">Start sending us your video from your streaming software to go live
                         <input type="checkbox"/>
-                        <span class="checkmark"></span>
+                        <span className="checkmark"></span>
                         </label>
                     </div>
                       </div>

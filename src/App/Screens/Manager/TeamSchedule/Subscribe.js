@@ -218,13 +218,13 @@ function Subscribe(props) {
     return (
 
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                                     {dropdown.map((dropdown) => {
@@ -240,9 +240,9 @@ function Subscribe(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -251,7 +251,7 @@ function Subscribe(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -259,53 +259,53 @@ function Subscribe(props) {
                             </div>
                         </div>
 
-                        <div class="prefarance-page">
-                            <div class="page-header">
-                                <h2 class="page-title">Export Schedule</h2>
+                        <div className="prefarance-page">
+                            <div className="page-header">
+                                <h2 className="page-title">Export Schedule</h2>
 
                             </div>
 
-                            <div class="prefarance-box" style={{ overflowX: "hidden" }}>
-                                <div class="team-payment team-assesment" >
-                                    <div class="prefarance-form playerinfo-form">
+                            <div className="prefarance-box" style={{ overflowX: "hidden" }}>
+                                <div className="team-payment team-assesment" >
+                                    <div className="prefarance-form playerinfo-form">
                                         <span style={{paddingLeft:"21px"}}>TeamSnap offers several ways to access or export your schedule data:</span>
 
-                                        <div class="row" style={{ padding: "21px" }}>
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                        <div className="row" style={{ padding: "21px" }}>
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <h1 style={{color:"white"}}>iCal</h1>
                                                     <p style={{ color: "gray",paddingTop:"15px",paddingBottom:"15px" }}>If you use Apple iCal, Microsoft Outlook 2007+ or any iCal-compatible desktop calendar application you can "subscribe"
 
                                                         to your TeamSanp Schedule and have your full schedule of games and events show up automatically in your calendar. Just click this button:</p>
-                                                    <button class="add-links" style={{width:"276px",marginRight:"10px"}}>Subscribe to full Calender</button>
-                                                    <button class="add-links" style={{width:"276px",marginRight:"10px"}}>Subscribe to Games only</button>
+                                                    <button className="add-links" style={{width:"276px",marginRight:"10px"}}>Subscribe to full Calender</button>
+                                                    <button className="add-links" style={{width:"276px",marginRight:"10px"}}>Subscribe to Games only</button>
                                                     <p style={{ color: "gray",paddingTop:"15px" }}>If you use Google Calendar, another web-based calendar, or just want to do things manually, you can also copy and paste the link directly into your calendar program (normally in the "Subscribe By URL" area):</p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <label> Full Calender</label>
-                                                    <input type="text" class="input-select" />
+                                                    <input type="text" className="input-select" />
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <label> Games Only</label>
-                                                    <input type="text" class="input-select" />
+                                                    <input type="text" className="input-select" />
 
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <label> CSV Export</label>
                                                     <span>You can export your schedule as a comma-separated (CSV) text file for use in a spreadsheet or word processing program. The file will begin downloading after you click the button below.</span>
                                                 </div>
                                             </div>
-                                            <div class="col-md-16">
-                                                <div class="prefarance-form-list" style={{ marginLeft: "10px" }}>
-                                                    <button class="add-links">Export Text File</button>
+                                            <div className="col-md-16">
+                                                <div className="prefarance-form-list" style={{ marginLeft: "10px" }}>
+                                                    <button className="add-links">Export Text File</button>
 
                                                 </div>
                                             </div>

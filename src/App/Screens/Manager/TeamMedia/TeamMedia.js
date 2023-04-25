@@ -149,13 +149,13 @@ function TeamMedia(props) {
 
   return (
     <div>
-      <div class="dashboard-container">
-        <div class="dashboard-main">
+      <div className="dashboard-container">
+        <div className="dashboard-main">
           <SideMenuComponents manger="manger"/>
-          <div class="dashboard-main-content">
-            <div class="dashboard-head">
-              <div class="teams-select">
-                <button class="create-new-team" onClick={() => {
+          <div className="dashboard-main-content">
+            <div className="dashboard-head">
+              <div className="teams-select">
+                <button className="create-new-team" onClick={() => {
                   history.push("/CreateTeam")
                 }}>Create New Teams</button>
                 <select onChange={change} >
@@ -168,39 +168,39 @@ function TeamMedia(props) {
                     })}
                 </select>
                 <div className="dropBtn">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                     ACCOUNT
                   </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                    <li><a class="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                    <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
                     <Link to={{ pathname: "/MyAccount" }} >
-                      <li><a class="dropdown-item" href="#">My Account</a></li>
+                      <li><a className="dropdown-item" href="#">My Account</a></li>
                     </Link>
                     <Link to={{ pathname: "/Credit" }} >
-                      <li><a class="dropdown-item" href="#">Credits</a></li>
+                      <li><a className="dropdown-item" href="#">Credits</a></li>
                     </Link>
                     <Link to={{ pathname: "/Household" }} >
-                      <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                      <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                     </Link>
                     <Link to={{ pathname: "/ManageTeam" }} >
-                      <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                      <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                     </Link>
                     <Link to={{ pathname: "/Biling" }} >
-                      <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                      <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                     </Link>
                     <Link to={{ pathname: "/CreateTeam" }} >
-                      <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                      <li><a className="dropdown-item" href="#">Create New Team</a></li>
                     </Link>
                     <Link to={{ pathname: "/SignOut" }} >
-                      <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                      <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                     </Link>
 
                   </ul>
                 </div>
               </div>
-              <div class="profile-head">
-                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                <div class="profile-head-img">
+              <div className="profile-head">
+                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                <div className="profile-head-img">
                   {profilePic.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
                     <img src={`${pic}${profilePic.profile_image}`} alt="" />
@@ -208,58 +208,58 @@ function TeamMedia(props) {
 
                 </div>
               </div>
-              <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+              <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
             </div>
 
-            <div class="prefarance-page">
-              <div class="player-info-head">
-                <h2 class="page-title">Stream</h2>
-                <div class="player-info-head-right">
+            <div className="prefarance-page">
+              <div className="player-info-head">
+                <h2 className="page-title">Stream</h2>
+                <div className="player-info-head-right">
 
-                  <div class="streming-head-right">
-                    <div class="stream-tab">
+                  <div className="streming-head-right">
+                    <div className="stream-tab">
                       <ul>
-                        <li><a class="active" href="#">Stream</a></li>
+                        <li><a className="active" href="#">Stream</a></li>
                         <li><a href="#" onClick={() => history.push("./Photos")}>Photos</a></li>
                         <li><a href="#" onClick={() => history.push("./Videos")}>Videos</a></li>
                         <li><a href="#" onClick={() => history.push("./Files")}>Files</a></li>
                       </ul>
                     </div>
 
-                    <button class="start-stream-btn">Start Stream</button>
+                    <button className="start-stream-btn">Start Stream</button>
                   </div>
                 </div>
               </div>
-              <div class="prefarance-box streaming-section">
-                <div class="strame-chat-section">
-                  <div class="strame-main">
-                    <div class="strame-main-inner">
+              <div className="prefarance-box streaming-section">
+                <div className="strame-chat-section">
+                  <div className="strame-main">
+                    <div className="strame-main-inner">
                       <h3>Connect streaming software to go live</h3>
                       <p>Viewers will be able to find your stream once you go live</p>
                     </div>
                   </div>
-                  <div class="chat-main">
+                  <div className="chat-main">
                     <h4>Live Chat</h4>
-                    <div class="chat-main-input">
-                      <input type="text" placeholder="say something..." class="input-field" />
-                      <button class="chat-send-btn"><img src="images/send-btn.png" alt="" /></button>
+                    <div className="chat-main-input">
+                      <input type="text" placeholder="say something..." className="input-field" />
+                      <button className="chat-send-btn"><img src="images/send-btn.png" alt="" /></button>
                     </div>
                   </div>
                 </div>
 
-                <div class="streaming-form-section playerinfo-form">
-                  <div class="streaming-form-field-set">
-                    <div class="streaming-form-field-left">
-                      <div class="prefarance-form-list">
+                <div className="streaming-form-section playerinfo-form">
+                  <div className="streaming-form-field-set">
+                    <div className="streaming-form-field-left">
+                      <div className="prefarance-form-list">
                         <label>Title</label>
-                        <input type="text" class="input-select" />
+                        <input type="text" className="input-select" />
                       </div>
                     </div>
-                    <div class="streaming-form-field-right">
-                      <div class="prefarance-form-list">
+                    <div className="streaming-form-field-right">
+                      <div className="prefarance-form-list">
                         <label>Game</label>
-                        <select class="input-select" >
+                        <select className="input-select" >
                           <option>Bascket</option>
                           <option>BaseBall</option>
                           <option>FootBall</option>
@@ -267,24 +267,24 @@ function TeamMedia(props) {
                         </select>
                       </div>
                     </div>
-                    <div class="streaming-form-field-left">
-                      <div class="prefarance-form-list">
+                    <div className="streaming-form-field-left">
+                      <div className="prefarance-form-list">
                         <label>Game Description</label>
-                        <textarea class="input-textarea"> </textarea>
+                        <textarea className="input-textarea"> </textarea>
                       </div>
                     </div>
-                    <div class="streaming-form-field-right">
-                      <div class="prefarance-form-list">
+                    <div className="streaming-form-field-right">
+                      <div className="prefarance-form-list">
                         <label>Team</label>
-                        <select class="input-select" >
+                        <select className="input-select" >
                           <option>Team1</option>
                           <option>Team2</option>
                           <option>Team3</option>
                         </select>
                       </div>
-                      <div class="prefarance-form-list">
+                      <div className="prefarance-form-list">
                         <label>Privacy</label>
-                        <select class="input-select" >
+                        <select className="input-select" >
                           <option>Privacy1</option>
                           <option>Privacy2</option>
                           <option>Privacy3</option>
@@ -293,10 +293,10 @@ function TeamMedia(props) {
 
                     </div>
                   </div>
-                  <div class="prefarance-form-list">
-                    <label class="options-check-family">Start sending us your video from your streaming software to go live
+                  <div className="prefarance-form-list">
+                    <label className="options-check-family">Start sending us your video from your streaming software to go live
                       <input type="checkbox" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                     </label>
                   </div>
                 </div>

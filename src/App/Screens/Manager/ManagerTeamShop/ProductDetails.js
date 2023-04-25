@@ -22,36 +22,36 @@ const ProductDetails = () => {
     console.log("state value",state)
     const pic = 'https://nodeserver.mydevfactory.com:1447/'
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
 
-            <div class="tab-content">
-                <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                    <div class="prefarance-tab-content">
+            <div className="tab-content">
+                <div className="tab-pane active" id="tabs-1" role="tabpanel">
+                    <div className="prefarance-tab-content">
 
-                        <div class="prefarance-form playerinfo-form">
+                        <div className="prefarance-form playerinfo-form">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <img src={`${pic}${state.image}`} alt="" style={{width:"100%",padding:"10px"}}/>
                                     </div>
                                     <div style={{ display: "flex" ,marginLeft:"10%"}}>
-                                    <div class="prefarance-form-list">
+                                    <div className="prefarance-form-list">
                                         <img src={`${pic}${state.image}`} alt="" className="imgSize" />
                                     </div>
-                                    <div class="prefarance-form-list">
+                                    <div className="prefarance-form-list">
                                         <img src={`${pic}${state.image}`} alt="" className="imgSize"  />
                                     </div>
-                                    <div class="prefarance-form-list">
+                                    <div className="prefarance-form-list">
                                         <img src={`${pic}${state.image}`} alt="" className="imgSize"  />
                                     </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
+                                <div className="col-md-6">
+                                    <div className="row">
+                                        <div className="col-md-12">
                                             <p style={{ color: "white", fontSize: "Larger" }}>Officially Licensed Gear</p>
                                             <p style={{ color: "white", fontSize: "Larger", fontWeight: "bolder", paddingTop: "15px", paddingBottom: "15px" }}>Men's Chicago Bulls Wendell Carter Jr. Nike Red
 
@@ -61,18 +61,18 @@ const ProductDetails = () => {
                                             <p style={{ color: "white", fontSize: "Larger" }}>Regular: $109.99</p>
                                             <p style={{ color: "green", fontSize: "Larger" ,paddingTop:"25px"}}>You Save: $27.50 on select sizes</p>
                                         </div>
-                                        <div class="row" style={{
+                                        <div className="row" style={{
                                             marginTop: "10%",
                                             backgroundColor: "gray",
                                             padding: "4%",
                                             borderRadius: "10px"
                                         }}>
 
-                                            <div class="col-md-12">
+                                            <div className="col-md-12">
                                                 <span style={{paddingRight:"73%"}}>Size</span>  <span style={{color:"red"}}> Size Chart</span>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <div style={{ display: "flex" }}>
                                                         <div className="sizebox">{state.size}<br></br>
                                                         </div>
@@ -89,36 +89,36 @@ const ProductDetails = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-4">
+                                                <div className="prefarance-form-list">
                                                     <label >Jursey No</label>
-                                                    <input type="text" class="input-select" defaultValue={state.jersey_number}/>
+                                                    <input type="text" className="input-select" defaultValue={state.jersey_number}/>
                                                 </div>
                                             </div>
-                                            {/* <div class="col-md-4">
-                                                <div class="prefarance-form-list">
+                                            {/* <div className="col-md-4">
+                                                <div className="prefarance-form-list">
                                                     <label >Quantity</label>
-                                                    <input type="number" class="input-select" />
+                                                    <input type="number" className="input-select" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-4">
+                                                <div className="prefarance-form-list">
                                                     <label >  </label>
-                                                    <button class="Addcart">Add To Cart</button>
+                                                    <button className="Addcart">Add To Cart</button>
                                                 </div>
                                             </div> */}
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <label>Shipping</label>
                                                     <ul style={{color:"white"}}>
                                                         <li>This item will ship within two business days.</li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <label>Details</label>
                                                     <ul style={{color:"white"}}>
                                                         <li>Product ID: 3231566</li>
@@ -139,8 +139,8 @@ const ProductDetails = () => {
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <label>Details</label>
                                                     <ul style={{color:"white"}}>
                                                         <li>When you put on this Wendell Carter Jr. Chicago Bulls Icon Swingman team jersey from Nike, you'll feel like you're out on the court ready to shoot free throws. While you're on the court, the Dri-FIT and Nike Dry technologies built into this jersey will keep you comfortable by wicking moisture away from your body.</li>
@@ -162,16 +162,16 @@ const ProductDetails = () => {
 
 
 
-                                    {/* <div class="col-md-6">
-                                                        <div class="prefarance-form-list">
+                                    {/* <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
                                                             <label>Links</label>
-                                                            <button class="add-links">Add Links</button>
+                                                            <button className="add-links">Add Links</button>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="prefarance-form-list">
+                                                    <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
                                                             <label>Files</label>
-                                                            <button class="add-links">Add Files</button>
+                                                            <button className="add-links">Add Files</button>
                                                         </div>
                                                     </div> */}
                                 </div>

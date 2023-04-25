@@ -369,13 +369,13 @@ function ManagerHome(props) {
   return (
     <div>
 
-      <div class="dashboard-container">
-        <div class="dashboard-main">
+      <div className="dashboard-container">
+        <div className="dashboard-main">
           <SideMenuComponents manger="manger" />
-          <div class="dashboard-main-content">
-            <div class="dashboard-head">
-              <div class="teams-select">
-                <button class="create-new-team" onClick={() => {
+          <div className="dashboard-main-content">
+            <div className="dashboard-head">
+              <div className="teams-select">
+                <button className="create-new-team" onClick={() => {
                   history.push("/CreateTeam")
                 }}>Create New Teams</button>
                 <select onChange={change} >
@@ -388,42 +388,42 @@ function ManagerHome(props) {
                     })}
                 </select>
                 <div className="dropBtn">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                     ACCOUNT
                   </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                    <li><a class="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                    <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
                     <Link to={{ pathname: "/MyAccount" }} >
-                      <li><a class="dropdown-item" href="#">My Account</a></li>
+                      <li><a className="dropdown-item" href="#">My Account</a></li>
                     </Link>
                     <Link to={{ pathname: "/Credit" }} >
-                      <li><a class="dropdown-item" href="#">Credits</a></li>
+                      <li><a className="dropdown-item" href="#">Credits</a></li>
                     </Link>
                     <Link to={{ pathname: "/Household" }} >
-                      <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                      <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                     </Link>
                     <Link to={{ pathname: "/ManageTeam" }} >
-                      <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                      <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                     </Link>
                     <Link to={{ pathname: "/Biling" }} >
-                      <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                      <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                     </Link>
                     <Link to={{ pathname: "/CreateTeam" }} >
-                      <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                      <li><a className="dropdown-item" href="#">Create New Team</a></li>
                     </Link>
                     <Link to={{ pathname: "/SignOut" }} >
-                      <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                      <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                     </Link>
 
                   </ul>
                 </div>
               </div>
-              <div class="profile-head">
+              <div className="profile-head">
                 {loader ?
-                  <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
-                  <div class="profile-head-name">Loading...</div>}
+                  <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
+                  <div className="profile-head-name">Loading...</div>}
 
-                <div class="profile-head-img">
+                <div className="profile-head-img">
                   {profilePic.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
                     <img src={`${pic1}${profilePic.profile_image}`} alt="" />
@@ -431,14 +431,14 @@ function ManagerHome(props) {
 
                 </div>
               </div>
-              <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+              <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
             </div>
-            <div class="dashboard-top-content">
-              <div class="dashboard-top-content-left">
-                <div class="dashboard-top-content-left-top">
-                  <div class="team-profile">
-                    <div class="team-profile-img">
+            <div className="dashboard-top-content">
+              <div className="dashboard-top-content-left">
+                <div className="dashboard-top-content-left-top">
+                  <div className="team-profile">
+                    <div className="team-profile-img">
                       {/* <img src={BigUserProfile} alt="" /> */}
                       {profilePic.profile_image == null ?
                         <img src={BigUserProfile} alt="" /> :
@@ -446,23 +446,23 @@ function ManagerHome(props) {
                       }
                     </div>
                     {loader ?
-                      <div class="team-profile-name">
+                      <div className="team-profile-name">
                         {profilePic.fname + " " + profilePic.lname}
                       </div> :
-                      <div class="team-profile-name">Loading...</div>}
+                      <div className="team-profile-name">Loading...</div>}
 
-                    <div class="update-team-photo">
+                    <div className="update-team-photo">
                       Update Team Photo
                       <input type="file" name='img' onChange={(event) => handleChange(event)} />
                     </div>
                   </div>
 
-                  <div class="invoice-due">
-                    <div class="create-new-team-section">
-                      <div class="create-new-team-banner">
+                  <div className="invoice-due">
+                    <div className="create-new-team-section">
+                      <div className="create-new-team-banner">
                         <img src="images/team-photo.png" alt="" />
                       </div>
-                      <div class="create-new-team-text">
+                      <div className="create-new-team-text">
                         <h3>Did you know XYZ supports over 100 different sports & activities?</h3>
                         <p>Use XYZ for everything from soccer, football or baseball to scouts,gaming or book clubs. It’s easy to start a new group. Try it today!</p>
                         <button onClick={() => {
@@ -474,65 +474,65 @@ function ManagerHome(props) {
                   </div>
 
                 </div>
-                <div class="dashboard-top-content-left-bottom">
-                  <div class="dublin-weather">
+                <div className="dashboard-top-content-left-bottom">
+                  <div className="dublin-weather">
 
                     <h2>Dublin-Weather</h2>
 
                     {degree.length == 0 ?
                       <div>
-                        <div class="dublin-weather-bottom">
-                          <div class="dublin-weather-bottom-boxes">
+                        <div className="dublin-weather-bottom">
+                          <div className="dublin-weather-bottom-boxes">
                             <h3>Today</h3>
                             <img src={Cloudy} alt="" />
 
-                            <div class="active-degree">
+                            <div className="active-degree">
                               <p>34˚/30˚</p>
 
                             </div>
                           </div>
-                          <div class="dublin-weather-bottom-boxes">
+                          <div className="dublin-weather-bottom-boxes">
                             <h3>Sat</h3>
                             <img src={Cloudy} alt="" />
                             <p>34˚/30˚</p>
 
                           </div>
-                          <div class="dublin-weather-bottom-boxes">
+                          <div className="dublin-weather-bottom-boxes">
                             <h3>Sun</h3>
                             <img src={Cloudy} alt="" />
                             <p>34˚/30˚</p>
 
                           </div>
-                          <div class="dublin-weather-bottom-boxes">
+                          <div className="dublin-weather-bottom-boxes">
                             <h3>Mon</h3>
                             <img src={Cloudy} alt="" />
                             <p>34˚/30˚</p>
 
                           </div>
                         </div></div> :
-                      <div><div class="dublin-weather-bottom">
-                        <div class="dublin-weather-bottom-boxes">
+                      <div><div className="dublin-weather-bottom">
+                        <div className="dublin-weather-bottom-boxes">
                           <h3>Today</h3>
                           <img src={Cloudy} alt="" />
 
-                          <div class="active-degree">
+                          <div className="active-degree">
                             <p>{degree[0].temp.max}˚/{degree[0].temp.min}˚</p>
 
                           </div>
                         </div>
-                        <div class="dublin-weather-bottom-boxes">
+                        <div className="dublin-weather-bottom-boxes">
                           <h3>Sat</h3>
                           <img src={Cloudy} alt="" />
                           <p>{degree[1].temp.max}˚/{degree[1].temp.min}˚</p>
 
                         </div>
-                        <div class="dublin-weather-bottom-boxes">
+                        <div className="dublin-weather-bottom-boxes">
                           <h3>Sun</h3>
                           <img src={Cloudy} alt="" />
                           <p>{degree[2].temp.max}˚/{degree[2].temp.min}˚</p>
 
                         </div>
-                        <div class="dublin-weather-bottom-boxes">
+                        <div className="dublin-weather-bottom-boxes">
                           <h3>Mon</h3>
                           <img src={Cloudy} alt="" />
                           <p>{degree[3].temp.max}˚/{degree[3].temp.min}˚</p>
@@ -543,20 +543,20 @@ function ManagerHome(props) {
                   </div>
                 </div>
               </div>
-              <div class="dashboard-top-content-right">
-                <div class="team-list-head">
+              <div className="dashboard-top-content-right">
+                <div className="team-list-head">
                   <h2>Team</h2>
                   <a href="#">View All</a>
                 </div>
-                <div class="team-list-section" style={{height:"544px",overflowX:"auto"}}>
+                <div className="team-list-section" style={{height:"544px",overflowX:"auto"}}>
                   {team.map((team) => {
                     return (
-                      <div class="team-list-box">
-                        <div class="team-list-box-img">
+                      <div className="team-list-box">
+                        <div className="team-list-box-img">
                           {team.image == null ? <img src={teamList} alt="" /> :
                             <img src={`${pic}${team.image}`} alt="" />}
                         </div>
-                        <div class="team-list-box-text">
+                        <div className="team-list-box-text">
                           <h4>{team.team_name}</h4>
 
                           <a href="#">Team Roster</a>
@@ -565,31 +565,31 @@ function ManagerHome(props) {
                       </div>
                     )
                   })}
-                  {/* <div class="team-list-box">
-                    <div class="team-list-box-img">
+                  {/* <div className="team-list-box">
+                    <div className="team-list-box-img">
                       <img src={photo} alt="" />
                     </div>
-                    <div class="team-list-box-text">
+                    <div className="team-list-box-text">
                       <h4>Boston Nets</h4>
                       <h5>Tab D’souza  <span>Manager</span></h5>
                       <a href="#">Team Roster</a>
                     </div>
                   </div>
-                  <div class="team-list-box">
-                    <div class="team-list-box-img">
+                  <div className="team-list-box">
+                    <div className="team-list-box-img">
                       <img src={teamList} alt="" />
                     </div>
-                    <div class="team-list-box-text">
+                    <div className="team-list-box-text">
                       <h4>Brooklyn Nets</h4>
                       <h5>Tab D’souza  <span>Player</span></h5>
                       <a href="#">Team Roster</a>
                     </div>
                   </div>
-                  <div class="team-list-box">
-                    <div class="team-list-box-img">
+                  <div className="team-list-box">
+                    <div className="team-list-box-img">
                       <img src={teamList} alt="" />
                     </div>
-                    <div class="team-list-box-text">
+                    <div className="team-list-box-text">
                       <h4>Golden State Warriors</h4>
                       <h5>Tab D’souza  <span>Administrative</span></h5>
                       <a href="#">Team Roster</a>
@@ -601,10 +601,10 @@ function ManagerHome(props) {
                 </div>
               </div>
             </div>
-            <div class="player-schedule-section">
+            <div className="player-schedule-section">
 
-              <div class="record-standing-box">
-                <div class="pie-chat-total-income">
+              <div className="record-standing-box">
+                <div className="pie-chat-total-income">
                   {/* <img src={piechat} alt="" /> */}
                   <div style={{ display: 'flex', flexDirection: "row" }}>
                     <h2 style={{ color: "white" }}>Total Income</h2>
@@ -659,27 +659,27 @@ function ManagerHome(props) {
 
               </div>
 
-              <div class="dashboard-schedule-section">
-                <div class="dashboard-schedule-head">
+              <div className="dashboard-schedule-section">
+                <div className="dashboard-schedule-head">
                   <h2>Schedule</h2>
                   <a href="#" onClick={() => {
                     history.push('./Teamschdule')
                   }}>View Full Schedule</a>
                 </div>
-                <div class="dashboard-schedule-main-box">
-                  <div class="dashboard-schedule-main-box-option">
-                    <label class="options-radio">Game
+                <div className="dashboard-schedule-main-box">
+                  <div className="dashboard-schedule-main-box-option">
+                    <label className="options-radio">Game
                       <input type="radio"  name="radio" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                     </label>
 
-                    <label class="options-radio">Event
+                    <label className="options-radio">Event
                       <input type="radio" name="radio" />
-                      <span class="checkmark"></span>
+                      <span className="checkmark"></span>
                     </label>
                   </div>
-                  {/* <div class="dashboard-schedule-game-event">
-                    <div class="dashboard-schedule-game-event-calender"> */}
+                  {/* <div className="dashboard-schedule-game-event">
+                    <div className="dashboard-schedule-game-event-calender"> */}
                   {/* <img src={Calender} alt="" /> */}
                   {/* <div>
                         <Calendar
@@ -695,35 +695,35 @@ function ManagerHome(props) {
 
             </div>
 
-            <div class="record-save-section">
-              <div class="record-save-box">
-                <div class="record-standing-head">
+            <div className="record-save-section">
+              <div className="record-save-box">
+                <div className="record-standing-head">
                   Record
                 </div>
-                <div class="record-save-box-inner">
-                  <div class="record-main-top">
+                <div className="record-save-box-inner">
+                  <div className="record-main-top">
                     <button>Last Game</button>
                     <h4>vs. HuskiesTS Grey</h4>
                     <span>Sat, Mar 14, 10:15 AM</span>
 
                   </div>
-                  <div class="record-line-bar">
+                  <div className="record-line-bar">
                     <img src={lineBar} alt="" />
                   </div>
-                  <div class="enter-result">
-                    <button class="enter-result-btn">Enter Result</button>
+                  <div className="enter-result">
+                    <button className="enter-result-btn">Enter Result</button>
                   </div>
                 </div>
               </div>
-              <div class="save-travel tb-section">
-                <div class="standing-tb-section">
-                  <div class="record-standing-head">
+              <div className="save-travel tb-section">
+                <div className="standing-tb-section">
+                  <div className="record-standing-head">
                     Standings
                   </div>
 
 
-                  <div class="record-standing-box-inner">
-                    <div class="standing-table">
+                  <div className="record-standing-box-inner">
+                    <div className="standing-table">
                       <table>
                         <tr>
                           <th>Team</th>

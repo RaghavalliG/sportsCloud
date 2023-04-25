@@ -152,12 +152,12 @@ function PlayerTeamShop(props) {
 
   return (
     <div>
-      <div class="dashboard-container">
-        <div class="dashboard-main">
+      <div className="dashboard-container">
+        <div className="dashboard-main">
           <SideMenuComponents />
-          <div class="dashboard-main-content">
-            <div class="dashboard-head">
-              <div class="teams-select">
+          <div className="dashboard-main-content">
+            <div className="dashboard-head">
+              <div className="teams-select">
                 <select onClick={change} >
                   { team.map((team)=>{
                     return(
@@ -167,14 +167,14 @@ function PlayerTeamShop(props) {
                 </select>
               </div>
 
-              <div class="profile-head">
+              <div className="profile-head">
                 {profilePic.fname ?
-                  <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
-                  <div class="profile-head-name">Loading...</div>
+                  <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
+                  <div className="profile-head-name">Loading...</div>
 
                 }
 
-                <div class="profile-head-img">
+                <div className="profile-head-img">
                   {profilePic.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
                     <img src={`${pic1}${profilePic.profile_image}`} alt="" />
@@ -182,7 +182,7 @@ function PlayerTeamShop(props) {
 
                 </div>
               </div>
-              <div class="login-account">
+              <div className="login-account">
                 <ul>
                   <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                   {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -190,13 +190,13 @@ function PlayerTeamShop(props) {
               </div>
             </div>
 
-            <div class="team-shop-page">
-              <div class="my-order-section">
+            <div className="team-shop-page">
+              <div className="my-order-section">
                 <a href="#">My Orders</a>
               </div>
-              <div class="team-shop-list-box">
-                <div class="sort-by-section">
-                  <div class="sort-by-section-main">
+              <div className="team-shop-list-box">
+                <div className="sort-by-section">
+                  <div className="sort-by-section-main">
                     <label>Sort By</label>
                     <select>
                       <option>Popularity</option>
@@ -206,135 +206,135 @@ function PlayerTeamShop(props) {
                   </div>
                 </div>
 
-                <div class="team-shop-list-main">
+                <div className="team-shop-list-main">
                   {shopData.length==0?
-                  <div class="team-shop-list-main">
-                   <div class="team-shop-product-box">
-                    <div class="team-shop-product-img"  >
+                  <div className="team-shop-list-main">
+                   <div className="team-shop-product-box">
+                    <div className="team-shop-product-img"  >
                        <Link to={{ pathname: "/AddShopData", state: "GAME" }} >
                       <img src={listImage} alt=""  />
                       </Link>
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                  <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                  <div className="team-shop-product-img">
                     <img src={listImage} alt="" />
                   </div>
-                  <div class="team-shop-product-text">
-                    <h2 class="product-title">Nike Edition</h2>
-                    <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                  <div className="team-shop-product-text">
+                    <h2 className="product-title">Nike Edition</h2>
+                    <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                       Red Swingman Team Jersey</p>
-                    <div class="product-price">
+                    <div className="product-price">
                       $82.49
                     </div>
-                    <div class="product-size">Size : S, M, L, XL, XXL</div>
+                    <div className="product-size">Size : S, M, L, XL, XXL</div>
                   </div>
                 </div>
-                <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
 
@@ -347,19 +347,19 @@ function PlayerTeamShop(props) {
                     :
                     shopData.map((data) => {
                       return (
-                        <div class="team-shop-product-box">
-                          <div class="team-shop-product-img">
+                        <div className="team-shop-product-box">
+                          <div className="team-shop-product-img">
                             {data.image == null ? <img src={listImage} alt="" /> :
                               <img src={`${pic}${data.image}`} alt="" />}
 
                           </div>
-                          <div class="team-shop-product-text">
-                            <h2 class="product-title">{data.brand}</h2>
-                            <p class="product-description">{data.description}</p>
-                            <div class="product-price">
+                          <div className="team-shop-product-text">
+                            <h2 className="product-title">{data.brand}</h2>
+                            <p className="product-description">{data.description}</p>
+                            <div className="product-price">
                               ${data.price}
                             </div>
-                            <div class="product-size">{data.size}</div>
+                            <div className="product-size">{data.size}</div>
                           </div>
                         </div>
 
@@ -371,75 +371,75 @@ function PlayerTeamShop(props) {
                   }
 
                   {/* 
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
 
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div>
-                  <div class="team-shop-product-box">
-                    <div class="team-shop-product-img">
+                  <div className="team-shop-product-box">
+                    <div className="team-shop-product-img">
                       <img src={listImage} alt="" />
                     </div>
-                    <div class="team-shop-product-text">
-                      <h2 class="product-title">Nike Edition</h2>
-                      <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                    <div className="team-shop-product-text">
+                      <h2 className="product-title">Nike Edition</h2>
+                      <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                         Red Swingman Team Jersey</p>
-                      <div class="product-price">
+                      <div className="product-price">
                         $82.49
                       </div>
-                      <div class="product-size">Size : S, M, L, XL, XXL</div>
+                      <div className="product-size">Size : S, M, L, XL, XXL</div>
                     </div>
                   </div> */}
                 </div>

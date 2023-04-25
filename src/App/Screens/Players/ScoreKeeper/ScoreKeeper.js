@@ -128,12 +128,12 @@ const Scorekeeper = () => {
     return (
 
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
                             <select onChange={change} >
 
 <option>Select A Team</option>
@@ -145,9 +145,9 @@ const Scorekeeper = () => {
 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -156,7 +156,7 @@ const Scorekeeper = () => {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -166,9 +166,9 @@ const Scorekeeper = () => {
 
 
 
-                        <div class="manager-player-section">
+                        <div className="manager-player-section">
                             <h3>Match :</h3>
-                            <div class="teams-select3" style={{ marginRight: "37%" }}>
+                            <div className="teams-select3" style={{ marginRight: "37%" }}>
                                 <select>
                                     <option>Location</option>
                                     {locationValue.map((data)=>{
@@ -181,7 +181,7 @@ const Scorekeeper = () => {
                             </div>
 
 
-                            <div class="teams-select3 teamSlct" >
+                            <div className="teams-select3 teamSlct" >
                                 <select>
                                     <option>All             </option>
                                     <option> Team Availability</option>
@@ -190,8 +190,8 @@ const Scorekeeper = () => {
 
                         </div>
 
-                        <div class="prefarance-box">
-                            <div class="team-payment team-assesment">
+                        <div className="prefarance-box">
+                            <div className="team-payment team-assesment">
                                 <table style={{textAlign:"center"}}>
                                     <tr>
                                         <th style={{ fontSize: "30px" }}>Players</th>
@@ -218,7 +218,7 @@ const Scorekeeper = () => {
 
                                         </td>
                                         <td>
-                                            <div class="last-row">
+                                            <div className="last-row">
                                                 <button data-toggle="modal" data-target="#assignmentdelect"><img src={Delect} /></button> <button><img src={pencil} /></button>
                                             </div>
                                         </td>
@@ -233,8 +233,8 @@ const Scorekeeper = () => {
                             </div>
                         </div>
 
-                        <div class="prefarance-box">
-                                <div class="team-payment team-assesment">
+                        <div className="prefarance-box">
+                                <div className="team-payment team-assesment">
                                     <table style={{textAlign:"center"}}>
                                         <tr>
                                             <th style={{fontSize:"30px"}}>Non-Players</th>
@@ -261,7 +261,7 @@ const Scorekeeper = () => {
 
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                      <button data-toggle="modal" data-target="#assignmentdelect"><img src={Delect} /></button> <button><img src={pencil} /></button>
                                                 </div>
                                             </td>

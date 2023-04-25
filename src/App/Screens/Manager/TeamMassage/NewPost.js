@@ -24,33 +24,33 @@ const NewPost = () => {
         post:false
     })
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
 
             <SideNav name="Post"/>
-            <div class="tab-content">
-                <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                    <div class="prefarance-tab-content">
+            <div className="tab-content">
+                <div className="tab-pane active" id="tabs-1" role="tabpanel">
+                    <div className="prefarance-tab-content">
 
-                        <div class="prefarance-form playerinfo-form">
+                        <div className="prefarance-form playerinfo-form">
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="prefarance-form-list">
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="prefarance-form-list">
                                         <label> Subjects</label>
-                                        <input type="text" class="input-select" />
+                                        <input type="text" className="input-select" />
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-12">
+                                    <div className="prefarance-form-list">
                                         <label> Massage</label>
-                                        <textarea type="text" class="input-select" style={{ height: "210px" }} />
+                                        <textarea type="text" className="input-select" style={{ height: "210px" }} />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" style={{borderBottom:"1px solid gray",paddingBottom:"30px"}}>
-                            <div class="col-md-12">
-                                <div class="prefarance-form-list">
+                            <div className="row" style={{borderBottom:"1px solid gray",paddingBottom:"30px"}}>
+                            <div className="col-md-12">
+                                <div className="prefarance-form-list">
 
                                     <input type="checkbox" style={{ height: "15px", width: "17px" }} />
                                     <span>Track this message
@@ -58,9 +58,9 @@ const NewPost = () => {
                                 </div>
                             </div>
                             </div>
-                            <div class="row" style={{borderBottom:"1px solid gray",paddingBottom:"30px"}}>
-                            <div class="col-md-12">
-                                <div class="prefarance-form-list" >
+                            <div className="row" style={{borderBottom:"1px solid gray",paddingBottom:"30px"}}>
+                            <div className="col-md-12">
+                                <div className="prefarance-form-list" >
 
                                     <input type="checkbox" style={{ height: "15px", width: "17px" }} />
                                     <span>
@@ -69,9 +69,9 @@ const NewPost = () => {
                                 </div>
                             </div>
                             </div>
-                            <div class="row" style={{borderBottom:"1px solid gray",paddingBottom:"30px"}}>
-                            <div class="col-md-12">
-                                <div class="prefarance-form-list">
+                            <div className="row" style={{borderBottom:"1px solid gray",paddingBottom:"30px"}}>
+                            <div className="col-md-12">
+                                <div className="prefarance-form-list">
 
                                     <input type="checkbox" style={{ height: "15px", width: "17px" }} />
                                     <span>Manager announcement
@@ -81,10 +81,10 @@ const NewPost = () => {
                             </div>
 
 
-                            <div class="col-md-12">
-                                <div class="prefarance-form-list" style={{ marginLeft: "57%" }}>
-                                    <button class="add-links" style={{ margin: "10px" }}>Cancel</button>
-                                    <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} >Post Massage</button>
+                            <div className="col-md-12">
+                                <div className="prefarance-form-list" style={{ marginLeft: "57%" }}>
+                                    <button className="add-links" style={{ margin: "10px" }}>Cancel</button>
+                                    <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} >Post Massage</button>
                 
                                 </div>
                             </div>

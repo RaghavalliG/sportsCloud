@@ -47,12 +47,12 @@ function Preferance(props) {
 
   return (
     <div>
-      <div class="dashboard-container">
-        <div class="dashboard-main">
+      <div className="dashboard-container">
+        <div className="dashboard-main">
           <SideMenuComponents />
-          <div class="dashboard-main-content">
-            <div class="dashboard-head">
-              <div class="teams-select">
+          <div className="dashboard-main-content">
+            <div className="dashboard-head">
+              <div className="teams-select">
                 <select>
                   <option>My Teams</option>
                   <option>My Teams 2</option>
@@ -60,9 +60,9 @@ function Preferance(props) {
                 </select>
               </div>
 
-              <div class="profile-head">
-                <div class="profile-head-name">{user ? user.fname : null}</div>
-                <div class="profile-head-img">
+              <div className="profile-head">
+                <div className="profile-head-name">{user ? user.fname : null}</div>
+                <div className="profile-head-img">
                   {
                     user ?
                       <img src={user.profile_image} alt="" /> :
@@ -71,7 +71,7 @@ function Preferance(props) {
 
                 </div>
               </div>
-              <div class="login-account">
+              <div className="login-account">
                 <ul>
                   <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                   {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -79,27 +79,27 @@ function Preferance(props) {
               </div>
             </div>
 
-            <div class="prefarance-page">
-              <h2 class="page-title">Preference</h2>
-              <div class="prefarance-box">
-                <ul class="nav nav-tabs" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Notification</a>
+            <div className="prefarance-page">
+              <h2 className="page-title">Preference</h2>
+              <div className="prefarance-box">
+                <ul className="nav nav-tabs" role="tablist">
+                  <li className="nav-item">
+                    <a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Notification</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Social Sharing</a>
+                  <li className="nav-item">
+                    <a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Social Sharing</a>
                   </li>
 
                 </ul>
-                <div class="tab-content">
-                  <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                    <div class="prefarance-tab-content">
+                <div className="tab-content">
+                  <div className="tab-pane active" id="tabs-1" role="tabpanel">
+                    <div className="prefarance-tab-content">
                       <h2>My Personal Game and Event Notifications</h2>
-                      <div class="prefarance-form">
-                        <div class="prefarance-form-list">
+                      <div className="prefarance-form">
+                        <div className="prefarance-form-list">
                           <label>First Name</label>
-                          <div class="prefarance-form-list-box">
-                            <select class="input-select">
+                          <div className="prefarance-form-list-box">
+                            <select className="input-select">
                               <option>Team Default (Email)</option>
                               <option>Team Default (Email) 2</option>
                               <option>Team Default (Email) 3</option>
@@ -108,10 +108,10 @@ function Preferance(props) {
                           </div>
 
                         </div>
-                        <div class="prefarance-form-list">
+                        <div className="prefarance-form-list">
                           <label>First Name</label>
-                          <div class="prefarance-form-list-box">
-                            <select class="input-select">
+                          <div className="prefarance-form-list-box">
+                            <select className="input-select">
                               <option>Team Default (Email)</option>
                               <option>Team Default (Email) 2</option>
                               <option>Team Default (Email) 3</option>
@@ -120,10 +120,10 @@ function Preferance(props) {
                           </div>
 
                         </div>
-                        <div class="prefarance-form-list">
+                        <div className="prefarance-form-list">
                           <label>Mobile Notifications</label>
-                          <div class="prefarance-form-list-box">
-                            <select class="input-select">
+                          <div className="prefarance-form-list-box">
+                            <select className="input-select">
                               <option>Team Default (Email)</option>
                               <option>Team Default (Email) 2</option>
                               <option>Team Default (Email) 3</option>
@@ -137,13 +137,13 @@ Android devices.</p>
                       </div>
                     </div>
                   </div>
-                  <div class="tab-pane" id="tabs-2" role="tabpanel">
-                    <div class="prefarance-tab-content social-share">
+                  <div className="tab-pane" id="tabs-2" role="tabpanel">
+                    <div className="prefarance-tab-content social-share">
                       <h2>Post Your Victories to Social Media!</h2>
                       <p>TeamSnap uses a tool called if This Then That (IFTTT) to share your photos and game score to your social media
                accounts. You can do other neat things too, like play music every time your teaam wins! It's very easy to setup and it's
 fee. Create an account and connect it to TeamSnap today. <a href="#">Learn more about connecting TeamSnap to IFTTT.</a></p>
-                      <a href="#" class="connect-toif">Connect to IFTTT</a>
+                      <a href="#" className="connect-toif">Connect to IFTTT</a>
                     </div>
 
                   </div>

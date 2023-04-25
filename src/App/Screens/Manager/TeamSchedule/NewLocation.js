@@ -218,13 +218,13 @@ function NewLocation(props) {
     return (
 
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents manger="manger"/>
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                                     {dropdown.map((dropdown) => {
@@ -240,9 +240,9 @@ function NewLocation(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -251,7 +251,7 @@ function NewLocation(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -259,28 +259,28 @@ function NewLocation(props) {
                             </div>
                         </div>
 
-                        <div class="prefarance-page">
-                            <div class="page-header">
-                                <h2 class="page-title">Locations</h2>
+                        <div className="prefarance-page">
+                            <div className="page-header">
+                                <h2 className="page-title">Locations</h2>
 
                             </div>
 
-                            <div class="prefarance-box" style={{overflow:"hidden"}}>
-                                <div class="team-payment team-assesment">
-                                    <div class="prefarance-form playerinfo-form">
+                            <div className="prefarance-box" style={{overflow:"hidden"}}>
+                                <div className="team-payment team-assesment">
+                                    <div className="prefarance-form playerinfo-form">
 
-                                        <div class="row" style={{padding:"21px"}}>
-                                        <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                        <div className="row" style={{padding:"21px"}}>
+                                        <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Location Name</label>
-                                        <input type="text" class="input-select" />
+                                        <input type="text" className="input-select" />
                                         <span>The name of the game location Example: "Wilshire Park Soccer Field"</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Address</label>
-                                        <input type="text" class="input-select" />
+                                        <input type="text" className="input-select" />
                                         <span>The Physical address of the game location Example: " NE 33rd Ave &
 
 Skidmore St, Portland OR" (It'll be automatically converted into a Google
@@ -288,26 +288,26 @@ Skidmore St, Portland OR" (It'll be automatically converted into a Google
 Map.)</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Link</label>
-                                        <input type="text" class="input-select" />
+                                        <input type="text" className="input-select" />
                                         <span>The URL to the site - this could be a link to the facility's home page or a link
 
 to your own map. Must include http:// or https://</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Address</label>
-                                        <textarea type="text" class="input-select"  style={{height:"200px"}}/>
+                                        <textarea type="text" className="input-select"  style={{height:"200px"}}/>
                                         <span>Additional notes or directions to this location.</span>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="prefarance-form-list" style={{marginLeft:"60%"}}>
-                                        <button class="add-links">CANCEL</button>
-                                        <button class="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} >SAVE</button>
+                                <div className="col-md-12">
+                                    <div className="prefarance-form-list" style={{marginLeft:"60%"}}>
+                                        <button className="add-links">CANCEL</button>
+                                        <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} >SAVE</button>
                                     </div>
                                 </div>
                                         </div>

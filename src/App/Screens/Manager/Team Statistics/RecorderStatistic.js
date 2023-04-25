@@ -152,13 +152,13 @@ function RecorderStatistic(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                    <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => {
+                    <div className="dashboard-main-content">
+                    <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
                                 <select onChange={change} >
@@ -171,39 +171,39 @@ function RecorderStatistic(props) {
                                         })}
                                 </select>
                                 <div className="dropBtn">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         ACCOUNT
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a class="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
-                                            <li><a class="dropdown-item" href="#">My Account</a></li>
+                                            <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Credit" }} >
-                                            <li><a class="dropdown-item" href="#">Credits</a></li>
+                                            <li><a className="dropdown-item" href="#">Credits</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Household" }} >
-                                            <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                                            <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Biling" }} >
-                                            <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                                            <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/CreateTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Create New Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/SignOut" }} >
-                                            <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                                            <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                                         </Link>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="profile-head">
-                                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
                                         <img src={`${pic}${profilePic.profile_image}`} alt="" />
@@ -211,11 +211,11 @@ function RecorderStatistic(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                         </div>
-                        <div class="player-info-head">
-                            <h2 class="page-title">Recorder Statistics</h2>
+                        <div className="player-info-head">
+                            <h2 className="page-title">Recorder Statistics</h2>
                         </div>
                         
                         <div className="prefarance-box recordStatisticBg">

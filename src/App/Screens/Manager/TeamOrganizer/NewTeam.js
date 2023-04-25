@@ -52,12 +52,12 @@ function NewTeam(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                        <div class="dashboard-main-content">
-                            <div class="dashboard-head">
-                                <div class="teams-select">
+                        <div className="dashboard-main-content">
+                            <div className="dashboard-head">
+                                <div className="teams-select">
                                     <select>
                                         <option>My Teams</option>
                                         <option>My Teams 2</option>
@@ -65,9 +65,9 @@ function NewTeam(props) {
                                     </select>
                                 </div>
 
-                                <div class="profile-head">
-                                    <div class="profile-head-name">{user ? user.fname : null}</div>
-                                    <div class="profile-head-img">
+                                <div className="profile-head">
+                                    <div className="profile-head-name">{user ? user.fname : null}</div>
+                                    <div className="profile-head-img">
                                         {
                                             user ?
                                                 <img src={user.profile_image} alt="" /> :
@@ -76,7 +76,7 @@ function NewTeam(props) {
 
                                     </div>
                                 </div>
-                                <div class="login-account">
+                                <div className="login-account">
                                     <ul>
                                         <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                         {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -84,11 +84,11 @@ function NewTeam(props) {
                                 </div>
                             </div>
 
-                    <div class="prefarance-page">
-                    <div class="player-info-head">
-                        <h2 class="page-title">Tournament Registration</h2>
+                    <div className="prefarance-page">
+                    <div className="player-info-head">
+                        <h2 className="page-title">Tournament Registration</h2>
                         </div>
-                        {/* <div class="teamOrgbar">
+                        {/* <div className="teamOrgbar">
                             <span><input type="checkbox"/>Show Historical</span>
                             <div className="teamBtnRgt">
                                 <a href="#">Print</a>
@@ -140,7 +140,7 @@ function NewTeam(props) {
                                 <div className="teamorgSlct toFlex">
                                     <div className="toflexInn">
                                         <label>Division</label>
-                                        <select class="input-select" >
+                                        <select className="input-select" >
                                             <option>Option 1</option>
                                             <option>2</option>
                                             <option>3</option>
@@ -175,7 +175,7 @@ function NewTeam(props) {
                                 <div className="teamorgSlct toFlex">
                                     <div className="toflexInn">
                                         <label>Division</label>
-                                        <select class="input-select" >
+                                        <select className="input-select" >
                                             <option>Option 1</option>
                                             <option>2</option>
                                             <option>3</option>

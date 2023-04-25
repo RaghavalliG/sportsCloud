@@ -204,12 +204,12 @@ const TeamSettingHome = () => {
 
     }
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
-            <div class="dashboard-main-content">
-                <div class="dashboard-head">
-                    <div class="teams-select">
-                        <button class="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
+            <div className="dashboard-main-content">
+                <div className="dashboard-head">
+                    <div className="teams-select">
+                        <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
                         <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                             {dropdown.map((dropdown) => {
@@ -225,9 +225,9 @@ const TeamSettingHome = () => {
                         </select>
                     </div>
 
-                    <div class="profile-head">
-                        <div class="profile-head-name">{user ? user.fname : null}</div>
-                        <div class="profile-head-img">
+                    <div className="profile-head">
+                        <div className="profile-head-name">{user ? user.fname : null}</div>
+                        <div className="profile-head-img">
                             {
                                 user ?
                                     <img src={user.profile_image} alt="" /> :
@@ -236,70 +236,70 @@ const TeamSettingHome = () => {
 
                         </div>
                     </div>
-                    <div class="login-account">
+                    <div className="login-account">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                             {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
                         </ul>
                     </div>
                 </div>
-                <div class="prefarance-page">
-                    <div class="page-header">
-                        <h2 class="page-title">Manager</h2>
-                        <div class="teams-select" >
-                            <button class="create-new-team" onClick={() => history.push("./CreateTeam")} style={{ backgroundColor: "red" }}>Create New Teams</button>
+                <div className="prefarance-page">
+                    <div className="page-header">
+                        <h2 className="page-title">Manager</h2>
+                        <div className="teams-select" >
+                            <button className="create-new-team" onClick={() => history.push("./CreateTeam")} style={{ backgroundColor: "red" }}>Create New Teams</button>
                         </div>
                     </div>
 
 
-                    <div class="prefarance-box" style={{ overflow: "auto" }} >
+                    <div className="prefarance-box" style={{ overflow: "auto" }} >
                         <SettingNav />
 
-                        <div class="team-payment team-assesment" style={{ marginTop: "10px" }}>
-                            <div class="prefarance-form playerinfo-form">
+                        <div className="team-payment team-assesment" style={{ marginTop: "10px" }}>
+                            <div className="prefarance-form playerinfo-form">
 
-                                <div class="row" style={{ padding: "20px" }}>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                <div className="row" style={{ padding: "20px" }}>
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label>Team</label>
-                                            <select class="input-select">
+                                            <select className="input-select">
                                                 <option>Kolkata Night Rider </option>
                                                 <option> Chennai Super King</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-4">
+                                        <div className="prefarance-form-list">
 
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-2">
+                                        <div className="prefarance-form-list">
                                             <div className="EditPhoto">Edit</div>
 
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-12">
+                                        <div className="prefarance-form-list">
                                             <label> Your Team Logo</label>
-                                            <input type="text" class="input-select"  style={{borderRadius:"30px",width:"33%"}} placeholder=" Upload A Team Logo"/>
+                                            <input type="text" className="input-select"  style={{borderRadius:"30px",width:"33%"}} placeholder=" Upload A Team Logo"/>
                                             <p style={{color:"white",fontSize:"15px",padding:"5px"}}>For best result, your team logo should be transparent PNG. <span style={{color:"red"}}> Learn more info about team logos.</span></p>
                                         </div>
                                     </div>
 
 
-                                    <div class="col-md-12">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-12">
+                                        <div className="prefarance-form-list">
                                             <label>Your Team Photo</label>
-                                            <input type="text" class="input-select" style={{borderRadius:"30px",width:"33%"}} placeholder=" Upload A Team Photo"/>
+                                            <input type="text" className="input-select" style={{borderRadius:"30px",width:"33%"}} placeholder=" Upload A Team Photo"/>
                                                <p style={{color:"white",fontSize:"15px",padding:"5px"}}>This photo shows on the home page.</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-12">
+                                        <div className="prefarance-form-list">
                                             <label>Sponcer Information</label>
-                                            <input type="text" class="input-select" style={{borderRadius:"30px",width:"33%"}} placeholder=" Add New Sponcer"/>
+                                            <input type="text" className="input-select" style={{borderRadius:"30px",width:"33%"}} placeholder=" Add New Sponcer"/>
                                             <p style={{color:"white",fontSize:"15px",padding:"5px"}}>Add multiple sponsors to your team home page.<span style={{color:"red"}}> Find out More</span> </p>
                                         </div>
                                     </div>

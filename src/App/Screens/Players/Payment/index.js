@@ -49,12 +49,12 @@ function PlayerPayment(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
                                 <select>
                                     <option>My Teams</option>
                                     <option>My Teams 2</option>
@@ -62,9 +62,9 @@ function PlayerPayment(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -73,7 +73,7 @@ function PlayerPayment(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -81,10 +81,10 @@ function PlayerPayment(props) {
                             </div>
                         </div>
 
-                        <div class="prefarance-page">
-                            <h2 class="page-title">Team Payment</h2>
-                            <div class="prefarance-box">
-                                <div class="team-payment">
+                        <div className="prefarance-page">
+                            <h2 className="page-title">Team Payment</h2>
+                            <div className="prefarance-box">
+                                <div className="team-payment">
                                     <table>
                                         <tr>
                                             <th>Name</th>
@@ -96,7 +96,7 @@ function PlayerPayment(props) {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <div class="profile-name-img">
+                                                <div className="profile-name-img">
                                                     <img src={tableProfile} alt="" />
                                                     Lisa Menon
                                         </div>
@@ -104,15 +104,15 @@ function PlayerPayment(props) {
                                             <td>lisamenon@gmail.com</td>
                                             <td>Authentic Jersey</td>
                                             <td>$ 59.99</td>
-                                            <td><a href="#" class="view-invoice" data-toggle="modal" data-target="#inVoice">View Invoice</a></td>
+                                            <td><a href="#" className="view-invoice" data-toggle="modal" data-target="#inVoice">View Invoice</a></td>
                                             <td>
-                                                <a href="#" class="pay-now">Pay Now</a>
+                                                <a href="#" className="pay-now">Pay Now</a>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>
-                                                <div class="profile-name-img">
+                                                <div className="profile-name-img">
                                                 <img src={tableProfile} alt="" />
                                                     Lisa Menon
                                         </div>
@@ -120,15 +120,15 @@ function PlayerPayment(props) {
                                             <td>lisamenon@gmail.com</td>
                                             <td>Authentic Jersey</td>
                                             <td>$ 59.99</td>
-                                            <td><a href="#" class="view-invoice">View Invoice</a></td>
+                                            <td><a href="#" className="view-invoice">View Invoice</a></td>
                                             <td>
-                                                <span class="paid">Paid</span>
+                                                <span className="paid">Paid</span>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>
-                                                <div class="profile-name-img">
+                                                <div className="profile-name-img">
                                                 <img src={tableProfile} alt="" />
                                                     Lisa Menon
                                         </div>
@@ -136,15 +136,15 @@ function PlayerPayment(props) {
                                             <td>lisamenon@gmail.com</td>
                                             <td>Authentic Jersey</td>
                                             <td>$ 59.99</td>
-                                            <td><a href="#" class="view-invoice">View Invoice</a></td>
+                                            <td><a href="#" className="view-invoice">View Invoice</a></td>
                                             <td>
-                                                <a href="#" class="pay-now">Pay Now</a>
+                                                <a href="#" className="pay-now">Pay Now</a>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>
-                                                <div class="profile-name-img">
+                                                <div className="profile-name-img">
                                                 <img src={tableProfile} alt="" />
                                                     Lisa Menon
                                         </div>
@@ -152,9 +152,9 @@ function PlayerPayment(props) {
                                             <td>lisamenon@gmail.com</td>
                                             <td>Authentic Jersey</td>
                                             <td>$ 59.99</td>
-                                            <td><a href="#" class="view-invoice">View Invoice</a></td>
+                                            <td><a href="#" className="view-invoice">View Invoice</a></td>
                                             <td>
-                                                <span class="paid">Paid</span>
+                                                <span className="paid">Paid</span>
                                             </td>
                                         </tr>
                                     </table>

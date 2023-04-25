@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { StrictMode } from 'react';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -25,10 +25,10 @@ const store = createStore(
   initialState,
   compose(applyMiddleware(...middleware)))
 
-  
+  const rootindx = ReactDOM.createRoot(document.getElementById("root"));
 
-ReactDOM.render(
-  <React.StrictMode>
+  rootindx.render(
+  <StrictMode>
     <Provider store={store}>
       <App />
       <ToastContainer
@@ -44,8 +44,7 @@ ReactDOM.render(
       />
       {/* Same as */}
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

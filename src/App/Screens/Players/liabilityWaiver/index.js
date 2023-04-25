@@ -48,12 +48,12 @@ function LiabilityWaiver(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
                                 <select>
                                     <option>My Teams</option>
                                     <option>My Teams 2</option>
@@ -61,9 +61,9 @@ function LiabilityWaiver(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -72,7 +72,7 @@ function LiabilityWaiver(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -80,43 +80,43 @@ function LiabilityWaiver(props) {
                             </div>
                         </div>
 
-                        <div class="prefarance-page">
-                    <h2 class="page-title">Liability Waiver</h2>
-                    <div class="prefarance-box">
-                        <div class="liability-box">
-                            <div class="player-details-section">
-                                <div class="player-details-box">
+                        <div className="prefarance-page">
+                    <h2 className="page-title">Liability Waiver</h2>
+                    <div className="prefarance-box">
+                        <div className="liability-box">
+                            <div className="player-details-section">
+                                <div className="player-details-box">
                                     <span>Player Name</span>
                                     <p>Lisa Menon</p>
                                 </div>
-                                <div class="player-details-box">
+                                <div className="player-details-box">
                                     <span>Player Email</span>
                                     <p>lisamenon@gmail.com</p>
                                 </div>
-                                <div class="player-details-box">
+                                <div className="player-details-box">
                                     <span>Player Contact</span>
                                     <p>+1 - 236 982 2356</p>
                                 </div>
                             </div>
-                            <div class="pdf-image">
+                            <div className="pdf-image">
                                 <img src={pdf} lt=""/>
                             </div>
-                            <div class="liability-form">
-                                <div class="liability-form-input">
+                            <div className="liability-form">
+                                <div className="liability-form-input">
                                    <label>Player Name (First and last)</label>
-                                    <input type="text" class="liability-input-field"/>
+                                    <input type="text" className="liability-input-field"/>
                                 </div>
-                                <div class="liability-form-input">
+                                <div className="liability-form-input">
                                    <label>Parent Name (First and last)</label>
-                                    <input type="text" class="liability-input-field"/>
+                                    <input type="text" className="liability-input-field"/>
                                 </div>
-                                <div class="liability-form-input">
+                                <div className="liability-form-input">
                                    <label>Date</label>
-                                    <input type="text" class="liability-input-field"/>
+                                    <input type="text" className="liability-input-field"/>
                                 </div>
-                                <div class="liability-form-input">
+                                <div className="liability-form-input">
                                    <label>Parent/Guardian's signature required</label>
-                                    <input type="text" class="liability-input-field"/>
+                                    <input type="text" className="liability-input-field"/>
                                 </div>
                             </div>
                         </div>

@@ -50,12 +50,12 @@ function PlayerFiles(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
                                 <select>
                                     <option>My Teams</option>
                                     <option>My Teams 2</option>
@@ -63,9 +63,9 @@ function PlayerFiles(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -74,7 +74,7 @@ function PlayerFiles(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -82,33 +82,33 @@ function PlayerFiles(props) {
                             </div>
                         </div>
 
-                 <div class="prefarance-page">
-                   <div class="player-info-head">
-                    <h2 class="page-title">Files</h2>
-                        <div class="player-info-head-right">    
-                        <div class="streming-head-right">
-                            <div class="stream-tab">
+                 <div className="prefarance-page">
+                   <div className="player-info-head">
+                    <h2 className="page-title">Files</h2>
+                        <div className="player-info-head-right">    
+                        <div className="streming-head-right">
+                            <div className="stream-tab">
                                 <ul>
                                     <li onClick={() => history.push("./PlayerMedia")}><a href="#">Stream</a></li>
                                     <li onClick={() => history.push("./PlayerPhotos")}><a href="#">Photos</a></li>
                                     <li onClick={() => history.push("./PlayerVideos")}><a href="#">Videos</a></li>
-                                    <li><a class="active" href="#">Files</a></li>
+                                    <li><a className="active" href="#">Files</a></li>
                                 </ul>
                             </div>
-                            <button class="start-stream-btn actvUpld">Upload New Photo</button>
-                            <button class="start-stream-btn">Make Album Private</button>
+                            <button className="start-stream-btn actvUpld">Upload New Photo</button>
+                            <button className="start-stream-btn">Make Album Private</button>
                         </div>
                         </div>
                     </div>
 
-                    <div class="prefarance-form-list">
-                            <label class="options-check-family">Select All
+                    <div className="prefarance-form-list">
+                            <label className="options-check-family">Select All
                             <input type="checkbox"/>
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                             </label>
                     </div>
 
-                    <div class="prefarance-box playerPhotopage">                      
+                    <div className="prefarance-box playerPhotopage">                      
                         <div className="ppHead">
                             <span>&nbsp;</span>
                             <select>
@@ -162,44 +162,44 @@ function PlayerFiles(props) {
 
 
                         <div className="accorDianbg">
-                            <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-head" id="headingOne">
-                                    <h2 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <div className="accordion" id="accordionExample">
+                                <div className="card">
+                                    <div className="card-head" id="headingOne">
+                                    <h2 className="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         Collapsible Group Item #1
                                     </h2>
                                     </div>
 
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body">
+                                    <div id="collapseOne" className="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div className="card-body">
                                         <p>Menu1</p>
                                         <p>Menu2</p>
                                         <p>Menu3</p>
                                     </div>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-head" id="headingTwo">
-                                    <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <div className="card">
+                                    <div className="card-head" id="headingTwo">
+                                    <h2 className="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                         Collapsible Group Item #2
                                     </h2>
                                     </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                    <div class="card-body">
+                                    <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div className="card-body">
                                         <p>Menu1</p>
                                         <p>Menu2</p>
                                         <p>Menu3</p>
                                     </div>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-head" id="headingThree">
-                                    <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <div className="card">
+                                    <div className="card-head" id="headingThree">
+                                    <h2 className="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                         Collapsible Group Item #3
                                     </h2>
                                     </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                    <div class="card-body">
+                                    <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                    <div className="card-body">
                                         <p>Menu1</p>
                                         <p>Menu2</p>
                                         <p>Menu3</p>

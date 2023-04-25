@@ -1,4 +1,5 @@
-import LoadingOverlay from 'react-loading-overlay'
+import LoadingOverlay from 'react-loading-overlay';
+LoadingOverlay.propTypes = undefined;
  
 export default function MyLoader({ active, children }) {
   return (

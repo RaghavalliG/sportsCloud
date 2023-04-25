@@ -21,19 +21,19 @@ import DatePicker from "react-datepicker";
 
 const TeamImportPlayer = () => {
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
 
 
-            <div class="tab-content">
-                <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                    <div class="prefarance-tab-content">
+            <div className="tab-content">
+                <div className="tab-pane active" id="tabs-1" role="tabpanel">
+                    <div className="prefarance-tab-content">
                         <h1 style={{color:"white"}}>Import Player</h1>
 
                         <div className="fileBox">
                             <span>Import a list of players by uploading a file below:</span>
                             <div style={{display:"flex",paddingBottom:"20px"}}>
-                            <div class="update-team-photo" style={{ width: "20%" }}>
+                            <div className="update-team-photo" style={{ width: "20%" }}>
                                 Choose File
                                 <input type="file" name='img' />
 

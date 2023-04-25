@@ -415,12 +415,12 @@ const MyAccount = () => {
 
 
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
-            <div class="dashboard-main-content">
-            <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => {
+            <div className="dashboard-main-content">
+            <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
@@ -431,39 +431,39 @@ const MyAccount = () => {
                                     })}
                                 </select>
                                 <div className="dropBtn">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         ACCOUNT
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a class="dropdown-item" href="#">{profilePic.fname + " " + profilePic.lname}</a></li>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <li><a className="dropdown-item" href="#">{profilePic.fname + " " + profilePic.lname}</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
-                                            <li><a class="dropdown-item" href="#">My Account</a></li>
+                                            <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Credit" }} >
-                                            <li><a class="dropdown-item" href="#">Credits</a></li>
+                                            <li><a className="dropdown-item" href="#">Credits</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Household" }} >
-                                            <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                                            <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Biling" }} >
-                                            <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                                            <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/CreateTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Create New Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/SignOut" }} >
-                                            <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                                            <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                                         </Link>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="profile-head">
-                                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
                                         <img src={`${pic}${profilePic.profile_image}`} alt="" />
@@ -471,35 +471,35 @@ const MyAccount = () => {
 
                                 </div>
                             </div>
-                            <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                         </div>
-                <div class="prefarance-page">
-                    <div class="page-header">
-                        <h2 class="page-title">My Account</h2>
+                <div className="prefarance-page">
+                    <div className="page-header">
+                        <h2 className="page-title">My Account</h2>
 
                     </div>
 
 
-                    <div class="prefarance-box" style={{ overflow: "auto" }} >
+                    <div className="prefarance-box" style={{ overflow: "auto" }} >
                         <NavBarSide />
-                        <div class="team-payment team-assesment">
+                        <div className="team-payment team-assesment">
 
 
 
 
-                            <div class="prefarance-form playerinfo-form">
+                            <div className="prefarance-form playerinfo-form">
 
-                                <div class="row" style={{ padding: "20px" }}>
-                                    <div class="col-md-8">
-                                        <div class="prefarance-form-list">
+                                <div className="row" style={{ padding: "20px" }}>
+                                    <div className="col-md-8">
+                                        <div className="prefarance-form-list">
                                             {/* <img src={UserProfile} alt="" style={{ height: "83px", width: "111px" }} /> */}
                                             {file == null ? <img src={`${pic}${allUserDataList.profile_image}`} alt="" style={{ height: "90px", width: "90px", borderRadius: "60px" }} /> : file && <ImageThumb image={file} style={{ height: "90px", width: "90px", borderRadius: "60px" }} />}
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="prefarance-form-list">
-                                            <div class="update-team-photo">
+                                    <div className="col-md-4">
+                                        <div className="prefarance-form-list">
+                                            <div className="update-team-photo">
                                                 Edit Photo
                                                 <input type="file" name='img' onChange={handleUpload} />
 
@@ -508,35 +508,35 @@ const MyAccount = () => {
 
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label> First Name</label>
-                                            <input type="text" class="input-select" onChange={(e) => setFirstName(e.target.value)} defaultValue={allUserDataList.fname} />
+                                            <input type="text" className="input-select" onChange={(e) => setFirstName(e.target.value)} defaultValue={allUserDataList.fname} />
                                         </div>
                                     </div>
 
 
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label>Last Name</label>
-                                            <input type="text" class="input-select" onChange={(e) => setLastName(e.target.value)} defaultValue={allUserDataList.lname} />
+                                            <input type="text" className="input-select" onChange={(e) => setLastName(e.target.value)} defaultValue={allUserDataList.lname} />
 
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label>Birthday</label>
-                                            <div class="input-select" >
-                                                <input  type="date"  defaultValue class="input-select" onChange={(e) => setBirthday(e.target.value)} style={{ border: "none" }} 
+                                            <div className="input-select" >
+                                                <input  type="date"  defaultValue className="input-select" onChange={(e) => setBirthday(e.target.value)} style={{ border: "none" }} 
                                                 value={allUserDataList.dob}/>
                                             
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label>Gender</label>
-                                            <select class="input-select" onChange={(e) => setGender(e.target.value)} defaultChecked={allUserDataList.gender}>
+                                            <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultChecked={allUserDataList.gender}>
                                                 <option >{allUserDataList.gender}</option>
                                                 <option >{allUserDataList.gender=="Male"? "Female":"Male"}</option>
                                                 
@@ -546,8 +546,8 @@ const MyAccount = () => {
                                     </div>
 
 
-                                    <div class="col-md-12">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-12">
+                                        <div className="prefarance-form-list">
 
                                             <input type="checkbox" style={{ height: "15px", width: "17px" }} onClick={(e) => setPrivate1(!private1)} />
                                             <span style={{ color: "white", textDecoration: "underline" }}>Hide Age</span>
@@ -555,78 +555,78 @@ const MyAccount = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row" style={{
+                                <div className="row" style={{
 
                                     marginTop: "15px",
                                     paddingBottom: "16px",
                                     padding: "20px"
                                 }}>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label>Email</label>
-                                            <input type="text" class="input-select" onChange={(e) => setEmail(e.target.value)} defaultValue={private5 ? "" : allUserDataList.email} />
+                                            <input type="text" className="input-select" onChange={(e) => setEmail(e.target.value)} defaultValue={private5 ? "" : allUserDataList.email} />
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <input type="checkbox" style={{ height: "15px", width: "17px" }} onClick={(e) => setPrivate5(!private5)} />
                                         <span style={{ color: "white", textDecoration: "underline" }}>Private</span>
                                     </div>
                                 </div>
 
-                                <div class="row" style={{
+                                <div className="row" style={{
 
                                     marginTop: "15px",
                                     paddingBottom: "16px",
                                     padding: "20px"
                                 }}>
 
-                                    <div class="col-md-3">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-3">
+                                        <div className="prefarance-form-list">
                                             <label>Type </label>
-                                            <select class="input-select" onChange={(e) => setType1(e.target.value)} defaultValue={allUserDataList.apptype}>
+                                            <select className="input-select" onChange={(e) => setType1(e.target.value)} defaultValue={allUserDataList.apptype}>
                                                 <option>Home</option>
                                                 <option>Personal</option>
                                             </select> </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-3">
+                                        <div className="prefarance-form-list">
                                             <label>Phone </label>
-                                            <input type="text" class="input-select" onChange={(e) => setNumber1(e.target.value)} defaultValue={private2 ? "" : allUserDataList.phone} />
+                                            <input type="text" className="input-select" onChange={(e) => setNumber1(e.target.value)} defaultValue={private2 ? "" : allUserDataList.phone} />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-3">
+                                        <div className="prefarance-form-list">
                                             <label>Type </label>
-                                            <select class="input-select" onChange={(e) => setType2(e.target.value)} defaultValue={allUserDataList.apptype}>
+                                            <select className="input-select" onChange={(e) => setType2(e.target.value)} defaultValue={allUserDataList.apptype}>
                                                 <option>Home</option>
                                                 <option>Personal</option>
                                             </select>
 
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-3">
+                                        <div className="prefarance-form-list">
                                             <label>Phone </label>
-                                            <input type="text" class="input-select" onChange={(e) => setNumber2(e.target.value)} defaultValue={private3 ? "" : allUserDataList.alternative_phone} />
+                                            <input type="text" className="input-select" onChange={(e) => setNumber2(e.target.value)} defaultValue={private3 ? "" : allUserDataList.alternative_phone} />
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <input type="checkbox" style={{ height: "15px", width: "17px" }} onClick={(e) => setPrivate2(!private2)} />
                                             <span style={{ color: "white", textDecoration: "underline" }}>Private</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <input type="checkbox" style={{ height: "15px", width: "17px" }} onClick={(e) => setPrivate3(!private3)} />
                                             <span style={{ color: "white", textDecoration: "underline" }}>Private</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row" style={{
+                                <div className="row" style={{
 
                                     marginTop: "15px",
                                     paddingBottom: "16px",
@@ -637,52 +637,52 @@ const MyAccount = () => {
 
 
 
-                                    <div class="col-md-12">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-12">
+                                        <div className="prefarance-form-list">
                                             <label>Address1 Line</label>
-                                            <input type="text" class="input-select" onChange={(e) => setAddress1(e.target.value)} defaultValue={allUserDataList.address_line_one} />
+                                            <input type="text" className="input-select" onChange={(e) => setAddress1(e.target.value)} defaultValue={allUserDataList.address_line_one} />
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-12">
+                                        <div className="prefarance-form-list">
                                             <label>Address2 Line</label>
-                                            <input type="text" class="input-select" onChange={(e) => setAddress2(e.target.value)} defaultValue={allUserDataList.address_line_two} />
+                                            <input type="text" className="input-select" onChange={(e) => setAddress2(e.target.value)} defaultValue={allUserDataList.address_line_two} />
                                         </div>
                                     </div>
 
 
 
 
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label>City</label>
-                                            <input type="text" class="input-select" onChange={(e) => setCity(e.target.value)} defaultValue={allUserDataList.city} />
+                                            <input type="text" className="input-select" onChange={(e) => setCity(e.target.value)} defaultValue={allUserDataList.city} />
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label >State</label>
-                                            <input type="text" class="input-select" onChange={(e) => setState1(e.target.value)} defaultValue={allUserDataList.state} />
-                                            {/* <select class="input-select" onClick={(e) => setState1(e.target.value)} defaultValue={allUserDataList.state}>
+                                            <input type="text" className="input-select" onChange={(e) => setState1(e.target.value)} defaultValue={allUserDataList.state} />
+                                            {/* <select className="input-select" onClick={(e) => setState1(e.target.value)} defaultValue={allUserDataList.state}>
                                                 <option>Select</option>
                                                 <option>State1</option>
                                                 <option>State2</option>
                                             </select> */}
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label>Zip Code</label>
-                                            <input type="text" class="input-select" onChange={(e) => setZip(e.target.value)} defaultValue={private4 ? "" : allUserDataList.zip} />
+                                            <input type="text" className="input-select" onChange={(e) => setZip(e.target.value)} defaultValue={private4 ? "" : allUserDataList.zip} />
 
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <label>Country</label>
-                                            <input type="text" class="input-select" onChange={(e) => setCountry(e.target.value)} defaultValue={allUserDataList.country} />
+                                            <input type="text" className="input-select" onChange={(e) => setCountry(e.target.value)} defaultValue={allUserDataList.country} />
 
-                                            {/* <select class="input-select" onClick={(e) => setCountry(e.target.value)} defaultValue={allUserDataList.country}>
+                                            {/* <select className="input-select" onClick={(e) => setCountry(e.target.value)} defaultValue={allUserDataList.country}>
                                                 <option>Select</option>
                                                 <option>Country1</option>
                                                 <option>Country2</option>
@@ -690,19 +690,19 @@ const MyAccount = () => {
 
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
                                             <input type="checkbox" style={{ height: "15px", width: "17px" }} onClick={(e) => setPrivate4(!private4)} defaultValue={allUserDataList.fname} />
                                             <span style={{ color: "white", textDecoration: "underline" }}>Private</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row" style={{ padding: "20px" }}>
-                                    <div class="col-md-6">
-                                        <div class="prefarance-form-list">
-                                            <button class="add-links" onClick={() => history.push("/")}>CANCEL</button>
-                                            <button class="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} onClick={EditUserDetails}>SAVE</button>
+                                <div className="row" style={{ padding: "20px" }}>
+                                    <div className="col-md-6">
+                                        <div className="prefarance-form-list">
+                                            <button className="add-links" onClick={() => history.push("/")}>CANCEL</button>
+                                            <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} onClick={EditUserDetails}>SAVE</button>
                                         </div>
                                     </div>
                                 </div>

@@ -150,12 +150,12 @@ const TeamAvailability = () => {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
                             <select onClick={change}>
                                     <option>Select Team</option>
                                     {team.map((team) => {
@@ -168,9 +168,9 @@ const TeamAvailability = () => {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
                                         <img src={`${pic}${profilePic.profile_image}`} alt="" />
@@ -178,14 +178,14 @@ const TeamAvailability = () => {
 
                                 </div>
                             </div>
-                            <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                         </div>
                         <div>
                             <h1 style={{color:"white",fontSize:"30px",fontWeight:"bold"}}>Availability for</h1>
                         </div>
-                        <div class="manager-player-section">
-                        <div class="teams-select1" >
+                        <div className="manager-player-section">
+                        <div className="teams-select1" >
                          <select>
                              <option>My Availability</option>
                              <option> Team Availability</option>
@@ -193,8 +193,8 @@ const TeamAvailability = () => {
                          </div>
                                 </div>
 
-                        <div class="prefarance-box">
-                            <div class="team-payment team-assesment">
+                        <div className="prefarance-box">
+                            <div className="team-payment team-assesment">
                                
                                 <table>
                                     <tr>
@@ -209,9 +209,9 @@ const TeamAvailability = () => {
                                             return(
                                     <tr>
                                     <td>
-                                                <div class="flag-prac">
+                                                <div className="flag-prac">
                                                 <img src={schedule.display_icon.image} alt=""  style={{height:"50px",width:"50px",borderRadius:"50%"}}/>
-                                                <button class="practice">{schedule.name}</button>
+                                                <button className="practice">{schedule.name}</button>
                                                     
                                                 </div>
                                         
@@ -234,11 +234,11 @@ const TeamAvailability = () => {
 
                                     {/* <tr>
                                         <td>
-                                            <div class="flag-prac">
+                                            <div className="flag-prac">
                                                 <img src={flag} alt="" />
-                                                <button class="practice">Practice</button>
+                                                <button className="practice">Practice</button>
                                             </div>
-                                            <div class="game-name">
+                                            <div className="game-name">
                                                 Dubcity Basketball
                                                 Practice</div>
                                         </td>
@@ -259,11 +259,11 @@ const TeamAvailability = () => {
 
                                     <tr>
                                         <td>
-                                            <div class="flag-prac">
+                                            <div className="flag-prac">
                                                 <img src={flag} alt="" />
-                                                <button class="practice">Practice</button>
+                                                <button className="practice">Practice</button>
                                             </div>
-                                            <div class="game-name">
+                                            <div className="game-name">
                                                 Dubcity Basketball
                                                 Practice</div>
                                         </td>

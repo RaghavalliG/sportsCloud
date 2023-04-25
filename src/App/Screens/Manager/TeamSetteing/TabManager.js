@@ -204,12 +204,12 @@ const TabManager = () => {
 
     }
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
-            <div class="dashboard-main-content">
-                <div class="dashboard-head">
-                    <div class="teams-select">
-                        <button class="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
+            <div className="dashboard-main-content">
+                <div className="dashboard-head">
+                    <div className="teams-select">
+                        <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
                         <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                             {dropdown.map((dropdown) => {
@@ -225,9 +225,9 @@ const TabManager = () => {
                         </select>
                     </div>
 
-                    <div class="profile-head">
-                        <div class="profile-head-name">{user ? user.fname : null}</div>
-                        <div class="profile-head-img">
+                    <div className="profile-head">
+                        <div className="profile-head-name">{user ? user.fname : null}</div>
+                        <div className="profile-head-img">
                             {
                                 user ?
                                     <img src={user.profile_image} alt="" /> :
@@ -236,27 +236,27 @@ const TabManager = () => {
 
                         </div>
                     </div>
-                    <div class="login-account">
+                    <div className="login-account">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                             {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
                         </ul>
                     </div>
                 </div>
-                <div class="prefarance-page">
-                    <div class="page-header">
-                        <h2 class="page-title">Manager</h2>
-                        <div class="teams-select" >
-                            <button class="create-new-team" onClick={() => history.push("./CreateTeam")} style={{ backgroundColor: "red" }}>Create New Teams</button>
+                <div className="prefarance-page">
+                    <div className="page-header">
+                        <h2 className="page-title">Manager</h2>
+                        <div className="teams-select" >
+                            <button className="create-new-team" onClick={() => history.push("./CreateTeam")} style={{ backgroundColor: "red" }}>Create New Teams</button>
                         </div>
                     </div>
 
 
-                    <div class="prefarance-box" style={{ overflow: "auto" }} >
+                    <div className="prefarance-box" style={{ overflow: "auto" }} >
                         <SettingNav />
 
-                        <div class="team-payment team-assesment" style={{ marginTop: "10px" }}>
-                            <div class="prefarance-form playerinfo-form">
+                        <div className="team-payment team-assesment" style={{ marginTop: "10px" }}>
+                            <div className="prefarance-form playerinfo-form">
 
                               <p style={{padding:"30px",color:"white",fontSize:"15px"}}> <span style={{color:"gray",fontWeight:"bold"}}> Tab management</span> for this is currently being handled at the league level.</p>
                             </div>

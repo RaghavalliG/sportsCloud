@@ -178,13 +178,13 @@ const CreateTeam = (props) => {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents manger="manger" />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => {
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
                                 <select onChange={change}>
@@ -195,39 +195,39 @@ const CreateTeam = (props) => {
                                     })}
                                 </select>
                                 <div className="dropBtn">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         ACCOUNT
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a class="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
-                                            <li><a class="dropdown-item" href="#">My Account</a></li>
+                                            <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Credit" }} >
-                                            <li><a class="dropdown-item" href="#">Credits</a></li>
+                                            <li><a className="dropdown-item" href="#">Credits</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Household" }} >
-                                            <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                                            <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Biling" }} >
-                                            <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                                            <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/CreateTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Create New Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/SignOut" }} >
-                                            <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                                            <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                                         </Link>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="profile-head">
-                                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
                                         <img src={`${pic}${profilePic.profile_image}`} alt="" />
@@ -235,15 +235,15 @@ const CreateTeam = (props) => {
 
                                 </div>
                             </div>
-                            <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                         </div>
-                        <div class="prefarance-box player-info" style={{ padding: "10px" }}>
-                            <div class="prefarance-form playerinfo-form">
+                        <div className="prefarance-box player-info" style={{ padding: "10px" }}>
+                            <div className="prefarance-form playerinfo-form">
 
-                                <div class="row">
-                                    <div class="col-md-6" >
-                                        <div class="prefarance-form-list" style={{ color: "white" }}>
+                                <div className="row">
+                                    <div className="col-md-6" >
+                                        <div className="prefarance-form-list" style={{ color: "white" }}>
                                             <h1 style={{ color: "white", fontSize: "35px", padding: "10px" }}>Create a  New Team</h1>
                                             <h3 style={{ color: "white", fontSize: "25px", padding: "10px" }}>Let's get started</h3>
                                             <p style={{ color: "white", fontSize: "20px", padding: "10px" }}> We'll create your team on the Free plan, which includes all of our
@@ -259,11 +259,11 @@ const CreateTeam = (props) => {
                                             <p style={{ color: "red", fontSize: "20px", padding: "10px" }}>Explore our paid plans</p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list">
+                                    <div className="col-md-6">
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list">
                                                 <label>Language</label>
-                                                <select class="input-select" onChange={(e) => setLanguage(e.target.value)}>
+                                                <select className="input-select" onChange={(e) => setLanguage(e.target.value)}>
                                                     <option>Select Language</option>
                                                     <option>ENGLISH</option>
                                                     <option>HINDI</option>
@@ -280,19 +280,19 @@ const CreateTeam = (props) => {
                                                     <option>TELUGU</option>
                                                 </select>
                                                 <label>Team Name</label>
-                                                <input type="text" class="input-select" onChange={(e) => setTeamName(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setTeamName(e.target.value)} />
                                                 <label>Player Parent Name</label>
-                                                <input type="text" class="input-select" onChange={(e) => setParentName(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setParentName(e.target.value)} />
                                                 <label>Sport</label>
-                                                <select class="input-select" onChange={(e) => setSport(e.target.value)}>
+                                                <select className="input-select" onChange={(e) => setSport(e.target.value)}>
                                                     <option>Football</option>
                                                     <option>Cricket</option>
                                                     <option>Badminton</option>
                                                 </select>
-                                                {/* <input type="text" class="input-select" onChange={(e) => setSport(e.target.value)}/> */}
+                                                {/* <input type="text" className="input-select" onChange={(e) => setSport(e.target.value)}/> */}
 
                                                 <label>Country</label>
-                                                <select class="input-select" onChange={(e) => setCountry(e.target.value)}>
+                                                <select className="input-select" onChange={(e) => setCountry(e.target.value)}>
                                                     <option>India</option>
                                                     <option>America</option>
                                                     <option>South Africa</option>
@@ -303,29 +303,29 @@ const CreateTeam = (props) => {
                                                     />
                                                 </div>
                                                 <label>Time Zone</label>
-                                                <select class="input-select" onChange={(e) => setTimeZone(e.target.value)}>
+                                                <select className="input-select" onChange={(e) => setTimeZone(e.target.value)}>
                                                     <option>Time Zone1</option>
                                                     <option>Time Zone2</option>
                                                     <option>Time Zone3</option>
                                                 </select>
 
                                                 <label>Zip Code</label>
-                                                <input type="text" class="input-select" onChange={(e) => setZip(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setZip(e.target.value)} />
 
-                                                {/* <input type="text" class="input-select" onChange={(e) => setTimeZone(e.target.value)}/> */}
+                                                {/* <input type="text" className="input-select" onChange={(e) => setTimeZone(e.target.value)}/> */}
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12" style={{ display: "flex", flexDirection: "row" }}>
-                                            <div class="col-md-6">
-                                                <div class="prefarance-form-list">
-                                                    <button class="add-links">CANCEL</button>
+                                        <div className="col-md-12" style={{ display: "flex", flexDirection: "row" }}>
+                                            <div className="col-md-6">
+                                                <div className="prefarance-form-list">
+                                                    <button className="add-links">CANCEL</button>
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="prefarance-form-list">
-                                                    <button class="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} onClick={CheckValidatiion} >SAVE</button>
+                                            <div className="col-md-6">
+                                                <div className="prefarance-form-list">
+                                                    <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} onClick={CheckValidatiion} >SAVE</button>
                                                 </div>
                                             </div>
                                         </div>

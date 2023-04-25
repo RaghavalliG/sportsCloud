@@ -207,12 +207,12 @@ const Household = (props) => {
 
     }
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
-            <div class="dashboard-main-content">
-                <div class="dashboard-head">
-                    <div class="teams-select">
-                        <button class="create-new-team" onClick={() => {
+            <div className="dashboard-main-content">
+                <div className="dashboard-head">
+                    <div className="teams-select">
+                        <button className="create-new-team" onClick={() => {
                             history.push("/CreateTeam")
                         }}>Create New Teams</button>
                         <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
@@ -223,39 +223,39 @@ const Household = (props) => {
                             })}
                         </select>
                         <div className="dropBtn">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                 ACCOUNT
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                <li><a class="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
                                 <Link to={{ pathname: "/MyAccount" }} >
-                                    <li><a class="dropdown-item" href="#">My Account</a></li>
+                                    <li><a className="dropdown-item" href="#">My Account</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/Credit" }} >
-                                    <li><a class="dropdown-item" href="#">Credits</a></li>
+                                    <li><a className="dropdown-item" href="#">Credits</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/Household" }} >
-                                    <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                                    <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/ManageTeam" }} >
-                                    <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                                    <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/Biling" }} >
-                                    <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                                    <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/CreateTeam" }} >
-                                    <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                                    <li><a className="dropdown-item" href="#">Create New Team</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/SignOut" }} >
-                                    <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                                    <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                                 </Link>
 
                             </ul>
                         </div>
                     </div>
-                    <div class="profile-head">
-                        <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                        <div class="profile-head-img">
+                    <div className="profile-head">
+                        <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                        <div className="profile-head-img">
                             {profilePic.profile_image == null ?
                                 <img src={BigUserProfile} alt="" /> :
                                 <img src={`${pic}${profilePic.profile_image}`} alt="" />
@@ -263,29 +263,29 @@ const Household = (props) => {
 
                         </div>
                     </div>
-                    <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                    <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                 </div>
-                <div class="prefarance-page">
+                <div className="prefarance-page">
 
-                    <div class="page-header">
-                        <h2 class="page-title">My Account</h2>
+                    <div className="page-header">
+                        <h2 className="page-title">My Account</h2>
 
                     </div>
-                    <div class="prefarance-box" style={{ overflow: "auto" }} >
+                    <div className="prefarance-box" style={{ overflow: "auto" }} >
 
                         <NavBarSide />
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                <div class="prefarance-tab-content">
+                        <div className="tab-content">
+                            <div className="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div className="prefarance-tab-content">
 
-                                    <div class="prefarance-form playerinfo-form">
+                                    <div className="prefarance-form playerinfo-form">
                                         <h3 style={{ color: "white" }}> Need to start our own household</h3>
                                         <img src={football} alt="" style={{ borderRadius: "10px", width: "100%" }} /><br></br>
                                         <span>Households make it easier to view and manage your family members within Teamsnap.</span><span style={{ color: "red" }}> Learn more about hoseholds.</span>
 
-                                        <div class="prefarance-form-list">
-                                            <button class="add-links" style={{ marginLeft: "73%", width: "243px" }}>Create My Household</button>
+                                        <div className="prefarance-form-list">
+                                            <button className="add-links" style={{ marginLeft: "73%", width: "243px" }}>Create My Household</button>
 
                                         </div>
 

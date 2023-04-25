@@ -62,15 +62,15 @@ function VerifyOtpComponents(props) {
 
   return (
     <>
-       <div class="login-container" style={{ flexGrow: 1 }}>
+       <div className="login-container" style={{ flexGrow: 1 }}>
         <a href="#"><img src={Logo} alt="" /></a>
         <div style={{ paddingBottom: 60 }}>
-          <div class="modal-dialog custom-modal">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Verify Otp</h4>
+          <div className="modal-dialog custom-modal">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Verify Otp</h4>
               </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <form  onSubmit={handleSubmit}>
                 <div style={{ alignItems: 'center', display: "flex", justifyContent: 'center', height: 200 }}>
                   <OtpInput
@@ -91,8 +91,8 @@ function VerifyOtpComponents(props) {
                     separator={<span style={{ fontSize: 20 }}> - </span>}
                   />
                 </div>
-                <div class="btn-set">
-                  <button type="submit" class="btn btn-deflt">Submit</button>
+                <div className="btn-set">
+                  <button type="submit" className="btn btn-deflt">Submit</button>
                 </div>
               </form>
             </div>

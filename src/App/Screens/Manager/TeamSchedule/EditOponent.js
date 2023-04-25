@@ -218,13 +218,13 @@ function EditOponent(props) {
     return (
 
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents manger="manger"/>
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                                     {dropdown.map((dropdown) => {
@@ -240,9 +240,9 @@ function EditOponent(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -251,7 +251,7 @@ function EditOponent(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -259,14 +259,14 @@ function EditOponent(props) {
                             </div>
                         </div>
 
-                        <div class="prefarance-page">
-                            <div class="page-header">
-                                <h2 class="page-title">Locations</h2>
+                        <div className="prefarance-page">
+                            <div className="page-header">
+                                <h2 className="page-title">Locations</h2>
 
                             </div>
-                            <div class="manager-player-section">
+                            <div className="manager-player-section">
                                 <h3>Manager:</h3>
-                                <div class="teams-select">
+                                <div className="teams-select">
                                     <ul >
                                         <Link to={{ pathname: "/NewOponent", state: "GAME" }} >
                                             <li ><a href="javascript:void(0)"  >New Oponent</a></li>
@@ -286,8 +286,8 @@ function EditOponent(props) {
                                     <li><a href="#">Import</a></li>
                                 </ul> */}
                             </div>
-                            <div class="prefarance-box">
-                                <div class="team-payment team-assesment">
+                            <div className="prefarance-box">
+                                <div className="team-payment team-assesment">
                                     <table>
                                         <tr>
                                             <th>Opponent Name</th>
@@ -325,7 +325,7 @@ function EditOponent(props) {
                                                 <span>TeamLink Opponent</span>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <button><img src={pencil} /></button>
                                                 </div>
                                             </td>
@@ -354,7 +354,7 @@ function EditOponent(props) {
                                                 <span>TeamLink Opponent</span>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <button><img src={pencil} /></button>
                                                 </div>
                                             </td>
@@ -383,7 +383,7 @@ function EditOponent(props) {
                                                 <span>TeamLink Opponent</span>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <button><img src={pencil} /></button>
                                                 </div>
                                             </td>
@@ -412,7 +412,7 @@ function EditOponent(props) {
                                                 <span>TeamLink Opponent</span>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <button><img src={pencil} /></button>
                                                 </div>
                                             </td>
@@ -441,7 +441,7 @@ function EditOponent(props) {
                                                 <span>TeamLink Opponent</span>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <button><img src={pencil} /></button>
                                                 </div>
                                             </td>

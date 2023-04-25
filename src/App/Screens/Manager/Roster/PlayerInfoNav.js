@@ -20,14 +20,14 @@ const PlayerInfoNav = (props) => {
     const history = useHistory();
     const [listValue, setList] = useState(false)
     return (
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "35px" }}>{props.name}</h1> </a>
+        <ul className="nav nav-tabs" role="tablist">
+            <li className="nav-item">
+                <a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "35px" }}>{props.name}</h1> </a>
 
             </li>
-            <li class="nav-item" >
+            <li className="nav-item" >
 
-                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"  
+                <a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab"  
                 onClick={() => {
                     
                    setList(true)
@@ -35,16 +35,16 @@ const PlayerInfoNav = (props) => {
                }}>Lisa Menon     </a>
                 
             </li>
-            <li class="nav-item" >
-                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Contact Information</a>
+            <li className="nav-item" >
+                <a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Contact Information</a>
             </li>
-            <li class="nav-item" >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab" >Optional Player Details</a>
+            <li className="nav-item" >
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab" >Optional Player Details</a>
                
             </li>
 
-            <li class="nav-item" class="nav-item"  >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  >Player Links and Files</a>
+            <li className="nav-item" className="nav-item"  >
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  >Player Links and Files</a>
                
             </li>
 

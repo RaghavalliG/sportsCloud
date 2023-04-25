@@ -388,13 +388,13 @@ function ManagerRoster(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents manger="manger" />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => {
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
@@ -405,39 +405,39 @@ function ManagerRoster(props) {
                                     })}
                                 </select>
                                 <div className="dropBtn">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         ACCOUNT
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a class="dropdown-item" href="#">{profilePic.fname + " " + profilePic.lname}</a></li>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <li><a className="dropdown-item" href="#">{profilePic.fname + " " + profilePic.lname}</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
-                                            <li><a class="dropdown-item" href="#">My Account</a></li>
+                                            <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Credit" }} >
-                                            <li><a class="dropdown-item" href="#">Credits</a></li>
+                                            <li><a className="dropdown-item" href="#">Credits</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Household" }} >
-                                            <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                                            <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Biling" }} >
-                                            <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                                            <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/CreateTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Create New Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/SignOut" }} >
-                                            <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                                            <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                                         </Link>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="profile-head">
-                                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
                                         <img src={`${pic1}${profilePic.profile_image}`} alt="" />
@@ -445,22 +445,22 @@ function ManagerRoster(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
                             
 
                         </div>
 
-                        <div class="prefarance-page">
-                            <div class="player-info-head">
-                                <h2 class="page-title">Roster</h2>
-                                <div class="player-info-head-right">
-                                    <button class="edit-btn" style={{ width: "265px" }} onClick={() => history.push('./PlayerInfo')}>Manage My Player Info</button>
-                                    <button class="add-new-family" style={{ width: "324px" }} onClick={() => history.push('./PlayerInfo')}>+ Add or Edit My Family Member</button>
-                                    <button class="edit-btn" style={{ marginLeft: "5px" }} onClick={() => history.push('./Subscribe')}>Export</button>
+                        <div className="prefarance-page">
+                            <div className="player-info-head">
+                                <h2 className="page-title">Roster</h2>
+                                <div className="player-info-head-right">
+                                    <button className="edit-btn" style={{ width: "265px" }} onClick={() => history.push('./PlayerInfo')}>Manage My Player Info</button>
+                                    <button className="add-new-family" style={{ width: "324px" }} onClick={() => history.push('./PlayerInfo')}>+ Add or Edit My Family Member</button>
+                                    <button className="edit-btn" style={{ marginLeft: "5px" }} onClick={() => history.push('./Subscribe')}>Export</button>
                                 </div>
                             </div>
 
-                            {user.user_type == "manager" ? <div class="manager-player-section">
+                            {user.user_type == "manager" ? <div className="manager-player-section">
                                 <h3>Maneger</h3>
                                 <ul >
                                     <li onClick={() => history.push('./AddPlayer')}><a href="#" style={{ color: "red" }}>+ Add Player</a></li>
@@ -471,13 +471,13 @@ function ManagerRoster(props) {
                             </div> : ""}
 
 
-                            <div class="manager-player-section">
+                            <div className="manager-player-section">
                                 <h3>Players</h3>
 
                                 <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData.TOTAL_PLAYER}(Men:3,Women:2)</span>
                             </div>
-                            <div class="prefarance-box">
-                                <div class="team-payment team-assesment">
+                            <div className="prefarance-box">
+                                <div className="team-payment team-assesment">
                                     <table>
 
                                         <tr>
@@ -505,7 +505,7 @@ function ManagerRoster(props) {
 
                                                                                     <td>
 
-                                                                                        <div class="game-name">
+                                                                                        <div className="game-name">
 
                                                                                             {(player.member_id.gender) ? player.member_id.gender : null}
                                                                                             {/* {(player.member_id.gender)==Male ? player.member_id.gender : null} */}
@@ -529,7 +529,7 @@ function ManagerRoster(props) {
 
                                                                                     </td>
                                                                                     <td>
-                                                                                        <div class="last-row">
+                                                                                        <div className="last-row">
                                                                                             <p>{player.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player.member_id._id)} ><img src={Delect} /></button>
                                                                                             <button onClick={() => updateModalValue(i, player.member_id._id)}><img src={pencil} /></button>
                                                                                         </div>
@@ -555,14 +555,14 @@ function ManagerRoster(props) {
 
 
                                     <Modal.Body>
-                                        <div class="prefarance-form playerinfo-form">
+                                        <div className="prefarance-form playerinfo-form">
                                             <h1 style={{ color: "red", paddingBottom: "20px", fontWeight: "bold" }}>Edit Player Details</h1>
-                                            <div class="row">
+                                            <div className="row">
 
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> Gender</h2>
-                                                        <select class="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newplayerdata[id].member_id.gender}>
+                                                        <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newplayerdata[id].member_id.gender}>
                                                             <option>Select</option>
                                                             <option>Male</option>
                                                             <option>Female</option>
@@ -570,119 +570,119 @@ function ManagerRoster(props) {
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> First Name of Player</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setFName(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setFName(e.target.value)}
                                                             defaultValue={newplayerdata[id].member_id.fname}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> Last Name of Player</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setLName(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setLName(e.target.value)}
                                                             defaultValue={newplayerdata[id].member_id.lname}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> Jursey Number </h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setJursey(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setJursey(e.target.value)}
                                                             defaultValue={newplayerdata[id].jersey_number}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>Email</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setEmail(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setEmail(e.target.value)}
                                                             defaultValue={newplayerdata[id].member_id.email}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Player Position</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setPosition(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setPosition(e.target.value)}
                                                             defaultValue={newplayerdata[id].position}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  City</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setCity(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setCity(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Zip</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setZip(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setZip(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  State</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setSateData(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setSateData(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Birthday</h2>
-                                                        <input type="date" class="input-select" placeholder="Virtual Practice " onChange={(e) => setBirthday(e.target.value)}
+                                                        <input type="date" className="input-select" placeholder="Virtual Practice " onChange={(e) => setBirthday(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Address Line1</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setAddress1(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setAddress1(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> Address Line 2</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setAddress2(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setAddress2(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Phone Number</h2>
-                                                        <input type="text" class="input-select" placeholder="Virtual Practice " onChange={(e) => setPhone(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setPhone(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Member Type</h2>
 
-                                                        <select class="input-select" onChange={(e) => setMemberType(e.target.value)}>
+                                                        <select className="input-select" onChange={(e) => setMemberType(e.target.value)}>
                                                             <option>Select</option>
                                                             <option>PLAYER</option>
                                                             <option>MANAGER</option>
@@ -697,8 +697,8 @@ function ManagerRoster(props) {
 
 
 
-                                            <button class="add-links" style={{ margin: "10px" }} onClick={() => setModeValue(false)}>Cancel</button>
-                                            <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updatePlayerData}>Update</button>
+                                            <button className="add-links" style={{ margin: "10px" }} onClick={() => setModeValue(false)}>Cancel</button>
+                                            <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updatePlayerData}>Update</button>
 
                                         </div>
                                     </Modal.Body>
@@ -709,19 +709,19 @@ function ManagerRoster(props) {
 
 
                                     <Modal.Body>
-                                        <div class="prefarance-form playerinfo-form">
+                                        <div className="prefarance-form playerinfo-form">
                                             <h1 style={{ color: "red", paddingBottom: "20px", fontWeight: "bold" }}>Edit Player Details</h1>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="update-team-photo" style={{ width: "100%" }}>
+                                            <div className="row">
+                                                <div className="col-md-12">
+                                                    <div className="update-team-photo" style={{ width: "100%" }}>
                                                         Choose Image
                                                         <input type="file" name='img' onChange={(event) => handleChange(event)} />
 
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button class="add-links" style={{ margin: "10px" }} onClick={() => setImageModal(false)}>Cancel</button>
-                                            <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updateImage}>Update</button>
+                                            <button className="add-links" style={{ margin: "10px" }} onClick={() => setImageModal(false)}>Cancel</button>
+                                            <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updateImage}>Update</button>
 
                                         </div>
                                     </Modal.Body>
@@ -733,14 +733,14 @@ function ManagerRoster(props) {
 
 
                                     <Modal.Body>
-                                        <div class="prefarance-form playerinfo-form">
+                                        <div className="prefarance-form playerinfo-form">
                                             <h1 style={{ color: "red", paddingBottom: "20px", fontWeight: "bold" }}>Edit Game/Event</h1>
-                                            <div class="row">
+                                            <div className="row">
 
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> Gender</h2>
-                                                        <select class="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newNonPlayerData[id1].member_id.gender}>
+                                                        <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newNonPlayerData[id1].member_id.gender}>
                                                             <option>Select</option>
                                                             <option>Male</option>
                                                             <option>Female</option>
@@ -748,119 +748,119 @@ function ManagerRoster(props) {
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> First Name of Player</h2>
-                                                        <input type="text" class="input-select" placeholder="enter Player First Name... " onChange={(e) => setFName(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="enter Player First Name... " onChange={(e) => setFName(e.target.value)}
                                                             defaultValue={newNonPlayerData[id1].member_id.fname}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> Last Name of Player</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter Player Last Name... " onChange={(e) => setLName(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter Player Last Name... " onChange={(e) => setLName(e.target.value)}
                                                             defaultValue={newNonPlayerData[id1].member_id.lname}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> Jursey Number </h2>
-                                                        <input type="text" class="input-select" placeholder="Enter Jursey Number... " onChange={(e) => setJursey(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter Jursey Number... " onChange={(e) => setJursey(e.target.value)}
                                                             defaultValue={newNonPlayerData[id1].jersey_number}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>Email</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter Email Address.. " onChange={(e) => setEmail(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter Email Address.. " onChange={(e) => setEmail(e.target.value)}
                                                             defaultValue={newNonPlayerData[id1].member_id.email}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Player Position</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter Player Position..." onChange={(e) => setPosition(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter Player Position..." onChange={(e) => setPosition(e.target.value)}
                                                             defaultValue={newNonPlayerData[id1].position}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  City</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter City..." onChange={(e) => setCity(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter City..." onChange={(e) => setCity(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Zip</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter Zip Code... " onChange={(e) => setZip(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter Zip Code... " onChange={(e) => setZip(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  State</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter State... " onChange={(e) => setSateData(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter State... " onChange={(e) => setSateData(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Birthday</h2>
-                                                        <input type="date" class="input-select" placeholder="Select Birdthady... " onChange={(e) => setBirthday(e.target.value)}
+                                                        <input type="date" className="input-select" placeholder="Select Birdthady... " onChange={(e) => setBirthday(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Address Line1</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter Address Line1... " onChange={(e) => setAddress1(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter Address Line1... " onChange={(e) => setAddress1(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2> Address Line 2</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter Address Line 2... " onChange={(e) => setAddress2(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter Address Line 2... " onChange={(e) => setAddress2(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Phone Number</h2>
-                                                        <input type="text" class="input-select" placeholder="Enter Phone Number... " onChange={(e) => setPhone(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="Enter Phone Number... " onChange={(e) => setPhone(e.target.value)}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="prefarance-form-list">
+                                                <div className="col-md-12">
+                                                    <div className="prefarance-form-list">
                                                         <h2>  Member Type</h2>
 
-                                                        <select class="input-select" onChange={(e) => setMemberType(e.target.value)}>
+                                                        <select className="input-select" onChange={(e) => setMemberType(e.target.value)}>
                                                             <option>Select</option>
                                                             <option>PLAYER</option>
                                                             <option>MANAGER</option>
@@ -875,8 +875,8 @@ function ManagerRoster(props) {
 
 
 
-                                            <button class="add-links" style={{ margin: "10px" }} onClick={() => setModeValue1(false)}>Cancel</button>
-                                            <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updatePlayerData}>Update</button>
+                                            <button className="add-links" style={{ margin: "10px" }} onClick={() => setModeValue1(false)}>Cancel</button>
+                                            <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updatePlayerData}>Update</button>
 
                                         </div>
                                     </Modal.Body>
@@ -886,7 +886,7 @@ function ManagerRoster(props) {
 
                             </div>
 
-                            <div class="manager-player-section">
+                            <div className="manager-player-section">
                                 <h3> Non-Players</h3>
                                 {/* <ul>
                                     <li><a href="#">New</a></li>
@@ -895,8 +895,8 @@ function ManagerRoster(props) {
                                 </ul> */}
                                 <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player 5(Men:3,Women:2)</span>
                             </div>
-                            <div class="prefarance-box">
-                                <div class="team-payment team-assesment">
+                            <div className="prefarance-box">
+                                <div className="team-payment team-assesment">
                                     <table>
                                         <tr>
                                             <th>Male/Female</th>
@@ -925,7 +925,7 @@ function ManagerRoster(props) {
 
                                                                                 <td>
 
-                                                                                    <div class="game-name">
+                                                                                    <div className="game-name">
 
                                                                                         {(nonPlayer.member_id.gender) ? nonPlayer.member_id.gender : null}
                                                                                     </div>
@@ -948,7 +948,7 @@ function ManagerRoster(props) {
 
                                                                                 </td>
                                                                                 <td>
-                                                                                    <div class="last-row">
+                                                                                    <div className="last-row">
                                                                                         <p>{nonPlayer.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(nonPlayer.member_id._id)} ><img src={Delect} /></button>
                                                                                         <button onClick={() => updateModalValue1(i, nonPlayer.member_id._id)}><img src={pencil} /></button>
                                                                                     </div>

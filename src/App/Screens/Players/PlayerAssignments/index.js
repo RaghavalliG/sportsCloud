@@ -489,12 +489,12 @@ function PlayerAssignments(props) {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
                                 <select onClick={change1}>
                                     <option>Select Team</option>
                                     {team.map((team) => {
@@ -507,9 +507,9 @@ function PlayerAssignments(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -518,7 +518,7 @@ function PlayerAssignments(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -526,12 +526,12 @@ function PlayerAssignments(props) {
                             </div>
                         </div>
 
-                        <div class="prefarance-page">
-                            <div class="page-header">
-                                <h2 class="page-title">Assignments</h2>
-                                <div class="right-head-buttons">
-                                    <a href="#" class="add-new-btn" data-toggle="modal" data-target="#addassignment" onClick={() => setModalValue(true)}>Add New</a>
-                                    <a href="#" class="view-preferance" data-toggle="modal" data-target="#assignmentpreferance">View Preferences</a>
+                        <div className="prefarance-page">
+                            <div className="page-header">
+                                <h2 className="page-title">Assignments</h2>
+                                <div className="right-head-buttons">
+                                    <a href="#" className="add-new-btn" data-toggle="modal" data-target="#addassignment" onClick={() => setModalValue(true)}>Add New</a>
+                                    <a href="#" className="view-preferance" data-toggle="modal" data-target="#assignmentpreferance">View Preferences</a>
                                 </div>
                             </div>
 
@@ -564,11 +564,11 @@ function PlayerAssignments(props) {
                                     </select>
 
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Date</h2>
-                                    <div class="input-select" style={{ width: "27%" }}>
+                                    <div className="input-select" style={{ width: "27%" }}>
                                         <DatePicker selected={startDate} show="false" onChange={(date) => setStartDate(date)} className="abc" />
                                     </div>
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Time</h2>
-                                    <div class="input-select" style={{ width: "80%", marginLeft: "11%", borderRadius: "10px", border: "1px solid black" }}>
+                                    <div className="input-select" style={{ width: "80%", marginLeft: "11%", borderRadius: "10px", border: "1px solid black" }}>
                                         <TimePicker
                                             onChange={setTime}
                                             value={time}
@@ -600,8 +600,8 @@ function PlayerAssignments(props) {
 
                                     </select>
 
-                                    <button class="add-links" style={{ margin: "10px" }} onClick={(e) => setModalValue(false)}>Cancel</button>
-                                    <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiionSave}>Save</button>
+                                    <button className="add-links" style={{ margin: "10px" }} onClick={(e) => setModalValue(false)}>Cancel</button>
+                                    <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiionSave}>Save</button>
                                     <button style={{ backgroundColor: "#1d1b1b", padding: "13px", borderRadius: "30px", margin: "10px", color: "white", width: "338px" }}>+Save and Create Another</button>
                                 </Modal.Body>
 
@@ -676,8 +676,8 @@ function PlayerAssignments(props) {
 
                                     </select>
 
-                                    <button class="add-links" style={{ margin: "10px" }} onClick={(e) => setModeValue(false)}>Cancel</button>
-                                    <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiionUpdate}>Save</button>
+                                    <button className="add-links" style={{ margin: "10px" }} onClick={(e) => setModeValue(false)}>Cancel</button>
+                                    <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={CheckValidatiionUpdate}>Save</button>
                                     <button style={{ backgroundColor: "#1d1b1b", padding: "13px", borderRadius: "30px", margin: "10px", color: "white", width: "338px" }}>+Save and Create Another</button>
                                 </Modal.Body>
 
@@ -685,8 +685,8 @@ function PlayerAssignments(props) {
 
 
 
-                            <div class="prefarance-box">
-                                <div class="team-payment team-assesment">
+                            <div className="prefarance-box">
+                                <div className="team-payment team-assesment">
                                     <table>
                                         <tr>
                                             <th>Game/ Event</th>
@@ -700,11 +700,11 @@ function PlayerAssignments(props) {
                                             return (
                                                 <tr >
                                                     <td>
-                                                        <div class="flag-prac">
+                                                        <div className="flag-prac">
                                                             <img src={flag} alt="" />
-                                                            <button class="practice">{assignment.eventGameDetails.event_type}</button>
+                                                            <button className="practice">{assignment.eventGameDetails.event_type}</button>
                                                         </div>
-                                                        <div class="game-name">
+                                                        <div className="game-name">
                                                             {assignment.eventGameDetails.name}</div>
                                                     </td>
                                                     <td><span>{new Date(assignment.date).getDate()}/{new Date(assignment.date).getMonth()}/{new Date(assignment.date).getFullYear()}</span></td>
@@ -718,12 +718,12 @@ function PlayerAssignments(props) {
                                                         
                                                     </td>
                                                     <td>
-                                                        <div class="last-row">
+                                                        <div className="last-row">
                                                             <p>{assignment.volunteer}</p>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="last-row">
+                                                        <div className="last-row">
                                                             <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteAssignmentData(assignment._id)}><img src={Delect} /></button>
                                                             <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => updateModalValue(id, assignment._id)}><img src={pencil} /></button>
                                                         </div>
@@ -757,11 +757,11 @@ export default PlayerAssignments;
 {/* 
                                         <tr>
                                             <td>
-                                                <div class="flag-prac">
+                                                <div className="flag-prac">
                                                     <img src={flag} alt="" />
-                                                    <button class="practice">Practice</button>
+                                                    <button className="practice">Practice</button>
                                                 </div>
-                                                <div class="game-name">
+                                                <div className="game-name">
                                                     Dubcity Basketball
 Practice</div>
                                             </td>
@@ -775,12 +775,12 @@ Practice</div>
 Fallon Middle Schoo</span>
                                             </td>
                                             <td>Scorekeeper
-                                    <div class="add-btn">
+                                    <div className="add-btn">
                                                     <button><img src={add} alt="" /></button>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <p>Avaneesh Shetti</p> <button><img src={Delect} /></button> <button><img src={pencil} /></button>
                                                 </div>
                                             </td>
@@ -788,11 +788,11 @@ Fallon Middle Schoo</span>
 
                                         <tr>
                                             <td>
-                                                <div class="flag-prac">
+                                                <div className="flag-prac">
                                                     <img src={flag} alt="" />
-                                                    <button class="practice">Practice</button>
+                                                    <button className="practice">Practice</button>
                                                 </div>
-                                                <div class="game-name">
+                                                <div className="game-name">
                                                     Dubcity Basketball
 Practice</div>
                                             </td>
@@ -806,12 +806,12 @@ Practice</div>
 Fallon Middle Schoo</span>
                                             </td>
                                             <td>Scorekeeper
-                                    <div class="add-btn">
+                                    <div className="add-btn">
                                                     <button><img src={add} alt="" /></button>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <p>Avaneesh Shetti</p> <button><img src={Delect} /></button> <button><img src={pencil} /></button>
                                                 </div>
                                             </td>
@@ -819,11 +819,11 @@ Fallon Middle Schoo</span>
 
                                         <tr>
                                             <td>
-                                                <div class="flag-prac">
+                                                <div className="flag-prac">
                                                     <img src={flag} alt="" />
-                                                    <button class="practice">Practice</button>
+                                                    <button className="practice">Practice</button>
                                                 </div>
-                                                <div class="game-name">
+                                                <div className="game-name">
                                                     Dubcity Basketball
 Practice</div>
                                             </td>
@@ -837,12 +837,12 @@ Practice</div>
 Fallon Middle Schoo</span>
                                             </td>
                                             <td>Scorekeeper
-                                    <div class="add-btn">
+                                    <div className="add-btn">
                                                     <button><img src={add} alt="" /></button>
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="last-row">
+                                                <div className="last-row">
                                                     <p>Avaneesh Shetti</p> <button><img src={Delect} /></button> <button><img src={pencil} /></button>
                                                 </div>
                                             </td>

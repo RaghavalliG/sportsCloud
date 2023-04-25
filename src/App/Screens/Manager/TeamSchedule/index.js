@@ -311,13 +311,13 @@ function TeamSchdule(props) {
     return (
 
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents manger="manger" />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => {
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
@@ -328,39 +328,39 @@ function TeamSchdule(props) {
                                     })}
                                 </select>
                                 <div className="dropBtn">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         ACCOUNT
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a class="dropdown-item" href="#">{profilePic.fname + " " + profilePic.lname}</a></li>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <li><a className="dropdown-item" href="#">{profilePic.fname + " " + profilePic.lname}</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
-                                            <li><a class="dropdown-item" href="#">My Account</a></li>
+                                            <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Credit" }} >
-                                            <li><a class="dropdown-item" href="#">Credits</a></li>
+                                            <li><a className="dropdown-item" href="#">Credits</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Household" }} >
-                                            <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                                            <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/Biling" }} >
-                                            <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                                            <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/CreateTeam" }} >
-                                            <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                                            <li><a className="dropdown-item" href="#">Create New Team</a></li>
                                         </Link>
                                         <Link to={{ pathname: "/SignOut" }} >
-                                            <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                                            <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                                         </Link>
 
                                     </ul>
                                 </div>
                             </div>
-                            <div class="profile-head">
-                                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
                                         <img src={`${pic}${profilePic.profile_image}`} alt="" />
@@ -368,17 +368,17 @@ function TeamSchdule(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                         </div>
 
-                        <div class="prefarance-page">
-                            <div class="page-header">
-                                <h2 class="page-title">Schedule</h2>
-                                <div class="streming-head-right">
-                                    <div class="stream-tab">
+                        <div className="prefarance-page">
+                            <div className="page-header">
+                                <h2 className="page-title">Schedule</h2>
+                                <div className="streming-head-right">
+                                    <div className="stream-tab">
                                         <ul>
-                                            <li><a class="active" href="#">List View</a></li>
+                                            <li><a className="active" href="#">List View</a></li>
                                             <li><a href="#" onClick={() => {
                                                 history.push('./ManagerViewCalender')
                                             }}>Calendar View</a></li>
@@ -386,52 +386,52 @@ function TeamSchdule(props) {
                                         </ul>
                                     </div>
 
-                                    <button class="start-stream-btn" onClick={() => { history.push("./ManagerTeamAvailability") }}>Select Availability</button>
-                                    <button class="start-stream-btn" onClick={() => { history.push("./preferance") }}>View Preferences</button>
-                                    <button class="start-stream-btn" onClick={() => {
+                                    <button className="start-stream-btn" onClick={() => { history.push("./ManagerTeamAvailability") }}>Select Availability</button>
+                                    <button className="start-stream-btn" onClick={() => { history.push("./preferance") }}>View Preferences</button>
+                                    <button className="start-stream-btn" onClick={() => {
                                         history.push("./Subscribe")
                                     }}>Subscribe/ Export</button>
                                 </div>
                             </div>
 
-                            <div class="managerDropdownLink">
+                            <div className="managerDropdownLink">
                                 <h3 style={{ color: "white" }}>Manager:</h3>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                <div className="dropdown">
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         New
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
                                         <Link to={{ pathname: "/NewEvent", state: "GAME" }} >
-                                            <li><a class="dropdown-item" href="#">New Game</a></li></Link>
+                                            <li><a className="dropdown-item" href="#">New Game</a></li></Link>
                                         <Link to={{ pathname: "/NewEvent", state: "EVENT" }} >
-                                            <li><a class="dropdown-item" href="#">New Event</a></li></Link>
+                                            <li><a className="dropdown-item" href="#">New Event</a></li></Link>
 
                                     </ul>
                                 </div>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                <div className="dropdown">
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         Edit
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
                                         <Link to={{ pathname: "/EditLocation", state: "GAME" }} >
-                                            <li><a class="dropdown-item" href="#">New Location</a></li></Link>
+                                            <li><a className="dropdown-item" href="#">New Location</a></li></Link>
                                         <Link to={{ pathname: "/EditOponent", state: "EVENT" }} >
-                                            <li><a class="dropdown-item" href="#">New Oponent</a></li></Link>
+                                            <li><a className="dropdown-item" href="#">New Oponent</a></li></Link>
 
                                     </ul>
                                 </div>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                <div className="dropdown">
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                         Import
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
 
-                                        <li><a class="dropdown-item" href="#">Import from Schedule</a></li>
+                                        <li><a className="dropdown-item" href="#">Import from Schedule</a></li>
 
 
                                     </ul>
                                 </div>
-                                {/* <div class="teams-select">
+                                {/* <div className="teams-select">
                                     <ul >
                                         <Link to={{ pathname: "/NewEvent", state: "GAME" }} >
                                             <li ><a href="javascript:void(0)"  >New Game</a></li>
@@ -461,8 +461,8 @@ function TeamSchdule(props) {
                                     <li><a href="#">Import</a></li>
                                 </ul> */}
                             </div>
-                            <div class="prefarance-box">
-                                <div class="team-payment team-assesment">
+                            <div className="prefarance-box">
+                                <div className="team-payment team-assesment">
                                     <table>
                                         <tr>
                                             <th>Game/ Event</th>
@@ -477,9 +477,9 @@ function TeamSchdule(props) {
                                                 <tr>
 
                                                     <td>
-                                                        <div class="flag-prac">
+                                                        <div className="flag-prac">
                                                             <img src={schedule.display_icon.image} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
-                                                            <button class="practice">{schedule.name}</button>
+                                                            <button className="practice">{schedule.name}</button>
 
                                                         </div>
 
@@ -495,7 +495,7 @@ function TeamSchdule(props) {
 
                                                     </td>
                                                     <td>
-                                                        <div class="last-row">
+                                                        <div className="last-row">
                                                             <p>Avaneesh Shett</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteScheduleData(schedule._id)}><img src={Delect} />
                                                             </button> <button onClick={() => updateModalValue(id, schedule._id)}><img src={pencil} /></button>
                                                         </div>
@@ -514,58 +514,58 @@ function TeamSchdule(props) {
                                     {modeValue && schedule.length !=0 ? <Modal show={modeValue} style={{ position: "absolute", top: "206px" }}>
 
                                         <Modal.Body>
-                                            <div class="prefarance-form playerinfo-form">
+                                            <div className="prefarance-form playerinfo-form">
                                                 <h1 style={{ color: "red", paddingBottom: "20px", fontWeight: "bold" }}>Edit Game/Event</h1>
-                                                <div class="row">
+                                                <div className="row">
 
 
-                                                    <div class="col-md-12">
-                                                        <div class="prefarance-form-list">
+                                                    <div className="col-md-12">
+                                                        <div className="prefarance-form-list">
                                                             <h2> Name of Event/Game</h2>
-                                                            <input type="text" class="input-select" placeholder="Enter Name of Game/Event "
+                                                            <input type="text" className="input-select" placeholder="Enter Name of Game/Event "
                                                                 defaultValue={schedule[id].name} onChange={(e) => setNameUpdate(e.target.value)} />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <div class="prefarance-form-list">
+                                                    <div className="col-md-12">
+                                                        <div className="prefarance-form-list">
                                                             <h2> date</h2>
-                                                            <input type="date" class="input-select" placeholder="Select Date "
+                                                            <input type="date" className="input-select" placeholder="Select Date "
                                                                 defaultValue={`${new Date(schedule[id].date).getDate()}/${new Date(schedule[id].date).getMonth()}/${new Date(schedule[id].date).getFullYear()}`} onChange={(e) => setDateUpdate(e.target.value)} />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <div class="prefarance-form-list">
+                                                    <div className="col-md-12">
+                                                        <div className="prefarance-form-list">
                                                             <h2> Time</h2>
-                                                            <input type="time" class="input-select" placeholder="Select Time "
+                                                            <input type="time" className="input-select" placeholder="Select Time "
                                                                 defaultValue={`${schedule[id].time.startTime}-${schedule[id].time.endTime}`} onChange={(e) => setTimeUpdate(e.target.value)} />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <div class="prefarance-form-list">
+                                                    <div className="col-md-12">
+                                                        <div className="prefarance-form-list">
                                                             <h2> Location</h2>
-                                                            <input type="text" class="input-select" placeholder="Enter Location"
+                                                            <input type="text" className="input-select" placeholder="Enter Location"
                                                                 defaultValue={`${schedule[id].location_details},${schedule[id].location}`} onChange={(e) => setLocationDetails(e.target.value)} />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <div class="prefarance-form-list">
+                                                    <div className="col-md-12">
+                                                        <div className="prefarance-form-list">
                                                             <h2> Assignment</h2>
-                                                            <input type="text" class="input-select" placeholder="Enter Assingment "
+                                                            <input type="text" className="input-select" placeholder="Enter Assingment "
                                                                 defaultValue={schedule[id].assignment} onChange={(e) => setAssignmentupdate(e.target.value)} />
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-12">
-                                                        <div class="prefarance-form-list">
+                                                    <div className="col-md-12">
+                                                        <div className="prefarance-form-list">
                                                             <h2> Name of Volenteer</h2>
-                                                            <input type="text" class="input-select" placeholder="Enter Name Of Volenteer "
+                                                            <input type="text" className="input-select" placeholder="Enter Name Of Volenteer "
                                                                 defaultValue="Avaneesh Shett" onChange={(e) => setVolenteerUpdate(e.target.value)} />
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="prefarance-form-list">
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list">
                                                     <div style={{ display: "flex" }}>
                                                         {flag.map((flag) => {
                                                             return (
@@ -581,8 +581,8 @@ function TeamSchdule(props) {
 
 
 
-                                            <button class="add-links" style={{ margin: "10px" }} onClick={() => setModeValue(false)}>Cancel</button>
-                                            <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updateGameEvent}>Update</button>
+                                            <button className="add-links" style={{ margin: "10px" }} onClick={() => setModeValue(false)}>Cancel</button>
+                                            <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updateGameEvent}>Update</button>
                                         </Modal.Body>
 
                                     </Modal> : ""}

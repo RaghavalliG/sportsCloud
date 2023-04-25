@@ -348,13 +348,13 @@ function ManagerTeamShop(props) {
   console.log("dta--->", shopData)
   return (
     <div>
-      <div class="dashboard-container">
-        <div class="dashboard-main">
+      <div className="dashboard-container">
+        <div className="dashboard-main">
           <SideMenuComponents manger="manger" />
-          <div class="dashboard-main-content">
-            <div class="dashboard-head">
-              <div class="teams-select">
-                <button class="create-new-team" onClick={() => {
+          <div className="dashboard-main-content">
+            <div className="dashboard-head">
+              <div className="teams-select">
+                <button className="create-new-team" onClick={() => {
                   history.push("/CreateTeam")
                 }}>Create New Teams</button>
                 <select onChange={change}>
@@ -365,39 +365,39 @@ function ManagerTeamShop(props) {
                   })}
                 </select>
                 <div className="dropBtn">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                     ACCOUNT
                   </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                    <li><a class="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                    <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
                     <Link to={{ pathname: "/MyAccount" }} >
-                      <li><a class="dropdown-item" href="#">My Account</a></li>
+                      <li><a className="dropdown-item" href="#">My Account</a></li>
                     </Link>
                     <Link to={{ pathname: "/Credit" }} >
-                      <li><a class="dropdown-item" href="#">Credits</a></li>
+                      <li><a className="dropdown-item" href="#">Credits</a></li>
                     </Link>
                     <Link to={{ pathname: "/Household" }} >
-                      <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                      <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                     </Link>
                     <Link to={{ pathname: "/ManageTeam" }} >
-                      <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                      <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                     </Link>
                     <Link to={{ pathname: "/Biling" }} >
-                      <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                      <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                     </Link>
                     <Link to={{ pathname: "/CreateTeam" }} >
-                      <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                      <li><a className="dropdown-item" href="#">Create New Team</a></li>
                     </Link>
                     <Link to={{ pathname: "/SignOut" }} >
-                      <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                      <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                     </Link>
 
                   </ul>
                 </div>
               </div>
-              <div class="profile-head">
-                <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
-                <div class="profile-head-img">
+              <div className="profile-head">
+                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                <div className="profile-head-img">
                   {profilePic.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
                     <img src={`${pic1}${profilePic.profile_image}`} alt="" />
@@ -405,37 +405,37 @@ function ManagerTeamShop(props) {
 
                 </div>
               </div>
-              <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+              <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
             </div>
 
-            <div class="team-shop-page">
-              <div class="my-order-section" onClick={() => history.push("./Order")}>
+            <div className="team-shop-page">
+              <div className="my-order-section" onClick={() => history.push("./Order")}>
                 <a href="#">My Orders</a>
               </div>
-              <div class="team-shop-list-box">
-                <div class="sort-by-section">
-                  <div class="sort-by-section-main">
-                    <div class="my-order-section" onClick={() => setModalValue(true)}>
+              <div className="team-shop-list-box">
+                <div className="sort-by-section">
+                  <div className="sort-by-section-main">
+                    <div className="my-order-section" onClick={() => setModalValue(true)}>
                       <a href="#">Add Product</a>
                     </div>
                   </div>
                 </div>
 
 
-                <div class="team-shop-list-main">
+                <div className="team-shop-list-main">
                   <Modal show={modalValue} >
 
                     <Modal.Body>
-                      <div class="prefarance-form playerinfo-form">
+                      <div className="prefarance-form playerinfo-form">
                         <h1 style={{ color: "red", fontWeight: "bolder" }}> ADD PRODUCT</h1>
-                        <div class="row">
+                        <div className="row">
 
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Team</h2>
 
-                              <select onChange={change} class="input-select">
+                              <select onChange={change} className="input-select">
                                 <option>Select A Team</option>
                                 {dropdown.map((dropdown) => {
                                   return (
@@ -447,42 +447,42 @@ function ManagerTeamShop(props) {
                             </div>
                           </div>
 
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Name</h2>
-                              <input type="text" class="input-select" onChange={(e) => setName(e.target.value)} />
+                              <input type="text" className="input-select" onChange={(e) => setName(e.target.value)} />
 
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Jursey Number</h2>
-                              <input type="text" class="input-select" onChange={(e) => setJursey(e.target.value)} />
+                              <input type="text" className="input-select" onChange={(e) => setJursey(e.target.value)} />
 
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Description</h2>
-                              <input type="text" class="input-select" onChange={(e) => setDescription(e.target.value)} />
+                              <input type="text" className="input-select" onChange={(e) => setDescription(e.target.value)} />
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Price</h2>
-                              <input type="text" class="input-select" onChange={(e) => setPrice(e.target.value)} />
+                              <input type="text" className="input-select" onChange={(e) => setPrice(e.target.value)} />
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Brand</h2>
-                              <input type="text" class="input-select" onChange={(e) => setBrand(e.target.value)} />
+                              <input type="text" className="input-select" onChange={(e) => setBrand(e.target.value)} />
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Color</h2>
-                              <select class="input-select" onChange={(e) => setColor(e.target.value)}>
+                              <select className="input-select" onChange={(e) => setColor(e.target.value)}>
                                 <option>Select Color</option>
                                 <option>RED</option>
                                 <option>BLUE</option>
@@ -493,17 +493,17 @@ function ManagerTeamShop(props) {
                               </select>
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Material</h2>
-                              <input type="text" class="input-select" onChange={(e) => setMaterial(e.target.value)} />
+                              <input type="text" className="input-select" onChange={(e) => setMaterial(e.target.value)} />
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Size</h2>
 
-                              <select class="input-select" onChange={(e) => setSize(e.target.value)}>
+                              <select className="input-select" onChange={(e) => setSize(e.target.value)}>
                                 <option>Select Size</option>
                                 <option>S</option>
                                 <option>M</option>
@@ -514,17 +514,17 @@ function ManagerTeamShop(props) {
                               </select>
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="update-team-photo" style={{ width: "100%" }}>
+                          <div className="col-md-12">
+                            <div className="update-team-photo" style={{ width: "100%" }}>
                               Choose Image
                               <input type="file" name='img' onChange={(event) => handleChange(event)} />
 
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list" >
-                              <button class="add-links" onClick={() => setModalValue(false)}>CANCEL</button>
-                              <button class="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} onClick={save} >SAVE</button>
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list" >
+                              <button className="add-links" onClick={() => setModalValue(false)}>CANCEL</button>
+                              <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} onClick={save} >SAVE</button>
                             </div>
                           </div>
 
@@ -538,131 +538,131 @@ function ManagerTeamShop(props) {
                   </Modal>
                   {
                   /* {shopData.length == 0 ?
-                    <div class="team-shop-list-main">
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                    <div className="team-shop-list-main">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
-                      <div class="team-shop-product-box">
-                        <div class="team-shop-product-img">
+                      <div className="team-shop-product-box">
+                        <div className="team-shop-product-img">
                           <img src={listImage} alt="" />
                         </div>
-                        <div class="team-shop-product-text">
-                          <h2 class="product-title">Nike Edition</h2>
-                          <p class="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
+                        <div className="team-shop-product-text">
+                          <h2 className="product-title">Nike Edition</h2>
+                          <p className="product-description">Men's Chicago Bulls Wendell Carter Jr. Nike
                             Red Swingman Team Jersey</p>
-                          <div class="product-price">
+                          <div className="product-price">
                             $82.49
                           </div>
-                          <div class="product-size">Size : S, M, L, XL, XXL</div>
+                          <div className="product-size">Size : S, M, L, XL, XXL</div>
                         </div>
                       </div>
 
@@ -675,8 +675,8 @@ function ManagerTeamShop(props) {
                     : */
                     shopData.map((data, id) => {
                       return (
-                        <div class="team-shop-product-box">
-                          <div class="team-shop-product-img">
+                        <div className="team-shop-product-box">
+                          <div className="team-shop-product-img">
                           <Link to={{ pathname: "/ProductDetails", state: data }} >
                           {data.image == null ? <img src={listImage} alt="" /> :
                               <img src={`${pic}${data.image}`} alt="" style={{height:"100%",width:"100%"}} />}
@@ -684,13 +684,13 @@ function ManagerTeamShop(props) {
                            
 
                           </div>
-                          <div class="team-shop-product-text">
-                            <h2 class="product-title">{data.brand}</h2>
-                            <p class="product-description">{data.description}</p>
-                            <div class="product-price">
+                          <div className="team-shop-product-text">
+                            <h2 className="product-title">{data.brand}</h2>
+                            <p className="product-description">{data.description}</p>
+                            <div className="product-price">
                               ${data.price}
                             </div>
-                            <div class="product-size" style={{ flexDirection: "row" }}>{data.size}
+                            <div className="product-size" style={{ flexDirection: "row" }}>{data.size}
 
                               <img src={Delect} style={{ marginLeft: "70%", marginRight: "10px", background: "orangered" }} onClick={() => deleteShopData(data._id)} />
                               <img src={pencil} onClick={(e) => updateModalValue(id, data._id)} />
@@ -708,48 +708,48 @@ function ManagerTeamShop(props) {
                   {modeValue && shopData.length !=0 ? <Modal show={modeValue} style={{ position: "absolute", top: "206px" }}>
 
                     <Modal.Body>
-                    <div class="prefarance-form playerinfo-form">
+                    <div className="prefarance-form playerinfo-form">
                         <h1 style={{ color: "red", fontWeight: "bolder" }}> Edit PRODUCT</h1>
-                        <div class="row">
+                        <div className="row">
 
                          
 
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Name</h2>
-                              <input type="text" class="input-select" onChange={(e) => setName(e.target.value)}  defaultValue={shopData[id].name}/>
+                              <input type="text" className="input-select" onChange={(e) => setName(e.target.value)}  defaultValue={shopData[id].name}/>
 
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Jursey Number</h2>
-                              <input type="text" class="input-select" onChange={(e) => setJursey(e.target.value)} defaultValue={shopData[id].jersey_number} />
+                              <input type="text" className="input-select" onChange={(e) => setJursey(e.target.value)} defaultValue={shopData[id].jersey_number} />
 
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Description</h2>
-                              <input type="text" class="input-select" onChange={(e) => setDescription(e.target.value)} defaultValue={shopData[id].description}/>
+                              <input type="text" className="input-select" onChange={(e) => setDescription(e.target.value)} defaultValue={shopData[id].description}/>
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Price</h2>
-                              <input type="text" class="input-select" onChange={(e) => setPrice(e.target.value)} defaultValue={shopData[id].price}/>
+                              <input type="text" className="input-select" onChange={(e) => setPrice(e.target.value)} defaultValue={shopData[id].price}/>
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Brand</h2>
-                              <input type="text" class="input-select" onChange={(e) => setBrand(e.target.value)} defaultValue={shopData[id].brand}/>
+                              <input type="text" className="input-select" onChange={(e) => setBrand(e.target.value)} defaultValue={shopData[id].brand}/>
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Color</h2>
-                              <select class="input-select" onChange={(e) => setColor(e.target.value)} defaultValue={shopData[id].color}>
+                              <select className="input-select" onChange={(e) => setColor(e.target.value)} defaultValue={shopData[id].color}>
                               <option>{shopData[id].color}</option>
                                 <option>RED</option>
                                 <option>BLUE</option>
@@ -760,17 +760,17 @@ function ManagerTeamShop(props) {
                               </select>
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Material</h2>
-                              <input type="text" class="input-select" onChange={(e) => setMaterial(e.target.value)} defaultValue={shopData[id].material}/>
+                              <input type="text" className="input-select" onChange={(e) => setMaterial(e.target.value)} defaultValue={shopData[id].material}/>
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="prefarance-form-list">
+                          <div className="col-md-12">
+                            <div className="prefarance-form-list">
                               <h2>Size</h2>
 
-                              <select class="input-select" onChange={(e) => setSize(e.target.value)} defaultValue={shopData[id].size}>
+                              <select className="input-select" onChange={(e) => setSize(e.target.value)} defaultValue={shopData[id].size}>
                                <option>{shopData[id].size}</option>
                                 <option>S</option>
                                 <option>M</option>
@@ -781,8 +781,8 @@ function ManagerTeamShop(props) {
                               </select>
                             </div>
                           </div>
-                          <div class="col-md-12">
-                            <div class="update-team-photo" style={{ width: "100%" }}>
+                          <div className="col-md-12">
+                            <div className="update-team-photo" style={{ width: "100%" }}>
                               Choose Image
                               <input type="file" name='img' onChange={(event) => handleChange(event)} />
 
@@ -797,8 +797,8 @@ function ManagerTeamShop(props) {
 
 
 
-                      <button class="add-links" style={{ margin: "10px" }} onClick={() => setModeValue(false)}>Cancel</button>
-                      <button class="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updateProduct} >Update</button>
+                      <button className="add-links" style={{ margin: "10px" }} onClick={() => setModeValue(false)}>Cancel</button>
+                      <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updateProduct} >Update</button>
                     </Modal.Body>
 
                   </Modal> :"" }

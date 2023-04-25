@@ -306,13 +306,13 @@ const ManagerTeamAvailability = () => {
 
     return (
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents manger="manger" />
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => {
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
 
@@ -331,9 +331,9 @@ const ManagerTeamAvailability = () => {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -342,7 +342,7 @@ const ManagerTeamAvailability = () => {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -352,9 +352,9 @@ const ManagerTeamAvailability = () => {
                         {/* <div>
                             <h1 style={{color:"white",fontSize:"30px",fontWeight:"bold"}}>Availability for</h1>
                         </div> */}
-                        <div class="player-info-head">
-                            <h2 class="page-title">Availability</h2>
-                            <div class="teams-select">
+                        <div className="player-info-head">
+                            <h2 className="page-title">Availability</h2>
+                            <div className="teams-select">
                                 <select onChange={gameEventId}>
 
                                     <option >Select Game/Event</option>
@@ -365,21 +365,21 @@ const ManagerTeamAvailability = () => {
                                     })}
                                 </select>
                             </div>
-                            <div class="player-info-head-right">
+                            <div className="player-info-head-right">
 
                                 <select style={{ color: "red", fontWeight: "bold" }}>
                                     <option >Show All</option>
                                     <option> Games Only</option>
                                     <option> Events Only</option>
                                 </select>
-                                <button class="add-new-family" style={{ width: "324px" }} onClick={() => { history.push("./preferance") }}>Availability Preference</button>
-                                <button class="edit-btn" style={{ marginLeft: "5px" }}>Export</button>
+                                <button className="add-new-family" style={{ width: "324px" }} onClick={() => { history.push("./preferance") }}>Availability Preference</button>
+                                <button className="edit-btn" style={{ marginLeft: "5px" }}>Export</button>
                             </div>
                         </div>
 
 
-                        <div class="prefarance-box">
-                            <div class="team-payment team-assesment" >
+                        <div className="prefarance-box">
+                            <div className="team-payment team-assesment" >
 
                                 <table >
                                     <tr >
@@ -392,7 +392,7 @@ const ManagerTeamAvailability = () => {
                                         return (
                                             <tr >
                                                 <td style={{ paddingLeft: "10%" }}>
-                                                    <div class="flag-prac">
+                                                    <div className="flag-prac">
                                                         {data.userDetails.image == null ? <img src={UserProfile} alt="" /> :
                                                             <img src={`${pic}${data.userDetails.image}`} alt="" />}
                                                         <span style={{ paddingTop: "15px" }}> {data.userDetails.fname}{" "}{data.userDetails.lname}</span>
@@ -404,9 +404,9 @@ const ManagerTeamAvailability = () => {
                                                 <td style={{ display: "flex", paddingLeft: "40%" }} key={data._id}>
 
                                                 
-                                                    <button class='focus1' >GOING</button>
-                                                    <button class='focus2' >MAY BE</button>
-                                                    <button class='focus3' >NO</button>
+                                                    <button className='focus1' >GOING</button>
+                                                    <button className='focus2' >MAY BE</button>
+                                                    <button className='focus3' >NO</button>
                                                     
 
                                                     {/* <Button variant="light" >Going</Button>{' '}

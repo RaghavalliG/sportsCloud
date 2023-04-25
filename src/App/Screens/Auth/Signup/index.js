@@ -197,43 +197,43 @@ function SignUpComponents(props) {
   return (
     <>
       <MyLoader active={loader}>
-      <div class="signup-container" style={{ flexGrow: 1 }}>
+      <div className="signup-container" style={{ flexGrow: 1 }}>
         <a href="#"><img src={Logo} alt="" /></a>
         <div style={{ paddingBottom: 50 }}>
-          <div class="modal-dialog custom-modal">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Register</h4>
+          <div className="modal-dialog custom-modal">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Register</h4>
               </div>
-              <div class="modal-body">
+              <div className="modal-body">
                 <form onSubmit={handleSubmit}>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>First Name</label>
-                    <input type="text" class="form-control" onChange={handleChange} name="firstName" />
+                    <input type="text" className="form-control" onChange={handleChange} name="firstName" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.firstName}
                     </span>
                   </div>
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Last Name</label>
-                    <input type="text" class="form-control" onChange={handleChange} name="lastName" />
+                    <input type="text" className="form-control" onChange={handleChange} name="lastName" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.lastName}
                     </span>
                   </div>
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Team Name</label>
-                    <input type="text" class="form-control" onChange={handleChange} name="teamName" />
+                    <input type="text" className="form-control" onChange={handleChange} name="teamName" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.teamName}
                     </span>
                   </div>
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Sports</label>
-                    <select onChange={(value)=>setsports(value.target.value)} name="SportsName" class="form-control">
+                    <select onChange={(value)=>setsports(value.target.value)} name="SportsName" className="form-control">
                       {
                         sportsName.map((item) => {
                           return (
@@ -243,9 +243,9 @@ function SignUpComponents(props) {
                       }
                     </select>
                   </div>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>userType</label>
-                    <select  onChange={(value)=>setUserType(value.target.value)} name="usertype" class="form-control">
+                    <select  onChange={(value)=>setUserType(value.target.value)} name="usertype" className="form-control">
                       {
                         userTypeName.map((item) => {
                           return (
@@ -255,47 +255,47 @@ function SignUpComponents(props) {
                       }
                     </select>
                   </div>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Parent/Guardian Name</label>
-                    <input type="text" class="form-control" onChange={handleChange} name="parentName" />
+                    <input type="text" className="form-control" onChange={handleChange} name="parentName" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.parentName}
                     </span>
                   </div>
 
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" onChange={handleChange} name="email" />
+                    <input type="email" className="form-control" onChange={handleChange} name="email" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.email}
                     </span>
                   </div>
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" onChange={handleChange} name="password" />
+                    <input type="password" className="form-control" onChange={handleChange} name="password" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.password}
                     </span>
                   </div>
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Confirm Password</label>
-                    <input type="password" class="form-control" onChange={handleChange} name="confirmpassword" />
+                    <input type="password" className="form-control" onChange={handleChange} name="confirmpassword" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.confirmpassword}
                     </span>
                   </div>
                  <div style={{alignItems:"center",paddingLeft:20}}>
-                 <h4 id="already-have-account"><input type="checkbox" class="form-check-input" id="exampleCheck1" onChange={handleChange} name='terms' /> I agree to the <a href="#"  style={{ color: "white", cursor: "pointer" }}>Terms of Service</a> and <a href="#"  style={{ color: "white", cursor: "pointer" }}>Privary Policy</a></h4>
+                 <h4 id="already-have-account"><input type="checkbox" className="form-check-input" id="exampleCheck1" onChange={handleChange} name='terms' /> I agree to the <a href="#"  style={{ color: "white", cursor: "pointer" }}>Terms of Service</a> and <a href="#"  style={{ color: "white", cursor: "pointer" }}>Privary Policy</a></h4>
                   <span style={{ color: "red", fontSize: 12 }}>
                     {errors.terms}
                   </span>
                  </div>
                  
-                  <div class="btn-set">
-                    <button type="submit" class="btn btn-deflt">Submit</button>
+                  <div className="btn-set">
+                    <button type="submit" className="btn btn-deflt">Submit</button>
                   </div>
                   <div id="already-have-account">
                     Already have an account?{" "}

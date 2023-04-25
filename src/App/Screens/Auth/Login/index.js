@@ -100,49 +100,46 @@ function LoginComponents(props) {
   return (
     <>
       <MyLoader active={loader}>
-      <div class="login-container" style={{ flexGrow: 1 }}>
+      <div className="login-container" style={{ flexGrow: 1 }}>
         <a href="#"><img src={Logo} alt="" /></a>
         <div style={{ paddingBottom: 60 }}>
-          <div class="modal-dialog custom-modal">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Login</h4>
+          <div className="modal-dialog custom-modal">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Login</h4>
               </div>
 
-              <div class="modal-body">
+              <div className="modal-body">
                 <form onSubmit={handleSubmit}>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" onChange={handleChange} name="email" />
+                    <input type="email" className="form-control" onChange={handleChange} name="email" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.email}
                     </span>
                   </div>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" onChange={handleChange} name="password" />
+                    <input type="password" className="form-control" onChange={handleChange} name="password" />
                     <span style={{ color: "red", fontSize: 12 }}>
                       {errors.password}
                     </span>
                   </div>
                   <div style={{ position: "absolute", right: 20 }}>
                     <Link to="/forgetpassword">
-                      <h3><a href="#" class="forget-title">Forgot Password?</a></h3>
+                      <h3 className="forget-title">Forgot Password?</h3>
                     </Link>
                   </div>
-                  <div class="btn-set">
-                    <button type="submit" class="btn btn-deflt">Submit</button>
+                  <div className="btn-set">
+                    <button type="submit" className="btn btn-deflt">Submit</button>
                   </div>
                   <div>
                     <p id="account">
                       Don't have an account? {"  "}
-                      <Link to="/signup">
-                        <a
-                          //  onClick={() => history.push("/signup")}
-                          style={{ color: "white", cursor: "pointer" }}
-                        >
+                      <Link to="/signup" style={{ color: "white", cursor: "pointer" }}>
+                       
                           Sign Up
-                </a>
+              
                       </Link>
                     </p>
                   </div>

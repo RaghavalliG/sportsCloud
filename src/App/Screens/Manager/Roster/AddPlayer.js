@@ -393,13 +393,13 @@ const AddPlayer = () => {
 
 
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
 
             <SideMenuComponents manger="manger" />
-            <div class="dashboard-main-content">
-                <div class="dashboard-head">
-                    <div class="teams-select">
-                        <button class="create-new-team" onClick={() => {
+            <div className="dashboard-main-content">
+                <div className="dashboard-head">
+                    <div className="teams-select">
+                        <button className="create-new-team" onClick={() => {
                             history.push("/CreateTeam")
                         }}>Create New Teams</button>
                         <select onChange={change} >
@@ -412,42 +412,42 @@ const AddPlayer = () => {
                                 })}
                         </select>
                         <div className="dropBtn">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
                                 ACCOUNT
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                <li><a class="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
                                 <Link to={{ pathname: "/MyAccount" }} >
-                                    <li><a class="dropdown-item" href="#">My Account</a></li>
+                                    <li><a className="dropdown-item" href="#">My Account</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/Credit" }} >
-                                    <li><a class="dropdown-item" href="#">Credits</a></li>
+                                    <li><a className="dropdown-item" href="#">Credits</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/Household" }} >
-                                    <li><a class="dropdown-item" href="#">My HouseHold</a></li>
+                                    <li><a className="dropdown-item" href="#">My HouseHold</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/ManageTeam" }} >
-                                    <li><a class="dropdown-item" href="#">Manage My Team</a></li>
+                                    <li><a className="dropdown-item" href="#">Manage My Team</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/Biling" }} >
-                                    <li><a class="dropdown-item" href="#">Biling & Plans</a></li>
+                                    <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/CreateTeam" }} >
-                                    <li><a class="dropdown-item" href="#">Create New Team</a></li>
+                                    <li><a className="dropdown-item" href="#">Create New Team</a></li>
                                 </Link>
                                 <Link to={{ pathname: "/SignOut" }} >
-                                    <li><a class="dropdown-item active" href="#">Sign Out</a></li>
+                                    <li><a className="dropdown-item active" href="#">Sign Out</a></li>
                                 </Link>
 
                             </ul>
                         </div>
                     </div>
-                    <div class="profile-head">
+                    <div className="profile-head">
                         {loader ?
-                            <div class="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
-                            <div class="profile-head-name">Loading...</div>}
+                            <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
+                            <div className="profile-head-name">Loading...</div>}
 
-                        <div class="profile-head-img">
+                        <div className="profile-head-img">
                             {profilePic.profile_image == null ?
                                 <img src={BigUserProfile} alt="" /> :
                                 <img src={`${pic1}${profilePic.profile_image}`} alt="" />
@@ -455,24 +455,24 @@ const AddPlayer = () => {
 
                         </div>
                     </div>
-                    <div class="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                    <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                 </div>
-                <div class="prefarance-box" style={{ overflow: "auto" }} >
-                    <ul class="nav nav-tabs" role="tablist" >
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "29px" }}>New Member</h1> </a>
+                <div className="prefarance-box" style={{ overflow: "auto" }} >
+                    <ul className="nav nav-tabs" role="tablist" >
+                        <li className="nav-item">
+                            <a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "29px" }}>New Member</h1> </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Member Info</a>
+                        <li className="nav-item">
+                            <a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Member Info</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Contact Information</a>
+                        <li className="nav-item">
+                            <a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Contact Information</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Optional PLayer Details</a>
+                        <li className="nav-item">
+                            <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Optional PLayer Details</a>
                         </li>
-                        <li class="nav-item" href="#tabs-4" role="tab">
+                        <li className="nav-item" href="#tabs-4" role="tab">
                             <div style={{ backgroundColor: "gray", borderRadius: "10px" }}>
                                 <h3 style={{ color: "white", padding: "10px" }}> Reordering People</h3>
                                 <p style={{ color: "white", padding: "10px" }}>In short, don't! Everyone receives the same information, regardless of their order in the list. Changing an email to another person's email address does not give them access. To invite some-one new, use the "Add New Family Member" button. <span style={{ color: "red" }}>Learn more</span> in our help center.</p>
@@ -480,111 +480,111 @@ const AddPlayer = () => {
                         </li>
 
                     </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <div class="prefarance-tab-content">
+                    <div className="tab-content">
+                        <div className="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div className="prefarance-tab-content">
 
-                                <div class="prefarance-form playerinfo-form">
+                                <div className="prefarance-form playerinfo-form">
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label> First Name</label>
-                                                <input type="text" class="input-select" onChange={(e) => setFName(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setFName(e.target.value)} />
                                             </div>
                                         </div>
 
 
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Last Name</label>
-                                                <input type="text" class="input-select" onChange={(e) => setLName(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setLName(e.target.value)} />
 
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list">
                                                 <label>Non Player</label>
                                                 <input type="checkbox" style={{ height: "15px", width: "17px" }} onClick={()=>setPlayerType(!playerType)} />
                                                 <span style={{ color: "white" }}>This person is a non playing player of the team </span>
 
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Email</label>
-                                                <input type="text" class="input-select" onChange={(e) => setEmail(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setEmail(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Whoe's This? </label>
-                                                <input type="text" class="input-select" onChange={(e) => setWho(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setWho(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
                                                 <button data-toggle="modal" data-target="#assignmentdelect" style={{ borderRadius: "12px", backgroundColor: "red", }}><img src={Delect} /></button>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
                                                 <p style={{ color: "white" }}> +Add Another Email</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Phone Number</label>
-                                                <input type="text" class="input-select" onChange={(e) => setPhone(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setPhone(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Label</label>
-                                                <input type="text" class="input-select" onChange={(e) => setLabel(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setLabel(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
                                                 <button data-toggle="modal" data-target="#assignmentdelect" style={{ borderRadius: "12px", backgroundColor: "red", }}><img src={Delect} /></button>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
+                                        <div className="col-md-12">
+                                            <div className="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
                                                 <p style={{ color: "white" }}> +Add Another Phone Number</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Address</label>
-                                                <input type="text" class="input-select" onChange={(e) => setAddress(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setAddress(e.target.value)} />
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>City</label>
-                                                <input type="text" class="input-select" onChange={(e) => setCity(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setCity(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label >State/Province</label>
-                                                <input type="text" class="input-select" onChange={(e) => setState(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setState(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Zip/Postal Code</label>
-                                                <input type="text" class="input-select" onChange={(e) => setZip(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setZip(e.target.value)} />
 
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Gender</label>
-                                                <select onChange={(e) => setGender(e.target.value)} class="input-select">
+                                                <select onChange={(e) => setGender(e.target.value)} className="input-select">
                                                     <option>SELECT</option>
                                                     <option>MALE</option>
                                                     <option>FEMALE</option>
@@ -594,50 +594,50 @@ const AddPlayer = () => {
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Birthday</label>
-                                                <div class="input-select" >
-                                                    <input type="date" class="input-select" onChange={(e) => setBirthday(e.target.value)} style={{ border: "none" }} />
+                                                <div className="input-select" >
+                                                    <input type="date" className="input-select" onChange={(e) => setBirthday(e.target.value)} style={{ border: "none" }} />
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label >Jursey Number</label>
-                                                <input type="text" class="input-select" onChange={(e) => setJursey(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setJursey(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label >Position</label>
-                                                <input type="text" class="input-select" onChange={(e) => setPosition(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setPosition(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Assignment</label>
-                                                <input type="text" class="input-select" onChange={(e) => setAssingment(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setAssingment(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <label>Uniform</label>
-                                                <input type="text" class="input-select" onChange={(e) => setUniform(e.target.value)} />
+                                                <input type="text" className="input-select" onChange={(e) => setUniform(e.target.value)} />
 
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
                                                 <input type="checkbox" style={{ height: "15px", width: "17px" }} />
                                                 <span style={{ color: "white" }}>Invite to join </span>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="prefarance-form-list">
-                                                <button class="add-links">CANCEL</button>
-                                                <button class="add-links" style={{ backgroundColor: "#181717", marginLeft: "4px" }} onClick={CheckValidatiion}>SAVE</button>
+                                        <div className="col-md-6">
+                                            <div className="prefarance-form-list">
+                                                <button className="add-links">CANCEL</button>
+                                                <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "4px" }} onClick={CheckValidatiion}>SAVE</button>
                                             </div>
                                         </div>
                                     </div>

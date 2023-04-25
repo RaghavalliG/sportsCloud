@@ -240,12 +240,12 @@ const ManagerViewCalender = () => {
     }
 
     return (
-        <div class="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+        <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
-            <div class="dashboard-main-content">
-                <div class="dashboard-head">
-                    <div class="teams-select">
-                        <button class="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
+            <div className="dashboard-main-content">
+                <div className="dashboard-head">
+                    <div className="teams-select">
+                        <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
                         <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                             {dropdown.map((dropdown) => {
@@ -261,9 +261,9 @@ const ManagerViewCalender = () => {
                         </select>
                     </div>
 
-                    <div class="profile-head">
-                        <div class="profile-head-name">{user ? user.fname : null}</div>
-                        <div class="profile-head-img">
+                    <div className="profile-head">
+                        <div className="profile-head-name">{user ? user.fname : null}</div>
+                        <div className="profile-head-img">
                             {
                                 user ?
                                     <img src={user.profile_image} alt="" /> :
@@ -272,7 +272,7 @@ const ManagerViewCalender = () => {
 
                         </div>
                     </div>
-                    <div class="login-account">
+                    <div className="login-account">
                         <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                             {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -282,13 +282,13 @@ const ManagerViewCalender = () => {
                 </div>
 
 
-                <div class="prefarance-page">
-                    <div class="page-header">
-                        <h2 class="page-title">Schedule</h2>
-                        <div class="streming-head-right">
-                            <div class="stream-tab">
+                <div className="prefarance-page">
+                    <div className="page-header">
+                        <h2 className="page-title">Schedule</h2>
+                        <div className="streming-head-right">
+                            <div className="stream-tab">
                                 <ul>
-                                    <li><a class="active" href="#">List View</a></li>
+                                    <li><a className="active" href="#">List View</a></li>
                                     <li onClick={() => {
                                         history.push("/ViewCalender")
                                     }}><a href="#">Calendar View</a></li>
@@ -296,9 +296,9 @@ const ManagerViewCalender = () => {
                                 </ul>
                             </div>
 
-                            <button class="start-stream-btn">Select Availability</button>
-                            <button class="start-stream-btn">View Preferences</button>
-                            <button class="start-stream-btn">Subscribe/ Export</button>
+                            <button className="start-stream-btn">Select Availability</button>
+                            <button className="start-stream-btn">View Preferences</button>
+                            <button className="start-stream-btn">Subscribe/ Export</button>
                         </div>
                     </div>
 
@@ -315,7 +315,7 @@ const ManagerViewCalender = () => {
                                 <span onClick={() => setY(y + 1)}>&#10095;</span>
                             </span>
                             <span onClick={CalenderListView}>
-                                <i class="fas fa-search"></i>
+                                <i className="fas fa-search"></i>
                             </span>
                             <div className="vcRgt">Team record: 8-5</div>
                         </div>

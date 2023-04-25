@@ -20,63 +20,63 @@ const SettingNav = (props) => {
     const history = useHistory();
     const [listValue, setList] = useState(false)
     return (
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "35px" }}>{props.name}</h1> </a>
+        <ul className="nav nav-tabs" role="tablist">
+            <li className="nav-item">
+                <a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "35px" }}>{props.name}</h1> </a>
 
             </li>
-            <li class="nav-item" >
+            <li className="nav-item" >
 
-                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"  style={{color:listValue == true ?"red": "white"}}
+                <a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab"  style={{color:listValue == true ?"red": "white"}}
                 onClick={() => {
                     
                    setList(true)
                   
                }}>Team Setting     </a>
                 <ul style={{ display: listValue == true ? "block" : "none", listStyle: "none", color:"white" }}>
-                    <li class="nav-item"  style={{color:listValue == true ?"red": "white"}} onClick={()=>{
+                    <li className="nav-item"  style={{color:listValue == true ?"red": "white"}} onClick={()=>{
                         history.push("/MyAccount")
                     }}>Profile </li>
-                    <li class="nav-item" onClick={()=>{
+                    <li className="nav-item" onClick={()=>{
                         history.push("/Household")
                     }}>HouseHold</li>
-                    <li class="nav-item"  onClick={()=>{
+                    <li className="nav-item"  onClick={()=>{
                         history.push("/Preference")
                     }}>Preferance</li>
-                    <li class="nav-item" onClick={()=>{
+                    <li className="nav-item" onClick={()=>{
                         history.push("/LoginAccount")
                     }}>Login</li>
                 </ul>
             </li>
-            <li class="nav-item"  onClick={()=>{
+            <li className="nav-item"  onClick={()=>{
                         history.push("/SitePreference")
                     }}>
-                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Site Preferance</a>
+                <a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Site Preferance</a>
             </li>
            
 
-            <li class="nav-item" class="nav-item" onClick={()=>{
+            <li className="nav-item" className="nav-item" onClick={()=>{
                         history.push("/TabManager")
                     }} >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Tab Manager</a>
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Tab Manager</a>
             </li>
-            <li class="nav-item" class="nav-item"  >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Custom Fields</a>
+            <li className="nav-item" className="nav-item"  >
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Custom Fields</a>
             </li>
-            <li class="nav-item" class="nav-item"  >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Seasion</a>
+            <li className="nav-item" className="nav-item"  >
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Seasion</a>
             </li>
-            <li class="nav-item" class="nav-item"  >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Sports Type</a>
+            <li className="nav-item" className="nav-item"  >
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Sports Type</a>
             </li>
-            <li class="nav-item" class="nav-item"  >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Language</a>
+            <li className="nav-item" className="nav-item"  >
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Language</a>
             </li>
-            <li class="nav-item" class="nav-item"  >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Invoice Template</a>
+            <li className="nav-item" className="nav-item"  >
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Invoice Template</a>
             </li>
-            <li class="nav-item" class="nav-item"  >
-                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Team Financials</a>
+            <li className="nav-item" className="nav-item"  >
+                <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  style={{color:listValue.post == true ?"red": "white"}}>Team Financials</a>
             </li>
 
 

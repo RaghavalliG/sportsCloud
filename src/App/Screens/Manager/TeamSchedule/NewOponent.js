@@ -218,13 +218,13 @@ function NewOponent(props) {
     return (
 
         <div>
-            <div class="dashboard-container">
-                <div class="dashboard-main">
+            <div className="dashboard-container">
+                <div className="dashboard-main">
                     <SideMenuComponents manger="manger"/>
-                    <div class="dashboard-main-content">
-                        <div class="dashboard-head">
-                            <div class="teams-select">
-                                <button class="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
+                    <div className="dashboard-main-content">
+                        <div className="dashboard-head">
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                                     {dropdown.map((dropdown) => {
@@ -240,9 +240,9 @@ function NewOponent(props) {
                                 </select>
                             </div>
 
-                            <div class="profile-head">
-                                <div class="profile-head-name">{user ? user.fname : null}</div>
-                                <div class="profile-head-img">
+                            <div className="profile-head">
+                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-img">
                                     {
                                         user ?
                                             <img src={user.profile_image} alt="" /> :
@@ -251,7 +251,7 @@ function NewOponent(props) {
 
                                 </div>
                             </div>
-                            <div class="login-account">
+                            <div className="login-account">
                                 <ul>
                                     <li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li>
                                     {/* <li><a href="#" data-toggle="modal" data-target="#myModalregister" onClick={handleLogout}>Logout</a></li> */}
@@ -259,56 +259,56 @@ function NewOponent(props) {
                             </div>
                         </div>
 
-                        <div class="prefarance-page">
-                            <div class="page-header">
-                                <h2 class="page-title">Locations</h2>
+                        <div className="prefarance-page">
+                            <div className="page-header">
+                                <h2 className="page-title">Locations</h2>
 
                             </div>
 
-                            <div class="prefarance-box" style={{overflow:"hidden"}}>
-                                <div class="team-payment team-assesment" style={{marginTop:"-12px"}}>
-                                    <div class="prefarance-form playerinfo-form">
+                            <div className="prefarance-box" style={{overflow:"hidden"}}>
+                                <div className="team-payment team-assesment" style={{marginTop:"-12px"}}>
+                                    <div className="prefarance-form playerinfo-form">
 
-                                        <div class="row" style={{padding:"21px"}}>
-                                        <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                        <div className="row" style={{padding:"21px"}}>
+                                        <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Oponent Name</label>
-                                        <input type="text" class="input-select" />
+                                        <input type="text" className="input-select" />
                                         <span>The name of the game location Example: "Wilshire Park Soccer Field"</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Contact Name</label>
-                                        <input type="text" class="input-select" />
+                                        <input type="text" className="input-select" />
                                         <span>A contact person for the opposing team Example: "Coach Smithers"</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Phone Number</label>
-                                        <input type="text" class="input-select" />
+                                        <input type="text" className="input-select" />
                                         <span>A phone number for that contact Example: "503-123-4567"</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Email address</label>
-                                        <input type="text" class="input-select" />
+                                        <input type="text" className="input-select" />
                                         <span>An email address tor that contact Example: "coach_smithers@domain.com"</span>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="prefarance-form-list">
+                                <div className="col-md-6">
+                                    <div className="prefarance-form-list">
                                         <label> Notes</label>
-                                        <textarea type="text" class="input-select"  style={{height:"200px"}}/>
+                                        <textarea type="text" className="input-select"  style={{height:"200px"}}/>
                                         <span>Team colors, scouting reports, etc</span>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="prefarance-form-list" style={{marginLeft:"60%"}}>
-                                        <button class="add-links">CANCEL</button>
-                                        <button class="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} >SAVE</button>
+                                <div className="col-md-12">
+                                    <div className="prefarance-form-list" style={{marginLeft:"60%"}}>
+                                        <button className="add-links">CANCEL</button>
+                                        <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} >SAVE</button>
                                     </div>
                                 </div>
                                         </div>
