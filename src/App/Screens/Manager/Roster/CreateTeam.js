@@ -153,6 +153,13 @@ const CreateTeam = (props) => {
 
 
     const CheckValidatiion = () => {
+        console.log("teamName ="  ,teamName)
+        console.log("timeZone ="  ,timeZone)
+        console.log("sport =" , sport)
+        console.log("country =" , country)
+        console.log("language =" , language)
+        console.log("parentName =" , parentName)
+        console.log("zip =" , zip)
 
         if (teamName && sport && timeZone && country && zip && language && parentName) {
             createTeamData()
@@ -285,6 +292,7 @@ const CreateTeam = (props) => {
                                                 <input type="text" className="input-select" onChange={(e) => setParentName(e.target.value)} />
                                                 <label>Sport</label>
                                                 <select className="input-select" onChange={(e) => setSport(e.target.value)}>
+                                                    <option>--Select--</option>
                                                     <option>Football</option>
                                                     <option>Cricket</option>
                                                     <option>Badminton</option>
@@ -292,7 +300,8 @@ const CreateTeam = (props) => {
                                                 {/* <input type="text" className="input-select" onChange={(e) => setSport(e.target.value)}/> */}
 
                                                 <label>Country</label>
-                                                <select className="input-select" onChange={(e) => setCountry(e.target.value)}>
+                                                <select className="input-select" onChange={(e) => {setCountry(e.target.value)}}>
+                                                    <option>--Select--</option>
                                                     <option>India</option>
                                                     <option>America</option>
                                                     <option>South Africa</option>
