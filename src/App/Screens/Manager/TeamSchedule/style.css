@@ -2313,7 +2313,7 @@ background: #EC3525;
     display: inline-block;
     margin: 0 22px;
 }
-.manager-player-section ul li a{
+.manager-player-section ul li{
     font-weight: normal;
     font-size: 16px;
     color: #FFFFFF;

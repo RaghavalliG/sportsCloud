@@ -206,27 +206,27 @@ const CreateTeam = (props) => {
                                         ACCOUNT
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                                        <li className="dropdown-item" href="#">Jayanta Karmakar</li>
                                         <Link to={{ pathname: "/MyAccount" }} >
-                                            <li><a className="dropdown-item" href="#">My Account</a></li>
+                                            <li className="dropdown-item" href="#">My Account</li>
                                         </Link>
                                         <Link to={{ pathname: "/Credit" }} >
-                                            <li><a className="dropdown-item" href="#">Credits</a></li>
+                                            <li className="dropdown-item" href="#">Credits</li>
                                         </Link>
                                         <Link to={{ pathname: "/Household" }} >
-                                            <li><a className="dropdown-item" href="#">My HouseHold</a></li>
+                                            <li className="dropdown-item" href="#">My HouseHold</li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
-                                            <li><a className="dropdown-item" href="#">Manage My Team</a></li>
+                                            <li className="dropdown-item" href="#">Manage My Team</li>
                                         </Link>
                                         <Link to={{ pathname: "/Biling" }} >
-                                            <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
+                                            <li className="dropdown-item" href="#">Biling & Plans</li>
                                         </Link>
                                         <Link to={{ pathname: "/CreateTeam" }} >
-                                            <li><a className="dropdown-item" href="#">Create New Team</a></li>
+                                            <li className="dropdown-item" href="#">Create New Team</li>
                                         </Link>
                                         <Link to={{ pathname: "/SignOut" }} >
-                                            <li><a className="dropdown-item active" href="#">Sign Out</a></li>
+                                            <li className="dropdown-item active" href="#">Sign Out</li>
                                         </Link>
 
                                     </ul>
@@ -271,20 +271,20 @@ const CreateTeam = (props) => {
                                             <div className="prefarance-form-list">
                                                 <label>Language</label>
                                                 <select className="input-select" onChange={(e) => setLanguage(e.target.value)}>
-                                                    <option>Select Language</option>
-                                                    <option>ENGLISH</option>
-                                                    <option>HINDI</option>
-                                                    <option>BENGALI</option>
-                                                    <option>SPANISH</option>
-                                                    <option>ARABIC</option>
-                                                    <option>PORTUGUESE</option>
-                                                    <option>RUSSIAN</option>
-                                                    <option>JAPANESE</option>
-                                                    <option>LAHNDA</option>
-                                                    <option>GERMAN</option>
-                                                    <option>KOREAN</option>
-                                                    <option>FRENCH</option>
-                                                    <option>TELUGU</option>
+                                                    <option key="lang">Select Language</option>
+                                                    <option key="ENGLISH" value="ENGLISH">ENGLISH</option>
+                                                    <option key="HINDI" value="HINDI">HINDI</option>
+                                                    <option key="BENGALI" value="BENGALI">BENGALI</option>
+                                                    <option key="SPANISH" value="SPANISH">SPANISH</option>
+                                                    <option key="ARABIC" value="ARABIC">ARABIC</option>
+                                                    <option key="PORTUGUESE" value="PORTUGUESE">PORTUGUESE</option>
+                                                    <option key="RUSSIAN" value="RUSSIAN">RUSSIAN</option>
+                                                    <option key="JAPANESE" value="JAPANESE">JAPANESE</option>
+                                                    <option key="LAHNDA" value="LAHNDA">LAHNDA</option>
+                                                    <option key="GERMAN" value="GERMAN">GERMAN</option>
+                                                    <option key="KOREAN" value="KOREAN">KOREAN</option>
+                                                    <option key="FRENCH" value="FRENCH">FRENCH</option>
+                                                    <option key="TELUGU" value="TELUGU">TELUGU</option>
                                                 </select>
                                                 <label>Team Name</label>
                                                 <input type="text" className="input-select" onChange={(e) => setTeamName(e.target.value)} />
@@ -292,19 +292,19 @@ const CreateTeam = (props) => {
                                                 <input type="text" className="input-select" onChange={(e) => setParentName(e.target.value)} />
                                                 <label>Sport</label>
                                                 <select className="input-select" onChange={(e) => setSport(e.target.value)}>
-                                                    <option>--Select--</option>
-                                                    <option>Football</option>
-                                                    <option>Cricket</option>
-                                                    <option>Badminton</option>
+                                                    <option key="sport">--Select--</option>
+                                                    <option key="Football" value="Football">Football</option>
+                                                    <option key="Cricket" value="Cricket">Cricket</option>
+                                                    <option key="Badminton" value="Badminton">Badminton</option>
                                                 </select>
                                                 {/* <input type="text" className="input-select" onChange={(e) => setSport(e.target.value)}/> */}
 
                                                 <label>Country</label>
                                                 <select className="input-select" onChange={(e) => {setCountry(e.target.value)}}>
-                                                    <option>--Select--</option>
-                                                    <option>India</option>
-                                                    <option>America</option>
-                                                    <option>South Africa</option>
+                                                    <option key="country">--Select--</option>
+                                                    <option key="India" value="India">India</option>
+                                                    <option key="America" value="America">America</option>
+                                                    <option key="South Africa" value="South Africa">South Africa</option>
                                                 </select>
                                                 <div>
                                                     <GooglePlacesAutocomplete
@@ -313,9 +313,10 @@ const CreateTeam = (props) => {
                                                 </div>
                                                 <label>Time Zone</label>
                                                 <select className="input-select" onChange={(e) => setTimeZone(e.target.value)}>
-                                                    <option>Time Zone1</option>
-                                                    <option>Time Zone2</option>
-                                                    <option>Time Zone3</option>
+                                                    <option key="Timezone">--Select--</option>
+                                                    <option key="Timezone1" value="Time Zone1">Time Zone1</option>
+                                                    <option key="Timezone2" value="Time Zone2">Time Zone2</option>
+                                                    <option key="Timezone3" value="Time Zone3">Time Zone3</option>
                                                 </select>
 
                                                 <label>Zip Code</label>

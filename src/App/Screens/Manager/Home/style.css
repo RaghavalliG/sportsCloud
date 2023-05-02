@@ -2320,19 +2320,19 @@ background: #484848 url(../../../images/select-dropdown.png) no-repeat 88% cente
 .dropBtn li{
     border-top: 1px solid #363636;
 }
-.dropBtn a{ padding: 0;}
-.dropBtn li a{
+.dropBtn li{ padding: 0;}
+.dropBtn li{
     color: #fff;
     font-weight: 600;
     font-size: 16px;
     padding: 12px 20px;
 }
-.dropBtn a:hover{
+.dropBtn li:hover{
     color: #ec3525;
     background: transparent;
     text-decoration: none;
 }
-.dropBtn a.active{
+.dropBtn li.active{
     background-color: #ec3525;
     color: #fff;
 }

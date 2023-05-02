@@ -72,8 +72,8 @@ function ManagerRoster(props) {
     const [memberType, setMemberType] = useState('')
     const [newplayerdata, setNewPlayerData] = useState([])
     const [newNonPlayerData, setNewNonPlayerData] = useState([])
-    const [male,setMale]=useState(0)
-    const [female,setFemale]=useState(0)
+    const [male, setMale] = useState(0)
+    const [female, setFemale] = useState(0)
 
 
 
@@ -113,25 +113,25 @@ function ManagerRoster(props) {
         props.history.push("/")
     };
 
-    
-  const updateProfile = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      let header = {
-        'authToken': user.authtoken
 
-      }
-      console.log('user', user)
+    const updateProfile = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            let header = {
+                'authToken': user.authtoken
 
-      Network('api/get-user-details?user_id=' + user._id, 'GET', header)
-        .then(async (res) => {
-          console.log("new Profile Pic----", res)
-          setProfilePic(res.response_data)
+            }
+            console.log('user', user)
 
-        })
+            Network('api/get-user-details?user_id=' + user._id, 'GET', header)
+                .then(async (res) => {
+                    console.log("new Profile Pic----", res)
+                    setProfilePic(res.response_data)
+
+                })
+        }
+
     }
-
-  }
 
     const dropdownMenu = () => {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -409,27 +409,27 @@ function ManagerRoster(props) {
                                         ACCOUNT
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a className="dropdown-item" href="#">{profilePic.fname + " " + profilePic.lname}</a></li>
+                                        <li className="dropdown-item" >{profilePic.fname + " " + profilePic.lname} </li>
                                         <Link to={{ pathname: "/MyAccount" }} >
-                                            <li><a className="dropdown-item" href="#">My Account</a></li>
+                                            <li className="dropdown-item" >My Account </li>
                                         </Link>
                                         <Link to={{ pathname: "/Credit" }} >
-                                            <li><a className="dropdown-item" href="#">Credits</a></li>
+                                            <li className="dropdown-item" >Credits </li>
                                         </Link>
                                         <Link to={{ pathname: "/Household" }} >
-                                            <li><a className="dropdown-item" href="#">My HouseHold</a></li>
+                                            <li className="dropdown-item" >My HouseHold </li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
-                                            <li><a className="dropdown-item" href="#">Manage My Team</a></li>
+                                            <li className="dropdown-item" >Manage My Team </li>
                                         </Link>
                                         <Link to={{ pathname: "/Biling" }} >
-                                            <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
+                                            <li className="dropdown-item" >Biling & Plans </li>
                                         </Link>
                                         <Link to={{ pathname: "/CreateTeam" }} >
-                                            <li><a className="dropdown-item" href="#">Create New Team</a></li>
+                                            <li className="dropdown-item" >Create New Team </li>
                                         </Link>
                                         <Link to={{ pathname: "/SignOut" }} >
-                                            <li><a className="dropdown-item active" href="#">Sign Out</a></li>
+                                            <li className="dropdown-item active" >Sign Out </li>
                                         </Link>
 
                                     </ul>
@@ -446,7 +446,7 @@ function ManagerRoster(props) {
                                 </div>
                             </div>
                             <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
-                            
+
 
                         </div>
 
@@ -463,9 +463,9 @@ function ManagerRoster(props) {
                             {user.user_type == "manager" ? <div className="manager-player-section">
                                 <h3>Maneger</h3>
                                 <ul >
-                                    <li onClick={() => history.push('./AddPlayer')}><a href="#" style={{ color: "red" }}>+ Add Player</a></li>
-                                    <li onClick={() => history.push('./ImportPlayer')}><a href="#" style={{ color: "red" }}>Import Players</a></li>
-                                    <li><a href="#" style={{ color: "red" }} onClick={() => history.push('./AnotherPlayer')}>Import From Another Teams</a></li>
+                                    <Link to = "./AddPlayer"><li  style={{ color: "red" }} > + Add Player</li></Link>
+                                    <Link to = "./ImportPlayer"><li style={{ color: "red" }}> Import Players</li></Link>
+                                    <Link to = "./AnotherPlayer"><li style={{ color: "red" }}> Import From Another Teams</li></Link>
                                 </ul>
 
                             </div> : ""}
@@ -479,75 +479,77 @@ function ManagerRoster(props) {
                             <div className="prefarance-box">
                                 <div className="team-payment team-assesment">
                                     <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Male/Female</th>
+                                                <th>Photo</th>
+                                                <th>Name</th>
+                                                <th>Jursey No</th>
+                                                <th>contact Info</th>
+                                                <th>Position</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
 
-                                        <tr>
-                                            <th>Male/Female</th>
-                                            <th>Photo</th>
-                                            <th>Name</th>
-                                            <th>Jursey No</th>
-                                            <th>contact Info</th>
-                                            <th>Position</th>
-                                        </tr>
-                                        {
+                                                (newplayerdata && newplayerdata.length > 0) ?
+                                                    <>
+                                                        {
+                                                            newplayerdata.map((player, i) => {
 
-                                            (newplayerdata && newplayerdata.length > 0) ?
-                                                <>
-                                                    {
-                                                        newplayerdata.map((player, i) => {
+                                                                return (
+                                                                    <>
+                                                                        {
+                                                                            (player.member_id != null) ?
+                                                                                <>
 
-                                                            return (
-                                                                <>
-                                                                    {
-                                                                        (player.member_id != null) ?
-                                                                            <>
+                                                                                    <tr key= {player.member_id}>
 
-                                                                                <tr>
+                                                                                        <td>
 
-                                                                                    <td>
+                                                                                            <div className="game-name">
 
-                                                                                        <div className="game-name">
+                                                                                                {(player.member_id.gender) ? player.member_id.gender : null}
+                                                                                                {/* {(player.member_id.gender)==Male ? player.member_id.gender : null} */}
+                                                                                            </div>
 
-                                                                                            {(player.member_id.gender) ? player.member_id.gender : null}
-                                                                                            {/* {(player.member_id.gender)==Male ? player.member_id.gender : null} */}
-                                                                                        </div>
+                                                                                        </td>
+                                                                                        <td onClick={() => imageModalOpen(i, player.member_id._id)}>
+                                                                                            {player.member_id.profile_image == null ?
+                                                                                                <img src={UserProfile} alt="" /> :
+                                                                                                <img src={`${pic1}${player.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                            }
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <span>{player.member_id.fname}{player.member_id.lname}</span>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <span>{player.jersey_number}</span>
+                                                                                        </td>
+                                                                                        <td>{player.member_id.fname}<br></br>
+                                                                                            {player.member_id.email}
 
-                                                                                    </td>
-                                                                                    <td onClick={() => imageModalOpen(i, player.member_id._id)}>
-                                                                                        {player.member_id.profile_image == null ?
-                                                                                            <img src={UserProfile} alt="" /> :
-                                                                                            <img src={`${pic1}${player.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
-                                                                                        }
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span>{player.member_id.fname}{player.member_id.lname}</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span>{player.jersey_number}</span>
-                                                                                    </td>
-                                                                                    <td>{player.member_id.fname}<br></br>
-                                                                                        {player.member_id.email}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div className="last-row">
+                                                                                                <p>{player.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player.member_id._id)} ><img src={Delect} /></button>
+                                                                                                <button onClick={() => updateModalValue(i, player.member_id._id)}><img src={pencil} /></button>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </>
+                                                                                : null
+                                                                        }
+                                                                    </>
+                                                                )
 
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div className="last-row">
-                                                                                            <p>{player.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player.member_id._id)} ><img src={Delect} /></button>
-                                                                                            <button onClick={() => updateModalValue(i, player.member_id._id)}><img src={pencil} /></button>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </>
-                                                                            : null
-                                                                    }
-                                                                </>
-                                                            )
+                                                            })
+                                                        }
+                                                    </>
+                                                    : null
+                                            }
 
-                                                        })
-                                                    }
-                                                </>
-                                                : null
-                                        }
-
-
+                                        </tbody>
 
                                     </table>
                                 </div>
@@ -564,8 +566,8 @@ function ManagerRoster(props) {
                                                         <h2> Gender</h2>
                                                         <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newplayerdata[id].member_id.gender}>
                                                             <option>Select</option>
-                                                            <option>Male</option>
-                                                            <option>Female</option>
+                                                            <option value="male">Male</option>
+                                                            <option value="female">Female</option>
                                                         </select>
                                                     </div>
 
@@ -882,7 +884,7 @@ function ManagerRoster(props) {
                                     </Modal.Body>
 
                                 </Modal> : ""}
-                                
+
 
                             </div>
 
@@ -898,88 +900,90 @@ function ManagerRoster(props) {
                             <div className="prefarance-box">
                                 <div className="team-payment team-assesment">
                                     <table>
-                                        <tr>
-                                            <th>Male/Female</th>
-                                            <th>Photo</th>
-                                            <th>Name</th>
-                                            <th>Jursey No</th>
-                                            <th>contact Info</th>
-                                            <th>Position</th>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th>Male/Female</th>
+                                                <th>Photo</th>
+                                                <th>Name</th>
+                                                <th>Jursey No</th>
+                                                <th>contact Info</th>
+                                                <th>Position</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            {(newNonPlayerData && newNonPlayerData.length > 0) ?
 
 
+                                                <>
+                                                    {
+                                                        newNonPlayerData.map((nonPlayer, i) => {
 
-                                        {(newNonPlayerData && newNonPlayerData.length > 0) ?
+                                                            return (
+                                                                <>
+                                                                    {
+                                                                        (nonPlayer.member_id != null) ?
+                                                                            <>
+                                                                                <tr key={nonPlayer.member_id}>
 
+                                                                                    <td>
 
-                                            <>
-                                                {
-                                                    newNonPlayerData.map((nonPlayer, i) => {
+                                                                                        <div className="game-name">
 
-                                                        return (
-                                                            <>
-                                                                {
-                                                                    (nonPlayer.member_id != null) ?
-                                                                        <>
-                                                                            <tr>
+                                                                                            {(nonPlayer.member_id.gender) ? nonPlayer.member_id.gender : null}
+                                                                                        </div>
 
-                                                                                <td>
+                                                                                    </td>
+                                                                                    <td onClick={() => imageModalOpen(i, nonPlayer.member_id._id)}>
+                                                                                        {nonPlayer.member_id.profile_image == null ?
+                                                                                            <img src={UserProfile} alt="" /> :
+                                                                                            <img src={`${pic1}${nonPlayer.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                        }
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>{nonPlayer.member_id.fname}{nonPlayer.member_id.lname}</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span>{nonPlayer.jersey_number}</span>
+                                                                                    </td>
+                                                                                    <td>{nonPlayer.member_id.fname}<br></br>
+                                                                                        {nonPlayer.member_id.email}
 
-                                                                                    <div className="game-name">
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div className="last-row">
+                                                                                            <p>{nonPlayer.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(nonPlayer.member_id._id)} ><img src={Delect} /></button>
+                                                                                            <button onClick={() => updateModalValue1(i, nonPlayer.member_id._id)}><img src={pencil} /></button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </>
+                                                                            : null
+                                                                    }
+                                                                </>
+                                                            )
 
-                                                                                        {(nonPlayer.member_id.gender) ? nonPlayer.member_id.gender : null}
-                                                                                    </div>
-
-                                                                                </td>
-                                                                                <td onClick={() => imageModalOpen(i, nonPlayer.member_id._id)}>
-                                                                                    {nonPlayer.member_id.profile_image == null ?
-                                                                                        <img src={UserProfile} alt="" /> :
-                                                                                        <img src={`${pic1}${nonPlayer.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
-                                                                                    }
-                                                                                </td>
-                                                                                <td>
-                                                                                    <span>{nonPlayer.member_id.fname}{nonPlayer.member_id.lname}</span>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <span>{nonPlayer.jersey_number}</span>
-                                                                                </td>
-                                                                                <td>{nonPlayer.member_id.fname}<br></br>
-                                                                                    {nonPlayer.member_id.email}
-
-                                                                                </td>
-                                                                                <td>
-                                                                                    <div className="last-row">
-                                                                                        <p>{nonPlayer.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(nonPlayer.member_id._id)} ><img src={Delect} /></button>
-                                                                                        <button onClick={() => updateModalValue1(i, nonPlayer.member_id._id)}><img src={pencil} /></button>
-                                                                                    </div>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </>
-                                                                        : null
-                                                                }
-                                                            </>
-                                                        )
-
-                                                    })
-                                                }
-                                            </>
-                                            : null
-                                        }
+                                                        })
+                                                    }
+                                                </>
+                                                : null
+                                            }
 
 
-
+                                        </tbody>
 
 
 
                                     </table>
-                                  
+
                                 </div>
                             </div>
-          
+
 
                         </div>
 
-                       
+
 
 
 
@@ -988,8 +992,8 @@ function ManagerRoster(props) {
 
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 

@@ -58,49 +58,49 @@ function SideMenuComponents(props) {
             props.manger == "manger" ?
             <ul>
             <Link to="/">
-              <li><a href="javascript:void(0)" className={(location.pathname == '/')? 'menu1 active' : 'menu1'}>Team Home</a></li>
+              <li className={(location.pathname == '/')? 'menu1 active' : 'menu1'}>Team Home</li>
             </Link>
             <Link to="/ManagerRoster">
-              <li><a href="javascript:void(0)" className={(location.pathname == '/ManagerRoster')? 'menu2 active' : 'menu2'}>Team Roster</a></li>
+              <li className={(location.pathname == '/ManagerRoster')? 'menu2 active' : 'menu2'}>Team Roster</li>
             </Link>
             <Link to="/Teamschdule">
-            <li><a href="javascript:void(0)" className={(location.pathname == '/Teamschdule')? 'menu3 active' : 'menu3'}>Team Schedule</a></li>
+            <li className={(location.pathname == '/Teamschdule')? 'menu3 active' : 'menu3'}>Team Schedule</li>
             </Link>
             <Link to="/ManagerTeamAvailability">
-            <li><a href="javascript:void(0)" className={(location.pathname == '/ManagerTeamAvailability')? 'menu4 active' : 'menu4'}>Team Availability</a></li>
+            <li className={(location.pathname == '/ManagerTeamAvailability')? 'menu4 active' : 'menu4'}>Team Availability</li>
             </Link>
             <Link to="/ManagerTeamShop">
-              <li><a href="javascript:void(0)" className={(location.pathname == '/ManagerTeamShop')? 'menu5 active' : 'menu5'}>Team Store</a></li>
+              <li className={(location.pathname == '/ManagerTeamShop')? 'menu5 active' : 'menu5'}>Team Store</li>
             </Link>
             <Link to="/ScoreKeeper">
-            <li><a href="javascript:void(0)" className={(location.pathname == '/ScoreKeeper')? 'menu6 active' : 'menu6'}>Score Keeper</a></li>
+            <li className={(location.pathname == '/ScoreKeeper')? 'menu6 active' : 'menu6'}>Score Keeper</li>
             </Link>
             <Link to="/TeamAssignments">
-              <li><a href="javascript:void(0)" className={(location.pathname == '/TeamAssignments')? 'menu7 active' : 'menu7'}>Team Assignment</a></li>
+              <li className={(location.pathname == '/TeamAssignments')? 'menu7 active' : 'menu7'}>Team Assignment</li>
             </Link>
             <Link to="/TeamMedia">
-            <li><a href="javascript:void(0)" className={(location.pathname == '/TeamMedia')? 'menu8 active' : 'menu8'}>Team Media</a></li>
+            <li className={(location.pathname == '/TeamMedia')? 'menu8 active' : 'menu8'}>Team Media</li>
             </Link>
             <Link to="/TeamMassage">
-            <li><a href="javascript:void(0)" className={(location.pathname == '/TeamMassage')? 'menu9 active' : 'menu9'}>Team Messages</a></li>
+            <li className={(location.pathname == '/TeamMassage')? 'menu9 active' : 'menu9'}>Team Messages</li>
             </Link>
             <Link to="/preferance">
-              <li><a href="javascript:void(0)" className={(location.pathname == '/preferance')? 'menu10 active' : 'menu10'}>Team Preferences</a></li>
+              <li className={(location.pathname == '/preferance')? 'menu10 active' : 'menu10'}>Team Preferences</li>
             </Link>
             <Link to='/TeamSettingHome'>
-            <li><a href="javascript:void(0)" className={(location.pathname == '/TeamSettingHome')? 'menu11 active' : 'menu11'}>Team Settings</a></li>
+            <li className={(location.pathname == '/TeamSettingHome')? 'menu11 active' : 'menu11'}>Team Settings</li>
             </Link>
             <Link to='/TeamStatistics'>
-            <li><a href="javascript:void(0)" className={(location.pathname == '/TeamStatistics')? 'menu11 active' : 'menu11'}>Team Statistics</a></li>
+            <li className={(location.pathname == '/TeamStatistics')? 'menu11 active' : 'menu11'}>Team Statistics</li>
             </Link>
             <Link to='/TeamOrganizer'>
-            <li><a href="javascript:void(0)" className={(location.pathname == '/TeamOrganizer')? 'menu12 active' : 'menu12'}>Tournament Organizer</a></li>
+            <li className={(location.pathname == '/TeamOrganizer')? 'menu12 active' : 'menu12'}>Tournament Organizer</li>
             </Link>
             <Link to = "/TeamLiabilityWaiver">
-          <li><a href="javascript:void(0)" className={(location.pathname == '/TeamLiabilityWaiver')? 'menu11 active' : 'menu11'}>Liability Waiver</a></li>
+          <li className={(location.pathname == '/TeamLiabilityWaiver')? 'menu11 active' : 'menu11'}>Liability Waiver</li>
           </Link>
             <Link to="/TeamPayment">
-              <li><a href="javascript:void(0)" className={(location.pathname == '/TeamPayment')? 'menu12 active' : 'menu12'}>Team Payment</a></li>
+              <li className={(location.pathname == '/TeamPayment')? 'menu12 active' : 'menu12'}>Team Payment</li>
             </Link>
            
             {/* <li><a href="#" className="menu13">Team Store</a></li>
@@ -112,38 +112,38 @@ function SideMenuComponents(props) {
           
           <ul>
           <Link to="/">
-            <li><a href="javascript:void(0)" className={(location.pathname == '/')? 'menu1 active' : 'menu1'}>Team Home</a></li>
+            <li className={(location.pathname == '/')? 'menu1 active' : 'menu1'}>Team Home</li>
           </Link>
           <Link to="/teamroster">
-            <li><a href="javascript:void(0)" className="menu2">Team Roster</a></li>
+            <li className="menu2">Team Roster</li>
           </Link>
           <Link to="/playerschdule">
-          <li><a href="javascript:void(0)" className="menu3">Team Schedule</a></li>
+          <li className="menu3">Team Schedule</li>
           </Link>
           <Link to="/TeamAvailability">
-          <li><a href="javascript:void(0)" className="menu4">Player Availability</a></li>
+          <li className="menu4">Player Availability</li>
           </Link>
           <Link to="/teamshop">
-            <li><a href="javascript:void(0)" className="menu5">Team Shop</a></li>
+            <li className="menu5">Team Shop</li>
           </Link>
           <Link to="/ScoreKeeper">
-            <li><a href="javascript:void(0)" className="menu6">Score Keeper</a></li>
+            <li className="menu6">Score Keeper</li>
             </Link>
           <Link to="/playerassignments">
-            <li><a href="javascript:void(0)" className="menu7">Player Assignment</a></li>
+            <li className="menu7">Player Assignment</li>
           </Link>
           <Link to="/playermedia">
-          <li><a href="javascript:void(0)" className="menu8">Player Media</a></li>
+          <li className="menu8">Player Media</li>
           </Link>
-          <li><a href="javascript:void(0)" className="menu9">Player Messages</a></li>
+          <li className="menu9">Player Messages</li>
           <Link to="/preferance">
-            <li><a href="javascript:void(0)" className={(location.pathname == '/preferance')? 'menu10 active' : 'menu10'}>Player Preferences</a></li>
+            <li className={(location.pathname == '/preferance')? 'menu10 active' : 'menu10'}>Player Preferences</li>
           </Link>
           <Link to = "liabilitywaiver">
-          <li><a href="javascript:void(0)" className={(location.pathname == '/liabilitywaiver')? 'menu11 active' : 'menu11'}>Liability Waiver</a></li>
+          <li className={(location.pathname == '/liabilitywaiver')? 'menu11 active' : 'menu11'}>Liability Waiver</li>
           </Link>
           <Link to="/payment">
-          <li><a href="javascript:void(0)" className={(location.pathname == '/payment')? 'menu12 active' : 'menu12'} >Team Payments</a></li>
+          <li className={(location.pathname == '/payment')? 'menu12 active' : 'menu12'} >Team Payments</li>
           </Link>
           
         </ul>
