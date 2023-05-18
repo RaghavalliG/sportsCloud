@@ -381,7 +381,11 @@ function ManagerHome(props) {
                 <select onChange={change} >
 
                   {team == null ? <option> Team1</option> :
+<<<<<<< HEAD
                     team && team.length>0 && team?.map((team) => {
+=======
+                    team && team.length > 0 && team?.map((team) => {
+>>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
                       return (
                         <option key={team.id}>{team.team_name}</option>
                       )

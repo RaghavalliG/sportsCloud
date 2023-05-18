@@ -197,7 +197,7 @@ const CreateTeam = (props) => {
                                 <select onChange={change}>
                                     {dropdown?.map((dropdown) => {
                                         return (
-                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option key={dropdown._id} value={dropdown._id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -233,11 +233,19 @@ const CreateTeam = (props) => {
                                 </div>
                             </div>
                             <div className="profile-head">
+<<<<<<< HEAD
                                 <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
                                 <div className="profile-head-img">
                                     {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
                                         <img src={`${pic}${profilePic?.profile_image}`} alt="" />
+=======
+                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-img add">
+                                    {profilePic.profile_image == null ?
+                                        <img src={BigUserProfile} alt="" /> :
+                                        <img src={`${pic}profilepic/${profilePic.profile_image}`} alt="" />
+>>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
                                     }
 
                                 </div>

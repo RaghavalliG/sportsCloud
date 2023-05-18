@@ -61,8 +61,62 @@ const Header = (props) => {
     props.history.push("/");
   };
 
+<<<<<<< HEAD
   const changeImage = () => {
     const user = JSON.parse(localStorage.getItem("user"));
+=======
+    const pic = 'https://nodeserver.mydevfactory.com:1447/profilepic/'
+
+    useEffect(() => {
+        // let user = userdata && userdata._id ? true : false;
+        // console.log("userMe===>", user);
+        setUser(user);
+        // console.log("USerData", userdata);
+        const userLocal = JSON.parse(localStorage.getItem("user"));
+        console.log("userData after login--->", userLocal)
+        let userD = userLocal && userLocal._id ? true : false;
+        setUser(userD);
+        setUserData(userLocal);
+        teamSelect()
+        changeImage()
+        updateProfile()
+    
+      }, []);
+
+    const handleLogout = () => {
+        console.log("pruyuuuuuu", props);
+        dispatch(logoutUser(null))
+        localStorage.removeItem("user");
+        setUserData(null);
+        props.history.push("/")
+      };
+
+
+      const changeImage = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+          let header = {
+            'authToken': user.authtoken
+          }
+          Network('api/player-joined-team-list?player_id=' + user._id, 'GET', header)
+            // api/player-list-by-team-id?team_id=60aca35ff6cd6923adf9634a
+            .then(async (res) => {
+              console.log("picture----", res)
+              if (res.response_code == 2000) {
+    
+              } else if (res.response_code == 4000) {
+                toast.error(res.response_message)
+              }
+            })
+            .catch((error) => {
+              console.log("error===>", error)
+            });
+        }
+      }
+      
+  const updateProfile = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+>>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
     if (user) {
       let header = {
         authToken: user.authtoken,
@@ -132,6 +186,7 @@ const Header = (props) => {
     }
   };
 
+<<<<<<< HEAD
   return (
     <>
       <div className='dashboard-head'>
@@ -261,3 +316,70 @@ const Header = (props) => {
   );
 };
 export default Header;
+=======
+    return(
+        <>
+         <div className="dashboard-head">
+              <div className="teams-select">
+                <button className="create-new-team" onClick={() => {
+                  history.push("/CreateTeam")
+                }}>Create New Teams</button>
+                <select onChange={change} >
+
+                  {team == null ? <option> Team1</option> :
+                    team.map((team) => {
+                      return (
+                        <option key={team.id}>{team.team_name}</option>
+                      )
+                    })}
+                </select>
+                <div className="dropBtn">
+                  <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                    ACCOUNT
+                  </button>
+                  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                      <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                    <Link to={{ pathname: "/MyAccount"}} >
+                      <li><a className="dropdown-item" href="#">My Account</a></li>
+                    </Link>
+                    <Link to={{ pathname: "/Credit"}} >
+                      <li><a className="dropdown-item" href="#">Credits</a></li>
+                    </Link>
+                    <Link to={{ pathname: "/Household" }} >
+                      <li><a className="dropdown-item" href="#">My HouseHold</a></li>
+                    </Link>
+                    <Link to={{ pathname: "/ManageTeam" }} >
+                      <li><a className="dropdown-item" href="#">Manage My Team</a></li>
+                    </Link>
+                    <Link to={{ pathname: "/Biling" }} >
+                      <li><a className="dropdown-item" href="#">Biling & Plans</a></li>
+                    </Link>
+                    <Link to={{ pathname: "/CreateTeam" }} >
+                      <li><a className="dropdown-item" href="#">Create New Team</a></li>
+                    </Link>
+                    <Link to={{ pathname: "/SignOut" }} >
+                      <li><a className="dropdown-item active" href="#">Sign Out</a></li>
+                    </Link>
+
+                  </ul>
+                </div>
+              </div>
+              <div className="profile-head">
+                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                <div className="profile-head-img">
+                  { profilePic.profile_image == null ?
+                    <img src={BigUserProfile} alt="" /> :
+                    <img src={`${pic}${profilePic.profile_image}`} alt="" />
+                  }
+
+                </div>
+              </div>
+              <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+
+            </div>
+        </>
+
+    )
+}
+export default Header
+>>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
