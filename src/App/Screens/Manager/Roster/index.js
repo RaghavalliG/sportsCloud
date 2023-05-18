@@ -514,16 +514,6 @@ function ManagerRoster(props) {
                                                                                             </div>
 
                                                                                         </td>
-<<<<<<< HEAD
-                                                                                        <td onClick={() => imageModalOpen(i, player.member_id._id)}>
-                                                                                            {player.member_id?.profile_image == null ?
-                                                                                                <img src={UserProfile} alt="" /> :
-                                                                                                <img src={`${pic1}${player.member_id?.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
-                                                                                            }
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <span>{player.member_id?.fname}{player.member_id?.lname}</span>
-=======
                                                                                         <td key="col2" onClick={() => imageModalOpen(i, player.member_id._id)}>
                                                                                             {player.member_id.profile_image == null ?
                                                                                                 <img key={player.member_id} src={UserProfile} alt="" /> :
@@ -532,16 +522,11 @@ function ManagerRoster(props) {
                                                                                         </td>
                                                                                         <td key="col3">
                                                                                             <span>{player.member_id.fname}{player.member_id.lname}</span>
->>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
                                                                                         </td>
                                                                                         <td key="col4">
                                                                                             <span>{player.jersey_number}</span>
                                                                                         </td>
-<<<<<<< HEAD
-                                                                                        <td>{player.member_id?.fname}<br></br>
-=======
                                                                                         <td key="col5">{player.member_id.fname}<br></br>
->>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
                                                                                             {player.member_id.email}
 
                                                                                         </td>
@@ -950,16 +935,6 @@ function ManagerRoster(props) {
                                                                                         </div>
 
                                                                                     </td>
-<<<<<<< HEAD
-                                                                                    <td onClick={() => imageModalOpen(i, nonPlayer.member_id._id)}>
-                                                                                        {nonPlayer.member_id?.profile_image == null ?
-                                                                                            <img src={UserProfile} alt="" /> :
-                                                                                            <img src={`${pic1}${nonPlayer.member_id?.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
-                                                                                        }
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span>{nonPlayer.member_id?.fname}{nonPlayer.member_id?.lname}</span>
-=======
                                                                                     <td key="col2" onClick={() => imageModalOpen(i, nonPlayer.member_id._id)}>
                                                                                         {nonPlayer.member_id.profile_image == null ?
                                                                                             <img key={nonPlayer.member_id} src={UserProfile} alt="" /> :
@@ -968,16 +943,11 @@ function ManagerRoster(props) {
                                                                                     </td>
                                                                                     <td key="col3">
                                                                                         <span>{nonPlayer.member_id.fname}{nonPlayer.member_id.lname}</span>
->>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
                                                                                     </td>
                                                                                     <td key="col4">
                                                                                         <span>{nonPlayer.jersey_number}</span>
                                                                                     </td>
-<<<<<<< HEAD
-                                                                                    <td>{nonPlayer.member_id?.fname}<br></br>
-=======
                                                                                     <td key="col5">{nonPlayer.member_id.fname}<br></br>
->>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
                                                                                         {nonPlayer.member_id.email}
 
                                                                                     </td>
