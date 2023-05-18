@@ -77,7 +77,7 @@ function LoginComponents(props) {
       Network('api/login', 'post', obj)
         .then(async (res) => {
           // console.log("res success login--->", res);
-          if (res.response_code == 2000) {
+          if (res.response_code == 200) {
             toast.success(res.response_message)
             setLoader(false)
             localStorage.setItem('user', JSON.stringify(res.response_data));
