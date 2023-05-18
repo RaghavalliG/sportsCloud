@@ -400,7 +400,7 @@ function ManagerRoster(props) {
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
                                     {dropdown.map((dropdown) => {
                                         return (
-                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option key={dropdown._id} value={dropdown._id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -505,7 +505,7 @@ function ManagerRoster(props) {
 
                                                                                     <tr key= {player.member_id}>
 
-                                                                                        <td>
+                                                                                        <td key="col1">
 
                                                                                             <div className="game-name">
 
@@ -514,23 +514,23 @@ function ManagerRoster(props) {
                                                                                             </div>
 
                                                                                         </td>
-                                                                                        <td onClick={() => imageModalOpen(i, player.member_id._id)}>
+                                                                                        <td key="col2" onClick={() => imageModalOpen(i, player.member_id._id)}>
                                                                                             {player.member_id.profile_image == null ?
-                                                                                                <img src={UserProfile} alt="" /> :
-                                                                                                <img src={`${pic1}${player.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                                <img key={player.member_id} src={UserProfile} alt="" /> :
+                                                                                                <img key={player.member_id} src={`${pic1}${player.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
                                                                                             }
                                                                                         </td>
-                                                                                        <td>
+                                                                                        <td key="col3">
                                                                                             <span>{player.member_id.fname}{player.member_id.lname}</span>
                                                                                         </td>
-                                                                                        <td>
+                                                                                        <td key="col4">
                                                                                             <span>{player.jersey_number}</span>
                                                                                         </td>
-                                                                                        <td>{player.member_id.fname}<br></br>
+                                                                                        <td key="col5">{player.member_id.fname}<br></br>
                                                                                             {player.member_id.email}
 
                                                                                         </td>
-                                                                                        <td>
+                                                                                        <td id="col6">
                                                                                             <div className="last-row">
                                                                                                 <p>{player.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player.member_id._id)} ><img src={Delect} /></button>
                                                                                                 <button onClick={() => updateModalValue(i, player.member_id._id)}><img src={pencil} /></button>
@@ -565,9 +565,9 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> Gender</h2>
                                                         <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newplayerdata[id].member_id.gender}>
-                                                            <option>Select</option>
-                                                            <option value="male">Male</option>
-                                                            <option value="female">Female</option>
+                                                            <option key = "gender">Select</option>
+                                                            <option key="male" value="male">Male</option>
+                                                            <option key="male" value="female">Female</option>
                                                         </select>
                                                     </div>
 
@@ -685,9 +685,9 @@ function ManagerRoster(props) {
                                                         <h2>  Member Type</h2>
 
                                                         <select className="input-select" onChange={(e) => setMemberType(e.target.value)}>
-                                                            <option>Select</option>
-                                                            <option>PLAYER</option>
-                                                            <option>MANAGER</option>
+                                                            <option key="membertype">Select</option>
+                                                            <option key="player" value="player">PLAYER</option>
+                                                            <option key="manager" value="manager">MANAGER</option>
                                                         </select>
                                                     </div>
 
@@ -743,9 +743,9 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> Gender</h2>
                                                         <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newNonPlayerData[id1].member_id.gender}>
-                                                            <option>Select</option>
-                                                            <option>Male</option>
-                                                            <option>Female</option>
+                                                        <option key = "gender">Select</option>
+                                                            <option key="male" value="male">Male</option>
+                                                            <option key="male" value="female">Female</option>
                                                         </select>
                                                     </div>
 
@@ -863,9 +863,9 @@ function ManagerRoster(props) {
                                                         <h2>  Member Type</h2>
 
                                                         <select className="input-select" onChange={(e) => setMemberType(e.target.value)}>
-                                                            <option>Select</option>
-                                                            <option>PLAYER</option>
-                                                            <option>MANAGER</option>
+                                                            <option key="membertype">Select</option>
+                                                            <option key="player" value="player">PLAYER</option>
+                                                            <option key="manager" value="manager">MANAGER</option>
                                                         </select>
                                                     </div>
 
@@ -895,7 +895,7 @@ function ManagerRoster(props) {
                                     <li><a href="#">Edit</a></li>
                                     <li><a href="#">Import</a></li>
                                 </ul> */}
-                                <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player 5(Men:3,Women:2)</span>
+                                <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData.TOTAL_NON_PLAYER}(Men:3,Women:2)</span>
                             </div>
                             <div className="prefarance-box">
                                 <div className="team-payment team-assesment">
@@ -927,7 +927,7 @@ function ManagerRoster(props) {
                                                                             <>
                                                                                 <tr key={nonPlayer.member_id}>
 
-                                                                                    <td>
+                                                                                    <td key="col1">
 
                                                                                         <div className="game-name">
 
@@ -935,23 +935,23 @@ function ManagerRoster(props) {
                                                                                         </div>
 
                                                                                     </td>
-                                                                                    <td onClick={() => imageModalOpen(i, nonPlayer.member_id._id)}>
+                                                                                    <td key="col2" onClick={() => imageModalOpen(i, nonPlayer.member_id._id)}>
                                                                                         {nonPlayer.member_id.profile_image == null ?
-                                                                                            <img src={UserProfile} alt="" /> :
-                                                                                            <img src={`${pic1}${nonPlayer.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                            <img key={nonPlayer.member_id} src={UserProfile} alt="" /> :
+                                                                                            <img key={nonPlayer.member_id} src={`${pic1}${nonPlayer.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
                                                                                         }
                                                                                     </td>
-                                                                                    <td>
+                                                                                    <td key="col3">
                                                                                         <span>{nonPlayer.member_id.fname}{nonPlayer.member_id.lname}</span>
                                                                                     </td>
-                                                                                    <td>
+                                                                                    <td key="col4">
                                                                                         <span>{nonPlayer.jersey_number}</span>
                                                                                     </td>
-                                                                                    <td>{nonPlayer.member_id.fname}<br></br>
+                                                                                    <td key="col5">{nonPlayer.member_id.fname}<br></br>
                                                                                         {nonPlayer.member_id.email}
 
                                                                                     </td>
-                                                                                    <td>
+                                                                                    <td key="col6">
                                                                                         <div className="last-row">
                                                                                             <p>{nonPlayer.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(nonPlayer.member_id._id)} ><img src={Delect} /></button>
                                                                                             <button onClick={() => updateModalValue1(i, nonPlayer.member_id._id)}><img src={pencil} /></button>

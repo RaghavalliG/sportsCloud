@@ -40,7 +40,7 @@ const Header=(props)=>{
     const [profilePic, setProfilePic] = useState([])
     const [teamId, setTeamId] = useState("")
 
-    const pic = 'https://nodeserver.mydevfactory.com:1447/'
+    const pic = 'https://nodeserver.mydevfactory.com:1447/profilepic/'
 
     useEffect(() => {
         // let user = userdata && userdata._id ? true : false;
@@ -190,7 +190,7 @@ const Header=(props)=>{
               <div className="profile-head">
                 <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
                 <div className="profile-head-img">
-                  {profilePic.profile_image == null ?
+                  { profilePic.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
                     <img src={`${pic}${profilePic.profile_image}`} alt="" />
                   }
