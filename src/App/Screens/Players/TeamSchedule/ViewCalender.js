@@ -143,7 +143,7 @@ const ViewCalender =()=>{
 
                         <select onClick={change}>
                                     <option>Select Team</option>
-                                    {team.map((team) => {
+                                    {team?.map((team) => {
                                         return (
                                             <option value={team.team_id._id}>{team.team_id.team_name}</option>
                                         )
@@ -159,11 +159,11 @@ const ViewCalender =()=>{
                     </div>
 
                     <div className="profile-head">
-                        <div className="profile-head-name">{user ? user.fname : null}</div>
+                        <div className="profile-head-name">{user ? user?.fname : null}</div>
                         <div className="profile-head-img">
                             {
                                 user ?
-                                    <img src={user.profile_image} alt="" /> :
+                                    <img src={user?.profile_image} alt="" /> :
                                     <img src={UserProfile} alt="" />
                             }
 

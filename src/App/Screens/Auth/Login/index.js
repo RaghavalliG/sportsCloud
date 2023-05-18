@@ -82,7 +82,7 @@ function LoginComponents(props) {
             setLoader(false)
             localStorage.setItem('user', JSON.stringify(res.response_data));
              dispatch(loginUser(res.response_data))
-             props.history.replace("/");
+             props.history.push("/");
           } else {
             toast.error(res.response_message)
             setLoader(false)

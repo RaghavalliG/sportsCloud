@@ -238,7 +238,7 @@ function ManagerHome(props) {
             toast.error(res.response_message)
           }
           setTeam(res.response_data)
-          teamSchedule(res.response_data[0]._id);
+          teamSchedule(res?.response_data[0]._id);
 
 
         })
@@ -275,7 +275,7 @@ function ManagerHome(props) {
           //     toast.error(res.response_message)
           // }
           //console.log("doc data----->",res.response_data.docs)
-          setSchedule(res.response_data.docs)
+          setSchedule(res.response_data?.docs)
 
 
         })
@@ -295,7 +295,7 @@ function ManagerHome(props) {
       Network('api/player-list-by-team-id?team_id=' + "60a51abfae9b3244cc9d1eae", 'GET', header)
         .then(async (res) => {
           console.log("teamRoster----", res)
-          console.log("team player", res.response_data.PLAYER)
+          console.log("team player", res.response_data?.PLAYER)
 
 
         })
@@ -381,7 +381,11 @@ function ManagerHome(props) {
                 <select onChange={change} >
 
                   {team == null ? <option> Team1</option> :
+<<<<<<< HEAD
+                    team && team.length>0 && team?.map((team) => {
+=======
                     team && team.length > 0 && team?.map((team) => {
+>>>>>>> 1f6d6d8c0f39c2f45dd0895948ac2a05bd2ce10b
                       return (
                         <option key={team.id}>{team.team_name}</option>
                       )
@@ -420,13 +424,13 @@ function ManagerHome(props) {
               </div>
               <div className="profile-head">
                 {loader ?
-                  <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
+                  <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div> :
                   <div className="profile-head-name">Loading...</div>}
 
                 <div className="profile-head-img">
-                  {profilePic.profile_image == null ?
+                  {profilePic?.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
-                    <img src={`${pic1}${profilePic.profile_image}`} alt="" />
+                    <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
                   }
 
                 </div>
@@ -440,14 +444,14 @@ function ManagerHome(props) {
                   <div className="team-profile">
                     <div className="team-profile-img">
                       {/* <img src={BigUserProfile} alt="" /> */}
-                      {profilePic.profile_image == null ?
+                      {profilePic?.profile_image == null ?
                         <img src={BigUserProfile} alt="" /> :
-                        <img src={`${pic1}${profilePic.profile_image}`} alt="" />
+                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
                       }
                     </div>
                     {loader ?
                       <div className="team-profile-name">
-                        {profilePic.fname + " " + profilePic.lname}
+                        {profilePic?.fname + " " + profilePic?.lname}
                       </div> :
                       <div className="team-profile-name">Loading...</div>}
 
@@ -549,7 +553,7 @@ function ManagerHome(props) {
                   <a href="#">View All</a>
                 </div>
                 <div className="team-list-section" style={{height:"544px",overflowX:"auto"}}>
-                  {team.map((team) => {
+                  {team?.map((team) => {
                     return (
                       <div className="team-list-box">
                         <div className="team-list-box-img">

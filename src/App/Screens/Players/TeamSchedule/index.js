@@ -293,7 +293,7 @@ function PlayerSchedule(props) {
                             <div className="teams-select">
                             <select onClick={change}>
                                     <option>Select Team</option>
-                                    {team.map((team) => {
+                                    {team?.map((team) => {
                                         return (
                                             <option value={team.team_id._id}>{team.team_id.team_name}</option>
                                         )
@@ -304,11 +304,11 @@ function PlayerSchedule(props) {
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
                                 <div className="profile-head-img">
-                                    {profilePic.profile_image == null ?
+                                    {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic}${profilePic.profile_image}`} alt="" />
+                                        <img src={`${pic}${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -348,7 +348,7 @@ function PlayerSchedule(props) {
                                             <th>Assignments</th>
                                             <th>Volunteer</th>
                                         </tr>
-                                        {schedule.map((schedule, id) => {
+                                        {schedule?.map((schedule, id) => {
                                             return (
                                                 <tr>
 
@@ -443,7 +443,7 @@ function PlayerSchedule(props) {
                                             <div className="col-md-12">
                                                 <div className="prefarance-form-list">
                                                     <div style={{ display: "flex" }}>
-                                                        {flag.map((flag) => {
+                                                        {flag?.map((flag) => {
                                                             return (
 
                                                                 <div style={{ margin: "10px" }}><img src={`${pic}${flag.image}`} alt="" style={{ height: "30px", width: "30px" }} /><br></br>

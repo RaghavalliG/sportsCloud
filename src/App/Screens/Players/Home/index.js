@@ -70,7 +70,7 @@ function HomeComponents(props) {
     updateProfile()
     weather()
   }, []);
-  const pic = 'https://nodeserver.mydevfactory.com:1447/'
+  const pic = 'https://nodeserver.mydevfactory.com:1448/'
 
   const handleLogout = () => {
     console.log("pruyuuuuuu", props);
@@ -117,7 +117,7 @@ function HomeComponents(props) {
       Network('api/player-list-by-team-id?team_id=' + '60a51abfae9b3244cc9d1eae', 'GET', header)
         .then(async (res) => {
           console.log("teamRoster----", res)
-          if (res.response_code == 4000) {
+          if (res.response_code == 400) {
             dispatch(logoutUser(null))
             localStorage.removeItem("user");
             history.push("/")
@@ -236,7 +236,7 @@ function HomeComponents(props) {
             <div className="dashboard-head">
               <div className="teams-select">
                 <select>
-                  {team.map((team) => {
+                  {team?.map((team) => {
                     return (
                       <option>{team.team_id.team_name}</option>
                     )
@@ -249,16 +249,16 @@ function HomeComponents(props) {
               </div>
               --> */}
               <div className="profile-head">
-                {profilePic.fname ?
-                  <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
+                {profilePic?.fname ?
+                  <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div> :
                   <div className="profile-head-name">Loading...</div>
 
                 }
 
                 <div className="profile-head-img">
-                  {profilePic.profile_image == null ?
+                  {profilePic?.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
-                    <img src={`${pic1}${profilePic.profile_image}`} alt="" />
+                    <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
                   }
 
                 </div>
@@ -275,15 +275,15 @@ function HomeComponents(props) {
                 <div className="dashboard-top-content-left-top">
                   <div className="team-profile">
                     <div className="team-profile-img">
-                      {profilePic.profile_image == null ?
+                      {profilePic?.profile_image == null ?
                         <img src={BigUserProfile} alt="" /> :
-                        <img src={`${pic1}${profilePic.profile_image}`} alt="" />
+                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
                       }
                     </div>
                     {
-                      profilePic.fname ?
+                      profilePic?.fname ?
                         <div className="team-profile-name">
-                          {profilePic.fname + " " + profilePic.lname}
+                          {profilePic?.fname + " " + profilePic?.lname}
                         </div> :
                         <div className="team-profile-name">
                           Loading...
@@ -385,19 +385,19 @@ function HomeComponents(props) {
                 <div className="team-list-section">
 
                   {
-                    newplayerdata.map((player) => {
+                    newplayerdata?.map((player) => {
 
                       return (
                         <div className="team-list-box">
                           <div className="team-list-box-img">
                             {
-                              player.member_id.profile_image == null ?
+                              player.member_id?.profile_image == null ?
                                 <img src={teamList} alt="" /> :
-                                <img src={`${pic1}${player.member_id.profile_image}`} alt="" />
+                                <img src={`${pic1}${player.member_id?.profile_image}`} alt="" />
                             }
                           </div>
                           <div className="team-list-box-text">
-                            <h4>{player.member_id.fname} {player.member_id.lname}</h4>
+                            <h4>{player.member_id?.fname} {player.member_id?.lname}</h4>
                             <h5>{player.member_type}</h5>
                             <a href="#">{player.position}</a>
                           </div>
@@ -578,7 +578,7 @@ function HomeComponents(props) {
                 </div>
                 <div className="myteam-list-section">
                   {
-                    team.map((team) => {
+                    team?.map((team) => {
                       console.log('team ----', team);
                       return (
                         <div className="team-list-box" key={team.id}>
