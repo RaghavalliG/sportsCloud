@@ -74,8 +74,8 @@ function TeamRoster(props) {
     const [image, Profile] = useState("")
 
 
-    const pic = 'https://nodeserver.mydevfactory.com:1447/roster/'
-    const pic1 = "https://nodeserver.mydevfactory.com:1447/profilepic/"
+    const pic = 'https://nodeserver.mydevfactory.com:1448/roster/'
+    const pic1 = "https://nodeserver.mydevfactory.com:1448/profilepic/"
 
 
 
@@ -111,8 +111,9 @@ function TeamRoster(props) {
 
             Network('api/get-user-details?user_id=' + user._id, 'GET', header)
                 .then(async (res) => {
+                    // console.log(header,"header");
                     console.log("new Profile Pic----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -148,7 +149,7 @@ function TeamRoster(props) {
                 .then(async (res) => {
                     console.log("teamRoster----", res)
 
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -187,7 +188,7 @@ function TeamRoster(props) {
             Network('api/player-joined-team-list?player_id=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("res----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -196,7 +197,7 @@ function TeamRoster(props) {
 
                     setTeam(res.response_data);
                     // if(res.response_data.length!=0){
-                    teamRoster(res.response_data[0]._id);
+                    teamRoster(res?.response_data[0]._id);
                     // }
 
 
@@ -229,15 +230,15 @@ function TeamRoster(props) {
                     "player_id": id
                 })
             };
-            fetch('https://nodeserver.mydevfactory.com:1447/api/delete-player', requestOptions)
+            fetch('https://nodeserver.mydevfactory.com:1448/api/delete-player', requestOptions)
                 .then(response => response.json())
                 .then((res) => {
                     console.log("delete Player  data", res)
-                    if (res.response_code == 2000) {
+                    if (res.response_code == 200) {
                         console.log("deleted data", res)
                         teamRoster(teamDropdown)
                     }
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -309,11 +310,11 @@ function TeamRoster(props) {
             })
 
         };
-        fetch('https://nodeserver.mydevfactory.com:1447/api/update-player-details', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/update-player-details', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("update Player data", res)
-                if (res.response_code == 2000) {
+                if (res.response_code == 200) {
                     toast.success("Edit Player data succesful")
                     setModeValue(false)
                     setModeValue1(false)
@@ -321,7 +322,7 @@ function TeamRoster(props) {
 
                 }
 
-                if (res.response_code == 4000) {
+                if (res.response_code == 400) {
                     dispatch(logoutUser(null))
                     localStorage.removeItem("user");
                     history.push("/")
@@ -345,7 +346,7 @@ function TeamRoster(props) {
         const formData = new FormData();
         formData.append('profile_image', image);
         formData.append('player_id', uid);
-        axios('https://nodeserver.mydevfactory.com:1447/api/add-update-player-profile-image',
+        axios('https://nodeserver.mydevfactory.com:1448/api/add-update-player-profile-image',
             {
                 method: "POST",
                 headers: {
@@ -364,7 +365,7 @@ function TeamRoster(props) {
                     teamRoster(teamDropdown)
                 }
 
-                if (res.response_code == 4000) {
+                if (res.response_code == 400) {
                     dispatch(logoutUser(null))
                     localStorage.removeItem("user");
                     history.push("/")
@@ -387,7 +388,7 @@ function TeamRoster(props) {
 
                                 <select onClick={change}>
                                     <option>Select Team</option>
-                                    {team.map((team) => {
+                                    {team?.map((team) => {
                                         return (
                                             <option value={team.team_id._id}>{team.team_id.team_name}</option>
                                         )
@@ -401,11 +402,11 @@ function TeamRoster(props) {
 
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
                                 <div className="profile-head-img">
-                                    {profilePic.profile_image == null ?
+                                    {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic1}${profilePic.profile_image}`} alt="" />
+                                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -430,7 +431,7 @@ function TeamRoster(props) {
                             </div>
 
                             {user.user_type == "manager" ? <div className="manager-player-section">
-                                <h3>Maneger</h3>
+                                <h3>Manager</h3>
                                 <ul >
                                     <li onClick={() => history.push('./AddPlayer')}><a href="#" style={{ color: "red" }}>+ Add Player</a></li>
                                     <li onClick={() => history.push('./ImportPlayer')}><a href="#" style={{ color: "red" }}>Import Players</a></li>
@@ -443,7 +444,7 @@ function TeamRoster(props) {
                             <div className="manager-player-section">
                                 <h3>Players</h3>
 
-                                <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData.TOTAL_PLAYER}(Men:3,Women:2)</span>
+                                <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData?.TOTAL_PLAYER}(Men:3,Women:2)</span>
                             </div>
                             <div className="prefarance-box">
                                 <div className="team-payment team-assesment">
@@ -462,7 +463,7 @@ function TeamRoster(props) {
                                             (newplayerdata && newplayerdata.length > 0) ?
                                                 <>
                                                     {
-                                                        newplayerdata.map((player, i) => {
+                                                        newplayerdata?.map((player, i) => {
 
                                                             return (
                                                                 <>
@@ -482,18 +483,18 @@ function TeamRoster(props) {
 
                                                                                     </td>
                                                                                     <td onClick={() => imageModalOpen(i, player.member_id._id)}>
-                                                                                        {player.member_id.profile_image == null ?
+                                                                                        {player.member_id?.profile_image == null ?
                                                                                             <img src={UserProfile} alt="" /> :
-                                                                                            <img src={`${pic1}${player.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                            <img src={`${pic1}${player.member_id?.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
                                                                                         }
                                                                                     </td>
                                                                                     <td>
-                                                                                        <span>{player.member_id.fname}{player.member_id.lname}</span>
+                                                                                        <span>{player.member_id?.fname}{player.member_id?.lname}</span>
                                                                                     </td>
                                                                                     <td>
                                                                                         <span>{player.jersey_number}</span>
                                                                                     </td>
-                                                                                    <td>{player.member_id.fname}<br></br>
+                                                                                    <td>{player.member_id?.fname}<br></br>
                                                                                         {player.member_id.email}
 
                                                                                     </td>
@@ -543,7 +544,7 @@ function TeamRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> First Name of Player</h2>
                                                         <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setFName(e.target.value)}
-                                                            defaultValue={newplayerdata[id].member_id.fname}
+                                                            defaultValue={newplayerdata[id].member_id?.fname}
                                                         />
                                                     </div>
 
@@ -552,7 +553,7 @@ function TeamRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> Last Name of Player</h2>
                                                         <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setLName(e.target.value)}
-                                                            defaultValue={newplayerdata[id].member_id.lname}
+                                                            defaultValue={newplayerdata[id].member_id?.lname}
                                                         />
                                                     </div>
 
@@ -721,7 +722,7 @@ function TeamRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> First Name of Player</h2>
                                                         <input type="text" className="input-select" placeholder="enter Player First Name... " onChange={(e) => setFName(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1].member_id.fname}
+                                                            defaultValue={newNonPlayerData[id1].member_id?.fname}
                                                         />
                                                     </div>
 
@@ -730,7 +731,7 @@ function TeamRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> Last Name of Player</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Player Last Name... " onChange={(e) => setLName(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1].member_id.lname}
+                                                            defaultValue={newNonPlayerData[id1].member_id?.lname}
                                                         />
                                                     </div>
 
@@ -883,7 +884,7 @@ function TeamRoster(props) {
 
                                             <>
                                                 {
-                                                    newNonPlayerData.map((nonPlayer, i) => {
+                                                    newNonPlayerData?.map((nonPlayer, i) => {
 
                                                         return (
                                                             <>
@@ -901,18 +902,18 @@ function TeamRoster(props) {
 
                                                                                 </td>
                                                                                 <td onClick={() => imageModalOpen(i, nonPlayer.member_id._id)}>
-                                                                                    {nonPlayer.member_id.profile_image == null ?
+                                                                                    {nonPlayer.member_id?.profile_image == null ?
                                                                                         <img src={UserProfile} alt="" /> :
-                                                                                        <img src={`${pic1}${nonPlayer.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                        <img src={`${pic1}${nonPlayer.member_id?.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
                                                                                     }
                                                                                 </td>
                                                                                 <td>
-                                                                                    <span>{nonPlayer.member_id.fname}{nonPlayer.member_id.lname}</span>
+                                                                                    <span>{nonPlayer.member_id?.fname}{nonPlayer.member_id?.lname}</span>
                                                                                 </td>
                                                                                 <td>
                                                                                     <span>{nonPlayer.jersey_number}</span>
                                                                                 </td>
-                                                                                <td>{nonPlayer.member_id.fname}<br></br>
+                                                                                <td>{nonPlayer.member_id?.fname}<br></br>
                                                                                     {nonPlayer.member_id.email}
 
                                                                                 </td>

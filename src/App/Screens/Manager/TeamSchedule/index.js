@@ -321,7 +321,7 @@ function TeamSchdule(props) {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
-                                    {dropdown.map((dropdown) => {
+                                    {dropdown?.map((dropdown) => {
                                         return (
                                             <option value={dropdown._id}>{dropdown.team_name}</option>
                                         )
@@ -332,7 +332,7 @@ function TeamSchdule(props) {
                                         ACCOUNT
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a className="dropdown-item" href="#">{profilePic.fname + " " + profilePic.lname}</a></li>
+                                        <li><a className="dropdown-item" href="#">{profilePic?.fname + " " + profilePic?.lname}</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
                                             <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
@@ -359,11 +359,11 @@ function TeamSchdule(props) {
                                 </div>
                             </div>
                             <div className="profile-head">
-                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
                                 <div className="profile-head-img">
-                                    {profilePic.profile_image == null ?
+                                    {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic}${profilePic.profile_image}`} alt="" />
+                                        <img src={`${pic}${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -472,7 +472,7 @@ function TeamSchdule(props) {
                                             <th>Assignments</th>
                                             <th>Volunteer</th>
                                         </tr>
-                                        {schedule.map((schedule, id) => {
+                                        {schedule?.map((schedule, id) => {
                                             return (
                                                 <tr>
 
@@ -567,7 +567,7 @@ function TeamSchdule(props) {
                                             <div className="col-md-12">
                                                 <div className="prefarance-form-list">
                                                     <div style={{ display: "flex" }}>
-                                                        {flag.map((flag) => {
+                                                        {flag?.map((flag) => {
                                                             return (
 
                                                                 <div style={{ margin: "10px" }}><img src={`${pic}${flag.image}`} alt="" style={{ height: "30px", width: "30px" }} /><br></br>
