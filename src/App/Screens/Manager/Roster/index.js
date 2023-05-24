@@ -118,7 +118,7 @@ function ManagerRoster(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken,
 
             }
             console.log('user', user)
@@ -137,15 +137,15 @@ function ManagerRoster(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken,
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?userId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -182,7 +182,7 @@ function ManagerRoster(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken,
 
             }
             console.log('user', user)
@@ -191,7 +191,7 @@ function ManagerRoster(props) {
                 .then(async (res) => {
                     console.log("teamRoster----", res)
 
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -373,7 +373,7 @@ function ManagerRoster(props) {
                     teamRoster(teamDropdown)
                 }
 
-                if (res.response_code == 4000) {
+                if (res.response_code == 400) {
                     dispatch(logoutUser(null))
                     localStorage.removeItem("user");
                     history.push("/")

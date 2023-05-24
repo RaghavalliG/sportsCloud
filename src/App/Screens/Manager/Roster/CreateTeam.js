@@ -48,7 +48,7 @@ const CreateTeam = (props) => {
         let userD = userLocal && userLocal._id ? true : false;
         setUser(userD);
         setUserData(userLocal);
-        createTeamData()
+        // createTeamData()
         updateProfile()
         dropdownMenu()
 
@@ -86,12 +86,12 @@ const CreateTeam = (props) => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?userId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
                     if (res.response_code == 400) {
@@ -124,24 +124,26 @@ const CreateTeam = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': user.authtoken
+                'token': user.authtoken,
+                
             },
             body: JSON.stringify({
-                "team_name": teamName,
-                "team_manager_id": user._id,
-                "sports": sport,
-                "time_zone": timeZone,
+                "teamName": teamName,
+                "sportName":sport,
+                "userId": user._id,               
+                "teamTimeZone": timeZone,
                 "country": country,
-                "zip": zip,
+                "zip_code": zip,
                 "language": language,
-                "parentName": parentName
-            })
+                "player_parent_name": parentName
+            }),
+            redirect: 'follow',
         };
-        fetch('https://nodeserver.mydevfactory.com:1447/api/create-team', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/createTeam', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("create team data", res)
-                if (res.response_code == 4000) {
+                if (res.response_code == 400) {
                     dispatch(logoutUser(null))
                     localStorage.removeItem("user");
                     history.push("/")
@@ -233,11 +235,11 @@ const CreateTeam = (props) => {
                                 </div>
                             </div>
                             <div className="profile-head">
-                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
                                 <div className="profile-head-img add">
-                                    {profilePic.profile_image == null ?
+                                    {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic}profilepic/${profilePic.profile_image}`} alt="" />
+                                        <img src={`${pic}profilepic/${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>
