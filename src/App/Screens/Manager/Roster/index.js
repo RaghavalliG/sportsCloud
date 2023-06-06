@@ -234,21 +234,21 @@ function ManagerRoster(props) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-access-token': user.authtoken
+                    'token': user.authtoken
                 },
                 body: JSON.stringify({
-                    "player_id": id
+                    "roster_id": id
                 })
             };
-            fetch('https://nodeserver.mydevfactory.com:1448/api/delete-player', requestOptions)
+            fetch('https://nodeserver.mydevfactory.com:1448/api/deleteRoasterDetailsById', requestOptions)
                 .then(response => response.json())
                 .then((res) => {
                     console.log("delete Player  data", res)
-                    if (res.response_code == 2000) {
+                    if (res.response_code == 200) {
                         console.log("deleted data", res)
                         teamRoster(teamDropdown)
                     }
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -296,6 +296,19 @@ function ManagerRoster(props) {
         setModeValue1(true)
         setUId(uId)
         setId1(id1)
+        //set the initial values for the edit form.
+        setGender(newplayerdata[id1].playerGender);
+        setFName(newplayerdata[id1].firstName);
+        setLName(newplayerdata[id1].lastName);
+        setJursey(newplayerdata[id1].jerseyNumber);
+        setEmail(newplayerdata[id1].contactInformationEmail);
+        setPosition(newplayerdata[id1].position);
+        setCity(newplayerdata[id1].contactInformationCity);
+        setZip(newplayerdata[id1].contactInformationZipCode);
+        setSateData(newplayerdata[id1].contactInformationState);
+        setBirthday(newplayerdata[id1].playerBirthday);
+        setPhone(newplayerdata[id1].contactInformationPhoneNumber);
+        setMemberType(newplayerdata[id1].whoIsThis);
 
 
     }
@@ -307,7 +320,7 @@ function ManagerRoster(props) {
 
     };
     const updatePlayerData = (e) => {
-        console.log(e.target.values);
+        console.log(memberType);
         const user = JSON.parse(localStorage.getItem('user'));
         const requestOptions = {
             method: 'POST',
@@ -316,39 +329,29 @@ function ManagerRoster(props) {
                 'token': user.authtoken
             },
             body: JSON.stringify({
-                "player_id" : uid,
-                "fname": fname,
-                "lname": lname,
-                "address_line_one":"",       
-                "city": city,
-                "state": stateData,    
-                "zip": zip,
-                "dob": birthday,
-                "gender": gender,
-                "jersey_number": jursey,
-                "position": position
+                "rosterId" : uid,
+                "firstName": fname,
+                "lastName": lname,
+                "contactInformationFirstName": "",
+                "contactInformationLastName": "",
+                "contactInformationEmail": email,
+                "contactInformationPhoneNumber": phone,
+                "contactInformationAddress": "",
+                "contactInformationCity": city,
+                "contactInformationState": stateData,
+                "contactInformationZipCode": zip,
+                "playerBirthday": birthday,
+                "playerGender": gender,
+                "jerseyNumber": jursey,
+                "position": position,
+                "managerAccess": true,
+                "nonPlayer": (memberType == player) ? '' : true
 
-                // "player_id": uid,
-                // "email": email,
-                // "fname": fname,
-                // "lname": lname,
-                // "gender": gender,
-                // "city": city,
-                // "zip": zip,
-                // "dob": birthday,
-                // "state": stateData,
-                // "address_line_one": address1,
-                // "address_line_two": address2,
-                // "phone": phone,
-                // "member_type": memberType,
-                // "jersey_number": jursey,
-                // "position": position,
-                // "family_member": [{ "name": "jay", "email": "jayantakarmakar.brainium@gmail.com", "phone": 123453 }]
 
             })
 
         };
-        fetch('https://nodeserver.mydevfactory.com:1448/api/update-player-information', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/editRoasterdetailsById', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("update Player data", res)
@@ -356,7 +359,7 @@ function ManagerRoster(props) {
                     toast.success("Edit Player data succesful")
                     setModeValue(false)
                     setModeValue1(false)
-                    teamRoster(teamDropdown);
+                    // teamRoster(teamDropdown);
 
                 }
 
@@ -389,7 +392,7 @@ function ManagerRoster(props) {
                 method: "POST",
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    'x-access-token': user.authtoken
+                    'token': user.authtoken
 
                 },
                 data: formData
@@ -427,10 +430,10 @@ function ManagerRoster(props) {
                                 <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
-                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
+                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
                                     {dropdown?.map((dropdown) => {
                                         return (
-                                            <option key={dropdown._id} value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option key={dropdown._id} value={dropdown.team_id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -794,7 +797,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> First Name of Player</h2>
                                                         <input type="text" className="input-select" placeholder="enter Player First Name... " onChange={(e) => setFName(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1]?.fname}
+                                                            defaultValue={newNonPlayerData[id1]?.firstName}
                                                         />
                                                     </div>
 
@@ -803,7 +806,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> Last Name of Player</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Player Last Name... " onChange={(e) => setLName(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1]?.lname}
+                                                            defaultValue={newNonPlayerData[id1]?.lastName}
                                                         />
                                                     </div>
 
@@ -812,7 +815,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> Jursey Number </h2>
                                                         <input type="text" className="input-select" placeholder="Enter Jursey Number... " onChange={(e) => setJursey(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1].jersey_number}
+                                                            defaultValue={newNonPlayerData[id1].jerseyNumber}
                                                         />
                                                     </div>
 
@@ -821,7 +824,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2>Email</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Email Address.. " onChange={(e) => setEmail(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1].email}
+                                                            defaultValue={newNonPlayerData[id1].contactInformationEmail}
                                                         />
                                                     </div>
 
@@ -839,6 +842,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2>  City</h2>
                                                         <input type="text" className="input-select" placeholder="Enter City..." onChange={(e) => setCity(e.target.value)}
+                                                        defaultValue={newNonPlayerData[id1].contactInformationCity}
 
                                                         />
                                                     </div>
@@ -848,6 +852,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2>  Zip</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Zip Code... " onChange={(e) => setZip(e.target.value)}
+                                                        defaultValue={newNonPlayerData[id1].contactInformationZipCode}
 
                                                         />
                                                     </div>
@@ -857,6 +862,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2>  State</h2>
                                                         <input type="text" className="input-select" placeholder="Enter State... " onChange={(e) => setSateData(e.target.value)}
+                                                        defaultValue={newNonPlayerData[id1].contactInformationState}
 
                                                         />
                                                     </div>
@@ -866,15 +872,17 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2>  Birthday</h2>
                                                         <input type="date" className="input-select" placeholder="Select Birdthady... " onChange={(e) => setBirthday(e.target.value)}
+                                                        defaultValue={newNonPlayerData[id1].playerBirthday}
 
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div className="col-md-12">
+                                                {/* <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  Address Line1</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Address Line1... " onChange={(e) => setAddress1(e.target.value)}
+                                                        defaultValue={newNonPlayerData[id1].position}
 
                                                         />
                                                     </div>
@@ -884,15 +892,17 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> Address Line 2</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Address Line 2... " onChange={(e) => setAddress2(e.target.value)}
+                                                        defaultValue={newNonPlayerData[id1].position}
 
                                                         />
                                                     </div>
 
-                                                </div>
+                                                </div> */}
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  Phone Number</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Phone Number... " onChange={(e) => setPhone(e.target.value)}
+                                                        defaultValue={newNonPlayerData[id1].contactInformationPhoneNumber}
 
                                                         />
                                                     </div>
@@ -902,9 +912,11 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2>  Member Type</h2>
 
-                                                        <select className="input-select" onChange={(e) => setMemberType(e.target.value)}>
+                                                        <select className="input-select" onChange={(e) => setMemberType(e.target.value)}
+                                                        defaultValue='nonplayer'>
                                                             <option key="membertype">Select</option>
                                                             <option key="player" value="player">PLAYER</option>
+                                                            <option key="nonplayer" value="nonplayer">NON - PLAYER</option>
                                                             <option key="manager" value="manager">MANAGER</option>
                                                         </select>
                                                     </div>

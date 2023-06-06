@@ -36,7 +36,7 @@ function VerifyOtpComponents(props) {
     Network('api/verify-otp ', 'post', obj)
       .then(async (res) => {
         console.log("res success verify otp--->", res);
-        if (res.response_code == 2000) {
+        if (res.response_code == 200) {
           if(location.state.otp_type === "forgot_password"){
             history.push({
               pathname: '/resetpassword',

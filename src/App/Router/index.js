@@ -91,6 +91,7 @@ import ProductDetails from '../Screens/Manager/ManagerTeamShop/ProductDetails'
 
 
 import NotFound from "./../../Error"
+import VerifyEmail from '../Screens/Auth/VerifyEmail';
 
 export const currentURL = '/projects/suvendu/robins/sportscloud';
 
@@ -232,6 +233,7 @@ function RouterScreen() {
                             <Route path='/signup' component={SignUpComponents} />
                             <Route path='/forgetpassword' component={ForgetComponents} />
                             <Route path='/resetpassword' component={ResetComponents} />
+                            <Route path='/verifyemail' component={VerifyEmail} />
                             <Route path='/verifyotp' component={VerifyOtpComponents} />
                             {/* <Route  component={NotFound} /> */}
 

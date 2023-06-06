@@ -113,7 +113,7 @@ const AddPlayer = () => {
             },
             body: JSON.stringify(
             {
-                "teamId": "6470683a88ea6b032e255a3e",
+                "teamId": teamDropdown? teamDropdown : "6470683a88ea6b032e255a3e",
                 "managerId": user._id,
                 "firstName": fname,
                 "lastName": lname,
@@ -129,7 +129,7 @@ const AddPlayer = () => {
                 "playerGender": gender.toLowerCase(),
                 "jerseyNumber": jursey,
                 "position": position,     
-                "nonPlayer": false,
+                "nonPlayer": "",
                 "assignment": "aaa",
                 "uniform": "ab"
 

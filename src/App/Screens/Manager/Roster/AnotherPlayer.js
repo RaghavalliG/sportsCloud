@@ -66,7 +66,7 @@ function AnotherPlayer(props) {
         setUserData(null);
         props.history.push("/")
     };
-    const pic = 'https://nodeserver.mydevfactory.com:1447/profilepic/'
+    const pic = 'https://nodeserver.mydevfactory.com:1448/profilepic/'
     const teamSelect = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
@@ -76,10 +76,10 @@ function AnotherPlayer(props) {
             }
             console.log('user', user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("teanSelect----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -134,7 +134,7 @@ function AnotherPlayer(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
@@ -154,7 +154,7 @@ function AnotherPlayer(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
@@ -232,11 +232,11 @@ function AnotherPlayer(props) {
 
             })
         };
-        fetch('https://nodeserver.mydevfactory.com:1447/api/invite-players-to-team', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/invite-players-to-team', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("Import  Data", res)
-                if (res.response_code == 4000) {
+                if (res.response_code == 400) {
                     dispatch(logoutUser(null))
                     localStorage.removeItem("user");
                     history.push("/")
