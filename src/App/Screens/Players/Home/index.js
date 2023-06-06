@@ -91,7 +91,7 @@ function HomeComponents(props) {
       Network('api/player-joined-team-list?player_id=' + user._id, 'GET', header)
         .then(async (res) => {
           console.log("res----", res)
-          if (res.response_code == 4000) {
+          if (res.response_code == 400) {
             dispatch(logoutUser(null))
             localStorage.removeItem("user");
             history.push("/")

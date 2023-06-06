@@ -39,7 +39,7 @@ const CreateTeam = (props) => {
     const [profilePic, setProfilePic] = useState([])
     const [dropdown, setDropdown] = useState([])
     const [teamDropdown, setTeamDropDown] = useState("")
-    const pic = 'https://nodeserver.mydevfactory.com:1447/'
+    const pic = 'https://nodeserver.mydevfactory.com:1448/'
 
     useEffect(() => {
 
@@ -66,7 +66,7 @@ const CreateTeam = (props) => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
@@ -91,7 +91,7 @@ const CreateTeam = (props) => {
             }
             //console.log('user',user)
 
-            Network('api/getAllTeamName?userId=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
                     if (res.response_code == 400) {

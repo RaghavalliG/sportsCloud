@@ -74,6 +74,27 @@ function LoginComponents(props) {
       }
       // console.log("obj submit for log in ----->", obj)
       setLoader(true)
+//       var myHeaders = new Headers();
+// myHeaders.append("Content-Type", "application/json");
+
+// var raw = JSON.stringify({
+//   "apptype": "ANDROID",
+//   "devicetoken": "123456",
+//   "email": "md.raja@gmail.com",
+//   "password": "123456"
+// });
+
+// var requestOptions = {
+//   method: 'POST',
+//   headers: myHeaders,
+//   body: raw,
+//   redirect: 'follow'
+// };
+
+// fetch("https://nodeserver.mydevfactory.com:1448/api/login", requestOptions)
+//   .then(response => response.text())
+//   .then(result => console.log(result))
+//   .catch(error => console.log('error', error));
       Network('api/login', 'post', obj)
         .then(async (res) => {
           // console.log("res success login--->", res);

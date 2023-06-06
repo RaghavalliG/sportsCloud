@@ -99,14 +99,13 @@ function ManagerRoster(props) {
 
 
     }, []);
-    console.log("546433333333333")
-    console.log("new player data", newplayerdata)
-    const pic = 'https://nodeserver.mydevfactory.com:1447/'
+    
+    const pic = 'https://nodeserver.mydevfactory.com:1448/'
 
-    const pic1 = 'https://nodeserver.mydevfactory.com:1447/profilepic/'
+    const pic1 = 'https://nodeserver.mydevfactory.com:1448/profilepic/'
 
     const handleLogout = () => {
-        console.log("pruyuuuuuu", props);
+        
         // dispatch(logoutUser(null));
         localStorage.removeItem("user");
         setUserData(null);
@@ -123,7 +122,7 @@ function ManagerRoster(props) {
             }
             console.log('user', user)
 
-            Network('api/get-user-details?user_id=' + user._id, 'GET', header)
+            Network('api/get-user-details?user_id=' + user._id, 'get', header)
                 .then(async (res) => {
                     console.log("new Profile Pic----", res)
                     setProfilePic(res.response_data)
@@ -135,14 +134,15 @@ function ManagerRoster(props) {
 
     const dropdownMenu = () => {
         const user = JSON.parse(localStorage.getItem('user'));
+        // console.log(user);
         if (user) {
             let header = {
                 'token': user.authtoken,
 
             }
-            //console.log('user',user)
+            // console.log('user',header)
 
-            Network('api/getAllTeamName?userId=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'get', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
                     if (res.response_code == 400) {
@@ -153,7 +153,7 @@ function ManagerRoster(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamRoster(res.response_data[0]._id);
+                    teamRoster(res.response_data[0].team_id);
 
 
 
@@ -178,7 +178,7 @@ function ManagerRoster(props) {
 
     console.log("player-------->", player)
     const teamRoster = (id) => {
-        console.log("team roster id", id)
+        console.log("team roster id", id)   
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
@@ -198,17 +198,19 @@ function ManagerRoster(props) {
                         toast.error(res.response_message)
                     }
                     setResData(res.response_data);
-                    console.log("team player", res.response_data.PLAYER)
-                    console.log("non player", res.response_data.NON_PLAYER)
+                    console.log("team player", res?.response_data?.player)
+                    console.log("non player", res.response_data.non_player)
 
-                    setPlayer(res.response_data.PLAYER)
-                    setNewPlayerData(res.response_data.PLAYER.filter(data => {
-                        return data.member_id != null
+                    setPlayer(res.response_data.player)
+                    setNewPlayerData(res.response_data.player.filter(data => {
+                        // console.log(res.response_data.player);
+                        // console.log(data._id)
+                        return data._id != null
 
                     }))
-                    setNonPlayer(res.response_data.NON_PLAYER)
-                    setNewNonPlayerData(res.response_data.NON_PLAYER.filter(data => {
-                        return data.member_id != null
+                    setNonPlayer(res.response_data.non_player)
+                    setNewNonPlayerData(res.response_data.non_player.filter(data => {
+                        return data._id != null
 
                     }))
 
@@ -238,7 +240,7 @@ function ManagerRoster(props) {
                     "player_id": id
                 })
             };
-            fetch('https://nodeserver.mydevfactory.com:1447/api/delete-player', requestOptions)
+            fetch('https://nodeserver.mydevfactory.com:1448/api/delete-player', requestOptions)
                 .then(response => response.json())
                 .then((res) => {
                     console.log("delete Player  data", res)
@@ -271,6 +273,22 @@ function ManagerRoster(props) {
         setModeValue(true)
         setUId(uId)
         setId(id1)
+        //set the initial values for the edit form.
+        setGender(newplayerdata[id1].playerGender);
+        setFName(newplayerdata[id1].firstName);
+        setLName(newplayerdata[id1].lastName);
+        setJursey(newplayerdata[id1].jerseyNumber);
+        setEmail(newplayerdata[id1].contactInformationEmail);
+        setPosition(newplayerdata[id1].position);
+        setCity(newplayerdata[id1].contactInformationCity);
+        setZip(newplayerdata[id1].contactInformationZipCode);
+        setSateData(newplayerdata[id1].contactInformationState);
+        setBirthday(newplayerdata[id1].playerBirthday);
+        setPhone(newplayerdata[id1].contactInformationPhoneNumber);
+        setMemberType(newplayerdata[id1].whoIsThis);
+        console.log(id1);
+        console.log(newplayerdata[id1].playerGender);
+
 
 
     }
@@ -288,41 +306,53 @@ function ManagerRoster(props) {
         // addShopData(event.target.files[0])
 
     };
-    const updatePlayerData = () => {
+    const updatePlayerData = (e) => {
+        console.log(e.target.values);
         const user = JSON.parse(localStorage.getItem('user'));
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': user.authtoken
+                'token': user.authtoken
             },
             body: JSON.stringify({
-
-                "player_id": uid,
-                "email": email,
+                "player_id" : uid,
                 "fname": fname,
                 "lname": lname,
-                "gender": gender,
+                "address_line_one":"",       
                 "city": city,
+                "state": stateData,    
                 "zip": zip,
                 "dob": birthday,
-                "state": stateData,
-                "address_line_one": address1,
-                "address_line_two": address2,
-                "phone": phone,
-                "member_type": memberType,
+                "gender": gender,
                 "jersey_number": jursey,
-                "position": position,
-                "family_member": [{ "name": "jay", "email": "jayantakarmakar.brainium@gmail.com", "phone": 123453 }]
+                "position": position
+
+                // "player_id": uid,
+                // "email": email,
+                // "fname": fname,
+                // "lname": lname,
+                // "gender": gender,
+                // "city": city,
+                // "zip": zip,
+                // "dob": birthday,
+                // "state": stateData,
+                // "address_line_one": address1,
+                // "address_line_two": address2,
+                // "phone": phone,
+                // "member_type": memberType,
+                // "jersey_number": jursey,
+                // "position": position,
+                // "family_member": [{ "name": "jay", "email": "jayantakarmakar.brainium@gmail.com", "phone": 123453 }]
 
             })
 
         };
-        fetch('https://nodeserver.mydevfactory.com:1447/api/update-player-details', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/update-player-information', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("update Player data", res)
-                if (res.response_code == 2000) {
+                if (res.response_code == 200) {
                     toast.success("Edit Player data succesful")
                     setModeValue(false)
                     setModeValue1(false)
@@ -330,7 +360,7 @@ function ManagerRoster(props) {
 
                 }
 
-                if (res.response_code == 4000) {
+                if (res.response_code == 400) {
                     dispatch(logoutUser(null))
                     localStorage.removeItem("user");
                     history.push("/")
@@ -354,7 +384,7 @@ function ManagerRoster(props) {
         const formData = new FormData();
         formData.append('profile_image', image);
         formData.append('player_id', uid);
-        axios('https://nodeserver.mydevfactory.com:1447/api/add-update-player-profile-image',
+        axios('https://nodeserver.mydevfactory.com:1448/api/add-update-player-profile-image',
             {
                 method: "POST",
                 headers: {
@@ -472,25 +502,28 @@ function ManagerRoster(props) {
 
 
                             <div className="manager-player-section">
-                                <h3>Players</h3>
+                                <h3>Playerss</h3>
 
-                                <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData.TOTAL_PLAYER}(Men:3,Women:2)</span>
+                                <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData?.total_player}(Men:3,Women:2)</span>
                             </div>
                             <div className="prefarance-box">
                                 <div className="team-payment team-assesment">
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Male/Female</th>
+                                                
                                                 <th>Photo</th>
                                                 <th>Name</th>
+                                                <th>Male/Female</th>
                                                 <th>Jursey No</th>
                                                 <th>contact Info</th>
                                                 <th>Position</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
+                                            
 
                                                 (newplayerdata && newplayerdata.length > 0) ?
                                                     <>
@@ -500,40 +533,46 @@ function ManagerRoster(props) {
                                                                 return (
                                                                     <>
                                                                         {
-                                                                            (player.member_id != null) ?
+                                                                            (player._id != null) ?
                                                                                 <>
 
-                                                                                    <tr key= {player.member_id}>
+                                                                                    <tr key= {player._id}>
 
-                                                                                        <td key="col1">
+                                                                                        
+                                                                                        <td key="col1" onClick={() => imageModalOpen(i, player._id)}>
+                                                                                            {player?.profile_image == null ?
+                                                                                                <img key={player._id} src={UserProfile} alt="" /> :
+                                                                                                <img key={player.member_id} src={`${pic1}${player.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                            }
+                                                                                        </td>
+                                                                                        <td key="col2">
+                                                                                            <span>{player.firstName}{player.lastName}</span>
+                                                                                        </td>
+                                                                                        <td key="col3">
+                                                                                            <span>{player.jerseyNumber}</span>
+                                                                                        </td>
+                                                                                        <td key="col4">
 
                                                                                             <div className="game-name">
 
-                                                                                                {(player.member_id.gender) ? player.member_id.gender : null}
+                                                                                                {(player.playerGender) ? player.playerGender : null}
                                                                                                 {/* {(player.member_id.gender)==Male ? player.member_id.gender : null} */}
                                                                                             </div>
 
                                                                                         </td>
-                                                                                        <td key="col2" onClick={() => imageModalOpen(i, player.member_id._id)}>
-                                                                                            {player.member_id.profile_image == null ?
-                                                                                                <img key={player.member_id} src={UserProfile} alt="" /> :
-                                                                                                <img key={player.member_id} src={`${pic1}${player.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
-                                                                                            }
-                                                                                        </td>
-                                                                                        <td key="col3">
-                                                                                            <span>{player.member_id.fname}{player.member_id.lname}</span>
-                                                                                        </td>
-                                                                                        <td key="col4">
-                                                                                            <span>{player.jersey_number}</span>
-                                                                                        </td>
-                                                                                        <td key="col5">{player.member_id.fname}<br></br>
-                                                                                            {player.member_id.email}
+                                                                                        <td key="col5">{player.firstName}<br></br>
+                                                                                            {player.email}
 
                                                                                         </td>
                                                                                         <td id="col6">
                                                                                             <div className="last-row">
-                                                                                                <p>{player.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player.member_id._id)} ><img src={Delect} /></button>
-                                                                                                <button onClick={() => updateModalValue(i, player.member_id._id)}><img src={pencil} /></button>
+                                                                                                <p>{player.position}</p> 
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <div className="last-row">
+                                                                                            <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player._id)} ><img src={Delect} /></button>
+                                                                                                <button id={player._id} onClick={() => updateModalValue(i, player._id)}><img src={pencil} /></button>
                                                                                             </div>
                                                                                         </td>
                                                                                     </tr>
@@ -564,7 +603,7 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2> Gender</h2>
-                                                        <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newplayerdata[id].member_id.gender}>
+                                                        <select className="input-select" onChange={(e) => setGender(e.target.value)} value={newplayerdata[id].playerGender}>
                                                             <option key = "gender">Select</option>
                                                             <option key="male" value="male">Male</option>
                                                             <option key="male" value="female">Female</option>
@@ -575,8 +614,8 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2> First Name of Player</h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setFName(e.target.value)}
-                                                            defaultValue={newplayerdata[id].member_id?.fname}
+                                                        <input type="text" className="input-select" name="fname" placeholder="Virtual Practice " onChange={(e) => setFName(e.target.value)}
+                                                            defaultValue={newplayerdata[id].firstName}
                                                         />
                                                     </div>
 
@@ -584,8 +623,8 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2> Last Name of Player</h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setLName(e.target.value)}
-                                                            defaultValue={newplayerdata[id].member_id?.lname}
+                                                        <input type="text" className="input-select" name="lname" placeholder="Virtual Practice " onChange={(e) => setLName(e.target.value)}
+                                                            defaultValue={newplayerdata[id]?.lastName}
                                                         />
                                                     </div>
 
@@ -593,8 +632,8 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2> Jursey Number </h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setJursey(e.target.value)}
-                                                            defaultValue={newplayerdata[id].jersey_number}
+                                                        <input type="text" className="input-select" name="jursey" placeholder="Jursey Number" onChange={(e) => setJursey(e.target.value)}
+                                                            defaultValue={newplayerdata[id].jerseyNumber}
                                                         />
                                                     </div>
 
@@ -602,8 +641,8 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>Email</h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setEmail(e.target.value)}
-                                                            defaultValue={newplayerdata[id].member_id.email}
+                                                        <input type="text" className="input-select" placeholder="Email" onChange={(e) => setEmail(e.target.value)}
+                                                            defaultValue={newplayerdata[id].contactInformationEmail}
                                                         />
                                                     </div>
 
@@ -611,7 +650,7 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  Player Position</h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setPosition(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder=" Player Position" onChange={(e) => setPosition(e.target.value)}
                                                             defaultValue={newplayerdata[id].position}
                                                         />
                                                     </div>
@@ -620,7 +659,8 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  City</h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setCity(e.target.value)}
+                                                        <input type="text" className="input-select" placeholder="City" onChange={(e) => setCity(e.target.value)}
+                                                        defaultValue={newplayerdata[id].contactInformationCity}
 
                                                         />
                                                     </div>
@@ -629,8 +669,8 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  Zip</h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setZip(e.target.value)}
-
+                                                        <input type="text" className="input-select" placeholder="Zip " onChange={(e) => setZip(e.target.value)}
+                                                        defaultValue={newplayerdata[id].contactInformationZipCode}
                                                         />
                                                     </div>
 
@@ -638,8 +678,8 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  State</h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setSateData(e.target.value)}
-
+                                                        <input type="text" className="input-select" placeholder="State " onChange={(e) => setSateData(e.target.value)}
+                                                        defaultValue={newplayerdata[id].contactInformationState}
                                                         />
                                                     </div>
 
@@ -647,13 +687,13 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  Birthday</h2>
-                                                        <input type="date" className="input-select" placeholder="Virtual Practice " onChange={(e) => setBirthday(e.target.value)}
-
+                                                        <input type="date" className="input-select" placeholder="Birthday " onChange={(e) => setBirthday(e.target.value)}
+                                                        defaultValue={newplayerdata[id].playerBirthday}
                                                         />
                                                     </div>
 
                                                 </div>
-                                                <div className="col-md-12">
+                                                {/* <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  Address Line1</h2>
                                                         <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setAddress1(e.target.value)}
@@ -670,12 +710,12 @@ function ManagerRoster(props) {
                                                         />
                                                     </div>
 
-                                                </div>
+                                                </div> */}
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2>  Phone Number</h2>
-                                                        <input type="text" className="input-select" placeholder="Virtual Practice " onChange={(e) => setPhone(e.target.value)}
-
+                                                        <input type="text" className="input-select" placeholder="Phone Number " onChange={(e) => setPhone(e.target.value)}
+                                                        defaultValue={newplayerdata[id].contactInformationPhoneNumber}
                                                         />
                                                     </div>
 
@@ -700,7 +740,7 @@ function ManagerRoster(props) {
 
 
                                             <button className="add-links" style={{ margin: "10px" }} onClick={() => setModeValue(false)}>Cancel</button>
-                                            <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updatePlayerData}>Update</button>
+                                            <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={(e)=>updatePlayerData(e)}>Update</button>
 
                                         </div>
                                     </Modal.Body>
@@ -742,7 +782,7 @@ function ManagerRoster(props) {
                                                 <div className="col-md-12">
                                                     <div className="prefarance-form-list">
                                                         <h2> Gender</h2>
-                                                        <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newNonPlayerData[id1].member_id.gender}>
+                                                        <select className="input-select" onChange={(e) => setGender(e.target.value)} defaultValue={newNonPlayerData[id1].playerGender}>
                                                         <option key = "gender">Select</option>
                                                             <option key="male" value="male">Male</option>
                                                             <option key="male" value="female">Female</option>
@@ -754,7 +794,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> First Name of Player</h2>
                                                         <input type="text" className="input-select" placeholder="enter Player First Name... " onChange={(e) => setFName(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1].member_id?.fname}
+                                                            defaultValue={newNonPlayerData[id1]?.fname}
                                                         />
                                                     </div>
 
@@ -763,7 +803,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2> Last Name of Player</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Player Last Name... " onChange={(e) => setLName(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1].member_id?.lname}
+                                                            defaultValue={newNonPlayerData[id1]?.lname}
                                                         />
                                                     </div>
 
@@ -781,7 +821,7 @@ function ManagerRoster(props) {
                                                     <div className="prefarance-form-list">
                                                         <h2>Email</h2>
                                                         <input type="text" className="input-select" placeholder="Enter Email Address.. " onChange={(e) => setEmail(e.target.value)}
-                                                            defaultValue={newNonPlayerData[id1].member_id.email}
+                                                            defaultValue={newNonPlayerData[id1].email}
                                                         />
                                                     </div>
 
@@ -895,19 +935,21 @@ function ManagerRoster(props) {
                                     <li><a href="#">Edit</a></li>
                                     <li><a href="#">Import</a></li>
                                 </ul> */}
-                                <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData.TOTAL_NON_PLAYER}(Men:3,Women:2)</span>
+                                <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData?.total_non_players}(Men:3,Women:2)</span>
                             </div>
                             <div className="prefarance-box">
                                 <div className="team-payment team-assesment">
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Male/Female</th>
+                                               
                                                 <th>Photo</th>
                                                 <th>Name</th>
                                                 <th>Jursey No</th>
+                                                <th>Male/Female</th>
                                                 <th>contact Info</th>
                                                 <th>Position</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
 
@@ -923,38 +965,44 @@ function ManagerRoster(props) {
                                                             return (
                                                                 <>
                                                                     {
-                                                                        (nonPlayer.member_id != null) ?
+                                                                        (nonPlayer != null) ?
                                                                             <>
-                                                                                <tr key={nonPlayer.member_id}>
+                                                                                <tr key={nonPlayer._id}>
 
-                                                                                    <td key="col1">
+                                                                                    
+                                                                                    <td key="col1" onClick={() => imageModalOpen(i, nonPlayer?._id)}>
+                                                                                        {nonPlayer?.profile_image == null ?
+                                                                                            <img key={nonPlayer._id} src={UserProfile} alt="" /> :
+                                                                                            <img key={nonPlayer._id} src={`${pic1}${nonPlayer._id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                        }
+                                                                                    </td>
+                                                                                    <td key="col2">
+                                                                                        <span>{nonPlayer.firstName}{nonPlayer.lastName}</span>
+                                                                                    </td>
+                                                                                    <td key="col3">
+                                                                                        <span>{nonPlayer.jerseyNumber}</span>
+                                                                                    </td>
+                                                                                    <td key="col4">
 
                                                                                         <div className="game-name">
 
-                                                                                            {(nonPlayer.member_id.gender) ? nonPlayer.member_id.gender : null}
+                                                                                            {(nonPlayer.playerGender) ? nonPlayer.playerGender : null}
                                                                                         </div>
 
                                                                                     </td>
-                                                                                    <td key="col2" onClick={() => imageModalOpen(i, nonPlayer.member_id._id)}>
-                                                                                        {nonPlayer.member_id.profile_image == null ?
-                                                                                            <img key={nonPlayer.member_id} src={UserProfile} alt="" /> :
-                                                                                            <img key={nonPlayer.member_id} src={`${pic1}${nonPlayer.member_id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
-                                                                                        }
-                                                                                    </td>
-                                                                                    <td key="col3">
-                                                                                        <span>{nonPlayer.member_id.fname}{nonPlayer.member_id.lname}</span>
-                                                                                    </td>
-                                                                                    <td key="col4">
-                                                                                        <span>{nonPlayer.jersey_number}</span>
-                                                                                    </td>
-                                                                                    <td key="col5">{nonPlayer.member_id.fname}<br></br>
-                                                                                        {nonPlayer.member_id.email}
+                                                                                    <td key="col5">{nonPlayer.firstName}<br></br>
+                                                                                        {nonPlayer.email}
 
                                                                                     </td>
                                                                                     <td key="col6">
                                                                                         <div className="last-row">
-                                                                                            <p>{nonPlayer.position}</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(nonPlayer.member_id._id)} ><img src={Delect} /></button>
-                                                                                            <button onClick={() => updateModalValue1(i, nonPlayer.member_id._id)}><img src={pencil} /></button>
+                                                                                            <p>{nonPlayer.position}</p> 
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div className="last-row">
+                                                                                        <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(nonPlayer._id)} ><img src={Delect} /></button>
+                                                                                            <button onClick={() => updateModalValue1(i, nonPlayer._id)}><img src={pencil} /></button>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>

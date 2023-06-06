@@ -140,7 +140,7 @@ function TeamRoster(props) {
         console.log("id---->", id)
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)

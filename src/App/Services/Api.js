@@ -4,17 +4,27 @@ var base_url = 'https://nodeserver.mydevfactory.com:1448/';
 var condition = navigator.onLine ? 'online' : 'offline';
 
 export const Network = (endpoint, method, body) => {
-  console.log("network",endpoint,body.authToken,method)
+  console.log("network",endpoint,body.token,method)
   return new Promise((resolve, reject) => {
     if (condition === 'online') {
-      axios({
-        method,
+      console.log(`${base_url}${endpoint}`,method)
+      
+      if (body && body.token && body.token !=='') {
+        console.log('+++++++++++++++++++++++++++++++++++++', body)
+        var header = body
+        // header['token'] = body.token
+      }else{
+        var header = {
+          'Content-Type': 'application/json'
+        }
+      }
+      console.log('+++++++++++++++++++++++++++++++++++++', header)
+
+      axios.request({
+        method: method,
         url: `${base_url}${endpoint}`,
-        headers: {
-          'Content-Type': 'application/json',
-          "x-access-token": body ? body.authToken : ""
-        },
-        data: body
+        headers: header,
+        data: body,  
       })
         .then(function (response) {
           resolve(response.data)

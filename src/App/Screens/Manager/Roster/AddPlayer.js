@@ -70,21 +70,23 @@ const AddPlayer = () => {
         setUserData(userLocal);
         dropdownMenu();
         updateProfile()
+        teamSelected();
+        // change();
 
 
     }, []);
-    const pic1 = "https://nodeserver.mydevfactory.com:1447/profilepic/"
+    const pic1 = "https://nodeserver.mydevfactory.com:1448/profilepic/"
 
     const updateProfile = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
 
-            Network('api/get-user-details', 'GET', header)
+            Network('api/get-user-details?userId='+user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("new Profile Pic----", res)
 
@@ -97,36 +99,48 @@ const AddPlayer = () => {
 
     }
 
+    const teamSelected = () => {
 
+    }
     const playerData = () => {
+        console.log(gender);
         const user = JSON.parse(localStorage.getItem('user'));
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': user.authtoken
+                'token': user.authtoken
             },
-            body: JSON.stringify({
-                "email": email,
-                "fname": fname,
-                "lname": lname,
-                "team_id": teamDropdown,
-                "gender": gender,
-                "city": city,
-                "zip": zip,
-                "dob": birthday,
-                "state": state,
-                "address": address,
-                "phone": phone,
-                "member_type": playerType ? "PLAYER" : "NON-PLAYER",
-                "jersey_number": jursey,
-                "position": position,
-                "family_member": [{ "name": "Krishna Das", "email": "angelinaKoli@gmail.com", "phone": 123453, "relation": "DAD" }]
-            })
+            body: JSON.stringify(
+            {
+                "teamId": "6470683a88ea6b032e255a3e",
+                "managerId": user._id,
+                "firstName": fname,
+                "lastName": lname,
+                "contactInformationEmail": email,
+                "whoIsThis": "player",
+                "contactInformationPhoneNumber": phone,
+                "label": "a",
+                "contactInformationAddress": address,
+                "contactInformationCity": city,
+                "contactInformationState": state,
+                "contactInformationZipCode": zip,
+                "playerBirthday": birthday,
+                "playerGender": gender.toLowerCase(),
+                "jerseyNumber": jursey,
+                "position": position,     
+                "nonPlayer": false,
+                "assignment": "aaa",
+                "uniform": "ab"
+
+                
+        }
+
+            )
 
 
         };
-        fetch('https://nodeserver.mydevfactory.com:1447/api/add-player-roster', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/addRoaster', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("player data", res)
@@ -253,12 +267,12 @@ const AddPlayer = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
                     if (res.response_code == 4000) {
@@ -407,7 +421,7 @@ const AddPlayer = () => {
                             {dropdown == null ? <option> Team1</option> :
                                 dropdown.map((team) => {
                                     return (
-                                        <option key={team.id}>{team.team_name}</option>
+                                        <option id={team.team_id}>{team.team_name}</option>
                                     )
                                 })}
                         </select>

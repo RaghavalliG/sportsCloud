@@ -86,8 +86,8 @@ function ManagerHome(props) {
     updateProfile()
   }, []);
 
-  const pic = 'https://nodeserver.mydevfactory.com:1447/'
-  const pic1 = "https://nodeserver.mydevfactory.com:1447/profilepic/"
+  const pic = 'https://nodeserver.mydevfactory.com:1448/'
+  const pic1 = "https://nodeserver.mydevfactory.com:1448/profilepic/"
 
   const handleLogout = () => {
     console.log("pruyuuuuuu", props);
@@ -223,12 +223,12 @@ function ManagerHome(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       let header = {
-        'authToken': user.authtoken
+        'token': user.authtoken
 
       }
       console.log('user', user)
 
-      Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+      Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
         .then(async (res) => {
           console.log("teanSelect----", res)
           if (res.response_code == 4000) {
@@ -307,12 +307,12 @@ function ManagerHome(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       let header = {
-        'authToken': user.authtoken
+        'token': user.authtoken
 
       }
       console.log('user', user)
 
-      Network('api/get-user-details', 'GET', header)
+      Network('api/get-user-details?user_id'+user._id, 'GET', header)
         .then(async (res) => {
           console.log("new Profile Pic----", res)
 
@@ -383,7 +383,7 @@ function ManagerHome(props) {
                   {team == null ? <option> Team1</option> :
                     team && team.length > 0 && team?.map((team) => {
                       return (
-                        <option key={team.id}>{team.team_name}</option>
+                        <option key={team.team_id}>{team.team_name}</option>
                       )
                     })}
                 </select>
