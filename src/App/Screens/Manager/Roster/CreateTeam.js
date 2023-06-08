@@ -23,6 +23,7 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { logoutUser } from "../../../Redux/Actions/auth";
 import BigUserProfile from "../../../images/big-user-profile.png"
+import timeData from '../../timezone';
 
 const CreateTeam = (props) => {
     const history = useHistory();
@@ -39,6 +40,7 @@ const CreateTeam = (props) => {
     const [profilePic, setProfilePic] = useState([])
     const [dropdown, setDropdown] = useState([])
     const [teamDropdown, setTeamDropDown] = useState("")
+    const [timezoneList, setTimeZoneList] = useState([]);
     const pic = 'https://nodeserver.mydevfactory.com:1448/'
 
     useEffect(() => {
@@ -51,6 +53,9 @@ const CreateTeam = (props) => {
         // createTeamData()
         updateProfile()
         dropdownMenu()
+        // getTimeZone()
+        setTimeZoneList(timeData);
+        
 
 
     }, []);
@@ -117,6 +122,24 @@ const CreateTeam = (props) => {
         setTeamDropDown(event.target.value)
 
     }
+    // const getTimeZone = () => {
+    //     const user = JSON.parse(localStorage.getItem('user'));
+    //     if (user) {
+    //         let header = {
+    //             'token': user.authtoken
+
+    //         }
+    //         console.log('user', user)
+
+    //         Network('https://nodeserver.mydevfactory.com:1448/api/getAllTimeZoneList', 'GET', header)
+    //             .then(async (res) => {
+    //                 console.log("timezone list----", res)
+    //                 setTimeZoneList(res.response_data)
+
+    //             })
+    //     }
+
+    // }
 
     const createTeamData = () => {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -144,10 +167,13 @@ const CreateTeam = (props) => {
             .then((res) => {
                 console.log("create team data", res)
                 if (res.response_code == 400) {
-                    dispatch(logoutUser(null))
-                    localStorage.removeItem("user");
+                    // dispatch(logoutUser(null))
+                    // localStorage.removeItem("user");
                     history.push("/")
                     toast.error(res.response_message)
+                }else{
+                    toast.success(res.response_message)
+                    history.goBack();
                 }
             })
 
@@ -308,17 +334,27 @@ const CreateTeam = (props) => {
                                                     <option key="America" value="America">America</option>
                                                     <option key="South Africa" value="South Africa">South Africa</option>
                                                 </select>
-                                                <div>
+                                                {/* <div>
                                                     <GooglePlacesAutocomplete
                                                         apiKey="AIzaSyB_Ve5EsMrUcHRCZHxkZeSdz24emqo4X6Y"
                                                     />
-                                                </div>
+                                                </div> */}
                                                 <label>Time Zone</label>
                                                 <select className="input-select" onChange={(e) => setTimeZone(e.target.value)}>
                                                     <option key="Timezone">--Select--</option>
-                                                    <option key="Timezone1" value="Time Zone1">Time Zone1</option>
-                                                    <option key="Timezone2" value="Time Zone2">Time Zone2</option>
-                                                    <option key="Timezone3" value="Time Zone3">Time Zone3</option>
+                                                    {timezoneList && timezoneList.length >0 ?
+                                                    
+                                                    timezoneList.map((timezone) => {
+                                                        return (
+                                                            <option key={timezone.label} value={`${timezone.label} ${timezone.timezone}`}>{timezone.label}{timezone.timezone}</option>
+                                                        )
+                                                    })
+                                                    :<option> Team1</option> 
+                                                    
+                                                    
+                                                    }
+                                                    {/* // <option key="Timezone2" value="Time Zone2">Time Zone2</option>
+                                                    // <option key="Timezone3" value="Time Zone3">Time Zone3</option> */}
                                                 </select>
 
                                                 <label>Zip Code</label>

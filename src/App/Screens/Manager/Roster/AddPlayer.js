@@ -145,11 +145,14 @@ const AddPlayer = () => {
             .then((res) => {
                 console.log("player data", res)
 
-                if (res.response_code == 4000) {
-                    dispatch(logoutUser(null))
-                    localStorage.removeItem("user");
+                if (res.response_code == 400) {
+                    // dispatch(logoutUser(null))
+                    // localStorage.removeItem("user");
                     history.push("/")
                     toast.error(res.response_message)
+                }else{
+                    toast.success(res.response_message)
+                    history.goBack();
                 }
             })
 
@@ -536,16 +539,16 @@ const AddPlayer = () => {
                                                 <input type="text" className="input-select" onChange={(e) => setWho(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div className="col-md-12">
+                                        {/* <div className="col-md-12">
                                             <div className="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
                                                 <button data-toggle="modal" data-target="#assignmentdelect" style={{ borderRadius: "12px", backgroundColor: "red", }}><img src={Delect} /></button>
                                             </div>
-                                        </div>
-                                        <div className="col-md-12">
+                                        </div> */}
+                                        {/* <div className="col-md-12">
                                             <div className="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
                                                 <p style={{ color: "white" }}> +Add Another Email</p>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="col-md-6">
                                             <div className="prefarance-form-list">
                                                 <label>Phone Number</label>
@@ -558,16 +561,16 @@ const AddPlayer = () => {
                                                 <input type="text" className="input-select" onChange={(e) => setLabel(e.target.value)} />
                                             </div>
                                         </div>
-                                        <div className="col-md-12">
+                                        {/* <div className="col-md-12">
                                             <div className="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
                                                 <button data-toggle="modal" data-target="#assignmentdelect" style={{ borderRadius: "12px", backgroundColor: "red", }}><img src={Delect} /></button>
                                             </div>
-                                        </div>
-                                        <div className="col-md-12">
+                                        </div> */}
+                                        {/* <div className="col-md-12">
                                             <div className="prefarance-form-list" style={{ justifyContent: "flex-end", display: "flex" }}>
                                                 <p style={{ color: "white" }}> +Add Another Phone Number</p>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="col-md-6">
                                             <div className="prefarance-form-list">
                                                 <label>Address</label>
@@ -650,7 +653,7 @@ const AddPlayer = () => {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="prefarance-form-list">
-                                                <button className="add-links">CANCEL</button>
+                                                <button className="add-links" onClick={history.goBack}>CANCEL</button>
                                                 <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "4px" }} onClick={CheckValidatiion}>SAVE</button>
                                             </div>
                                         </div>

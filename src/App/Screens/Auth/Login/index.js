@@ -15,7 +15,7 @@ import "../../../Utils/css/bootstrap-datepicker.css"
 import Logo from "../../../images/logo.png"
 import { Network } from '../../../Services/Api';
 import { useDispatch } from 'react-redux';
- import { loginUser } from "../../../Redux/Actions/auth"
+import { loginUser } from "../../../Redux/Actions/auth"
 import MyLoader from "../../../Components/Comman/loader"
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -74,36 +74,41 @@ function LoginComponents(props) {
       }
       // console.log("obj submit for log in ----->", obj)
       setLoader(true)
-//       var myHeaders = new Headers();
-// myHeaders.append("Content-Type", "application/json");
+      //       var myHeaders = new Headers();
+      // myHeaders.append("Content-Type", "application/json");
 
-// var raw = JSON.stringify({
-//   "apptype": "ANDROID",
-//   "devicetoken": "123456",
-//   "email": "md.raja@gmail.com",
-//   "password": "123456"
-// });
+      // var raw = JSON.stringify({
+      //   "apptype": "ANDROID",
+      //   "devicetoken": "123456",
+      //   "email": "md.raja@gmail.com",
+      //   "password": "123456"
+      // });
 
-// var requestOptions = {
-//   method: 'POST',
-//   headers: myHeaders,
-//   body: raw,
-//   redirect: 'follow'
-// };
+      // var requestOptions = {
+      //   method: 'POST',
+      //   headers: myHeaders,
+      //   body: raw,
+      //   redirect: 'follow'
+      // };
 
-// fetch("https://nodeserver.mydevfactory.com:1448/api/login", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
+      // fetch("https://nodeserver.mydevfactory.com:1448/api/login", requestOptions)
+      //   .then(response => response.text())
+      //   .then(result => console.log(result))
+      //   .catch(error => console.log('error', error));
       Network('api/login', 'post', obj)
         .then(async (res) => {
           // console.log("res success login--->", res);
           if (res.response_code == 200) {
-            toast.success(res.response_message)
-            setLoader(false)
-            localStorage.setItem('user', JSON.stringify(res.response_data));
-             dispatch(loginUser(res.response_data))
-             props.history.push("/");
+
+            if (res.response_data.authtoken != '') {
+              toast.success(res.response_message)
+              setLoader(false)
+              localStorage.setItem('user', JSON.stringify(res.response_data));
+              dispatch(loginUser(res.response_data))
+              props.history.push("/");
+            } else {
+              toast.success(res.response_message)
+            }
           } else {
             toast.error(res.response_message)
             setLoader(false)
@@ -121,55 +126,55 @@ function LoginComponents(props) {
   return (
     <>
       <MyLoader active={loader}>
-      <div className="login-container" style={{ flexGrow: 1 }}>
-        <a href="#"><img src={Logo} alt="" /></a>
-        <div style={{ paddingBottom: 60 }}>
-          <div className="modal-dialog custom-modal">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h4 className="modal-title">Login</h4>
-              </div>
+        <div className="login-container" style={{ flexGrow: 1 }}>
+          <a href="#"><img src={Logo} alt="" /></a>
+          <div style={{ paddingBottom: 60 }}>
+            <div className="modal-dialog custom-modal">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h4 className="modal-title">Login</h4>
+                </div>
 
-              <div className="modal-body">
-                <form onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control" onChange={handleChange} name="email" />
-                    <span style={{ color: "red", fontSize: 12 }}>
-                      {errors.email}
-                    </span>
-                  </div>
-                  <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" onChange={handleChange} name="password" />
-                    <span style={{ color: "red", fontSize: 12 }}>
-                      {errors.password}
-                    </span>
-                  </div>
-                  <div style={{ position: "absolute", right: 20 }}>
-                    <Link to="/forgetpassword">
-                      <h3 className="forget-title">Forgot Password?</h3>
-                    </Link>
-                  </div>
-                  <div className="btn-set">
-                    <button type="submit" className="btn btn-deflt">Submit</button>
-                  </div>
-                  <div>
-                    <p id="account">
-                      Don't have an account? {"  "}
-                      <Link to="/signup" style={{ color: "white", cursor: "pointer" }}>
-                       
-                          Sign Up
-              
+                <div className="modal-body">
+                  <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                      <label>Email</label>
+                      <input type="email" className="form-control" onChange={handleChange} name="email" />
+                      <span style={{ color: "red", fontSize: 12 }}>
+                        {errors.email}
+                      </span>
+                    </div>
+                    <div className="form-group">
+                      <label>Password</label>
+                      <input type="password" className="form-control" onChange={handleChange} name="password" />
+                      <span style={{ color: "red", fontSize: 12 }}>
+                        {errors.password}
+                      </span>
+                    </div>
+                    <div style={{ position: "absolute", right: 20 }}>
+                      <Link to="/forgetpassword">
+                        <h3 className="forget-title">Forgot Password?</h3>
                       </Link>
-                    </p>
-                  </div>
-                </form>
+                    </div>
+                    <div className="btn-set">
+                      <button type="submit" className="btn btn-deflt">Submit</button>
+                    </div>
+                    <div>
+                      <p id="account">
+                        Don't have an account? {"  "}
+                        <Link to="/signup" style={{ color: "white", cursor: "pointer" }}>
+
+                          Sign Up
+
+                        </Link>
+                      </p>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </MyLoader>
     </>
   );

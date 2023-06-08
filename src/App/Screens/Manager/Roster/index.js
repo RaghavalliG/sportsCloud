@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CsvDownload from '../../../Components/Comman/CsvDownload';
 import {
     BrowserRouter as Router,
     Switch,
@@ -169,7 +170,10 @@ function ManagerRoster(props) {
 
 
     const change = (event) => {
-        console.log("event", event.target.value)
+        console.log("event", event)
+        console.log("event", event.target.name)
+        console.log("event", event.target.id)
+        console.log("event", event.target.key)
         setTeamDropDown(event.target.value)
         setPlayer([])
         teamRoster(event.target.value);
@@ -198,13 +202,8 @@ function ManagerRoster(props) {
                         toast.error(res.response_message)
                     }
                     setResData(res.response_data);
-                    console.log("team player", res?.response_data?.player)
-                    console.log("non player", res.response_data.non_player)
-
                     setPlayer(res.response_data.player)
                     setNewPlayerData(res.response_data.player.filter(data => {
-                        // console.log(res.response_data.player);
-                        // console.log(data._id)
                         return data._id != null
 
                     }))
@@ -213,6 +212,7 @@ function ManagerRoster(props) {
                         return data._id != null
 
                     }))
+                    // history.goBack();
 
 
 
@@ -417,6 +417,17 @@ function ManagerRoster(props) {
     }
     console.log("pic1", pic1)
 
+    let headers = [
+        { label: "Firstname", key: "firstName" },
+        { label: "lastname", key: "lastName" },
+        { label: "email", key: "contactInformationEmail" },
+        { label: "phone", key: "contactInformationPhoneNumber" },
+        { label: "Gender", key: "playerGender" }
+    ];
+
+    const allPlayers = newplayerdata.concat(newNonPlayerData);
+    let data = (allPlayers && allPlayers.length >0) ? allPlayers  : [];
+
 
 
     return (
@@ -433,7 +444,7 @@ function ManagerRoster(props) {
                                 <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
                                     {dropdown?.map((dropdown) => {
                                         return (
-                                            <option key={dropdown._id} value={dropdown.team_id}>{dropdown.team_name}</option>
+                                            <option key={dropdown.team_id} id={dropdown.team_id} name={dropdown.team_name} value={dropdown.team_id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -489,7 +500,8 @@ function ManagerRoster(props) {
                                 <div className="player-info-head-right">
                                     <button className="edit-btn" style={{ width: "265px" }} onClick={() => history.push('./PlayerInfo')}>Manage My Player Info</button>
                                     <button className="add-new-family" style={{ width: "324px" }} onClick={() => history.push('./PlayerInfo')}>+ Add or Edit My Family Member</button>
-                                    <button className="edit-btn" style={{ marginLeft: "5px" }} onClick={() => history.push('./Subscribe')}>Export</button>
+                                    {/* <button className="edit-btn" style={{ marginLeft: "5px" }} onClick={() => history.push('./Subscribe')}>Export</button> */}
+                                    <CsvDownload data={data} headers={headers} filename={`Roster list `} />
                                 </div>
                             </div>
 
@@ -505,7 +517,7 @@ function ManagerRoster(props) {
 
 
                             <div className="manager-player-section">
-                                <h3>Playerss</h3>
+                                <h3>Players</h3>
 
                                 <span style={{ color: "white", position: "absolute", right: "3%" }}>Total Player {resData?.total_player}(Men:3,Women:2)</span>
                             </div>
