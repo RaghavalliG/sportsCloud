@@ -77,15 +77,15 @@ function Subscribe(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -93,7 +93,7 @@ function Subscribe(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamSchedule(res.response_data[0]._id);
+                    teamSchedule(res?.response_data[0]._id);
 
 
 
@@ -135,14 +135,14 @@ function Subscribe(props) {
             Network('api/get-game-event-list?manager_id=' + user._id + '&team_id=' + id + '&page=1&limit=10', 'GET', header)
                 .then(async (res) => {
                     console.log("schedule----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
                         toast.error(res.response_message)
                     }
                     //console.log("doc data----->",res.response_data.docs)
-                    setSchedule(res.response_data.docs)
+                    setSchedule(res?.response_data?.docs)
 
 
                 })
@@ -226,10 +226,10 @@ function Subscribe(props) {
                             <div className="teams-select">
                                 <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
-                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
-                                    {dropdown.map((dropdown) => {
+                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
+                                    {dropdown?.map((dropdown) => {
                                         return (
-                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -245,7 +245,7 @@ function Subscribe(props) {
                                 <div className="profile-head-img">
                                     {
                                         user ?
-                                            <img src={user.profile_image} alt="" /> :
+                                            <img src={user?.profile_image} alt="" /> :
                                             <img src={UserProfile} alt="" />
                                     }
 

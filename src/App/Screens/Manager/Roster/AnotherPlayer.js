@@ -163,16 +163,16 @@ function AnotherPlayer(props) {
                 .then(async (res) => {
                     console.log("teamRoster----", res)
 
-                    if (res.response_code == 4000) {
-                        dispatch(logoutUser(null))
-                        localStorage.removeItem("user");
+                    if (res.response_code == 400) {
+                        // dispatch(logoutUser(null))
+                        // localStorage.removeItem("user");
                         history.push("/")
                         toast.error(res.response_message)
                     }
-                    console.log("team player", res.response_data.PLAYER)
-                    console.log("non player", res.response_data.NON_PLAYER)
-                    setPlayer(res.response_data.PLAYER)
-                    setNewPlayerData(res.response_data.PLAYER.filter(data => {
+                    console.log("team player", res.response_data.player)
+                    console.log("non player", res.response_data.nonplayer)
+                    setPlayer(res.response_data.player)
+                    setNewPlayerData(res.response_data.player.filter(data => {
                         return data.member_id != null
 
                     }))
@@ -188,12 +188,12 @@ function AnotherPlayer(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
                     if (res.response_code == 4000) {
@@ -279,7 +279,7 @@ function AnotherPlayer(props) {
                                 <select onChange={change}>
                                     {dropdown.map((dropdown) => {
                                         return (
-                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>

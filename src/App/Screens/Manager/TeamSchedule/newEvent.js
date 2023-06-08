@@ -111,7 +111,7 @@ const NewEvent = () => {
             Network('api/all-flag-list', 'GET', header)
                 .then(async (res) => {
                     console.log("flagList----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -129,15 +129,15 @@ const NewEvent = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -194,11 +194,11 @@ const NewEvent = () => {
             .then((res) => {
                 console.log("event Data", res)
                 console.log("eventType", eventType)
-                if(res.response_code==2000){
+                if(res.response_code==200){
                     console.log("success new game event",res)
                     history.push("/Teamschdule")
                 }
-                if (res.response_code == 4000) {
+                if (res.response_code == 400) {
                     dispatch(logoutUser(null))
                     localStorage.removeItem("user");
                     history.push("/")
@@ -231,7 +231,7 @@ const NewEvent = () => {
                 .then(async (res) => {
                     console.log("schedule----", res)
                    
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -374,10 +374,10 @@ const NewEvent = () => {
                     <div className="teams-select">
                         <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
-                        <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
+                        <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
                             {dropdown.map((dropdown) => {
                                 return (
-                                    <option value={dropdown._id}>{dropdown.team_name}</option>
+                                    <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                 )
                             })}
                         </select>
@@ -467,11 +467,11 @@ const NewEvent = () => {
                                                 {/* <input type="text" className="input-select" onChange={(e) => setOponent(e.target.value)} /> */}
                                                 <select className="input-select" onChange={changeTeam}>
                                                     <option value="">Select A Team </option>
-                                                    {dropdown.map((dropdown) => {
+                                                    {dropdown?.map((dropdown) => {
                                                         return (
 
 
-                                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
 
                                                         )
                                                     })}
@@ -484,7 +484,7 @@ const NewEvent = () => {
                                                 {/* <input type="text" className="input-select" onChange={(e) => setOponent(e.target.value)} /> */}
                                                 <select className="input-select" onChange={changeOponent} >
                                                     <option value="">Select Oponent Team </option>
-                                                    {dropdown.map((dropdown) => {
+                                                    {dropdown?.map((dropdown) => {
                                                         return (
 
                                                             <option value={dropdown._id}>{dropdown.team_name}</option>
@@ -538,7 +538,7 @@ const NewEvent = () => {
                                         <div className="col-md-6">
                                             <div className="prefarance-form-list">
                                                 <div style={{ display: "flex" }}>
-                                                    {flag.map((flag) => {
+                                                    {flag?.map((flag) => {
                                                         return (
 
                                                             <div style={{ margin: "10px" }}><img src={`${pic}${flag.image}`} alt="" style={{ height: "30px", width: "30px" }} /><br></br>
