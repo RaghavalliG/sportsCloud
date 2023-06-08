@@ -117,14 +117,14 @@ function ManagerHome(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       let header = {
-        'authToken': user.authtoken
+        'token': user.authtoken
       }
-      Network('api/my-team-list?team_resmanager_id=' + user._id, 'GET', header)
+      Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
         .then(async (res) => {
           console.log("hello----", res)
-          if (res.response_code == 2000) {
+          if (res.response_code == 200) {
 
-          } else if (res.response_code == 4000) {
+          } else if (res.response_code == 400) {
             toast.error(res.response_message)
           }
         })
@@ -140,12 +140,12 @@ function ManagerHome(props) {
     formData.append('profile_image', value);
     console.log("image--->", value)
 
-    axios('https://nodeserver.mydevfactory.com:1447/api/update-user-profile-image',
+    axios('https://nodeserver.mydevfactory.com:1448/api/update-user-profile-image',
       {
         method: "POST",
         headers: {
           "Content-Type": "multipart/form-data",
-          'x-access-token': user.authtoken
+          'token': user.authtoken
 
         },
         data: formData
@@ -159,8 +159,8 @@ function ManagerHome(props) {
         }
 
         if (res.response_code == 400) {
-          dispatch(logoutUser(null))
-          localStorage.removeItem("user");
+          // dispatch(logoutUser(null))
+          // localStorage.removeItem("user");
           history.push("/")
           toast.error(res.response_message)
         }
@@ -180,7 +180,7 @@ function ManagerHome(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       let header = {
-        'authToken': user.authtoken
+        'token': user.authtoken
       }
       Network('api/player-joined-team-list?player_id=' + user._id, 'GET', header)
         // api/player-list-by-team-id?team_id=60aca35ff6cd6923adf9634a
@@ -231,7 +231,7 @@ function ManagerHome(props) {
       Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
         .then(async (res) => {
           console.log("teanSelect----", res)
-          if (res.response_code == 4000) {
+          if (res.response_code == 400) {
             dispatch(logoutUser(null))
             localStorage.removeItem("user");
             history.push("/")
@@ -287,15 +287,16 @@ function ManagerHome(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
       let header = {
-        'authToken': user.authtoken
+        'token': user.authtoken
 
       }
       console.log('user', user)
+      const team_id = teamId ? teamId : "6480285555cf8a5024960668";
 
-      Network('api/player-list-by-team-id?team_id=' + "60a51abfae9b3244cc9d1eae", 'GET', header)
+      Network('api/player-list-by-team-id?team_id=' + team_id, 'GET', header)
         .then(async (res) => {
           console.log("teamRoster----", res)
-          console.log("team player", res.response_data?.PLAYER)
+          console.log("team player", res.response_data?.player)
 
 
         })
@@ -383,7 +384,7 @@ function ManagerHome(props) {
                   {team == null ? <option> Team1</option> :
                     team && team.length > 0 && team?.map((team) => {
                       return (
-                        <option key={team.team_id}>{team.team_name}</option>
+                        <option key={team.team_id} value={team.team_id}>{team.team_name}</option>
                       )
                     })}
                 </select>
@@ -392,7 +393,7 @@ function ManagerHome(props) {
                     ACCOUNT
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                    <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                    <li><a className="dropdown-item" href="#">{`${user.fname} ${user.lname}`}</a></li>
                     <Link to={{ pathname: "/MyAccount" }} >
                       <li><a className="dropdown-item" href="#">My Account</a></li>
                     </Link>
@@ -554,12 +555,13 @@ function ManagerHome(props) {
                       <div className="team-list-box">
                         <div className="team-list-box-img">
                           {team.image == null ? <img src={teamList} alt="" /> :
-                            <img src={`${pic}${team.image}`} alt="" />}
+                            // <img src={`${pic}${team.image}`} alt="" />}
+                            <img src={`/${team.sports}`} alt={team.sports} />}
                         </div>
                         <div className="team-list-box-text">
                           <h4>{team.team_name}</h4>
 
-                          <a href="#">Team Roster</a>
+                          <a href="#">{team.sports}</a>
 
                         </div>
                       </div>
