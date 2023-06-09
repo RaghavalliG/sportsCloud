@@ -273,19 +273,21 @@ function ManagerRoster(props) {
         setModeValue(true)
         setUId(uId)
         setId(id1)
+        console.log(id1);
         //set the initial values for the edit form.
         setGender(newplayerdata[id1].playerGender);
-        setFName(newplayerdata[id1].firstName);
-        setLName(newplayerdata[id1].lastName);
-        setJursey(newplayerdata[id1].jerseyNumber);
-        setEmail(newplayerdata[id1].contactInformationEmail);
-        setPosition(newplayerdata[id1].position);
-        setCity(newplayerdata[id1].contactInformationCity);
-        setZip(newplayerdata[id1].contactInformationZipCode);
-        setSateData(newplayerdata[id1].contactInformationState);
-        setBirthday(newplayerdata[id1].playerBirthday);
-        setPhone(newplayerdata[id1].contactInformationPhoneNumber);
-        setMemberType(newplayerdata[id1].whoIsThis);
+        setFName(newplayerdata[id1]?.firstName);
+        setLName(newplayerdata[id1]?.lastName);
+        setJursey(newplayerdata[id1]?.jerseyNumber);
+        setEmail(newplayerdata[id1]?.contactInformationEmail);
+        setPosition(newplayerdata[id1]?.position);
+        setCity(newplayerdata[id1]?.contactInformationCity);
+        setZip(newplayerdata[id1]?.contactInformationZipCode);
+        setSateData(newplayerdata[id1]?.contactInformationState);
+        setBirthday(newplayerdata[id1]?.playerBirthday);
+
+        setPhone(newplayerdata[id1]?.contactInformationPhoneNumber);
+        setMemberType(newplayerdata[id1]?.whoIsThis);
         console.log(id1);
         console.log(newplayerdata[id1].playerGender);
 
@@ -297,18 +299,18 @@ function ManagerRoster(props) {
         setUId(uId)
         setId1(id1)
         //set the initial values for the edit form.
-        setGender(newplayerdata[id1].playerGender);
-        setFName(newplayerdata[id1].firstName);
-        setLName(newplayerdata[id1].lastName);
-        setJursey(newplayerdata[id1].jerseyNumber);
-        setEmail(newplayerdata[id1].contactInformationEmail);
-        setPosition(newplayerdata[id1].position);
-        setCity(newplayerdata[id1].contactInformationCity);
-        setZip(newplayerdata[id1].contactInformationZipCode);
-        setSateData(newplayerdata[id1].contactInformationState);
-        setBirthday(newplayerdata[id1].playerBirthday);
-        setPhone(newplayerdata[id1].contactInformationPhoneNumber);
-        setMemberType(newplayerdata[id1].whoIsThis);
+        setGender(newplayerdata[id1]?.playerGender);
+        setFName(newplayerdata[id1]?.firstName);
+        setLName(newplayerdata[id1]?.lastName);
+        setJursey(newplayerdata[id1]?.jerseyNumber);
+        setEmail(newplayerdata[id1]?.contactInformationEmail);
+        setPosition(newplayerdata[id1]?.position);
+        setCity(newplayerdata[id1]?.contactInformationCity);
+        setZip(newplayerdata[id1]?.contactInformationZipCode);
+        setSateData(newplayerdata[id1]?.contactInformationState);
+        setBirthday(newplayerdata[id1]?.playerBirthday);
+        setPhone(newplayerdata[id1]?.contactInformationPhoneNumber);
+        setMemberType(newplayerdata[id1]?.whoIsThis);
 
 
     }
@@ -484,7 +486,7 @@ function ManagerRoster(props) {
                                 <div className="profile-head-img">
                                     {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                                        <img src={`${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -741,7 +743,7 @@ function ManagerRoster(props) {
 
                                                         <select className="input-select" onChange={(e) => setMemberType(e.target.value)}>
                                                             <option key="membertype">Select</option>
-                                                            <option key="player" value="player">PLAYER</option>
+                                                            <option key="player" value="player" selected>PLAYER</option>
                                                             <option key="manager" value="manager">MANAGER</option>
                                                         </select>
                                                     </div>
@@ -928,7 +930,7 @@ function ManagerRoster(props) {
                                                         defaultValue='nonplayer'>
                                                             <option key="membertype">Select</option>
                                                             <option key="player" value="player">PLAYER</option>
-                                                            <option key="nonplayer" value="nonplayer">NON - PLAYER</option>
+                                                            <option key="nonplayer" value="nonplayer" selected>NON - PLAYER</option>
                                                             <option key="manager" value="manager">MANAGER</option>
                                                         </select>
                                                     </div>
@@ -997,7 +999,7 @@ function ManagerRoster(props) {
                                                                                     <td key="col1" onClick={() => imageModalOpen(i, nonPlayer?._id)}>
                                                                                         {nonPlayer?.profile_image == null ?
                                                                                             <img key={nonPlayer._id} src={UserProfile} alt="" /> :
-                                                                                            <img key={nonPlayer._id} src={`${pic1}${nonPlayer._id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                                                            <img key={nonPlayer._id} src={`${nonPlayer._id.profile_image}`} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
                                                                                         }
                                                                                     </td>
                                                                                     <td key="col2">
@@ -1010,7 +1012,7 @@ function ManagerRoster(props) {
 
                                                                                         <div className="game-name">
 
-                                                                                            {(nonPlayer.playerGender) ? nonPlayer.playerGender : null}
+                                                                                            {(nonPlayer?.playerGender) ? nonPlayer?.playerGender : null}
                                                                                         </div>
 
                                                                                     </td>

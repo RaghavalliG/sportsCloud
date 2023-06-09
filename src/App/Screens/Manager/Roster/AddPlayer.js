@@ -60,6 +60,8 @@ const AddPlayer = () => {
     const [team, setTeam] = useState([])
     const [loader, setLoader] = useState(false)
     const [playerType,setPlayerType]=useState(false)
+    const [nonplayerCheck,setNonplayerCheck]=useState(false)
+    const [invite, setInvite] = useState(true)
 
     useEffect(() => {
 
@@ -103,7 +105,7 @@ const AddPlayer = () => {
 
     }
     const playerData = () => {
-        console.log(gender);
+        console.log(nonplayerCheck);
         const user = JSON.parse(localStorage.getItem('user'));
         const requestOptions = {
             method: 'POST',
@@ -129,8 +131,8 @@ const AddPlayer = () => {
                 "playerGender": gender.toLowerCase(),
                 "jerseyNumber": jursey,
                 "position": position,  
-                "managerAccess": "",   
-                "nonPlayer": "",
+                "managerAccess": nonplayerCheck == false ? false : "",   
+                "nonPlayer": nonplayerCheck == false ? false : "",
                 "assignment": "aaa",
                 "uniform": "ab"
 
@@ -141,6 +143,7 @@ const AddPlayer = () => {
 
 
         };
+        
         fetch('https://nodeserver.mydevfactory.com:1448/api/addRoaster', requestOptions)
             .then(response => response.json())
             .then((res) => {
@@ -468,7 +471,7 @@ const AddPlayer = () => {
                         <div className="profile-head-img">
                             {profilePic?.profile_image == null ?
                                 <img src={BigUserProfile} alt="" /> :
-                                <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                                <img src={`${profilePic?.profile_image}`} alt="" />
                             }
 
                         </div>
@@ -523,7 +526,7 @@ const AddPlayer = () => {
                                         <div className="col-md-12">
                                             <div className="prefarance-form-list">
                                                 <label>Non Player</label>
-                                                <input type="checkbox" style={{ height: "15px", width: "17px" }} onClick={()=>setPlayerType(!playerType)} />
+                                                <input type="checkbox" onChange={(e) => setNonplayerCheck(e.target.checked)} style={{ height: "15px", width: "17px" }} onClick={()=>setPlayerType(!playerType)} />
                                                 <span style={{ color: "white" }}>This person is a non playing player of the team </span>
 
                                             </div>
@@ -604,7 +607,7 @@ const AddPlayer = () => {
                                                 <label>Gender</label>
                                                 <select onChange={(e) => setGender(e.target.value)} className="input-select">
                                                     <option>SELECT</option>
-                                                    <option>MALE</option>
+                                                    <option >MALE</option>
                                                     <option>FEMALE</option>
                                                 </select>
                                                 
@@ -648,7 +651,7 @@ const AddPlayer = () => {
 
                                         <div className="col-md-6">
                                             <div className="prefarance-form-list">
-                                                <input type="checkbox" style={{ height: "15px", width: "17px" }} />
+                                                <input type="checkbox" style={{ height: "15px", width: "17px" }} onChange={(e) => setInvite(e.target.checked)} />
                                                 <span style={{ color: "white" }}>Invite to join </span>
                                             </div>
                                         </div>

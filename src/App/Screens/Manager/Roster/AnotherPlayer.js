@@ -39,9 +39,12 @@ function AnotherPlayer(props) {
     const [player, setPlayer] = useState([]);
     const [dropdown, setDropdown] = useState([])
     const [teamDropdown, setTeamDropDown] = useState("")
+    const [teamdroplist,setTeamDroplist] = useState([]);
     const [id, setId] = useState([])
     const [newplayerdata, setNewPlayerData] = useState([])
     const [newNonPlayerData, setNewNonPlayerData] = useState([])
+    const [checked, setChecked] = useState([]);
+    var res;
 
     useEffect(() => {
         // let user = userdata && userdata._id ? true : false;
@@ -196,7 +199,7 @@ function AnotherPlayer(props) {
             Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -204,7 +207,7 @@ function AnotherPlayer(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamRoster(res.response_data[0]._id);
+                    teamRoster(res.response_data[0].team_id);
 
 
 
@@ -223,16 +226,19 @@ function AnotherPlayer(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': user.authtoken
+                'token': user.authtoken
             },
             body: JSON.stringify({
-                "player_id": id,
-                "manager_id": user._id,
-                'team_id': teamDropdown,
+                // "player_id": id,
+                // "manager_id": user._id,
+                // 'team_id': teamDropdown,
+                'fromTeamId': teamdroplist,
+                'toTeamId':teamDropdown?teamDropdown: dropdown[0].team_id,
+                "data" : []
 
             })
         };
-        fetch('https://nodeserver.mydevfactory.com:1448/api/invite-players-to-team', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/createRoasterFromAnotherTeam', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("Import  Data", res)
@@ -254,15 +260,40 @@ function AnotherPlayer(props) {
         setTeamDropDown(event.target.value)
         teamRoster(event.target.value);
     }
+    const teamchange = (event) => {
+        console.log("event", event.target.value)
+        setTeamDroplist(event.target.value)
+        teamRoster(event.target.value);
+    }
 
 
     const removePlayer=(pid)=>{
         setId(id.filter(data=>{
             return data != pid
         }))
+        // console.log(id);
     }
 
-   
+    // const handleCheck = (event) => {
+    //     var updatedList = [...checked];
+    //     if (event.target.checked) {
+    //       updatedList = [...checked, event.target.value];
+    //     } else {
+    //       updatedList.splice(checked.indexOf(event.target.value), 1);
+    //     }
+    //     setChecked(updatedList);
+    //   };
+    //   var id = checked.length
+    //   ? checked.reduce((total, item) => {
+    //       return total + ", " + item;
+    //     })
+    //   : ""; 
+
+   const newPlayerlist = (player) => {
+       console.log("new", teamdroplist);
+       console.log("old",teamDropdown);
+    console.log(player)
+   }
 
     return (
         <div>
@@ -288,7 +319,7 @@ function AnotherPlayer(props) {
                                         ACCOUNT
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                                        <li><a className="dropdown-item" href="#">{`${user?.fname}${user?.lname}`}</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
                                             <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
@@ -319,7 +350,7 @@ function AnotherPlayer(props) {
                                 <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic}${profilePic.profile_image}`} alt="" />
+                                        <img src={`${profilePic.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -332,8 +363,20 @@ function AnotherPlayer(props) {
                                 <h2 className="page-title">Import Players From Another Team</h2>
                             </div>
                             <div className="prefarance-box playerOther">
+                           
                                 <p>Select the player below from your other terms that you'd like to add th this roster.</p>
+                                <select onChange={teamchange}>
+                                    {dropdown.map((dropdown) => {
+                                         
+                                        return (
+                                             
+                                             <option value={dropdown.team_id}>{dropdown.team_name}</option> 
+                                            
+                                        ) 
+                                    })}
+                                </select>
                                 <div className="playerLists">
+                                
                                     <div className="playerLstLft">
                                         <h4>Players From Other Teams</h4>
                                         {newplayerdata.map((player) => {
@@ -345,9 +388,15 @@ function AnotherPlayer(props) {
                                                             <img src={UserProfile} alt="" /> :
                                                             <img src={`${pic}${player.member_id.profile_image}`} alt="" style={{height:"70px",width:"70px"}}/>
                                                         }
-                                                        <span>{player.member_id.fname}{player.member_id.lname}</span>
+                                                        <span>{player.firstName}{player.lastName}</span>
                                                     </span>
-                                                    <span><input type="checkbox" style={{ width: "20px", height: "20px" }} onClick={() => setId([...id, player._id])} /></span>
+                                                    <span><input id ={player._id} value={`${player.firstName} ${player.lastName}`} type="checkbox" style={{ width: "20px", height: "20px" }} 
+                                                    onClick={() => {
+                                                        setId([...id, player._id])
+                                                    }
+                                                    }
+                                                    // onChange={setId([...id, player._id])} 
+                                                    /></span>
                                                 </div>
                                             )
                                         })
@@ -362,23 +411,28 @@ function AnotherPlayer(props) {
                                     </div>
                                     <div className="playerLstRgt">
                                         <h4>Player select  for import </h4>
-
+                                        {/* <div>
+  {`Items checked are: ${id}`}
+</div> */}
                                         {newplayerdata.map((player) => {
                                             return (
                                                 <div>
-                                                    {id.map((id) => {
+                                                    {
+                                                //    id.length>1 ?
+                                                //     res = [...new Set(id)]:
+                                                    id?.map((id) => {
                                                         return (
                                                             <div>
                                                                 {
                                                                     player._id == id ?
                                                                         <div className="playerRow">
-                                                                            <span><input type="checkbox" onClick={()=>removePlayer(player._id)}/></span>
+                                                                            <span><input type="checkbox" checked onClick={()=>removePlayer(player._id)}/></span>
                                                                             <span>
                                                                                 {player.member_id.profile_image == null ?
                                                                                     <img src={UserProfile} alt="" /> :
                                                                                     <img src={`${pic}${player.member_id.profile_image}`} alt="" style={{height:"70px",width:"70px"}}/>
                                                                                 }
-                                                                                <span>{player.member_id.fname}{player.member_id.lname}</span>
+                                                                                <span>{player.firstName}{player.lastName}</span>
                                                                             </span>
                                                                         </div> : ""
                                                                 }
@@ -400,18 +454,20 @@ function AnotherPlayer(props) {
                                     </div>
 
                                 </div>
-
-                            </div>
-
-                            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                                <div 
+                                style={{ display: "flex", justifyContent: "center" }}
+                                >
                                 <button style={{
                                     padding: "6px",
                                     marginTop: "19px",
                                     borderRadius: "10px",
                                     backgroundColor: "#EC3525"
                                 }} 
-                                onClick={PlayerImportData}> Invite</button>
+                                onClick={PlayerImportData}> Invite Players</button>
                             </div>
+                            </div>
+
+                            
                         </div>
 
 
