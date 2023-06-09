@@ -18,3 +18,8 @@
   height: 10;
 }
 
+.dropdown-item {
+  color: #e3e7ec;
+  border-radius: 25px;
+}
+

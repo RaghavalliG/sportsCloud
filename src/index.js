@@ -28,7 +28,7 @@ const store = createStore(
   const rootindx = ReactDOM.createRoot(document.getElementById("root"));
 
   rootindx.render(
-  <StrictMode>
+    <React.Fragment>
     <Provider store={store}>
       <App />
       <ToastContainer
@@ -44,7 +44,7 @@ const store = createStore(
       />
       {/* Same as */}
     </Provider>
-  </StrictMode>
+    </React.Fragment>
 );
 
 // If you want to start measuring performance in your app, pass a function

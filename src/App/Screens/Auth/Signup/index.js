@@ -71,7 +71,7 @@ function SignUpComponents(props) {
       Network('api/register', 'post', obj)
         .then(async (res) => {
           console.log("res success register--->", res);
-          if (res.response_code == 2000) {
+          if (res.response_code == 200) {
             setLoader(false)
             toast.success(res.response_message)
             generateOtp()
@@ -105,7 +105,7 @@ function SignUpComponents(props) {
     Network('api/generate-otp', 'post', obj)
       .then(async (res) => {
         console.log("res success verify otp--->", res);
-        if (res.response_code == 2000) {
+        if (res.response_code == 200) {
           toast.success(res.response_message)
         } else {
           toast.error(res.response_message)

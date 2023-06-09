@@ -71,7 +71,7 @@ function VerifyEmail(props) {
           <div className="modal-dialog custom-modal">
             <div className="modal-content">
               <div className="modal-header">
-                <h4 className="modal-title">Forget Password</h4>
+                <h4 className="modal-title">Verify Email</h4>
               </div>
 
               <div className="modal-body">

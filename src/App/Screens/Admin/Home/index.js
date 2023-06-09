@@ -252,7 +252,7 @@ function ManagerHome(props) {
     if (user) {
       let header = {
 
-        'token': user.authtoken
+        'authToken': user.authtoken
 
       }
 
@@ -727,15 +727,12 @@ function ManagerHome(props) {
                   <div className="record-standing-box-inner">
                     <div className="standing-table">
                       <table>
-                        <thead>
                         <tr>
                           <th>Team</th>
                           <th>Wins</th>
                           <th>Losses</th>
                           <th>Ties</th>
                         </tr>
-                        </thead>
-                        <tbody>
                         <tr>
                           <td>Dubcity  Blue</td>
                           <td>8</td>
@@ -754,7 +751,6 @@ function ManagerHome(props) {
                           <td>5</td>
                           <td>0</td>
                         </tr>
-                        </tbody>
                       </table>
                     </div>
                   </div>
