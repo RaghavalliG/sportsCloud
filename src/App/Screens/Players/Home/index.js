@@ -68,6 +68,7 @@ function HomeComponents(props) {
     teamRoster();
     updateProfile();
     weather();
+    invitationList()
   }, []);
   const pic = "https://nodeserver.mydevfactory.com:1448/";
 
@@ -214,6 +215,30 @@ function HomeComponents(props) {
       });
     });
   };
+    // console.log(user._id,"user.authtoken")
+  const invitationList=()=>{
+    const user = JSON.parse(localStorage.getItem('user'));
+    axios({
+      method: 'get',
+      // url: 'https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?PlayerId='+"647f1c8456ee340813ac0e49",
+      url:`https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?playerId=${user._id}`,
+      headers: {
+        "token": (user.authtoken)
+        
+      },
+    
+    })
+      .then(function (res) {
+         console.log(res,"9000000000000000000000000000000000009090")
+        
+      })
+      .catch(function (res) {
+         console.log(res)
+           
+    });
+  }
+
+
 
   return (
     <div>
