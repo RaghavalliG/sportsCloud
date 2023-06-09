@@ -128,7 +128,8 @@ const AddPlayer = () => {
                 "playerBirthday": birthday,
                 "playerGender": gender.toLowerCase(),
                 "jerseyNumber": jursey,
-                "position": position,     
+                "position": position,  
+                "managerAccess": "",   
                 "nonPlayer": "",
                 "assignment": "aaa",
                 "uniform": "ab"
@@ -424,7 +425,7 @@ const AddPlayer = () => {
                             {dropdown == null ? <option> Team1</option> :
                                 dropdown.map((team) => {
                                     return (
-                                        <option id={team.team_id}>{team.team_name}</option>
+                                        <option id={team.team_id} value={team.team_id}>{team.team_name}</option>
                                     )
                                 })}
                         </select>
