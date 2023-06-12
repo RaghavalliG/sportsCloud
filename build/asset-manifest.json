@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/projects/suvendu/robins/sportscloud/static/css/main.1b233693.css",
-    "main.js": "/projects/suvendu/robins/sportscloud/static/js/main.e97bbc99.js",
+    "main.js": "/projects/suvendu/robins/sportscloud/static/js/main.5ad59018.js",
     "static/js/320.f2f9cd0e.chunk.js": "/projects/suvendu/robins/sportscloud/static/js/320.f2f9cd0e.chunk.js",
     "static/media/football.png": "/projects/suvendu/robins/sportscloud/static/media/football.48c62db25dca4da20389.png",
     "static/media/piechat.png": "/projects/suvendu/robins/sportscloud/static/media/piechat.17eb3779050670d4a4db.png",
@@ -11,11 +11,11 @@
     "static/media/calender.png": "/projects/suvendu/robins/sportscloud/static/media/calender.862c5651db86b1db1c1b.png",
     "index.html": "/projects/suvendu/robins/sportscloud/index.html",
     "main.1b233693.css.map": "/projects/suvendu/robins/sportscloud/static/css/main.1b233693.css.map",
-    "main.e97bbc99.js.map": "/projects/suvendu/robins/sportscloud/static/js/main.e97bbc99.js.map",
+    "main.5ad59018.js.map": "/projects/suvendu/robins/sportscloud/static/js/main.5ad59018.js.map",
     "320.f2f9cd0e.chunk.js.map": "/projects/suvendu/robins/sportscloud/static/js/320.f2f9cd0e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1b233693.css",
-    "static/js/main.e97bbc99.js"
+    "static/js/main.5ad59018.js"
   ]
 }
