@@ -49,7 +49,7 @@ import CreateTeam from '../Screens/Manager/Roster/CreateTeam'
 // import TeamLiabilityWaiver from '../Screens/Manager/TeamLiabilityWaiver/LiabilityWaiver';
 // import ManagerTeamShop from '../Screens/Manager/ManagerTeamShop/ManagerShop';
 // import TeamAssignments from '../Screens/Manager/TeamAssignment/TeamAssignment';
-import MyAccount from '../Screens/Manager/Home/MyAccount';
+// import MyAccount from '../Screens/Manager/Home/MyAccount';
 // import NavBarSide from '../Screens/Manager/Home/NabBar';
 // import Household from '../Screens/Manager/Home/Household';
 // import Preference from '../Screens/Manager/Home/Preference';
@@ -178,7 +178,7 @@ function RouterScreen() {
                                         {/* <Route path='/TeamMedia' component={TeamMedia} /> */}
                                         {/* <Route path='/TeamPayment' component={TeamPayment} /> */}
                                         {/* <Route path='/TeamLiabilityWaiver' component={TeamLiabilityWaiver} /> */}
-                                        <Route path='/MyAccount' component={MyAccount} />
+                                        {/* <Route path='/MyAccount' component={MyAccount} /> */}
                                         {/* <Route path='/NavBarSide' component={NavBarSide} /> */}
                                         {/* <Route path='/Household' component={Household} /> */}
                                         {/* <Route path='/Preference' component={Preference} /> */}

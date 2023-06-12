@@ -626,7 +626,7 @@ function HomeComponents(props) {
                 </div>
                 <div className="teamsnap-section-main">
                   <div className="teamsnap-list-box">
-                    <p>You Can Help Save Youth Sports in 30 Seconds.</p>
+                    <p>You Can Help Save Youth Sports in  30 Seconds.</p>
                     <span>May 7, 2021</span>
                   </div>
                   <div className="teamsnap-list-box">
