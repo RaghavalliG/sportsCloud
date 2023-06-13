@@ -323,6 +323,7 @@ function ManagerRoster(props) {
     };
     const updatePlayerData = (e) => {
         console.log(memberType);
+        console.log(memberType == 'player');
         const user = JSON.parse(localStorage.getItem('user'));
         const requestOptions = {
             method: 'POST',
@@ -346,8 +347,8 @@ function ManagerRoster(props) {
                 "playerGender": gender,
                 "jerseyNumber": jursey,
                 "position": position,
-                "managerAccess": true,
-                "nonPlayer": (memberType == player) ? '' : true
+                "managerAccess": (memberType == 'player') ? '' : true,
+                "nonPlayer": (memberType == 'player') ? '' : true
 
 
             })

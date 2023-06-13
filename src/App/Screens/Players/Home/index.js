@@ -28,6 +28,8 @@ import { Network } from "../../../Services/Api";
 import { ToastContainer, toast } from "react-toastify";
 import { CalendarComponent } from "@syncfusion/ej2-react-calendars";
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
+
 import "../../../../../node_modules/@syncfusion/ej2-base/styles/material.css";
 import "../../../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
 import "../../../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
@@ -48,6 +50,9 @@ function HomeComponents(props) {
 
   // const [loading,setLoading]= useState(false)
   const [profilePic, setProfilePic] = useState([]);
+  const[invitationlist,setInvitationlist]= useState([])
+  const [modelValue, setModelValue] = useState(false)
+  const [invite_id, setInviteId] = useState('')
   console.log("team ka value====>+++++++++++++++++++++++=", team);
   console.log(" typeof team====>", typeof team);
   
@@ -69,6 +74,7 @@ function HomeComponents(props) {
     updateProfile();
     weather();
     invitationList()
+  
   }, []);
   const pic = "https://nodeserver.mydevfactory.com:1448/";
 
@@ -218,6 +224,7 @@ function HomeComponents(props) {
     // console.log(user._id,"user.authtoken")
   const invitationList=()=>{
     const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user._id,"user idghkmh")
     axios({
       method: 'get',
       // url: 'https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?PlayerId='+"647f1c8456ee340813ac0e49",
@@ -230,15 +237,91 @@ function HomeComponents(props) {
     })
       .then(function (res) {
          console.log(res,"9000000000000000000000000000000000009090")
+        //  setInvitationlist(res.data.response_data.filter(data=>{
+        //   return data.invite_id !=null;
+        //  }));
+         res.data.response_data.map((invitation)=>{
+          invitationlist.push(invitation);
+         })
         
+         console.log(invitationlist,"dudaessdnjkndrftnryue")
+
+         if(invitationlist && invitationlist.length>0){
+          setModelValue(true)
+         }
       })
       .catch(function (res) {
          console.log(res)
            
     });
   }
+ 
+// const handleclick=(invite_id,type)=>{
+//   const user = JSON.parse(localStorage.getItem('user'));
+//   console.log(invite_id);
+// //  const headers = {
+// //     "token": (user.authtoken)
+    
+// //   }
+// //  const body = {
+// //     "invite_id": invite_id,
+// //     "type": type === 'accept' ? 'accepted' : 'rejected'
+// //     // "type":"ACCEPT"
+// //   }
+  
+  
+//   axios({
+//     headers : {
+//       "token": (user.authtoken)
+      
+//     },
+    
+//     method: 'post',
+//     url: 'http://nodeserver.mydevfactory.com:1448/api/acceptOrRejectInviatationByInviteId',
 
+//     data:  {
+//       "invite_id": invite_id,
+//       "type": type === 'accept' ? 'accepted' : 'rejected'
+//       // "type":"ACCEPT"
+//     }
+//   })
+ 
+//   .then((res)=>{
+//     console.log(res,"ghghghghghghhghjgghggghfgg")
 
+//   })
+//   .catch((error)=>{
+
+//   })
+  
+// }
+const handleClick =(invite_id,type)=>{
+  const user = JSON.parse(localStorage.getItem('user'));
+  const api ="https://nodeserver.mydevfactory.com:1448/api/acceptOrRejectInviatationByInviteId"
+   const headers = {
+          "token": (user.authtoken)
+          
+        }
+   const requestbody ={
+    "invite_id": invite_id,
+      "type": type === 'accept' ? 'ACCEPT' : 'REJECT'
+   }      
+  axios
+  .post(api,requestbody,{headers:headers})
+  .then((res)=>{
+    console.log(res,"ghghghghghghhghjgghggghfgg")
+    if(res.data.success==true){
+      toast.success(res.data.response_message)
+    }else{
+      toast.error(res.data.response_message)
+    }
+  })
+  .catch((err)=>{
+    toast.error("an error occurred")
+
+  })
+  console.log(requestbody)
+}
 
   return (
     <div>
@@ -326,6 +409,65 @@ function HomeComponents(props) {
                       />
                     </div>
                   </div>
+                  {modelValue ? <Modal show={modelValue} >
+
+
+                                    <Modal.Body>
+                  
+                  {/* // <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> */}
+                  
+                  
+                  
+                      <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">Accept Or Reject Invitations</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          
+                        </div>
+                        <div class="modal-body">
+                          {/* <p>{(invitationlist)?
+                          
+                          <>
+                          <h3>TeamName:</h3> 
+                          <h3>invite_team_manager_name:</h3> 
+                          
+                          
+                          </>
+                          :null
+                            }</p> */}
+                            <h2>Invitation List</h2>
+        {invitationlist.map((invitation) => (
+          <div key={invitation.invite_id}>
+            <div>
+            <p>Team Name: {invitation.invite_team_name}</p>
+            </div>
+            <div>
+            <p>Team Manager: {invitation.invite_team_manager_name}</p>
+            </div>
+            <div>
+            <button onClick={() => handleClick(invitation.invite_id, 'accept')}>Accept</button>
+             <button onClick={() =>  handleClick(invitation.invite_id, 'reject')}>Reject</button>
+              {/* <button  value='reject'onClick={() => {setInviteId(invitation.invite_id); handleclick()}}>Reject</button>
+              <button  value='accept' onClick={() => {setInviteId(invitation.invite_id); handleclick()}}>Accept</button> */}
+            </div>
+          </div>
+        ))}
+                            
+                        </div>
+                        {/* <div class="modal-actions">
+                          <button type="button" class="btn btn-default" >Accept</button>
+                          <button type="button" class="btn btn-default" >reject</button>
+                        </div> */}
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                  
+                  
+                  
+                  </Modal.Body>
+
+</Modal> : ""}
 
                   <div className="invoice-due">
                     <div className="ionice-due-inner">
@@ -626,7 +768,7 @@ function HomeComponents(props) {
                 </div>
                 <div className="teamsnap-section-main">
                   <div className="teamsnap-list-box">
-                    <p>You Can Help Save Youth Sports in  30 Seconds.</p>
+                    <p>You Can Help Save Youth Sports in 30 Seconds.</p>
                     <span>May 7, 2021</span>
                   </div>
                   <div className="teamsnap-list-box">
