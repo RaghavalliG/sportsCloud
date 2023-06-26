@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import CsvDownload from '../../../Components/Comman/CsvDownload';
 import { EyeFill, ZoomIn } from 'react-bootstrap-icons';
 import {
     BrowserRouter as Router,
@@ -173,8 +174,8 @@ function TeamRoster(props) {
                     // console.log(res.)
                     console.log("team player", res.response_data?.player)
                     console.log("non player", res.response_data?.non_player)
-                    setPlayer(res.response_data?.player)
-                    setNewPlayerData(res?.response_data?.player?.filter(data => {
+                    setPlayer(res.response_data.player)
+                    setNewPlayerData(res.response_data?.player?.filter(data => {
                         return data._id != null
                        
 
@@ -186,8 +187,8 @@ function TeamRoster(props) {
                     
                     
                     // console.log( newplayerdata,"6767676769898988")
-                    setNonPlayer(res.response_data?.non_Player)
-                    setNewNonPlayerData(res.response_data?.non_player.filter(data => {
+                    setNonPlayer(res.response_data.non_Player)
+                    setNewNonPlayerData(res.response_data.non_player.filter(data => {
                         return data._id != null
 
                     }))
@@ -459,6 +460,17 @@ function TeamRoster(props) {
                
         });
       }
+      let headers = [
+        { label: "Firstname", key: "firstName" },
+        { label: "lastname", key: "lastName" },
+        { label: "email", key: "contactInformationEmail" },
+        { label: "phone", key: "contactInformationPhoneNumber" },
+        { label: "Gender", key: "playerGender" }
+    ];
+
+    const allPlayers = newplayerdata.concat(newNonPlayerData);
+    let data = (allPlayers && allPlayers.length >0) ? allPlayers  : [];
+
 
     return (
         <div>
@@ -516,7 +528,8 @@ function TeamRoster(props) {
                                 <div className="player-info-head-right">
                                     <button className="edit-btn" style={{ width: "265px" }} onClick={() => history.push('./TeamPlayerInfo')}>Manage My Player Info</button>
                                     <button className="add-new-family" style={{ width: "324px" }} onClick={() => history.push('./TeamPlayerInfo')}>+ Add or Edit My Family Member</button>
-                                    <button className="edit-btn" style={{ marginLeft: "5px" }} onClick={() => history.push('./Export')}>Export</button>
+                                    {/* <button className="edit-btn" style={{ marginLeft: "5px" }} onClick={() => history.push('./Export')}>Export</button> */}
+                                    <CsvDownload data={data} headers={headers} filename={`Roster list `} />
                                 </div>
                             </div>
 
@@ -601,7 +614,7 @@ function TeamRoster(props) {
                                                                                     <td>
                                                                                     <div className="last-row">
                                                                                            
-                                                                                            <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player._id)} ><img src={Delect} /></button>
+                                                                                            {/* <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player._id)} ><img src={Delect} /></button> */}
                                                                                             <button onClick={() =>  ditailsmodelvalue (i, player._id)}><EyeFill style={{ color: 'white' }} /></button>
                                                                                         </div>
                                                                                     </td>
@@ -1071,7 +1084,7 @@ function TeamRoster(props) {
                                                                                 </td>
                                                                                 <td>
                                                                                 <div className="last-row">
-                                                                                         <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(non_Player._id)} ><img src={Delect} /></button>
+                                                                                         {/* <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(non_Player._id)} ><img src={Delect} /></button> */}
                                                                                         <button onClick={() => ditailsmodelvalue(i, non_Player._id)}><EyeFill style={{ color: 'white' }}/></button>
                                                                                     </div>
                                                                                 </td>

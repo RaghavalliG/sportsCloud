@@ -23,6 +23,7 @@ import { Network } from '../../../Services/Api';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { logoutUser } from "../../../Redux/Actions/auth";
+import CsvDownload from '../../../Components/Comman/CsvDownload';
 
 
 
@@ -39,7 +40,8 @@ function Export(props) {
     const [dropdown, setDropdown] = useState([])
     const [teamDropdown, setTeamDropDown] = useState("")
     const [team, setTeam] = useState([]);
-
+    const [schedule, setSchedule] = useState([]);
+    
 
     useEffect(() => {
         // let user = userdata && userdata._id ? true : false;
@@ -98,42 +100,112 @@ function Export(props) {
         }
     }
 
-    const teamSelect = () => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            let header = {
-                'authToken': user.authtoken
+    // const teamSelect = () => {
+    //     const user = JSON.parse(localStorage.getItem('user'));
+    //     if (user) {
+    //         let header = {
+    //             'authToken': user.authtoken
 
-            }
-            console.log('user', user)
+    //         }
+    //         console.log('user', user)
 
-            Network('api/player-joined-team-list?player_id=' + user._id, 'GET', header)
-                .then(async (res) => {
-                    console.log("res----", res)
-                    if (res.response_code == 4000) {
-                        dispatch(logoutUser(null))
-                        localStorage.removeItem("user");
-                        history.push("/")
-                        toast.error(res.response_message)
-                    }
+    //         Network('api/player-joined-team-list?player_id=' + user._id, 'GET', header)
+    //             .then(async (res) => {
+    //                 console.log("res----", res)
+    //                 if (res.response_code == 4000) {
+    //                     dispatch(logoutUser(null))
+    //                     localStorage.removeItem("user");
+    //                     history.push("/")
+    //                     toast.error(res.response_message)
+    //                 }
 
-                    setTeam(res.response_data);
-                    // if(res.response_data.length!=0){
-                        teamRoster(res.response_data[0]._id);
-                    // }
+    //                 setTeam(res.response_data);
+    //                 // if(res.response_data.length!=0){
+    //                     teamRoster(res.response_data[0]._id);
+    //                 // }
                    
 
-                })
+    //             })
+    //     }
+    // }
+
+
+    const teamSelect = () => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) {
+          let header = {
+            token: user.authtoken,
+          };
+          console.log("user", user);
+    
+          Network(
+            "api/getAllAcceptedTeamListByPlayerId?playerId=" + user._id,
+            "GET",
+            header
+          ).then(async (res) => {
+            console.log("res----", res);
+            if (res.response_code == 4000) {
+              dispatch(logoutUser(null));
+              localStorage.removeItem("user");
+              history.push("/");
+              toast.error(res.response_message);
+            }
+    
+            setTeam(res.response_data);
+            // if(res.response_data.length!=0){
+            teamSchedule(res?.response_data[0]._id);
+            // }
+          });
         }
-    }
+      };
+
+      const teamSchedule = (id) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        console.log("id<<<<<", id);
+        if (user) {
+          let header = {
+            token: user.authtoken,
+          };
+          console.log("user", user);
+    
+          Network(
+            // 'api/get-game-event-list-for-player?user_id='+user._id+'&page=1&limit=10',
+            // "api/getAllEventAndGamesData?team_id="+"645cc97e6612dc1e4cd97597",
+            "api/getAllEventAndGamesData?team_id=" + id,
+            // +'&page=1&limit=10',
+            "GET",
+            header
+          ).then(async (res) => {
+            console.log("schedule----", res);
+    
+            if (res.response_code == 4000) {
+              dispatch(logoutUser(null));
+              localStorage.removeItem("user");
+              history.push("/");
+              toast.error(res.response_message);
+            }
+            setSchedule(res.response_data);
+          });
+        }
+      };
 
     
 
     const change = (event) => {
-        console.log("event", event.target.value)
-        setTeamDropDown(event.target.value)
-        teamRoster(event.target.value);
+        console.log("event", event.target.value);
+    setTeamDropDown(event.target.value);
+    teamSchedule(event.target.value);
     }
+    let headers = [
+    //   schedule?.isFlag ==  "Event"? 
+        { label: "Event/Game Name", key: "event_name" }
+    //     { label: "Event/Game Name", key: "game_name" },
+    // {label:"Event/Game name",key:["event_name","game_name"]}
+
+    ];
+
+    let data = (schedule && schedule.length>0 )? schedule: [];
+
 
 
 
@@ -152,9 +224,11 @@ function Export(props) {
 
                                 <select onClick={change}>
                                     <option>Select Team</option>
-                                    {team.map((team) => {
+                                    {team?.map((team) => {
                                         return (
-                                            <option value={team.team_id._id}>{team.team_id.team_name}</option>
+                                            <option value={team.accept_invite_team_id}>
+                                            {team.accept_invite_team_name}
+                                          </option>
                                         )
                                     })}
 
@@ -228,7 +302,8 @@ function Export(props) {
                                             </div>
                                             <div className="col-md-16">
                                                 <div className="prefarance-form-list" style={{ marginLeft: "10px" }}>
-                                                    <button className="add-links">Export Text File</button>
+                                                    {/* <button className="add-links">Export Text File</button> */}
+                                                    <CsvDownload data={data} headers={headers} filename={`Schedule list `} />
 
                                                 </div>
                                             </div>
