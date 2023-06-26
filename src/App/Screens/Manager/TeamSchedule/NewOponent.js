@@ -42,6 +42,11 @@ function NewOponent(props) {
     const [valueDropDown, setValueDropDown] = useState("")
     const [eventType, setEventType] = useState()
 
+    const [oponentName, setOponentName] = useState('');
+    const [oponentContact, setOponentContactName] = useState('');
+    const [oponentPhoneNum, setOponentPhoneNum] = useState('');
+    const [oponentNotes, setOponentNotes]= useState('');
+    const [oponentEmail, setOponentEmail] = useState('');
 
 
     useEffect(() => {
@@ -77,15 +82,15 @@ function NewOponent(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -93,7 +98,7 @@ function NewOponent(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamSchedule(res.response_data[0]._id);
+                    teamSchedule(res.response_data[0].team_id);
 
 
 
@@ -212,8 +217,87 @@ function NewOponent(props) {
     //         console.log("eventtype------>",setEvent)
     //    }
 
+    const checkValidation = () => {
+        if (oponentName == null) {
+            toast.error("Please Provide  Oponent Name", {
+                position: "top-center"
+            })
+
+        }
+        if (oponentPhoneNum == null) {
+            toast.error("Please Provide  Oponent phone number", {
+                position: "top-center"
+            })
+
+        }
+        if (oponentContact == null) {
+            toast.error("Please Provide  contact", {
+                position: "top-center"
+            })
+
+        }
+        if (oponentEmail == null) {
+            toast.error("Please Provides Oponent Email", {
+                position: "top-center"
+            })
+
+        }
+        if (oponentNotes == null) {
+            toast.error("Please Provides some notes related to Oponent", {
+                position: "top-center"
+            })
+
+        }
+
+        addOpponent()
+    }
+
+    const addOpponent = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': user.authtoken
+                },
+                body: JSON.stringify(
+
+                    {
+                        "userId": user._id,
+                        "opponentsName": oponentName,
+                        "contactName": oponentContact,
+                        "contactEmail": oponentEmail,
+                        "contactPhoneNumber": oponentPhoneNum
+                    }
 
 
+
+                )
+
+
+            };
+            console.log(requestOptions);
+
+            fetch('https://nodeserver.mydevfactory.com:1448/api/createTeamOpponents', requestOptions)
+                .then(response => response.json())
+                .then((res) => {
+                    console.log("oponent data", res)
+
+                    if (res.response_code == 400) {
+                        // dispatch(logoutUser(null))
+                        // localStorage.removeItem("user");
+                        history.push("/")
+                        toast.error(res.response_message)
+                    } else {
+                        toast.success(res.response_message)
+                        history.goBack();
+                    }
+                })
+        }
+
+    }
 
     return (
 
@@ -226,10 +310,10 @@ function NewOponent(props) {
                             <div className="teams-select">
                                 <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
-                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
+                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
                                     {dropdown.map((dropdown) => {
                                         return (
-                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -241,7 +325,7 @@ function NewOponent(props) {
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-name">{user ? `${user.fname} ${user.lname}` : null}</div>
                                 <div className="profile-head-img">
                                     {
                                         user ?
@@ -261,7 +345,7 @@ function NewOponent(props) {
 
                         <div className="prefarance-page">
                             <div className="page-header">
-                                <h2 className="page-title">Locations</h2>
+                                <h2 className="page-title">Opponents</h2>
 
                             </div>
 
@@ -273,42 +357,42 @@ function NewOponent(props) {
                                         <div className="col-md-6">
                                     <div className="prefarance-form-list">
                                         <label> Oponent Name</label>
-                                        <input type="text" className="input-select" />
+                                        <input type="text" className="input-select" onChange={(e)=> setOponentName(e.target.value)}/>
                                         <span>The name of the game location Example: "Wilshire Park Soccer Field"</span>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="prefarance-form-list">
                                         <label> Contact Name</label>
-                                        <input type="text" className="input-select" />
+                                        <input type="text" className="input-select" onChange={(e)=> setOponentContactName(e.target.value)} />
                                         <span>A contact person for the opposing team Example: "Coach Smithers"</span>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="prefarance-form-list">
                                         <label> Phone Number</label>
-                                        <input type="text" className="input-select" />
+                                        <input type="text" className="input-select" onChange={(e)=> setOponentPhoneNum(e.target.value)}/>
                                         <span>A phone number for that contact Example: "503-123-4567"</span>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="prefarance-form-list">
                                         <label> Email address</label>
-                                        <input type="text" className="input-select" />
+                                        <input type="text" className="input-select" onChange={(e)=> setOponentEmail(e.target.value)}/>
                                         <span>An email address tor that contact Example: "coach_smithers@domain.com"</span>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="prefarance-form-list">
                                         <label> Notes</label>
-                                        <textarea type="text" className="input-select"  style={{height:"200px"}}/>
+                                        <textarea type="text" className="input-select" onChange={(e)=> setOponentNotes(e.target.value)} style={{height:"200px"}}/>
                                         <span>Team colors, scouting reports, etc</span>
                                     </div>
                                 </div>
                                 <div className="col-md-12">
                                     <div className="prefarance-form-list" style={{marginLeft:"60%"}}>
-                                        <button className="add-links">CANCEL</button>
-                                        <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} >SAVE</button>
+                                        <button className="add-links" onClick={history.goBack}>CANCEL</button>
+                                        <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} onClick={()=> checkValidation()}>SAVE</button>
                                     </div>
                                 </div>
                                         </div>

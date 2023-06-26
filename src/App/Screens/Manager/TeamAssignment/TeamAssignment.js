@@ -93,15 +93,15 @@ function TeamAssignments(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
 
-            Network('api/get-assignment-list?assigner_id=' + user._id, 'GET', header)
+            Network('api/getAllAssignmentData' , 'GET', header)
                 .then(async (res) => {
                     console.log("assignmentData----", res)
-                    setAssignment(res.response_data.docs)
+                    setAssignment(res.response_data)
 
 
 
@@ -149,15 +149,15 @@ function TeamAssignments(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -165,7 +165,7 @@ function TeamAssignments(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamSchedule(res.response_data[0]._id);
+                    teamSchedule(res.response_data[0].team_id);
 
 
 
@@ -185,17 +185,17 @@ function TeamAssignments(props) {
             }
             console.log('user', user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("teanSelect----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
                         toast.error(res.response_message)
                     }
                     setTeam(res.response_data)
-                    teamSchedule(res.response_data[0]._id);
+                    teamSchedule(res.response_data[0].team_id);
 
 
                 })
@@ -252,7 +252,7 @@ function TeamAssignments(props) {
                 "_id": id
             })
         };
-        fetch('https://nodeserver.mydevfactory.com:1447/api/delete-assignment', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/delete-assignment', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("delete assignment data", res)
@@ -526,10 +526,10 @@ console.log("volenteer",volenteerData)
                                 }}>Create New Teams</button>
                                 <select onChange={change} >
 
-                                    {team == null ? <option> Team1</option> :
-                                        team.map((team) => {
+                                    {dropdown == null ? <option> Team1</option> :
+                                        dropdown?.map((team) => {
                                             return (
-                                                <option key={team.id}>{team.team_name}</option>
+                                                <option  key={team.team_id} value={team.team_id}>{team.team_name}</option>
                                             )
                                         })}
                                 </select>
@@ -538,7 +538,7 @@ console.log("volenteer",volenteerData)
                                         ACCOUNT
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a className="dropdown-item" href="#">Jayanta Karmakar</a></li>
+                                        <li><a className="dropdown-item" href="#">{`${user.fname} ${user.lname}`}</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
                                             <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
@@ -565,11 +565,11 @@ console.log("volenteer",volenteerData)
                                 </div>
                             </div>
                             <div className="profile-head">
-                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-name">{user?.fname + " " + user?.lname}</div>
                                 <div className="profile-head-img">
                                     {profilePic.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic}${profilePic.profile_image}`} alt="" />
+                                        <img src={`${user.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -596,9 +596,9 @@ console.log("volenteer",volenteerData)
 
                                     <select onChange={change} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }} >
                                         <option>Select A Team</option>
-                                        {dropdown.map((dropdown) => {
+                                        {dropdown?.map((dropdown) => {
                                             return (
-                                                <option value={dropdown._id}>{dropdown.team_name}</option>
+                                                <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                             )
                                         })}
                                     </select>
@@ -607,7 +607,7 @@ console.log("volenteer",volenteerData)
 
                                     <select style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }} onChange={gameEventId}>
                                         <option >Select Game/Event</option>
-                                        {schedule.map((schedule) => {
+                                        {schedule?.map((schedule) => {
                                             return (
                                                 <option value={schedule._id}>{schedule.name}</option>
                                             )
@@ -630,7 +630,7 @@ console.log("volenteer",volenteerData)
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Location</h2>
                                     <select onClick={selectLocation} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option  >Select Location</option>
-                                        {locationData.map((locationData) => {
+                                        {locationData?.map((locationData) => {
                                             return (
                                                 <option value={locationData.locationName}>{locationData.locationName}</option>
                                             )
@@ -644,9 +644,9 @@ console.log("volenteer",volenteerData)
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Volenteer</h2>
                                     <select onClick={volenteerId} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option>Select Volenteer</option>
-                                        {volenteerData.member_id != null ? volenteerData.map((volenteerData) => {
+                                        {volenteerData?.member_id != null ? volenteerData?.map((volenteerData) => {
                                             return (
-                                                <option value={`${volenteerData.member_id.fname}${volenteerData.member_id.lname}`}>{volenteerData.member_id.fname}{volenteerData.member_id.lname}</option>
+                                                <option value={`${volenteerData?.member_id.fname}${volenteerData?.member_id.lname}`}>{volenteerData?.member_id.fname}{volenteerData?.member_id.lname}</option>
                                             )
                                         }) :""}
 
@@ -671,9 +671,9 @@ console.log("volenteer",volenteerData)
 
                                         <option>Select a Team</option>
 
-                                        {dropdown.map((dropdown) => {
+                                        {dropdown?.map((dropdown) => {
                                             return (
-                                                <option value={dropdown._id}>{dropdown.team_name}</option>
+                                                <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                             )
                                         })}
                                     </select>
@@ -683,7 +683,7 @@ console.log("volenteer",volenteerData)
                                     <select style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }} onChange={gameEventId}>
                                         <option >{assignment[id].eventGameDetails.name}</option>
 
-                                        {schedule.map((schedule) => {
+                                        {schedule?.map((schedule) => {
                                             return (
                                                 <option value={schedule._id}>{schedule.name}</option>
                                             )
@@ -707,7 +707,7 @@ console.log("volenteer",volenteerData)
                                     <select onClick={selectLocation} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option  > {assignment[id].location}</option>
 
-                                        {locationData.map((locationData) => {
+                                        {locationData?.map((locationData) => {
                                             return (
                                                 <option value={locationData.locationName}>{locationData.locationName}</option>
                                             )
@@ -721,9 +721,9 @@ console.log("volenteer",volenteerData)
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Volenteer</h2>
                                     <select onClick={volenteerId} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option>{assignment[id].volunteer}</option>
-                                        {volenteerData.member_id != null ? volenteerData.map((volenteerData) => {
+                                        {volenteerData?.member_id != null ? volenteerData?.map((volenteerData) => {
                                             return (
-                                                <option value={`${volenteerData.member_id.fname}${volenteerData.member_id.lname}`}>{volenteerData.member_id.fname}{volenteerData.member_id.lname}</option>
+                                                <option value={`${volenteerData?.member_id.fname}${volenteerData?.member_id.lname}`}>{volenteerData?.member_id.fname}{volenteerData?.member_id.lname}</option>
                                             )
                                         }) :""}
 
@@ -749,34 +749,34 @@ console.log("volenteer",volenteerData)
                                             <th>Assignments</th>
                                             <th>Volunteer</th>
                                         </tr>
-                                        {assignment.map((assignment, id) => {
+                                        {assignment?.map((assignment, id) => {
                                             return (
                                                 <tr >
                                                     <td>
                                                         <div className="flag-prac">
                                                             <img src={flag} alt="" />
-                                                            <button className="practice">{assignment.eventGameDetails.event_type}</button>
+                                                            <button className="practice">{assignment?.eventGameDetails?.event_type}</button>
                                                         </div>
                                                         <div className="game-name">
-                                                            {assignment.eventGameDetails.name}</div>
+                                                            {assignment.assignment_name}</div>
                                                     </td>
-                                                    <td><span>{assignment.date}</span></td>
-                                                    <td>
+                                                    {/* <td><span>{assignment.date}</span></td> */}
+                                                    {/* <td>
                                                         <span>{assignment.time}</span>
-                                                    </td>
-                                                    <td>
+                                                    </td> */}
+                                                    {/* <td>
                                                         <span>{assignment.location}</span>
-                                                    </td>
-                                                    <td>{assignment.assignment}
+                                                    </td> */}
+                                                    {/* <td>{assignment.assignment} */}
                                                         {/* <div className="add-btn">
                                                 <button><img src={add} alt="" /></button>
                                             </div> */}
-                                                    </td>
-                                                    <td>
+                                                    {/* </td> */}
+                                                    {/* <td>
                                                         <div className="last-row">
                                                             <p>{assignment.volunteer}</p>
                                                         </div>
-                                                    </td>
+                                                    </td> */}
                                                     <td>
                                                         <div className="last-row">
                                                             <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteAssignmentData(assignment._id)}><img src={Delect} /></button>

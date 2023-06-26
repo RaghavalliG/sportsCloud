@@ -44,6 +44,7 @@ function AnotherPlayer(props) {
     const [newplayerdata, setNewPlayerData] = useState([])
     const [newNonPlayerData, setNewNonPlayerData] = useState([])
     const [checked, setChecked] = useState([]);
+    const [addPlayer, setaddImportPlayers] = useState([]);
     var res;
 
     useEffect(() => {
@@ -222,6 +223,7 @@ function AnotherPlayer(props) {
 
     const PlayerImportData = () => {
         const user = JSON.parse(localStorage.getItem('user'));
+        console.log(addPlayer);
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -238,17 +240,17 @@ function AnotherPlayer(props) {
 
             })
         };
-        fetch('https://nodeserver.mydevfactory.com:1448/api/createRoasterFromAnotherTeam', requestOptions)
-            .then(response => response.json())
-            .then((res) => {
-                console.log("Import  Data", res)
-                if (res.response_code == 400) {
-                    dispatch(logoutUser(null))
-                    localStorage.removeItem("user");
-                    history.push("/")
-                    toast.error(res.response_message)
-                }
-            })
+        // fetch('https://nodeserver.mydevfactory.com:1448/api/createRoasterFromAnotherTeam', requestOptions)
+        //     .then(response => response.json())
+        //     .then((res) => {
+        //         console.log("Import  Data", res)
+        //         if (res.response_code == 400) {
+        //             dispatch(logoutUser(null))
+        //             localStorage.removeItem("user");
+        //             history.push("/")
+        //             toast.error(res.response_message)
+        //         }
+        //     })
 
     }
 
@@ -414,6 +416,15 @@ function AnotherPlayer(props) {
                                         {/* <div>
   {`Items checked are: ${id}`}
 </div> */}
+{
+    newplayerdata.map((player)=>{
+        id?.map((id)=>{
+           return ( 
+               player._id == id ? addPlayer.push(player): ''
+           )
+        })
+    })
+}
                                         {newplayerdata.map((player) => {
                                             return (
                                                 <div>

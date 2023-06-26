@@ -25,6 +25,10 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { logoutUser } from "../../../Redux/Actions/auth";
 
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import PlaceComponent from './PlaceComponent';
+
+
 
 
 
@@ -41,6 +45,11 @@ function NewLocation(props) {
 
     const [valueDropDown, setValueDropDown] = useState("")
     const [eventType, setEventType] = useState()
+
+    const [locationName, setLocationName] = useState("");
+    const [address, setAddress] = useState("")
+    const [link, setLink] = useState("");
+    const [notes, setNotes] = useState("");
 
 
 
@@ -77,15 +86,15 @@ function NewLocation(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -93,7 +102,7 @@ function NewLocation(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamSchedule(res.response_data[0]._id);
+                    teamSchedule(res.response_data[0].team_id);
 
 
 
@@ -205,6 +214,83 @@ function NewLocation(props) {
 
     }
 
+    const CheckValidation = () => {
+
+        if (locationName == null) {
+            toast.error("Please Provide  Location Name", {
+                position: "top-center"
+            })
+
+        }
+        if (address == null) {
+            toast.error("Please Provide  Location Address", {
+                position: "top-center"
+            })
+
+        }
+        if (link == null) {
+            toast.error("Please Provide  website link", {
+                position: "top-center"
+            })
+
+        }
+        if (notes == null) {
+            toast.error("Please Provides some notes related to Location", {
+                position: "top-center"
+            })
+
+        }
+
+        addLocation();
+    }
+
+    const addLocation = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': user.authtoken
+                },
+                body: JSON.stringify(
+
+                    {
+                        "userId": user._id,
+                        "locationName": locationName,
+                        "address": address,
+                        "website": link,
+                        "notes": notes,
+                        "locationLatLong": "EktNdW1icmEgQnlwYXNzIFJkLCBSYXNoaWQgQ29tcG91bmQsIEthdXNhLCBNdW1icmEsIFRoYW5lLCBNYWhhcmFzaHRyYSwgSW5kaWEiLiosChQKEgnN1dJh6L7nOxFVs4wymvWnBhIUChIJ1ZpF_W2_5zsRPl3Hicw9h8c"
+                    }
+
+
+
+                )
+
+
+            };
+            console.log(requestOptions);
+
+            fetch('https://nodeserver.mydevfactory.com:1448/api/createTeamLocation', requestOptions)
+                .then(response => response.json())
+                .then((res) => {
+                    console.log("location data", res)
+
+                    if (res.response_code == 400) {
+                        // dispatch(logoutUser(null))
+                        // localStorage.removeItem("user");
+                        history.push("/")
+                        toast.error(res.response_message)
+                    } else {
+                        toast.success(res.response_message)
+                        history.goBack();
+                    }
+                })
+        }
+    }
+
 
     //     const EventSet=(setEvent)=>{
     //         // setEventType(e.target.value)
@@ -220,16 +306,16 @@ function NewLocation(props) {
         <div>
             <div className="dashboard-container">
                 <div className="dashboard-main">
-                    <SideMenuComponents manger="manger"/>
+                    <SideMenuComponents manger="manger" />
                     <div className="dashboard-main-content">
                         <div className="dashboard-head">
                             <div className="teams-select">
                                 <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
-                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
+                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
                                     {dropdown.map((dropdown) => {
                                         return (
-                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -265,51 +351,56 @@ function NewLocation(props) {
 
                             </div>
 
-                            <div className="prefarance-box" style={{overflow:"hidden"}}>
+                            <div className="prefarance-box" style={{ overflow: "hidden" }}>
                                 <div className="team-payment team-assesment">
                                     <div className="prefarance-form playerinfo-form">
 
-                                        <div className="row" style={{padding:"21px"}}>
-                                        <div className="col-md-6">
-                                    <div className="prefarance-form-list">
-                                        <label> Location Name</label>
-                                        <input type="text" className="input-select" />
-                                        <span>The name of the game location Example: "Wilshire Park Soccer Field"</span>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="prefarance-form-list">
-                                        <label> Address</label>
-                                        <input type="text" className="input-select" />
-                                        <span>The Physical address of the game location Example: " NE 33rd Ave &
+                                        <div className="row" style={{ padding: "21px" }}>
+                                            <div className="col-md-6">
+                                                <div className="prefarance-form-list">
+                                                    <label> Location Name</label>
+                                                    <input type="text" className="input-select" onChange={(e) => setLocationName(e.target.value)} />
+                                                    <span>The name of the game location Example: "Wilshire Park Soccer Field"</span>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="prefarance-form-list">
+                                                    <label> Address</label>
+                                                    <input type="text" className="input-select" onChange={(e) => setAddress(e.target.value)} />
+                                                    <span>The Physical address of the game location Example: " NE 33rd Ave &
 
-Skidmore St, Portland OR" (It'll be automatically converted into a Google
+                                                        Skidmore St, Portland OR" (It'll be automatically converted into a Google
 
-Map.)</span>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="prefarance-form-list">
-                                        <label> Link</label>
-                                        <input type="text" className="input-select" />
-                                        <span>The URL to the site - this could be a link to the facility's home page or a link
+                                                        Map.)</span>
+                                                        </div>
+                                                {/* <div className="prefarance-form-list">
+                                                    <label> Address</label>
+                                                <PlaceComponent />
+                                                </div> */}
+                                                
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="prefarance-form-list">
+                                                    <label> Link</label>
+                                                    <input type="text" className="input-select" onChange={(e) => setLink(e.target.value)} />
+                                                    <span>The URL to the site - this could be a link to the facility's home page or a link
 
-to your own map. Must include http:// or https://</span>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="prefarance-form-list">
-                                        <label> Address</label>
-                                        <textarea type="text" className="input-select"  style={{height:"200px"}}/>
-                                        <span>Additional notes or directions to this location.</span>
-                                    </div>
-                                </div>
-                                <div className="col-md-12">
-                                    <div className="prefarance-form-list" style={{marginLeft:"60%"}}>
-                                        <button className="add-links">CANCEL</button>
-                                        <button className="add-links" style={{ backgroundColor: "#181717", marginLeft: "5px" }} >SAVE</button>
-                                    </div>
-                                </div>
+                                                        to your own map. Must include http:// or https://</span>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="prefarance-form-list">
+                                                    <label> Notes</label>
+                                                    <textarea type="text" className="input-select" onChange={(e) => setNotes(e.target.value)} style={{ height: "200px" }} />
+                                                    <span>Additional notes or directions to this location.</span>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="prefarance-form-list" style={{ marginLeft: "60%" }}>
+                                                    <button className="add-links" onClick={history.goBack}>CANCEL</button>
+                                                    <button className="add-links" onClick={CheckValidation} style={{ backgroundColor: "#181717", marginLeft: "5px" }} >SAVE</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

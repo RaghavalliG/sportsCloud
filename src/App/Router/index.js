@@ -92,6 +92,9 @@ import ProductDetails from '../Screens/Manager/ManagerTeamShop/ProductDetails'
 
 import NotFound from "./../../Error"
 import VerifyEmail from '../Screens/Auth/VerifyEmail';
+// import Location from '../Screens/Manager/TeamSchedule/Location';
+// import CreateOpponent from '../Screens/Manager/TeamSchedule/CreateOpponent';
+import NewGame from '../Screens/Manager/TeamSchedule/newGame';
 
 export const currentURL = '/projects/suvendu/robins/sportscloud';
 
@@ -159,10 +162,13 @@ function RouterScreen() {
                                         <Route path='/' component={ManagerHome} exact />
                                         <Route path='/ManagerRoster' component={ManagerRoster} />
                                         <Route path='/Teamschdule' component={TeamSchdule} />
+                                        {/* <Route path='/Location' component={Location} /> */}
+                                        {/* <Route path='/CreateOpponent' component={CreateOpponent} /> */}
                                         <Route path='/ManagerTeamShop' component={ManagerTeamShop} />
                                         <Route path='/preferance' component={Preferance} />
                                         <Route path='/TeamAssignments' component={TeamAssignments} />
                                         <Route path='/NewEvent' component={NewEvent} />
+                                        <Route path='/NewGame' component={NewGame} />
                                         <Route path='/AddPlayer' component={AddPlayer} />
                                         <Route path='/CreateTeam' component={CreateTeam} />
                                         <Route path='/ManagerTeamAvailability' component={ManagerTeamAvailability} />

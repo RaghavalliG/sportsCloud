@@ -1229,7 +1229,7 @@ p, ul, ol {
 }
 .prefarance-form-list-box .input-select{
     width: 55%;
-    background: ;
+    /* background: ; */
     border: 1px solid #2C2C2C;
     border-radius: 10px;
     height: 60px;
@@ -1805,7 +1805,7 @@ p, ul, ol {
 }
 .playerinfo-form .input-select{
     width: 100%;
-    background: ;
+    /* background: ; */
     border: 1px solid #2C2C2C;
     border-radius: 10px;
     height: 60px;
@@ -2171,7 +2171,7 @@ button.add-links{
 
 .playerinfo-form .input-textarea{
     width: 100%;
-    background: ;
+    /* background: ; */
     border: 1px solid #2C2C2C;
     border-radius: 10px;
     height: 184px;
@@ -2322,4 +2322,8 @@ background: #EC3525;
     padding-right: 20px;
     background-size: 12px;
 
+}
+
+.modal-content {
+    width: 1000px;
 }

@@ -47,17 +47,18 @@ function HomeComponents(props) {
   const [degree, setDegree] = useState([]);
   const [newplayerdata, setNewPlayerData] = useState([]);
   const [image, Profile] = useState(BigUserProfile);
+  const [teamDropdown, setTeamDropDown] = useState("")
 
   // const [loading,setLoading]= useState(false)
   const [profilePic, setProfilePic] = useState([]);
   const[invitationlist,setInvitationlist]= useState([])
   const [modelValue, setModelValue] = useState(false)
   const [invite_id, setInviteId] = useState('')
-  console.log("team ka value====>+++++++++++++++++++++++=", team);
-  console.log(" typeof team====>", typeof team);
+  // console.log("team ka value====>+++++++++++++++++++++++=", team);
+  // console.log(" typeof team====>", typeof team);
   
 
-  const pic1 = "https://nodeserver.mydevfactory.com:1447/profilepic/";
+  const pic1 = "https://nodeserver.mydevfactory.com:1448/profilepic/";
 
   useEffect(() => {
     // let user = userdata && userdata._id ? true : false;
@@ -65,7 +66,7 @@ function HomeComponents(props) {
     setUser(user);
     // console.log("USerData", userdata);
     const userLocal = JSON.parse(localStorage.getItem("user"));
-    console.log("userData after login--->", userLocal);
+    // console.log("userData after login--->", userLocal);
     let userD = userLocal && userLocal._id ? true : false;
     setUser(userD);
     setUserData(userLocal);
@@ -79,27 +80,31 @@ function HomeComponents(props) {
   const pic = "https://nodeserver.mydevfactory.com:1448/";
 
   const handleLogout = () => {
-    console.log("pruyuuuuuu", props);
+    // console.log("pruyuuuuuu", props);
     dispatch(logoutUser(null));
     localStorage.removeItem("user");
     setUserData(null);
     props.history.push("/");
   };
+
+
   const teamSelect = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       let header = {
         token: user.authtoken,
       };
-      console.log("user+++++++++++", user._id
-      );
+      // console.log("user+++++++++++", user._id
+      // );
 
       Network(
-        "api/player-joined-team-list?player_id=" + user._id,
+        // "api/player-joined-team-list?player_id=" + user._id,
+        // "api/getAllAcceptedTeamListByPlayerId?playerId=" +"644a463b556e970345ff5be5",
+        "api/getAllAcceptedTeamListByPlayerId?playerId=" + user._id,
         "GET",
         header
       ).then(async (res) => {
-        console.log("res----_______________+++++++++++++++()()", res);
+        // console.log("res----_______________+++++++++++++++()()", res);
         if (res.response_code == 400) {
           dispatch(logoutUser(null));
           localStorage.removeItem("user");
@@ -108,48 +113,61 @@ function HomeComponents(props) {
         }
 
         setTeam(res.response_data);
+        teamRoster(res?.response_data[0]._id);
       });
 
       
     }
   };
 
-  const teamRoster = () => {
+  const teamRoster = (id) => {
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log("87676564",id)
     if (user) {
       let header = {
-        authTokentoken: user.authtoken,
+        token: user.authtoken,
       };
-      console.log("user", user);
+      // console.log("user", user);
 
       Network(
-        "api/player-list-by-team-id?team_id=" + "60a51abfae9b3244cc9d1eae",
+        // "api/player-list-by-team-id?team_id=" + "6470683a88ea6b032e255a3e",
+        "api/player-list-by-team-id?team_id=" + id,
+        // "api/getRosterListByTeamId?teamid=" + "6480285555cf8a5024960668",
         "GET",
         header
       ).then(async (res) => {
-        console.log("teamRoster----", res);
+        console.log("teamRoster----+++++++++++++++++++++++++++++++++++++++++++++++", res);
         if (res.response_code == 400) {
           dispatch(logoutUser(null));
           localStorage.removeItem("user");
           history.push("/");
           toast.error(res.response_message);
         }
-        console.log("team player", res.response_data.PLAYER);
-        setPlayer(res.response_data.PLAYER);
+        console.log("team player", res.response_data.player);
+        setPlayer(res.response_data.player);
         setNewPlayerData(
-          res.response_data.PLAYER.filter((data) => {
-            return data.member_id != null;
+          res.response_data.player.filter((data) => {
+            return data._id != null;
           })
         );
       });
     }
   };
 
+
+  const change = (event) => {
+    console.log("event+++++++++++++++++++++", event.target.value)
+    setTeamDropDown(event.target.value)
+   teamRoster(event.target.value);
+    setPlayer([])
+   
+}
+
   const handleChange = (event) => {
-    console.log(
-      "URL.createObjectURL(event.target.files[0])---->",
-      URL.createObjectURL(event.target.files[0])
-    );
+    // console.log(
+    //   "URL.createObjectURL(event.target.files[0])---->",
+    //   URL.createObjectURL(event.target.files[0])
+    // );
     Profile(event.target.files[0]);
     uploadImage(event.target.files[0]);
   };
@@ -159,11 +177,11 @@ function HomeComponents(props) {
       let header = {
         authToken: user.authtoken,
       };
-      console.log("user", user);
+      // console.log("user", user);
 
       Network("api/get-user-details?user_id=" + user._id, "GET", header).then(
         async (res) => {
-          console.log("new Profile Pic----", res);
+          // console.log("new Profile Pic----", res);
           if (res.response_code == 4000) {
             dispatch(logoutUser(null));
             localStorage.removeItem("user");
@@ -179,10 +197,10 @@ function HomeComponents(props) {
   const uploadImage = (value) => {
     const formData = new FormData();
     formData.append("profile_image", value);
-    console.log("image--->", value);
+    // console.log("image--->", value);
 
     axios(
-      "https://nodeserver.mydevfactory.com:1447/api/update-user-profile-image",
+      "https://nodeserver.mydevfactory.com:1448/api/update-user-profile-image",
       {
         method: "POST",
         headers: {
@@ -192,10 +210,10 @@ function HomeComponents(props) {
         data: formData,
       }
     ).then((res) => {
-      console.log("edit user Image", res);
+      // console.log("edit user Image", res);
       if (res.status == 200) {
         toast.success("Profile Picture Change  Succecfull");
-        console.log("edit Image", res);
+        // console.log("edit Image", res);
         updateProfile();
       }
 
@@ -214,7 +232,7 @@ function HomeComponents(props) {
       "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&exclude=hourly,minutely&units=matric&appid=2986831fc21dc86b9c0a3f789cec2721"
     ).then((res) => {
       res.json().then((res) => {
-        console.log("weather", res.daily);
+        // console.log("weather", res.daily);
         if (res.daily != null) {
           setDegree(res.daily);
         }
@@ -224,7 +242,7 @@ function HomeComponents(props) {
     // console.log(user._id,"user.authtoken")
   const invitationList=()=>{
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user._id,"user idghkmh")
+    // console.log(user._id,"user idghkmh")
     axios({
       method: 'get',
       // url: 'https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?PlayerId='+"647f1c8456ee340813ac0e49",
@@ -236,7 +254,7 @@ function HomeComponents(props) {
     
     })
       .then(function (res) {
-         console.log(res,"9000000000000000000000000000000000009090")
+        //  console.log(res,"9000000000000000000000000000000000009090")
         //  setInvitationlist(res.data.response_data.filter(data=>{
         //   return data.invite_id !=null;
         //  }));
@@ -244,14 +262,14 @@ function HomeComponents(props) {
           invitationlist.push(invitation);
          })
         
-         console.log(invitationlist,"dudaessdnjkndrftnryue")
+        //  console.log(invitationlist,"dudaessdnjkndrftnryue")
 
          if(invitationlist && invitationlist.length>0){
           setModelValue(true)
          }
       })
       .catch(function (res) {
-         console.log(res)
+        //  console.log(res)
            
     });
   }
@@ -309,7 +327,7 @@ const handleClick =(invite_id,type)=>{
   axios
   .post(api,requestbody,{headers:headers})
   .then((res)=>{
-    console.log(res,"ghghghghghghhghjgghggghfgg")
+    // console.log(res,"ghghghghghghhghjgghggghfgg")
     if(res.data.success==true){
       toast.success(res.data.response_message)
     }else{
@@ -320,7 +338,7 @@ const handleClick =(invite_id,type)=>{
     toast.error("an error occurred")
 
   })
-  console.log(requestbody)
+  // console.log(requestbody)
 }
 
   return (
@@ -331,11 +349,14 @@ const handleClick =(invite_id,type)=>{
           <div className="dashboard-main-content">
             <div className="dashboard-head">
               <div className="teams-select">
-                <select >
+                <select value={teamDropdown}onChange={change} >
+                <option>Select Team</option>
                   {team?.map((team) => (
                     <>
-                      <option>{team?.team_id?.team_name}</option>
+                    return(
+                      <option value={team?.accept_invite_team_id}>{team?.accept_invite_team_name}</option>
                       {/* {console.log(item,"item====++++++")} */}
+                    )
                     </>
                   ))}
                 </select>
@@ -562,7 +583,7 @@ const handleClick =(invite_id,type)=>{
                     return (
                       <div className="team-list-box">
                         <div className="team-list-box-img">
-                          {player.member_id?.profile_image == null ? (
+                          {player?._id?.profile_image == null ? (
                             <img src={teamList} alt="" />
                           ) : (
                             <img
@@ -573,10 +594,10 @@ const handleClick =(invite_id,type)=>{
                         </div>
                         <div className="team-list-box-text">
                           <h4>
-                            {player.member_id?.fname} {player.member_id?.lname}
+                            {player?.firstName} {player?.lastName}
                           </h4>
                           <h5>{player.member_type}</h5>
-                          <a href="#">{player.position}</a>
+                          <a href="#">{player?.position}</a>
                         </div>
                       </div>
                     );
@@ -738,18 +759,18 @@ const handleClick =(invite_id,type)=>{
                 <div className="record-standing-head">My Teams</div>
                 <div className="myteam-list-section">
                   {team?.map((team) => {
-                    console.log("team ----", team);
+                    // console.log("team ----", team);
                     return (
                       <div className="team-list-box" key={team.id}>
                         <div className="team-list-box-img">
-                          {team.team_id.image == null ? (
+                          {team?.team_id?.image == null ? (
                             <img src={UserProfile} alt="" />
                           ) : (
                             <img src={`${pic}${team?.team_id?.image}`} alt="" />
                           )}
                         </div>
                         <div className="team-list-box-text">
-                          <h4>{team?.team_id?.team_name}</h4>
+                          <h4>{team?.accept_invite_team_name}</h4>
                           {/* <div className="my-team-details">
                         <div className="name">John Doe</div>
                         <div className="category">Player</div>

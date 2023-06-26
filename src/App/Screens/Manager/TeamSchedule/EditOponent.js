@@ -25,6 +25,9 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { logoutUser } from "../../../Redux/Actions/auth";
 
+import Modal from "react-bootstrap/Modal";
+
+
 
 
 
@@ -42,6 +45,18 @@ function EditOponent(props) {
     const [valueDropDown, setValueDropDown] = useState("")
     const [eventType, setEventType] = useState()
 
+    const [oponentlist, setOponentList] = useState([]);
+    const [loading, setLoading] = useState(false)
+    const [editModal, setEditModal] = useState(false);
+
+    const [oponentId, setOponentID] = useState([]);
+
+    const [oponentName, setOponentName] = useState('');
+    const [oponentContact, setOponentContactName] = useState('');
+    const [oponentPhoneNum, setOponentPhoneNum] = useState('');
+    const [oponentNotes, setOponentNotes] = useState('');
+    const [oponentEmail, setOponentEmail] = useState('');
+
 
 
     useEffect(() => {
@@ -55,6 +70,7 @@ function EditOponent(props) {
         let userD = userLocal && userLocal._id ? true : false;
         setUser(userD);
         setUserData(userLocal);
+        oponentList();
 
         // teamSchedule();
 
@@ -67,25 +83,19 @@ function EditOponent(props) {
         setUserData(null);
         props.history.push("/")
     };
-
-
-
-
-
-
     const dropdownMenu = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -93,7 +103,7 @@ function EditOponent(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamSchedule(res.response_data[0]._id);
+                    teamSchedule(res.response_data[0].team_id);
 
 
 
@@ -108,10 +118,6 @@ function EditOponent(props) {
         setTeamDropDown(event.target.value)
         teamSchedule(event.target.value);
     }
-
-
-
-
 
     const teamSchedule = (id) => {
         console.log("id", id)
@@ -173,7 +179,6 @@ function EditOponent(props) {
         }
     }
 
-
     const deleteScheduleData = (id) => {
         const user = JSON.parse(localStorage.getItem('user'));
         console.log("id-------------->", id)
@@ -212,7 +217,177 @@ function EditOponent(props) {
     //         console.log("eventtype------>",setEvent)
     //    }
 
+    const oponentList = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            let header = {
+                'Content-Type': 'application/json',
+                'token': user.authtoken
 
+            }
+            //console.log('user',user)
+
+            Network('api/getAllOpponentsData', 'GET', header)
+                .then(async (res) => {
+                    console.log("oponent List----", res)
+                    if (res.response_code == 400) {
+                        dispatch(logoutUser(null))
+                        localStorage.removeItem("user");
+                        history.push("/")
+                        toast.error(res.response_message)
+                    }
+                    if (res.response_code == 200) {
+                        setOponentList(res.response_data);
+                        // res.response_data.map(location => {
+                        //     locationlist.push(location);
+                        // })
+
+                    }
+                    setLoading(false)
+                    // window.location.reload(false); 
+
+
+
+                })
+        }
+    }
+
+    const CheckValidation = () => {
+        if (oponentName == null) {
+            toast.error("Please Provide  Oponent Name", {
+                position: "top-center"
+            })
+
+        }
+        if (oponentPhoneNum == null) {
+            toast.error("Please Provide  Oponent phone number", {
+                position: "top-center"
+            })
+
+        }
+        if (oponentContact == null) {
+            toast.error("Please Provide  contact", {
+                position: "top-center"
+            })
+
+        }
+        if (oponentEmail == null) {
+            toast.error("Please Provides Oponent Email", {
+                position: "top-center"
+            })
+
+        }
+        if (oponentNotes == null) {
+            toast.error("Please Provides some notes related to Oponent", {
+                position: "top-center"
+            })
+
+        }
+
+        editOponent();
+        
+    }
+
+    const updateModalOponent = (oponent_id, id) => {
+        setEditModal(true)
+        setOponentID(oponent_id);
+
+        setOponentName(oponentlist[id].opponentsName)
+        setOponentContactName(oponentlist[id].contactName)
+        setOponentPhoneNum(oponentlist[id].contactPhoneNumber)
+        // setOponentNotes(oponentlist[id].)
+        setOponentEmail(oponentlist[id].contactEmail)
+
+
+    }
+
+    const editOponent = () => {
+        console.log();
+        console.log(oponentId);
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': user.authtoken
+                },
+                body: JSON.stringify({
+                    "opponentId": oponentId,
+                    "opponentsName": oponentName,
+                    "contactName": oponentContact,
+                    "contactEmail": oponentEmail,
+                    "contactPhoneNumber": oponentPhoneNum
+
+
+                })
+
+            };
+            fetch('https://nodeserver.mydevfactory.com:1448/api/editOpponentsDetailsById', requestOptions)
+                .then(response => response.json())
+                .then((res) => {
+                    console.log("update oponent data", res)
+                    if (res.response_code == 200) {
+                        toast.success(res.response_message)
+                        setEditModal(false);
+                        oponentList()
+                       
+
+                    }
+
+                    if (res.response_code == 400) {
+                        dispatch(logoutUser(null))
+                        localStorage.removeItem("user");
+                        history.push("/")
+                        toast.error(res.response_message)
+                    }
+                    setEditModal(false);
+                })
+
+
+
+
+        }
+        
+
+    }
+
+    const deleteOponent = (oponent_id) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        console.log("id-------------->", oponent_id)
+        const a = window.confirm('Are you sure you wish to delete this Data?')
+        console.log("delete click")
+        if (a == true) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': user.authtoken
+                },
+                body: JSON.stringify({
+                    "oponent_id": oponent_id
+                })
+            };
+            fetch('https://nodeserver.mydevfactory.com:1448/api/deleteLocationDetailsById', requestOptions)
+                .then(response => response.json())
+                .then((res) => {
+                    console.log("delete location  data", res)
+                    if (res.response_code == 200) {
+                        console.log("deleted data", res)
+                        oponentList()
+                    }
+                    if (res.response_code == 400) {
+                        dispatch(logoutUser(null))
+                        localStorage.removeItem("user");
+                        history.push("/")
+                        toast.error(res.response_message)
+                    }
+
+
+                })
+        }
+
+    }
 
 
     return (
@@ -220,7 +395,7 @@ function EditOponent(props) {
         <div>
             <div className="dashboard-container">
                 <div className="dashboard-main">
-                    <SideMenuComponents manger="manger"/>
+                    <SideMenuComponents manger="manger" />
                     <div className="dashboard-main-content">
                         <div className="dashboard-head">
                             <div className="teams-select">
@@ -261,7 +436,7 @@ function EditOponent(props) {
 
                         <div className="prefarance-page">
                             <div className="page-header">
-                                <h2 className="page-title">Locations</h2>
+                                <h2 className="page-title">Oponents</h2>
 
                             </div>
                             <div className="manager-player-section">
@@ -269,13 +444,13 @@ function EditOponent(props) {
                                 <div className="teams-select">
                                     <ul >
                                         <Link to={{ pathname: "/NewOponent", state: "GAME" }} >
-                                            <li ><a href="javascript:void(0)"  >New Oponent</a></li>
+                                            <li >New Oponent</li>
                                         </Link>
-                                        <Link to={{ pathname: "/NewEvent", state: "GAME" }} >
-                                            <li ><a href="javascript:void(0)"  >New Game</a></li>
+                                        <Link to={{ pathname: "/NewGame", state: "GAME" }} >
+                                            <li >New Game</li>
                                         </Link>
                                         <Link to={{ pathname: "/NewEvent", state: "EVENT" }} >
-                                            <li   ><a href="javascript:void(0)"  >New Event</a></li>
+                                            <li   >New Event</li>
                                         </Link>
                                     </ul>
 
@@ -286,174 +461,137 @@ function EditOponent(props) {
                                     <li><a href="#">Import</a></li>
                                 </ul> */}
                             </div>
-                            <div className="prefarance-box">
-                                <div className="team-payment team-assesment">
-                                    <table>
-                                        <tr>
-                                            <th>Opponent Name</th>
-                                            <th>Name</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Notes</th>
-                                            <th>Record vs.</th>
-                                            <th>Scheduled Games</th>
+                            {loading ? (
+                                <div>Loading...</div>
+                            ) : (
+                                <div className="prefarance-box">
+                                    <div className="team-payment team-assesment">
+                                        <table>
+                                            <tr>
+                                                <th>Opponent Name</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Notes</th>
+                                                <th>Record vs.</th>
+                                                <th>Scheduled Games</th>
 
 
-                                        </tr>
+                                            </tr>
+                                            {oponentlist && oponentlist.length > 0 ?
 
-                                        <tr>
+                                                oponentlist.map((oponent, id) => {
+                                                    return (
+                                                        <tr>
 
-                                            <td>
-                                                <span> Bay Area Eagles</span>
+                                                            <td>
+                                                                <span> {oponent.opponentsName}</span>
 
-                                            </td>
-                                            <td><span>Siomone Gary</span></td>
-                                            <td>
-                                                <span>+1 256 232 8872</span>
-                                            </td>
-                                            <td>
-                                                <span>
-                                                    siomongary@domain.com</span>
-                                            </td>
-                                            <td>
-                                                <span>......</span>
-                                            </td>
-                                            <td>
-                                                <span>0-1</span>
-                                            </td>
-                                            <td>
-                                                <span>TeamLink Opponent</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
+                                                            </td>
+                                                            <td><span>{oponent.contactName}</span></td>
+                                                            <td>
+                                                                <span>{oponent.contactPhoneNumber}</span>
+                                                            </td>
+                                                            <td>
+                                                                <span>
+                                                                    {oponent.contactEmail}</span>
+                                                            </td>
+                                                            <td>
+                                                                <span>......</span>
+                                                            </td>
+                                                            <td>
+                                                                <span>0-1</span>
+                                                            </td>
+                                                            <td>
+                                                                <span>TeamLink Opponent</span>
+                                                            </td>
+                                                            <td>
+                                                                <div className="last-row">
+                                                                    <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteOponent(oponent._id)}><img src={Delect} />
+                                                                    </button> <button onClick={() => updateModalOponent(oponent._id, id)}><img src={pencil} /></button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
 
-                                            <td>
-                                                <span> Bay Area Eagles</span>
-
-                                            </td>
-                                            <td><span>Siomone Gary</span></td>
-                                            <td>
-                                                <span>+1 256 232 8872</span>
-                                            </td>
-                                            <td>
-                                                <span>
-                                                    siomongary@domain.com</span>
-                                            </td>
-                                            <td>
-                                                <span>......</span>
-                                            </td>
-                                            <td>
-                                                <span>0-1</span>
-                                            </td>
-                                            <td>
-                                                <span>TeamLink Opponent</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>
-                                                <span> Bay Area Eagles</span>
-
-                                            </td>
-                                            <td><span>Siomone Gary</span></td>
-                                            <td>
-                                                <span>+1 256 232 8872</span>
-                                            </td>
-                                            <td>
-                                                <span>
-                                                    siomongary@domain.com</span>
-                                            </td>
-                                            <td>
-                                                <span>......</span>
-                                            </td>
-                                            <td>
-                                                <span>0-1</span>
-                                            </td>
-                                            <td>
-                                                <span>TeamLink Opponent</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>
-                                                <span> Bay Area Eagles</span>
-
-                                            </td>
-                                            <td><span>Siomone Gary</span></td>
-                                            <td>
-                                                <span>+1 256 232 8872</span>
-                                            </td>
-                                            <td>
-                                                <span>
-                                                    siomongary@domain.com</span>
-                                            </td>
-                                            <td>
-                                                <span>......</span>
-                                            </td>
-                                            <td>
-                                                <span>0-1</span>
-                                            </td>
-                                            <td>
-                                                <span>TeamLink Opponent</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>
-                                                <span> Bay Area Eagles</span>
-
-                                            </td>
-                                            <td><span>Siomone Gary</span></td>
-                                            <td>
-                                                <span>+1 256 232 8872</span>
-                                            </td>
-                                            <td>
-                                                <span>
-                                                    siomongary@domain.com</span>
-                                            </td>
-                                            <td>
-                                                <span>......</span>
-                                            </td>
-                                            <td>
-                                                <span>0-1</span>
-                                            </td>
-                                            <td>
-                                                <span>TeamLink Opponent</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                    )
+                                                })
+                                                :
+                                                'No Data Found'
+                                            }
 
 
 
-
-
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
+
+                            )}
+
+                            {editModal ? <Modal show={editModal} style={{ position: "absolute", top: "206px" }}>
+
+
+                                <Modal.Body style={{ width: "1000" }}>
+                                    <div className="prefarance-box" style={{ overflow: "hidden" }}>
+                                        <div className="team-payment team-assesment" style={{ marginTop: "-12px" }}>
+                                            <div className=" playerinfo-form">
+
+                                                <div className="row" style={{ padding: "21px" }}>
+                                                    <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
+                                                            <label> Oponent Name</label>
+                                                            <input type="text" className="input-select" 
+                                                            defaultValue={oponentName}
+                                                            onChange={(e) => setOponentName(e.target.value)} />
+                                                            <span>The name of the game location Example: "Wilshire Park Soccer Field"</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
+                                                            <label> Contact Name</label>
+                                                            <input type="text" className="input-select" 
+                                                            defaultValue={oponentContact}
+                                                            onChange={(e) => setOponentContactName(e.target.value)} />
+                                                            <span>A contact person for the opposing team Example: "Coach Smithers"</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
+                                                            <label> Phone Number</label>
+                                                            <input type="text" className="input-select" 
+                                                            defaultValue={oponentPhoneNum}
+                                                            onChange={(e) => setOponentPhoneNum(e.target.value)} />
+                                                            <span>A phone number for that contact Example: "503-123-4567"</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
+                                                            <label> Email address</label>
+                                                            <input type="text" className="input-select" 
+                                                            defaultValue={oponentEmail}
+                                                            onChange={(e) => setOponentEmail(e.target.value)} />
+                                                            <span>An email address tor that contact Example: "coach_smithers@domain.com"</span>
+                                                        </div>
+                                                    </div>
+                                                    {/* <div className="col-md-6">
+                                                        <div className="prefarance-form-list">
+                                                            <label> Notes</label>
+                                                            <textarea type="text" defaultValue={notes} className="input-select" onChange={(e) => setOponentNotes(e.target.value)} style={{ height: "200px" }} />
+                                                            <span>Team colors, scouting reports, etc</span>
+                                                        </div>
+                                                    </div> */}
+                                                    <div className="col-md-12">
+                                                        <div className="prefarance-form-list" style={{ marginLeft: "60%" }}>
+                                                        <button className="add-links" style={{ margin: "10px" }} onClick={() => setEditModal(false)}>Cancel</button>
+                                                    <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={(e) => CheckValidation(e)}>Update</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Modal.Body>
+
+                            </Modal> : ""}
                         </div>
                         <Footer />
                     </div>

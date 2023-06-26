@@ -24,6 +24,9 @@ import { Network } from '../../../Services/Api';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { logoutUser } from "../../../Redux/Actions/auth";
+import Modal from "react-bootstrap/Modal";
+
+
 
 
 
@@ -32,6 +35,8 @@ function EditLocation(props) {
 
     const history = useHistory();
     const dispatch = useDispatch()
+    // console.log(props);
+
 
     const [userMe, setUser] = useState(null);
     const [user, setUserData] = useState({});
@@ -42,6 +47,16 @@ function EditLocation(props) {
     const [valueDropDown, setValueDropDown] = useState("")
     const [eventType, setEventType] = useState()
 
+    const [locationName, setLocationName] = useState("");
+    const [address, setAddress] = useState("")
+    const [link, setLink] = useState("");
+    const [notes, setNotes] = useState("");
+    const [latlong, setLatLong] = useState("");
+
+    const [locationlist, setLocationList] = useState([]);
+    const [locationId, setlocationId] = useState("");
+    const [editModal, setEditModal] = useState(false);
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
@@ -60,6 +75,9 @@ function EditLocation(props) {
         // teamSchedule();
 
     }, []);
+    const pic = 'https://nodeserver.mydevfactory.com:1448/'
+
+    const pic1 = 'https://nodeserver.mydevfactory.com:1448/profilepic/'
 
     const handleLogout = () => {
         //console.log("pruyuuuuuu", props);
@@ -78,15 +96,15 @@ function EditLocation(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -94,7 +112,7 @@ function EditLocation(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamSchedule(res.response_data[0]._id);
+                    teamSchedule(res.response_data[0].team_id);
 
 
 
@@ -109,10 +127,6 @@ function EditLocation(props) {
         setTeamDropDown(event.target.value)
         teamSchedule(event.target.value);
     }
-
-
-
-
 
     const teamSchedule = (id) => {
         console.log("id", id)
@@ -219,15 +233,165 @@ function EditLocation(props) {
         if (user) {
             let header = {
                 'Content-Type': 'application/json',
-                'x-access-token': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('https://nodeserver.mydevfactory.com:1447/api/get-location-list?locationName=mum&address=mum', 'GET', header)
+            Network('api/getAllLocationData', 'GET', header)
                 .then(async (res) => {
                     console.log("location List----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
+                        dispatch(logoutUser(null))
+                        localStorage.removeItem("user");
+                        history.push("/")
+                        toast.error(res.response_message)
+                    }
+                    if (res.response_code == 200) {
+                        setLocationList(res.response_data);
+                        // res.response_data.map(location => {
+                        //     locationlist.push(location);
+                        // })
+
+                    }
+                    setLoading(false)
+                    // window.location.reload(false); 
+
+
+
+                })
+        }
+    }
+    console.log(locationlist)
+    const CheckValidation = () => {
+
+        if (locationName == null) {
+            toast.error("Please Provide  Location Name", {
+                position: "top-center"
+            })
+
+        }
+        if (address == null) {
+            toast.error("Please Provide  Location Address", {
+                position: "top-center"
+            })
+
+        }
+        if (link == null) {
+            toast.error("Please Provide  website link", {
+                position: "top-center"
+            })
+
+        }
+        if (notes == null) {
+            toast.error("Please Provides some notes related to Location", {
+                position: "top-center"
+            })
+
+        }
+
+        editLocation();
+    }
+
+    const updateModalLocation = (location_id, id) => {
+        setEditModal(true)
+
+        // locationId = location._id;
+        // setId(id1)
+        // console.log(location._id);
+        console.log(id);
+        console.log(location_id)
+        setlocationId(location_id)
+        console.log(locationlist)
+        setNotes(locationlist[id].notes)
+        setLocationName(locationlist[id].locationName)
+        setAddress(locationlist[id].address);
+        setLink(locationlist[id].website);
+        setLatLong(locationlist[id].locationLatLong)
+        // editLocation(location._id)
+    }
+    const editLocation = (location_id) => {
+        console.log(location_id);
+        console.log(locationId);
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': user.authtoken
+                },
+                body: JSON.stringify({
+                    "locationId": locationId,
+                    "locationName": locationName,
+                    "address": address,
+                    "website": link,
+                    "notes": notes,
+                    "locationLatLong":latlong
+
+
+                })
+
+            };
+            fetch('https://nodeserver.mydevfactory.com:1448/api/editLocationDetailsById', requestOptions)
+                .then(response => response.json())
+                .then((res) => {
+                    console.log("update location data", res)
+                    if (res.response_code == 200) {
+                        toast.success(res.response_message)
+                        setEditModal(false);
+                        locationList();
+                       
+
+                    }
+
+                    if (res.response_code == 400) {
+                        dispatch(logoutUser(null))
+                        localStorage.removeItem("user");
+                        history.push("/")
+                        toast.error(res.response_message)
+                    }
+                    setEditModal(false);
+                })
+
+
+
+
+        }
+        
+
+    }
+
+    // const updateDeletelocation = (location_id) => {
+    //     setDelModal(true);
+    //     setlocationId(location_id);
+        
+    // }
+    const deletelocation = (location_id) => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        console.log("id-------------->", location_id)
+        const a = window.confirm('Are you sure you wish to delete this Data?')
+        console.log("delete click")
+        if (a == true) {
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'token': user.authtoken
+                },
+                body: JSON.stringify({
+                    "location_id": location_id
+                })
+            };
+            fetch('https://nodeserver.mydevfactory.com:1448/api/deleteLocationDetailsById', requestOptions)
+                .then(response => response.json())
+                .then((res) => {
+                    console.log("delete location  data", res)
+                    if (res.response_code == 200) {
+                        console.log("deleted data", res)
+                        locationList()
+                    }
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -235,9 +399,9 @@ function EditLocation(props) {
                     }
 
 
-
                 })
         }
+
     }
 
 
@@ -248,7 +412,7 @@ function EditLocation(props) {
         <div>
             <div className="dashboard-container">
                 <div className="dashboard-main">
-                    <SideMenuComponents manger="manger"/>
+                    <SideMenuComponents manger="manger" />
                     <div className="dashboard-main-content">
                         <div className="dashboard-head">
                             <div className="teams-select">
@@ -269,7 +433,7 @@ function EditLocation(props) {
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-name">{user ? `${user.fname} ${user.lname}` : null}</div>
                                 <div className="profile-head-img">
                                     {
                                         user ?
@@ -297,13 +461,13 @@ function EditLocation(props) {
                                 <div className="teams-select">
                                     <ul >
                                         <Link to={{ pathname: "/NewLocation", state: "GAME" }} >
-                                            <li ><a href="javascript:void(0)"  >New Location</a></li>
+                                            <li >New Location</li>
                                         </Link>
-                                        <Link to={{ pathname: "/NewEvent", state: "GAME" }} >
-                                            <li ><a href="javascript:void(0)"  >New Game</a></li>
+                                        <Link to={{ pathname: "/NewGame", state: "GAME" }} >
+                                            <li >New Game</li>
                                         </Link>
                                         <Link to={{ pathname: "/NewEvent", state: "EVENT" }} >
-                                            <li   ><a href="javascript:void(0)"  >New Event</a></li>
+                                            <li   >New Event</li>
                                         </Link>
                                     </ul>
 
@@ -314,116 +478,128 @@ function EditLocation(props) {
                                     <li><a href="#">Import</a></li>
                                 </ul> */}
                             </div>
-                            <div className="prefarance-box">
-                                <div className="team-payment team-assesment">
-                                    <table>
-                                        <tr>
-                                            <th>Location Name</th>
-                                            <th>Address</th>
-                                            <th>URL</th>
-                                            <th>Games/Events Scheduled
+                            {loading ? (
+                                <div>Loading...</div>
+                            ) : (
+                                <div className="prefarance-box">
+                                    <div className="team-payment team-assesment">
+                                        <table>
+                                            <tr>
+                                                <th>Location Name</th>
+                                                <th>Address</th>
+                                                <th>URL</th>
+                                                <th>Games/Events Scheduled
 
-                                                at this Location</th>
-                                            <th>Manager</th>
+                                                    at this Location</th>
+                                                <th>Manager</th>
 
-                                        </tr>
+                                            </tr>
+                                            {locationlist && locationlist.length > 0 ?
 
-                                        <tr>
+                                                locationlist.map((location, id) => {
+                                                    console.log()
+                                                    return (<tr>
 
-                                            <td>
-                                                <span> Amador Elementary School</span>
+                                                        <td>
+                                                            <span> {location.locationName}</span>
 
-                                            </td>
-                                            <td><span>2100 E. Cantara Dr. Dublin,
-
-                                                CA 94568 View Map</span></td>
-                                            <td>
-                                                <span>Web Link</span>
-                                            </td>
-                                            <td>
-                                                <span>Shared Location</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteScheduleData(schedule._id)}><img src={Delect} />
-                                                    </button> <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>
-                                                <span> Amador Elementary School</span>
-
-                                            </td>
-                                            <td><span>2100 E. Cantara Dr. Dublin,
-
-                                                CA 94568 View Map</span></td>
-                                            <td>
-                                                <span>Web Link</span>
-                                            </td>
-                                            <td>
-                                                <span>Shared Location</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteScheduleData(schedule._id)}><img src={Delect} />
-                                                    </button> <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>
-                                                <span> Amador Elementary School</span>
-
-                                            </td>
-                                            <td><span>2100 E. Cantara Dr. Dublin,
-
-                                                CA 94568 View Map</span></td>
-                                            <td>
-                                                <span>Web Link</span>
-                                            </td>
-                                            <td>
-                                                <span>Shared Location</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteScheduleData(schedule._id)}><img src={Delect} />
-                                                    </button> <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                            <td>
-                                                <span> Amador Elementary School</span>
-
-                                            </td>
-                                            <td><span>2100 E. Cantara Dr. Dublin,
-
-                                                CA 94568 View Map</span></td>
-                                            <td>
-                                                <span>Web Link</span>
-                                            </td>
-                                            <td>
-                                                <span>Shared Location</span>
-                                            </td>
-                                            <td>
-                                                <div className="last-row">
-                                                    <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteScheduleData(schedule._id)}><img src={Delect} />
-                                                    </button> <button><img src={pencil} /></button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                        </td>
+                                                        <td><span>{location.address}</span></td>
+                                                        <td>
+                                                            <span>{location.website}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span>Shared Location</span>
+                                                        </td>
+                                                        <td>
+                                                            <div className="last-row">
+                                                                <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletelocation(location._id)}><img src={Delect} />
+                                                                </button> <button onClick={() => updateModalLocation(location._id, id)}><img src={pencil} /></button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>)
+                                                })
+                                                :
+                                                'No data found'
+                                            }
 
 
 
 
 
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
+
+                            )}
+
+                            {editModal ? <Modal show={editModal} style={{ position: "absolute", top: "206px" }}>
+
+
+                                <Modal.Body style={{ width: "1000" }}>
+                                    <div className=" playerinfo-form">
+                                        <div className="row" style={{ padding: "21px" }}>
+                                            <div className="col-md-12">
+                                                <div className="">
+                                                    <label> Location Name</label>
+                                                    <input type="text" className="input-select"
+                                                        defaultValue={locationName}
+                                                        onChange={(e) => setLocationName(e.target.value)} />
+                                                    <span>The name of the game location Example: "Wilshire Park Soccer Field"</span>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="">
+                                                    <label> Address</label>
+                                                    <input type="text" className="input-select"
+                                                        defaultValue={address}
+                                                        onChange={(e) => setAddress(e.target.value)} />
+                                                    <span>The Physical address of the game location Example: " NE 33rd Ave &
+
+                                                        Skidmore St, Portland OR" (It'll be automatically converted into a Google
+
+                                                        Map.)</span>
+                                                </div>
+                                                {/* <div className="">
+                                                    <label> Address</label>
+                                                <PlaceComponent />
+                                                </div> */}
+
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="">
+                                                    <label> Link</label>
+                                                    <input type="text" className="input-select"
+                                                        defaultValue={link}
+                                                        onChange={(e) => setLink(e.target.value)} />
+                                                    <span>The URL to the site - this could be a link to the facility's home page or a link
+
+                                                        to your own map. Must include http:// or https://</span>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="">
+                                                    <label> Notes</label>
+                                                    <textarea type="text" className="input-select"
+                                                        defaultValue={notes}
+                                                        onChange={(e) => setNotes(e.target.value)} style={{ height: "200px" }} />
+                                                    <span>Additional notes or directions to this location.</span>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-12">
+                                                <div className="" style={{ marginLeft: "60%" }}>
+                                                    <button className="add-links" style={{ margin: "10px" }} onClick={() => setEditModal(false)}>Cancel</button>
+                                                    <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={(e) => CheckValidation(e)}>Update</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* <button className="add-links" style={{ margin: "10px" }} onClick={() => setEditModal(false)}>Cancel</button>
+                                        <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updateImage}>Update</button> */}
+
+                                    </div>
+                                </Modal.Body>
+
+                            </Modal> : ""}
                         </div>
                         <Footer />
                     </div>

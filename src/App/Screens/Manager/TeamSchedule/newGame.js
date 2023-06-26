@@ -30,7 +30,7 @@ import Assignment from './Assignment';
 
 
 
-const NewEvent = () => {
+const NewGame = () => {
 
 
     const history = useHistory();
@@ -82,7 +82,7 @@ const NewEvent = () => {
         setUser(userD);
         setUserData(userLocal);
         flagList()
-        eventCreate()
+        // eventCreate()
         dropdownMenu()
         locationList()
 
@@ -161,25 +161,27 @@ const NewEvent = () => {
 
 
 
-    const eventCreate = () => {
+    const gameCreate = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         const eventType = localStorage.getItem("eventType")
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': user.authtoken
+                'token': user.authtoken
             },
             body: {
                 "team_id" : teamDropdown,
-                "event_name": name,
+                "game_name": name,
                 "short_label": lebel,
                 "date": startDate,
                 "time": startTime,
                 "timezone": "62a33c98527edd5bf020ab14",
                 "location": location,
+                "opponent": oponent,
                 "Volunteer": assignment,
                 "at_an_event" : "",
+                "game_type" : '',
                 "start_time": startTime,
                 "end_time": endTime,
                 "arrival_time": arrivalTime,
@@ -191,7 +193,7 @@ const NewEvent = () => {
             }
         };
         console.log(requestOptions);
-        fetch('https://nodeserver.mydevfactory.com:1447/api/addEvents', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1447/api/addGames', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("event Data", res)
@@ -361,7 +363,7 @@ const NewEvent = () => {
         }
 
 
-        eventCreate()
+        gameCreate()
 
 
 
@@ -508,7 +510,7 @@ const NewEvent = () => {
                                                 <p style={{ color: "gray" }}>Pacific Time (US & Canada)<span style={{ color: "red" }}>Change</span></p>
                                             </div>
                                         </div>
-                                        {/* <div className="col-md-6">
+                                        <div className="col-md-6">
                                             <div className="prefarance-form-list">
                                                 <label>Team</label>
                                                 <select className="input-select" onChange={changeTeam}>
@@ -540,7 +542,7 @@ const NewEvent = () => {
                                                 </select>
                                             </div>
                                         </div>
-                                        */}
+                                       
                                         <div className="col-md-6">
                                             <div className="prefarance-form-list">
                                                 <label>Location</label>
@@ -673,4 +675,4 @@ const NewEvent = () => {
     )
 }
 
-export default NewEvent;
+export default NewGame;

@@ -27,6 +27,7 @@ import { logoutUser } from "../../../Redux/Actions/auth";
 import Subscribe from './Subscribe';
 import Modal from "react-bootstrap/Modal";
 import BigUserProfile from "../../../images/big-user-profile.png"
+import CsvDownload from '../../../Components/Comman/CsvDownload';
 
 
 
@@ -56,7 +57,7 @@ function TeamSchdule(props) {
     const [flag, setFlagList] = useState([])
     const [flagId, setFlagId] = useState("")
 
-    const pic = 'https://nodeserver.mydevfactory.com:1447/'
+    const pic = 'https://nodeserver.mydevfactory.com:1448/'
 
     useEffect(() => {
         // let user = userdata && userdata._id ? true : false;
@@ -88,7 +89,7 @@ function TeamSchdule(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
@@ -112,15 +113,15 @@ function TeamSchdule(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -128,7 +129,7 @@ function TeamSchdule(props) {
                     }
                     setDropdown(res.response_data);
 
-                    teamSchedule(res.response_data[0]._id);
+                    teamSchedule(res.response_data[0].team_id);
 
 
 
@@ -155,7 +156,7 @@ function TeamSchdule(props) {
         if (user) {
             let header = {
 
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
 
@@ -168,17 +169,18 @@ function TeamSchdule(props) {
                 url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + teamDropdown + '&page=1&limit=10'
             }
             //console.log('user',user)
-            Network('api/get-game-event-list?manager_id=' + user._id + '&team_id=' + id + '&page=1&limit=10', 'GET', header)
+           var teamid = id ? id : '6480285555cf8a5024960668'; 
+            Network('api/getAllEventAndGamesData?team_id=' + id , 'GET', header)
                 .then(async (res) => {
                     console.log("schedule----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
                         toast.error(res.response_message)
                     }
                     //console.log("doc data----->",res.response_data.docs)
-                    setSchedule(res.response_data.docs)
+                    setSchedule(res.response_data)
 
 
                 })
@@ -306,7 +308,17 @@ function TeamSchdule(props) {
         setFlagId(event.target.value)
     }
 
+    let headers = [
+        // { label: "Event/Game", key: "firstName" },
+        { label: "Event Name", key: "event_name" },
+        // { label: "email", key: "contactInformationEmail" },
+        // { label: "phone", key: "contactInformationPhoneNumber" },
+        // { label: "Gender", key: "playerGender" }
+    ];
 
+    // const allPlayers = newplayerdata.concat(newNonPlayerData);
+    // let data = (allPlayers && allPlayers.length >0) ? allPlayers  : [];
+    let data = (schedule && schedule.length>0 )? schedule: [];
 
     return (
 
@@ -320,10 +332,10 @@ function TeamSchdule(props) {
                                 <button className="create-new-team" onClick={() => {
                                     history.push("/CreateTeam")
                                 }}>Create New Teams</button>
-                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
+                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
                                     {dropdown?.map((dropdown) => {
                                         return (
-                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -332,7 +344,7 @@ function TeamSchdule(props) {
                                         ACCOUNT
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li><a className="dropdown-item" href="#">{profilePic?.fname + " " + profilePic?.lname}</a></li>
+                                        <li><a className="dropdown-item" href="#">{`${profilePic?.fname} ${profilePic?.lname}`}</a></li>
                                         <Link to={{ pathname: "/MyAccount" }} >
                                             <li><a className="dropdown-item" href="#">My Account</a></li>
                                         </Link>
@@ -363,7 +375,7 @@ function TeamSchdule(props) {
                                 <div className="profile-head-img">
                                     {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic}${profilePic?.profile_image}`} alt="" />
+                                        <img src={`${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -388,9 +400,10 @@ function TeamSchdule(props) {
 
                                     <button className="start-stream-btn" onClick={() => { history.push("./ManagerTeamAvailability") }}>Select Availability</button>
                                     <button className="start-stream-btn" onClick={() => { history.push("./preferance") }}>View Preferences</button>
-                                    <button className="start-stream-btn" onClick={() => {
+                                    {/* <button className="start-stream-btn" onClick={() => {
                                         history.push("./Subscribe")
-                                    }}>Subscribe/ Export</button>
+                                    }}>Subscribe/ Export</button> */}
+                                    <CsvDownload data={data} headers={headers} filename={`Schedule list `} />
                                 </div>
                             </div>
 
@@ -401,7 +414,7 @@ function TeamSchdule(props) {
                                         New
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <Link to={{ pathname: "/NewEvent", state: "GAME" }} >
+                                        <Link to={{ pathname: "/NewGame", state: "GAME" }} >
                                             <li><a className="dropdown-item" href="#">New Game</a></li></Link>
                                         <Link to={{ pathname: "/NewEvent", state: "EVENT" }} >
                                             <li><a className="dropdown-item" href="#">New Event</a></li></Link>
@@ -410,13 +423,23 @@ function TeamSchdule(props) {
                                 </div>
                                 <div className="dropdown">
                                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
-                                        Edit
+                                        Create
                                     </button>
-                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <Link to={{ pathname: "/EditLocation", state: "GAME" }} >
+                                    {/* <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <Link to={{ pathname: "/Location", state: "Location" }} >
                                             <li><a className="dropdown-item" href="#">New Location</a></li></Link>
-                                        <Link to={{ pathname: "/EditOponent", state: "EVENT" }} >
-                                            <li><a className="dropdown-item" href="#">New Oponent</a></li></Link>
+                                        <Link to={{ pathname: "/Oponent", state: "Opponent" }} >
+                                            <li><a className="dropdown-item" href="#">New Opponent</a></li></Link>
+
+                                    </ul>
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                        Edit
+                                    </button> */}
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton2" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <Link to={{ pathname: "/EditLocation", state: "Location" }} >
+                                            <li><a className="dropdown-item" href="#">Edit Location</a></li></Link>
+                                        <Link to={{ pathname: "/EditOponent", state: "Opponent" }} >
+                                            <li><a className="dropdown-item" href="#">Edit Opponent</a></li></Link>
 
                                     </ul>
                                 </div>
@@ -478,20 +501,22 @@ function TeamSchdule(props) {
 
                                                     <td>
                                                         <div className="flag-prac">
-                                                            <img src={schedule.display_icon.image} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
-                                                            <button className="practice">{schedule.name}</button>
+                                                            <img src={schedule.display_icon?.image} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} />
+                                                            <button className="practice">{schedule.event_name}</button>
 
                                                         </div>
 
                                                     </td>
-                                                    <td><span>{`${new Date(schedule.date).getDate()}/${new Date(schedule.date).getMonth()}/${new Date(schedule.date).getFullYear()}`}</span></td>
+                                                    <td><span>{schedule.date}</span></td>
+                                                    {/* <td><span>{`${new Date(schedule.date).getDate()}/${new Date(schedule.date).getMonth()}/${new Date(schedule.date).getFullYear()}`}</span></td> */}
                                                     <td>
-                                                        <span>{schedule.time.startTime}-{schedule.time.endTime}</span>
+                                                        {/* <span>{schedule.time.startTime}-{schedule.time.endTime}</span> */}
                                                     </td>
                                                     <td>
-                                                        <span>{schedule.location_details},{schedule.location}</span>
+                                                        {/* <span>{schedule.location_details},{schedule.location}</span> */}
                                                     </td>
-                                                    <td>{schedule.assignment}
+                                                    <td>
+                                                        {/* {schedule.assignment} */}
 
                                                     </td>
                                                     <td>
@@ -570,7 +595,7 @@ function TeamSchdule(props) {
                                                         {flag?.map((flag) => {
                                                             return (
 
-                                                                <div style={{ margin: "10px" }}><img src={`${pic}${flag.image}`} alt="" style={{ height: "30px", width: "30px" }} /><br></br>
+                                                                <div style={{ margin: "10px" }}><img src={`${pic}${flag?.image}`} alt="" style={{ height: "30px", width: "30px" }} /><br></br>
                                                                     <input type="radio" name="radio" style={{ height: "30px", margin: "5px" }} onClick={selectFlag} value={flag._id} /></div>
                                                             )
                                                         })}

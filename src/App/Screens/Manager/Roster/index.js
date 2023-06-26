@@ -456,7 +456,7 @@ function ManagerRoster(props) {
                                         ACCOUNT
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li className="dropdown-item" >{profilePic?.fname + " " + profilePic?.lname} </li>
+                                        <li className="dropdown-item" >{`${user?.fname} ${user?.lname}`}</li>
                                         <Link to={{ pathname: "/MyAccount" }} >
                                             <li className="dropdown-item" >My Account </li>
                                         </Link>

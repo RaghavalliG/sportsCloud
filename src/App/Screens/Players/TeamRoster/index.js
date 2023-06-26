@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { EyeFill, ZoomIn } from 'react-bootstrap-icons';
 import {
     BrowserRouter as Router,
     Switch,
@@ -23,6 +24,7 @@ import flag from "../../../images/flag.png"
 import add from "../../../images/add.png"
 import Delect from "../../../images/delect.png"
 import pencil from "../../../images/pencil.png"
+
 import { Network } from '../../../Services/Api';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
@@ -30,6 +32,7 @@ import { logoutUser } from "../../../Redux/Actions/auth";
 import BigUserProfile from "../../../images/big-user-profile.png"
 import Modal from "react-bootstrap/Modal";
 import axios from 'axios'
+
 
 
 
@@ -47,6 +50,8 @@ function TeamRoster(props) {
     const [teamDropdown, setTeamDropDown] = useState("")
     const [team, setTeam] = useState([]);
     const [newplayerdata, setNewPlayerData] = useState([])
+
+    // console.log( newplayerdata,"++++++++++++++++++++===")
     const [newNonPlayerData, setNewNonPlayerData] = useState([])
     const [profilePic, setProfilePic] = useState([])
     const [gender, setGender] = useState('')
@@ -62,6 +67,7 @@ function TeamRoster(props) {
     const [city, setCity] = useState('')
     const [stateData, setSateData] = useState('')
     const [zip, setZip] = useState('')
+    const[timid,setTimid]=useState('')
     const [birthday, setBirthday] = useState('')
     const [memberType, setMemberType] = useState('')
     const [modeValue, setModeValue] = useState(false)
@@ -72,6 +78,9 @@ function TeamRoster(props) {
     const [imageModal, setImageModal] = useState(false)
     const [imageId, setImageId] = useState("")
     const [image, Profile] = useState("")
+    const[ditailsmodel,setDitailsmodel]= useState(false)
+    const[ditails,setDitails]= useState({})
+     console.log( ditails,"++++++++++++++++++++=== ditails")
 
 
     const pic = 'https://nodeserver.mydevfactory.com:1448/roster/'
@@ -94,6 +103,7 @@ function TeamRoster(props) {
         teamSelect()
         updateProfile()
         teamRoster()
+        playerDitails()
        
 
 
@@ -105,7 +115,7 @@ function TeamRoster(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
@@ -136,9 +146,11 @@ function TeamRoster(props) {
         setUserData(null);
         props.history.push("/")
     };
+
+
     const teamRoster = (id) => {
         const user = JSON.parse(localStorage.getItem('user'));
-        console.log("id---->", id)
+        console.log("id------>", id)
         if (user) {
             let header = {
                 'token': user.authtoken
@@ -146,7 +158,8 @@ function TeamRoster(props) {
             }
             console.log('user', user)
 
-            Network('api/player-list-by-team-id?team_id=' +"6470683a88ea6b032e255a3e", 'GET', header)
+            // Network('api/getRosterListByTeamId?teamid=' +"6480285555cf8a5024960668", 'GET', header)
+            Network('api/player-list-by-team-id?team_id=' +id, 'GET', header)
                 .then(async (res) => {
                     console.log("teamRoster----", res)
 
@@ -157,15 +170,24 @@ function TeamRoster(props) {
                         toast.error(res.response_message)
                     }
                     setResData(res.response_data);
-                    console.log("team player", res.response_data.player)
-                    console.log("non player", res.response_data.non_player)
-                    setPlayer(res.response_data.player)
-                    setNewPlayerData(res.response_data.player.filter(data => {
+                    // console.log(res.)
+                    console.log("team player", res.response_data?.player)
+                    console.log("non player", res.response_data?.non_player)
+                    setPlayer(res.response_data?.player)
+                    setNewPlayerData(res?.response_data?.player?.filter(data => {
                         return data._id != null
+                       
 
                     }))
-                    setNonPlayer(res.response_data.non_Player)
-                    setNewNonPlayerData(res.response_data.non_player.filter(data => {
+                    // setNewPlayerData(res.response_data.player)
+                       
+
+                    
+                    
+                    
+                    // console.log( newplayerdata,"6767676769898988")
+                    setNonPlayer(res.response_data?.non_Player)
+                    setNewNonPlayerData(res.response_data?.non_player.filter(data => {
                         return data._id != null
 
                     }))
@@ -181,12 +203,17 @@ function TeamRoster(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
 
-            Network('api/player-joined-team-list?player_id=' + user._id, 'GET', header)
+            Network(
+                // 'api/getAllAcceptedTeamListByPlayerId?playerId=' + "644a463b556e970345ff5be5", 
+                "api/getAllAcceptedTeamListByPlayerId?playerId=" +user._id,
+                // "api/getAllAcceptedTeamListByPlayerId?playerId=" +"644a463b556e970345ff5be5",
+                'GET',
+                 header)
                 .then(async (res) => {
                     console.log("res----", res)
                     if (res.response_code == 400) {
@@ -209,29 +236,32 @@ function TeamRoster(props) {
 
 
     const change = (event) => {
-        console.log("event", event.target.value)
+        console.log("event+++++++++++++++++++++", event.target.value)
         setTeamDropDown(event.target.value)
         teamRoster(event.target.value);
         setPlayer([])
+       
     }
 
     const deletePlayerData = (id) => {
         const user = JSON.parse(localStorage.getItem('user'));
-        console.log("id-------------->", id)
+      
+        console.log("id------>---->---->---->--->", id)
         const a = window.confirm('Are you sure you wish to delete this Data?')
         console.log("delete click")
         if (a == true) {
             const requestOptions = {
-                method: 'POST',
+                method: 'post',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'x-access-token': user.authtoken
+                    // 'Content-Type': 'application/json',
+                    // 'x-access-token': user.authtoken
+                    "token":user.authtoken
                 },
                 body: JSON.stringify({
-                    "player_id": id
+                    "roster_id": id
                 })
             };
-            fetch('https://nodeserver.mydevfactory.com:1448/api/delete-player', requestOptions)
+            fetch('https://nodeserver.mydevfactory.com:1448/api/deleteRoasterDetailsById', requestOptions)
                 .then(response => response.json())
                 .then((res) => {
                     console.log("delete Player  data", res)
@@ -247,12 +277,12 @@ function TeamRoster(props) {
                     }
 
 
-                    setPlayer(player.filter(data => {
-                        return data._id != id
-                    }))
-                    setNonPlayer(nonPlayer.filter(data => {
-                        return data._id != id
-                    }))
+                    // setPlayer(player.filter(data => {
+                    //     return data._id != id
+                    // }))
+                    // setNonPlayer(nonPlayer.filter(data => {
+                    //     return data._id != id
+                    // }))
 
                 })
         }
@@ -375,6 +405,60 @@ function TeamRoster(props) {
             })
 
     }
+    const ditailsmodelvalue =(uId,id)=>{
+        setDitailsmodel(true)
+        setUId(uId)
+        setId1(id)
+        //set the  values for the  form.
+        // setGender(newplayerdata[uId].playerGender);
+        // setFName(newplayerdata[uId]?.firstName);
+        // setLName(newplayerdata[uId]?.lastName);
+        // setJursey(newplayerdata[uId]?.jerseyNumber);
+        // setEmail(newplayerdata[uId]?.contactInformationEmail);
+        // setPosition(newplayerdata[uId]?.position);
+        // setCity(newplayerdata[uId]?.contactInformationCity);
+        // setZip(newplayerdata[uId]?.contactInformationZipCode);
+        // // setSateData(newplayerdata[uId]?.contactInformationState);
+        // // setBirthday(newplayerdata[uId]?.playerBirthday);
+
+        // setPhone(newplayerdata[uId]?.contactInformationPhoneNumber);
+        // setMemberType(newplayerdata[uId]?.whoIsThis);
+        // setTimid(newplayerdata[uId]?.teamId)
+        playerDitails(id)
+    }
+
+
+    const playerDitails=(id)=>{
+        const user = JSON.parse(localStorage.getItem('user'));
+        // console.log(user._id,"user idghkmh")
+        axios({
+          method: 'get',
+        
+          url:'https://nodeserver.mydevfactory.com:1448/api/getRoasterDetailsById?rosterId=' + id,
+          headers: {
+            "token": (user.authtoken)
+            
+          },
+        
+        })
+          .then(function (res) {
+            console.log(res,"978767564554343456767475784789567856756")
+            setDitails(res.data.response_data)
+           
+            
+             if(res.response_code == 200){
+              setDitailsmodel(false  )
+            //   teamRoster(teamDropdown)
+              
+              
+             }
+            
+          })
+          .catch(function (res) {
+            //  console.log(res)
+               
+        });
+      }
 
     return (
         <div>
@@ -387,13 +471,18 @@ function TeamRoster(props) {
                             <div className="teams-select">
 
 
-                                <select onClick={change}>
+                                <select value={teamDropdown}onChange={change}>
                                     <option>Select Team</option>
                                     {team?.map((team) => {
+                                        console.log("676767555",team);
+                                      
                                         return (
-                                            <option value={team.team_id._id}>{team.team_id.team_name}</option>
-                                        )
+                                            <option value={team?.accept_invite_team_id}>{team?.accept_invite_team_name}</option>
+                                           
+                                        );
+                                     
                                     })}
+                                   
 
 
                                 </select>
@@ -512,8 +601,8 @@ function TeamRoster(props) {
                                                                                     <td>
                                                                                     <div className="last-row">
                                                                                            
-                                                                                            <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player.member_id._id)} ><img src={Delect} /></button>
-                                                                                            <button onClick={() => updateModalValue(i, player.member_id._id)}><img src={pencil} /></button>
+                                                                                            <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player._id)} ><img src={Delect} /></button>
+                                                                                            <button onClick={() =>  ditailsmodelvalue (i, player._id)}><EyeFill style={{ color: 'white' }} /></button>
                                                                                         </div>
                                                                                     </td>
 
@@ -865,6 +954,45 @@ function TeamRoster(props) {
                                     </Modal.Body>
 
                                 </Modal> : ""}
+                                {ditailsmodel ? <Modal show={ditailsmodel} style={{ position: "absolute", top: "206px" }}>
+                                <Modal.Body>
+                                        <div className="prefarance-form playerinfo-form">
+                                            <h1 style={{ color: "red", paddingBottom: "20px", fontWeight: "bold" }}>Player Details</h1>
+                                            
+                                            { ditails  ?
+                                           
+
+
+                                                <>  
+                                                
+                                                <div>
+                                                <p>player ID:  {ditails._id}</p>
+                                                <p>player Name: {` ${ditails.firstName} ${ditails.lastName} `}</p>
+                                                <p>player gendar:  {ditails.playerGender}</p>
+                                                <p>Tim ID:  {ditails.teamId}</p>
+                                                <p>manager ID:  {ditails.managerId}</p>
+                                                <p>Email:  {ditails.contactInformationEmail}</p>
+                                                <p>address:  {ditails.contactInformationAddress}</p>
+                                                <p>city:  {ditails.contactInformationCity}</p>
+                                                <p>state:  {ditails.contactInformationState}</p>
+                                                <p>zip:  {ditails.contactInformationZipCode}</p>
+                                                <p>Membaer Type:  {ditails.nonPlayer == false ? "Player":"nonplayer"}</p>
+                                                <p>birth day :  {ditails.playerBirthday}</p>
+                                                <p>Position:  {ditails.position}</p>
+                                                <p>jursey no :  {ditails.jerseyNumber}</p>
+                                                <p>phone:  {ditails.contactInformationPhoneNumber}</p>
+                                                </div>
+                                                <div>
+                                                {/* <p>Team Name: {ditails.team_name}</p> */}
+                                                </div>
+                                                </>
+                                             : ''  
+                                            }    
+
+                                                <button className="add-links" style={{ margin: "10px" }} onClick={() => setDitailsmodel(false)}>Close</button>
+                                            </div>
+                                            </Modal.Body>
+                                </Modal>:""}
                                 
 
                             </div>
@@ -934,7 +1062,7 @@ function TeamRoster(props) {
 
                                                                                 </td>
                                                                                 <td>
-                                                                                <span>{player.position}</span>
+                                                                                <span>{non_Player.position}</span>
                                                                                     {/* <div className="last-row">
                                                                                         <p>{non_Player.position}</p> 
                                                                                         <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(non_Player.member_id._id)} ><img src={Delect} /></button>
@@ -943,8 +1071,8 @@ function TeamRoster(props) {
                                                                                 </td>
                                                                                 <td>
                                                                                 <div className="last-row">
-                                                                                         <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(non_Player.member_id._id)} ><img src={Delect} /></button>
-                                                                                        <button onClick={() => updateModalValue1(i, non_Player.member_id._id)}><img src={pencil} /></button>
+                                                                                         <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(non_Player._id)} ><img src={Delect} /></button>
+                                                                                        <button onClick={() => ditailsmodelvalue(i, non_Player._id)}><EyeFill style={{ color: 'white' }}/></button>
                                                                                     </div>
                                                                                 </td>
                                                                             </tr>
