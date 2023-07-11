@@ -415,9 +415,9 @@ function TeamSchdule(props) {
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
                                         <Link to={{ pathname: "/NewGame", state: "GAME" }} >
-                                            <li><a className="dropdown-item" href="#">New Game</a></li></Link>
+                                            <li><a className="dropdown-item" >New Game</a></li></Link>
                                         <Link to={{ pathname: "/NewEvent", state: "EVENT" }} >
-                                            <li><a className="dropdown-item" href="#">New Event</a></li></Link>
+                                            <li><a className="dropdown-item" >New Event</a></li></Link>
 
                                     </ul>
                                 </div>

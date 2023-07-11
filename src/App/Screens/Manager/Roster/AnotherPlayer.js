@@ -39,7 +39,7 @@ function AnotherPlayer(props) {
     const [player, setPlayer] = useState([]);
     const [dropdown, setDropdown] = useState([])
     const [teamDropdown, setTeamDropDown] = useState("")
-    const [teamdroplist,setTeamDroplist] = useState([]);
+    const [teamdroplist, setTeamDroplist] = useState([]);
     const [id, setId] = useState([])
     const [newplayerdata, setNewPlayerData] = useState([])
     const [newNonPlayerData, setNewNonPlayerData] = useState([])
@@ -235,8 +235,8 @@ function AnotherPlayer(props) {
                 // "manager_id": user._id,
                 // 'team_id': teamDropdown,
                 'fromTeamId': teamdroplist,
-                'toTeamId':teamDropdown?teamDropdown: dropdown[0].team_id,
-                "data" : []
+                'toTeamId': teamDropdown ? teamDropdown : dropdown[0].team_id,
+                "data": []
 
             })
         };
@@ -269,8 +269,8 @@ function AnotherPlayer(props) {
     }
 
 
-    const removePlayer=(pid)=>{
-        setId(id.filter(data=>{
+    const removePlayer = (pid) => {
+        setId(id.filter(data => {
             return data != pid
         }))
         // console.log(id);
@@ -291,18 +291,18 @@ function AnotherPlayer(props) {
     //     })
     //   : ""; 
 
-   const newPlayerlist = (player) => {
-       console.log("new", teamdroplist);
-       console.log("old",teamDropdown);
-    console.log(player)
-   }
+    const newPlayerlist = (player) => {
+        console.log("new", teamdroplist);
+        console.log("old", teamDropdown);
+        console.log(player)
+    }
 
     return (
         <div>
 
             <div className="dashboard-container">
                 <div className="dashboard-main">
-                    <SideMenuComponents manger="manger"/>
+                    <SideMenuComponents manger="manger" />
                     <div className="dashboard-main-content">
                         <div className="dashboard-head">
                             <div className="teams-select">
@@ -365,20 +365,20 @@ function AnotherPlayer(props) {
                                 <h2 className="page-title">Import Players From Another Team</h2>
                             </div>
                             <div className="prefarance-box playerOther">
-                           
+
                                 <p>Select the player below from your other terms that you'd like to add th this roster.</p>
                                 <select onChange={teamchange}>
                                     {dropdown.map((dropdown) => {
-                                         
+
                                         return (
-                                             
-                                             <option value={dropdown.team_id}>{dropdown.team_name}</option> 
-                                            
-                                        ) 
+
+                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
+
+                                        )
                                     })}
                                 </select>
                                 <div className="playerLists">
-                                
+
                                     <div className="playerLstLft">
                                         <h4>Players From Other Teams</h4>
                                         {newplayerdata.map((player) => {
@@ -388,15 +388,15 @@ function AnotherPlayer(props) {
 
                                                         {player.member_id.profile_image == null ?
                                                             <img src={UserProfile} alt="" /> :
-                                                            <img src={`${pic}${player.member_id.profile_image}`} alt="" style={{height:"70px",width:"70px"}}/>
+                                                            <img src={`${pic}${player.member_id.profile_image}`} alt="" style={{ height: "70px", width: "70px" }} />
                                                         }
                                                         <span>{player.firstName}{player.lastName}</span>
                                                     </span>
-                                                    <span><input id ={player._id} value={`${player.firstName} ${player.lastName}`} type="checkbox" style={{ width: "20px", height: "20px" }} 
-                                                    onClick={() => {
-                                                        setId([...id, player._id])
-                                                    }
-                                                    }
+                                                    <span><input id={player._id} value={`${player.firstName} ${player.lastName}`} type="checkbox" style={{ width: "20px", height: "20px" }}
+                                                        onClick={() => {
+                                                            setId([...id, player._id])
+                                                        }
+                                                        }
                                                     // onChange={setId([...id, player._id])} 
                                                     /></span>
                                                 </div>
@@ -416,43 +416,43 @@ function AnotherPlayer(props) {
                                         {/* <div>
   {`Items checked are: ${id}`}
 </div> */}
-{
-    newplayerdata.map((player)=>{
-        id?.map((id)=>{
-           return ( 
-               player._id == id ? addPlayer.push(player): ''
-           )
-        })
-    })
-}
+                                        {
+                                            newplayerdata.map((player) => {
+                                                id?.map((id) => {
+                                                    return (
+                                                        player._id == id ? addPlayer.push(player) : ''
+                                                    )
+                                                })
+                                            })
+                                        }
                                         {newplayerdata.map((player) => {
                                             return (
                                                 <div>
                                                     {
-                                                //    id.length>1 ?
-                                                //     res = [...new Set(id)]:
-                                                    id?.map((id) => {
-                                                        return (
-                                                            <div>
-                                                                {
-                                                                    player._id == id ?
-                                                                        <div className="playerRow">
-                                                                            <span><input type="checkbox" checked onClick={()=>removePlayer(player._id)}/></span>
-                                                                            <span>
-                                                                                {player.member_id.profile_image == null ?
-                                                                                    <img src={UserProfile} alt="" /> :
-                                                                                    <img src={`${pic}${player.member_id.profile_image}`} alt="" style={{height:"70px",width:"70px"}}/>
-                                                                                }
-                                                                                <span>{player.firstName}{player.lastName}</span>
-                                                                            </span>
-                                                                        </div> : ""
-                                                                }
-                                                            </div>
-                                                        )
+                                                        //    id.length>1 ?
+                                                        //     res = [...new Set(id)]:
+                                                        id?.map((id) => {
+                                                            return (
+                                                                <div>
+                                                                    {
+                                                                        player._id == id ?
+                                                                            <div className="playerRow">
+                                                                                <span><input type="checkbox" checked onClick={() => removePlayer(player._id)} /></span>
+                                                                                <span>
+                                                                                    {player.member_id.profile_image == null ?
+                                                                                        <img src={UserProfile} alt="" /> :
+                                                                                        <img src={`${pic}${player.member_id.profile_image}`} alt="" style={{ height: "70px", width: "70px" }} />
+                                                                                    }
+                                                                                    <span>{player.firstName}{player.lastName}</span>
+                                                                                </span>
+                                                                            </div> : ""
+                                                                    }
+                                                                </div>
+                                                            )
 
 
 
-                                                    })}
+                                                        })}
 
                                                 </div>
 
@@ -465,20 +465,20 @@ function AnotherPlayer(props) {
                                     </div>
 
                                 </div>
-                                <div 
-                                style={{ display: "flex", justifyContent: "center" }}
+                                <div
+                                    style={{ display: "flex", justifyContent: "center" }}
                                 >
-                                <button style={{
-                                    padding: "6px",
-                                    marginTop: "19px",
-                                    borderRadius: "10px",
-                                    backgroundColor: "#EC3525"
-                                }} 
-                                onClick={PlayerImportData}> Invite Players</button>
-                            </div>
+                                    <button style={{
+                                        padding: "6px",
+                                        marginTop: "19px",
+                                        borderRadius: "10px",
+                                        backgroundColor: "#EC3525"
+                                    }}
+                                        onClick={PlayerImportData}> Invite Players</button>
+                                </div>
                             </div>
 
-                            
+
                         </div>
 
 

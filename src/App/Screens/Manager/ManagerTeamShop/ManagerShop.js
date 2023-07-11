@@ -24,6 +24,7 @@ import BigUserProfile from "../../../images/big-user-profile.png"
 import axios from 'axios'
 import Delect from "../../../images/delect.png"
 import pencil from "../../../images/pencil.png"
+import Sizes from './Sizes';
 
 
 function ManagerTeamShop(props) {
@@ -53,6 +54,9 @@ function ManagerTeamShop(props) {
   const [modeValue, setModeValue] = useState(false)
   const [uid, setUId] = useState("")
   const [id, setId] = useState("")
+  const[category,setCategory] = useState("")
+  const[quantity,setQuantity] = useState("")
+  const [reloadKey, setReloadKey] = useState(1)
 
   useEffect(() => {
     // let user = userdata && userdata._id ? true : false;
@@ -68,6 +72,8 @@ function ManagerTeamShop(props) {
     dropdownMenu()
     setTeamDropdown()
     teamShopData()
+    addShopData()
+    
 
    
 
@@ -137,20 +143,52 @@ function ManagerTeamShop(props) {
 
 
 
+  // const teamShopData = (id) => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   if (user) {
+  //     let header = {
+  //       'authToken': user.authtoken
+
+  //     }
+  //     console.log('user', user)
+
+
+  //     console.log("id----------->", id)
+
+
+  //     Network('api/team-store-product-list?manager_id=' + user._id + '&team_id=' + id, 'GET', header)
+  //       .then(async (res) => {
+  //         console.log("teamShopData----", res)
+
+  //         if (res.response_code == 4000) {
+  //           dispatch(logoutUser(null))
+  //           localStorage.removeItem("user");
+  //           history.push("/")
+  //           toast.error(res.response_message)
+  //         }
+  //         setShopData(res.response_data.docs)
+
+
+
+  //       })
+  //   }
+  // }
+
+
   const teamShopData = (id) => {
     const user = JSON.parse(localStorage.getItem('user'));
+    console.log("iddddd",id)
     if (user) {
       let header = {
-        'authToken': user.authtoken
+        'token': user.authtoken
 
       }
       console.log('user', user)
 
 
       console.log("id----------->", id)
-
-
-      Network('api/team-store-product-list?manager_id=' + user._id + '&team_id=' + id, 'GET', header)
+      // Network('api/team-store-product-list?manager_id=' + user._id + '&team_id=' + id, 'GET', header)
+      Network('api/getAllProductDetails' , 'GET', header)
         .then(async (res) => {
           console.log("teamShopData----", res)
 
@@ -160,14 +198,14 @@ function ManagerTeamShop(props) {
             history.push("/")
             toast.error(res.response_message)
           }
-          setShopData(res.response_data.docs)
-
+          setShopData(res.response_data)
+          
+         
 
 
         })
     }
   }
-
 
   const change = (event) => {
     console.log("event", event.target.value)
@@ -176,56 +214,84 @@ function ManagerTeamShop(props) {
    
 
   }
-  const addShopData = async () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const formData = new FormData();
-    formData.append('team_id', teamDropdown);
-    formData.append('name', name);
-    formData.append('jersey_number', jursey);
-    formData.append('description', desciption);
-    formData.append('price', price);
-    formData.append('brand ', brand);
-    formData.append('color', color);
-    formData.append('material ', material);
-    formData.append('size', size);
-    formData.append('image', image);
-    const requestOptions = {
-      method:"POST",
-        headers: {
-            'x-access-token': user.authtoken
-        },
+  // const addShopData = async () => {
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   const formData = new FormData();
+  //   formData.append('team_id', teamDropdown);
+  //   formData.append('name', name);
+  //   formData.append('jersey_number', jursey);
+  //   formData.append('description', desciption);
+  //   formData.append('price', price);
+  //   formData.append('brand ', brand);
+  //   formData.append('color', color);
+  //   formData.append('material ', material);
+  //   formData.append('size', size);
+  //   formData.append('image', image);
+  //   const requestOptions = {
+  //     method:"POST",
+  //       headers: {
+  //           'x-access-token': user.authtoken
+  //       },
        
-    };
-    console.log("image--> ",image)
-    axios('https://nodeserver.mydevfactory.com:1447/api/add-store-image', 
-    {
-      method:"POST",
-      headers:{
-          "Content-Type": "multipart/form-data",
-          'x-access-token': user.authtoken
+  //   };
+  //   console.log("image--> ",image)
+  //   axios('https://nodeserver.mydevfactory.com:1447/api/add-store-image', 
+  //   {
+  //     method:"POST",
+  //     headers:{
+  //         "Content-Type": "multipart/form-data",
+  //         'x-access-token': user.authtoken
           
-      },
-      data:formData
-  })
-        .then((res) => {
-            console.log("edit shop Image", res)
-            if(res.status==200){
-                toast.success("Add Succecfull")
-                console.log("Add Image",res)
-                teamShopData(teamDropdown==null?dropdown[0]._id :teamDropdown)
+  //     },
+  //     data:formData
+  // })
+  //       .then((res) => {
+  //           console.log("edit shop Image", res)
+  //           if(res.status==200){
+  //               toast.success("Add Succecfull")
+  //               console.log("Add Image",res)
+  //               teamShopData(teamDropdown==null?dropdown[0]._id :teamDropdown)
 
-            }
+  //           }
 
-            if (res.response_code == 4000) {
-                dispatch(logoutUser(null))
-                localStorage.removeItem("user");
-                history.push("/")
-                toast.error(res.response_message)
-            }
-        })
+  //           if (res.response_code == 4000) {
+  //               dispatch(logoutUser(null))
+  //               localStorage.removeItem("user");
+  //               history.push("/")
+  //               toast.error(res.response_message)
+  //           }
+  //       })
+
+  // }
+
+  const addShopData =async()=>{
+    const user = JSON.parse(localStorage.getItem('user'));
+   const data = {
+      "createdByManagerId": user._id,
+      "name":name,
+      "category":category,
+      "description":desciption,
+      "price":price,
+     "sizes":size
+    }
+    console.log("78787",data)
+    axios({
+      method: 'post',
+      url: 'https://nodeserver.mydevfactory.com:1448/api/addProduct',
+      headers: {
+        'Content-Type': 'application/json',
+        'token': user.authtoken
+    },
+     data:data
+     
+    });
 
   }
-  
+  const getSize =(data) =>{
+    console.log(data)
+    setSize(data);
+    setQuantity(data)
+}
 
   const handleChange = event => {
     console.log("URL.createObjectURL(event.target.files[0])---->", URL.createObjectURL(event.target.files[0]));
@@ -248,19 +314,23 @@ function ManagerTeamShop(props) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': user.authtoken
+          'token': user.authtoken
         },
         body: JSON.stringify({
-          "id": id
+          "productId": id
         })
       };
-      fetch('https://nodeserver.mydevfactory.com:1447/api/delete-store-product-by-id', requestOptions)
+      fetch('https://nodeserver.mydevfactory.com:1448/api/deleteProductById', requestOptions)
         .then(response => response.json())
         .then((res) => {
           console.log("delete shop  data", res)
           if (res.response_code == 2000) {
             console.log("deleted data", res)
-            teamShopData(teamDropdown==null?dropdown[0]._id :teamDropdown)
+            const data = shopData
+            // teamShopData(teamDropdown==null?dropdown[0]._id :teamDropdown)
+            // teamShopData();
+            setShopData({ ...shopData, data: data.filter(el => el.id !== id) });
+                    setReloadKey(Math.random());
           }
           if (res.response_code == 4000) {
             dispatch(logoutUser(null))
@@ -358,7 +428,7 @@ function ManagerTeamShop(props) {
                   history.push("/CreateTeam")
                 }}>Create New Teams</button>
                 <select onChange={change}>
-                  {dropdown.map((dropdown) => {
+                  {dropdown?.map((dropdown) => {
                     return (
                       <option value={dropdown._id}>{dropdown.team_name}</option>
                     )
@@ -396,11 +466,11 @@ function ManagerTeamShop(props) {
                 </div>
               </div>
               <div className="profile-head">
-                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                <div className="profile-head-name">{user?.fname + " " + user?.lname}</div>
                 <div className="profile-head-img">
-                  {profilePic.profile_image == null ?
+                  {profilePic?.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
-                    <img src={`${pic1}${profilePic.profile_image}`} alt="" />
+                    <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
                   }
 
                 </div>
@@ -431,18 +501,26 @@ function ManagerTeamShop(props) {
                         <h1 style={{ color: "red", fontWeight: "bolder" }}> ADD PRODUCT</h1>
                         <div className="row">
 
-                          <div className="col-md-12">
+                          {/* <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Team</h2>
 
                               <select onChange={change} className="input-select">
                                 <option>Select A Team</option>
-                                {dropdown.map((dropdown) => {
+                                {dropdown?.map((dropdown) => {
                                   return (
                                     <option value={dropdown._id}>{dropdown.team_name}</option>
                                   )
                                 })}
                               </select>
+
+                            </div>
+                          </div> */}
+                           <div className="col-md-12">
+                            <div className="prefarance-form-list">
+                              {/* <h2>manager id</h2> */}
+                              {/* <input type="text" className="input-select" onChange={(e) => setName(e.target.value)} /> */}
+                             {/* <p>{user?._id}</p> */}
 
                             </div>
                           </div>
@@ -456,8 +534,8 @@ function ManagerTeamShop(props) {
                           </div>
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
-                              <h2>Jursey Number</h2>
-                              <input type="text" className="input-select" onChange={(e) => setJursey(e.target.value)} />
+                              <h2>Category</h2>
+                              <input type="text" className="input-select" onChange={(e) => setCategory(e.target.value)} />
 
                             </div>
                           </div>
@@ -473,7 +551,7 @@ function ManagerTeamShop(props) {
                               <input type="text" className="input-select" onChange={(e) => setPrice(e.target.value)} />
                             </div>
                           </div>
-                          <div className="col-md-12">
+                          {/* <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Brand</h2>
                               <input type="text" className="input-select" onChange={(e) => setBrand(e.target.value)} />
@@ -498,8 +576,12 @@ function ManagerTeamShop(props) {
                               <h2>Material</h2>
                               <input type="text" className="input-select" onChange={(e) => setMaterial(e.target.value)} />
                             </div>
-                          </div>
-                          <div className="col-md-12">
+                          </div> */}
+
+
+
+
+                          {/* <div className="col-md-6">
                             <div className="prefarance-form-list">
                               <h2>Size</h2>
 
@@ -514,13 +596,24 @@ function ManagerTeamShop(props) {
                               </select>
                             </div>
                           </div>
-                          <div className="col-md-12">
+                          <div className='col-md-6'>
+                          <div className="prefarance-form-list">
+                          <h2>quantity</h2>
+                          <input type="text" className="input-select" onChange={(e) => setQuantity(e.target.value)} />
+
+                          </div>
+                          </div>
+                          <button style={{ color: "red", fontSize: "15px", float: "right" }}>Add More..</button> */}
+                        
+                        <Sizes getSize={getSize}/>
+
+                          {/* <div className="col-md-12">
                             <div className="update-team-photo" style={{ width: "100%" }}>
                               Choose Image
                               <input type="file" name='img' onChange={(event) => handleChange(event)} />
 
                             </div>
-                          </div>
+                          </div> */}
                           <div className="col-md-12">
                             <div className="prefarance-form-list" >
                               <button className="add-links" onClick={() => setModalValue(false)}>CANCEL</button>
@@ -673,13 +766,15 @@ function ManagerTeamShop(props) {
 
 
                     : */
-                    shopData.map((data, id) => {
+                    // shopData.map((data, id) => {
+                      shopData?.map((data) => {
                       return (
                         <div className="team-shop-product-box">
                           <div className="team-shop-product-img">
                           <Link to={{ pathname: "/ProductDetails", state: data }} >
                           {data.image == null ? <img src={listImage} alt="" /> :
-                              <img src={`${pic}${data.image}`} alt="" style={{height:"100%",width:"100%"}} />}
+                              // <img src={`${pic}${data.image}`} alt="" style={{height:"100%",width:"100%"}} />}
+                              <img src=  {data.image} alt=""  />}
                       </Link>
                            
 

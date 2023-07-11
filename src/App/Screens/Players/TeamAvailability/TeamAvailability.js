@@ -158,7 +158,7 @@ const TeamAvailability = () => {
                             <div className="teams-select">
                             <select onClick={change}>
                                     <option>Select Team</option>
-                                    {team.map((team) => {
+                                    {team?.map((team) => {
                                         return (
                                             <option value={team.team_id._id}>{team.team_id.team_name}</option>
                                         )
@@ -169,11 +169,11 @@ const TeamAvailability = () => {
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
                                 <div className="profile-head-img">
-                                    {profilePic.profile_image == null ?
+                                    {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic}${profilePic.profile_image}`} alt="" />
+                                        <img src={`${pic}${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -205,7 +205,7 @@ const TeamAvailability = () => {
                                         <th>Attendence</th>
                                         
                                     </tr>
-                                    {schedule.map((schedule)=>{
+                                    {schedule?.map((schedule)=>{
                                             return(
                                     <tr>
                                     <td>

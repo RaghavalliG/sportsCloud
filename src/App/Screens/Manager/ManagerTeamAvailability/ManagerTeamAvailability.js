@@ -114,15 +114,15 @@ const ManagerTeamAvailability = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             //console.log('user',user)
 
-            Network('api/my-team-list?team_manager_id=' + user._id, 'GET', header)
+            Network('api/getAllTeamName?teamManagerId=' + user._id, 'GET', header)
                 .then(async (res) => {
                     console.log("dropdown----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
@@ -147,30 +147,30 @@ const ManagerTeamAvailability = () => {
         if (user) {
             let header = {
 
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
 
             let url = ""
-            if (id != undefined) {
+            // if (id != undefined) {
 
-                url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + id + '&page=1&limit=10'
-            }
-            else {
-                url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + teamDropdown + '&page=1&limit=10'
-            }
+            //     url = 'api/getAllEventAndGamesData?team_id=' + id
+            // }
+            // else {
+            //     url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + teamDropdown + '&page=1&limit=10'
+            // }
             //console.log('user',user)
-            Network('api/get-game-event-list?manager_id=' + user._id + '&team_id=' + id + '&page=1&limit=10', 'GET', header)
+            Network('api/getAllEventAndGamesData?team_id=' + id, 'GET', header)
                 .then(async (res) => {
                     console.log("schedule----", res)
-                    if (res.response_code == 4000) {
+                    if (res.response_code == 400) {
                         dispatch(logoutUser(null))
                         localStorage.removeItem("user");
                         history.push("/")
                         toast.error(res.response_message)
                     }
                     //console.log("doc data----->",res.response_data.docs)
-                    setSchedule(res.response_data.docs)
+                    setSchedule(res.response_data)
 
 
 
@@ -183,7 +183,7 @@ const ManagerTeamAvailability = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
 
@@ -228,7 +228,7 @@ const ManagerTeamAvailability = () => {
                 "availability": availability
             })
         };
-        fetch('https://nodeserver.mydevfactory.com:1447/api/change-player-availability', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/change-player-availability', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("availability", res)
@@ -320,7 +320,7 @@ const ManagerTeamAvailability = () => {
                                     <option>Select A Team</option>
                                     {dropdown.map((dropdown) => {
                                         return (
-                                            <option value={dropdown._id}>{dropdown.team_name}</option>
+                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                         )
                                     })}
                                 </select>
@@ -358,7 +358,7 @@ const ManagerTeamAvailability = () => {
                                 <select onChange={gameEventId}>
 
                                     <option >Select Game/Event</option>
-                                    {schedule.map((schedule) => {
+                                    {schedule?.map((schedule) => {
                                         return (
                                             <option value={schedule._id}>{schedule.name}</option>
                                         )
@@ -388,7 +388,7 @@ const ManagerTeamAvailability = () => {
 
 
                                     </tr>
-                                    {gameEventAllData.map((data, index) => {
+                                    {gameEventAllData?.map((data, index) => {
                                         return (
                                             <tr >
                                                 <td style={{ paddingLeft: "10%" }}>

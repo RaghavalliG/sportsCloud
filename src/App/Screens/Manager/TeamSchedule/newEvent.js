@@ -82,14 +82,14 @@ const NewEvent = () => {
         setUser(userD);
         setUserData(userLocal);
         flagList()
-        eventCreate()
+        // eventCreate()
         dropdownMenu()
         locationList()
 
 
 
     }, []);
-    const pic = 'https://nodeserver.mydevfactory.com:1447/'
+    const pic = 'https://nodeserver.mydevfactory.com:1448/'
 
 
 
@@ -168,9 +168,9 @@ const NewEvent = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': user.authtoken
+                'token': user.authtoken
             },
-            body: {
+            body: JSON.stringify({
                 "team_id" : teamDropdown,
                 "event_name": name,
                 "short_label": lebel,
@@ -188,10 +188,10 @@ const NewEvent = () => {
                 "duration": "90",
                 "notify_team": true,
                 "track_availability": true
-            }
+            })
         };
         console.log(requestOptions);
-        fetch('https://nodeserver.mydevfactory.com:1447/api/addEvents', requestOptions)
+        fetch('https://nodeserver.mydevfactory.com:1448/api/addEvents', requestOptions)
             .then(response => response.json())
             .then((res) => {
                 console.log("event Data", res)

@@ -74,7 +74,7 @@ function Export(props) {
         console.log("id---->",id)
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
@@ -198,8 +198,8 @@ function Export(props) {
     }
     let headers = [
     //   schedule?.isFlag ==  "Event"? 
-        { label: "Event/Game Name", key: "event_name" }
-    //     { label: "Event/Game Name", key: "game_name" },
+        // { label: "Event/Game Name", key: schedule?.isFlag ==  "Event"? "event_name" :"game_name"}
+        { label: "Event/Game Name", key: "event_name" },
     // {label:"Event/Game name",key:["event_name","game_name"]}
 
     ];
@@ -238,7 +238,7 @@ function Export(props) {
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-name">{user ? user.fname : user.lname}</div>
                                 <div className="profile-head-img">
                                     {
                                         user ?

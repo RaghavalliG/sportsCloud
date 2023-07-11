@@ -20,14 +20,55 @@ import SideMenuComponents from "../../../Components/SideMenu"
 import flag from "../../../images/flag.png"
 import UserProfile from "../../../images/user-profile.png"
 import './ManagerViewCalender.css'
+// import EventCalendar from 'react-event-calendar';
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const ManagerViewCalender = () => {
+    const localizer = momentLocalizer(moment);
+    // const EventCalendar = require('/../react-event-calendar');
+    // var dateTimeObj = moment('2023-07-14T00:00:00.000Z' + '04:00 PM', 'YYYY-MM-DDLT');
+    // var dateTime = dateTimeObj.format('YYYY-MM-DDTHH:mm:s');
+    // console.log(dateTime + 'datetime');
+    // const events = [
+    //     // {
+    //     //     start: '2023-07-20',
+    //     //     end: '2023-07-02',
+    //     //     eventClasses: 'optionalEvent',
+    //     //     title: 'test event',
+    //     //     description: 'This is a test description of an event',
+    //     // },
+    //     {
+    //         start: '2023-07-19',
+    //         end: '2023-07-19',
+    //         title: 'test event',
+    //         description: 'This is a test description of an event',
+    //         data: 'you can add what ever random data you may want to use later',
+    //     },
+    //     {
+    //         start: '2023-07-14T00:00:00.000Z',
+    //         end: '2023-07-14T00:00:00.000Z',
+    //         title: 'Acfg event',
+    //         description: 'This is a test description of an event',
+    //         data: 'you can add what ever random data you may want to use later',
+    //     },
+    //     // {
+    //     //     start: moment().toDate(),
+    //     //     end: moment()
+    //     //       .add(1, "days")
+    //     //       .toDate(),
+    //     //     title: "Some title"
+    //     //   }
+    // ];
     const history = useHistory();
     const dispatch = useDispatch()
 
     const [userMe, setUser] = useState(null);
     const [user, setUserData] = useState({});
     const [schedule, setSchedule] = useState([])
+  
+    const [event, setEvent] = useState([]);
     const [dropdown, setDropdown] = useState([])
     const [teamDropdown, setTeamDropDown] = useState("")
 
@@ -35,6 +76,7 @@ const ManagerViewCalender = () => {
     const [eventType, setEventType] = useState()
     const [m, setM] = useState(new Date().getMonth())
     const [y, setY] = useState(new Date().getFullYear())
+    
     const Month = ["January", "February", "March", "April", "May", "June", "July",
         "August", "September", "October", "November", "December"];
     console.log("month ", Month[m])
@@ -112,41 +154,102 @@ const ManagerViewCalender = () => {
 
 
 
+    // const teamSchedule = (id) => {
+    //     console.log("id", id)
+    //     const user = JSON.parse(localStorage.getItem('user'));
+    //     if (user) {
+    //         let header = {
+
+    //             'token': user.authtoken
+
+    //         }
+
+    //         let url = ""
+    //         if (id != undefined) {
+
+    //             url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + id + '&page=1&limit=10'
+    //         }
+    //         else {
+    //             url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + teamDropdown + '&page=1&limit=10'
+    //         }
+    //         //console.log('user',user)
+    //         Network('api/getAllEventAndGamesData?team_id=' + id, 'GET', header)
+    //             .then(async (res) => {
+    //                 console.log("schedule----", res)
+    //                 if (res.response_code == 400) {
+    //                     dispatch(logoutUser(null))
+    //                     localStorage.removeItem("user");
+    //                     history.push("/")
+    //                     toast.error(res.response_message)
+    //                 }
+    //                 //console.log("doc data----->",res.response_data.docs)
+    //                 setSchedule(res.response_data.docs)
+
+
+    //             })
+    //     }
+    // }
+
+// calender event view
+
     const teamSchedule = (id) => {
-        console.log("id", id)
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem("user"));
+
         if (user) {
             let header = {
+                token: user.authtoken,
+            };
+            console.log("user", user);
 
-                'token': user.authtoken
+            Network(
+                // 'api/get-game-event-list-for-player?user_id='+user._id+'&page=1&limit=10',
+                // "api/getAllEventAndGamesData?team_id="+"6470683a88ea6b032e255a3e",
+                "api/getAllEventAndGamesData?team_id=" + id,
+                // +'&page=1&limit=10',
+                "GET",
+                header
+            ).then(async (res) => {
+                console.log("schedule----", res);
 
-            }
+                if (res.response_code == 4000) {
+                    dispatch(logoutUser(null));
+                    localStorage.removeItem("user");
+                    history.push("/");
+                    toast.error(res.response_message);
+                }
+                setSchedule(res.response_data);
+                // var transformEvent=[]
+                // console.log(res.response_data, "9090909890990990");
+                // const transformEvent = schedule.map((item) => {
+                //     console.log(item, "==========>>>>>>>");
+                //     // const{}=item
+                //     return {
+                //         date: item.date,
+                //     };
+                // });
+                // setEvent(transformEvent);
+                // console.log(transformEvent, "090989786543");
+                var transformEvent=[]
+                console.log (res.response_data,"ohohohoioihjhihhhhj")
+                res.response_data.forEach((item)=>{
 
-            let url = ""
-            if (id != undefined) {
+                    console.log(item,"90980909")
 
-                url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + id + '&page=1&limit=10'
-            }
-            else {
-                url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + teamDropdown + '&page=1&limit=10'
-            }
-            //console.log('user',user)
-            Network('api/getAllEventAndGamesData?team_id=' + id , 'GET', header)
-                .then(async (res) => {
-                    console.log("schedule----", res)
-                    if (res.response_code == 400) {
-                        dispatch(logoutUser(null))
-                        localStorage.removeItem("user");
-                        history.push("/")
-                        toast.error(res.response_message)
-                    }
-                    //console.log("doc data----->",res.response_data.docs)
-                    setSchedule(res.response_data.docs)
+                    transformEvent.push({
 
+                        start:new Date(item.date),
+                        end:new Date(item.date)
+                     })
 
                 })
+                setEvent(transformEvent);
+                console.log(transformEvent, "====>>>>>>");
+            });
         }
-    }
+    };
+
+
+
     const flagList = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
@@ -247,10 +350,10 @@ const ManagerViewCalender = () => {
                     <div className="teams-select">
                         <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
-                        <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
+                        <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
                             {dropdown.map((dropdown) => {
                                 return (
-                                    <option value={dropdown._id}>{dropdown.team_name}</option>
+                                    <option value={dropdown.team_id}>{dropdown.team_name}</option>
                                 )
                             })}
                         </select>
@@ -303,8 +406,8 @@ const ManagerViewCalender = () => {
                     </div>
 
                     <div className="calBox">
-                        <div className="calBoxHead">
-                            <span>
+                        {/* <div className="calBoxHead"> */}
+                        {/* <span>
                                 <span onClick={() => setM(m - 1)}>&#10094;</span>
                                 {Month[m]}
                                 <span onClick={() => setM(m + 1)}>&#10095;</span>
@@ -317,109 +420,29 @@ const ManagerViewCalender = () => {
                             <span onClick={CalenderListView}>
                                 <i className="fas fa-search"></i>
                             </span>
-                            <div className="vcRgt">Team record: 8-5</div>
-                        </div>
+                            <div className="vcRgt">Team record: 8-5</div> */}
+                        {/* </div> */}
                         <div className="calBtm">
-                            <div className="calInfo">
+                            {/* <div className="calInfo">
                                 <span>Do you want to play college sports?</span>
                                 <span className="maxW">Set up a free  recruiting profile with Next College Student Athlete and start connecting with over 35,000 college coaches.</span>
                                 <span className="redTx">Let’s Do  This!</span>
                                 <span className="redTx">No Thanks</span>
-                            </div>
-                            <div className="calTable">
-                                <table>
-                                    <tr>
-                                        <th>Sunday</th>
-                                        <th>Monday</th>
-                                        <th>Tueday</th>
-                                        <th>Wednesday</th>
-                                        <th>Thursday</th>
-                                        <th>Friday</th>
-                                        <th>Saturday</th>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>
-                                            2
-                                            <div className="prcBar"><span className="prcIcn">&#9873;</span> <span className="prcBtn">Practice</span></div>
-                                            <h5>Dubcity Basketball Practice</h5>
-                                            <p>Eleanor Murrary Fallon Middle School</p>
-                                        </td>
-                                        <td>3</td>
-                                        <td>
-                                            4
-                                            <div className="prcBar"><span className="prcIcn">&#9873;</span> <span className="prcBtn">Practice</span></div>
-                                            <h5>Dubcity Basketball Practice</h5>
-                                            <p>Eleanor Murrary Fallon Middle School</p>
-                                        </td>
-                                        <td>
-                                            5
-                                            <div className="prcBar"><span className="prcIcn">&#9873;</span> <span className="prcBtn">Practice</span></div>
-                                            <h5>Dubcity Basketball Practice</h5>
-                                            <p>Eleanor Murrary Fallon Middle School</p>
-                                        </td>
-                                        <td>6</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>8</td>
-                                        <td>9</td>
-                                        <td>
-                                            10
-                                            <div className="prcBar"><span className="prcIcn">&#9873;</span> <span className="prcBtn">Practice</span></div>
-                                            <h5>Dubcity Basketball Practice</h5>
-                                            <p>Eleanor Murrary Fallon Middle School</p>
-                                        </td>
-                                        <td>11</td>
-                                        <td>12</td>
-                                        <td>13</td>
-                                    </tr>
-                                    <tr>
-                                        <td>14</td>
-                                        <td>15</td>
-                                        <td>
-                                            16
-                                            <div className="prcBar"><span className="prcIcn">&#9873;</span> <span className="prcBtn">Practice</span></div>
-                                            <h5>Dubcity Basketball Practice</h5>
-                                            <p>Eleanor Murrary Fallon Middle School</p>
-                                        </td>
-                                        <td>17</td>
-                                        <td>
-                                            18
-                                            <div className="prcBar"><span className="prcIcn">&#9873;</span> <span className="prcBtn">Practice</span></div>
-                                            <h5>Dubcity Basketball Practice</h5>
-                                            <p>Eleanor Murrary Fallon Middle School</p>
-                                        </td>
-                                        <td>19</td>
-                                        <td>20</td>
-                                    </tr>
-                                    <tr>
-                                        <td>21</td>
-                                        <td>22</td>
-                                        <td>23</td>
-                                        <td><span className="prcRedCircle">24</span></td>
-                                        <td>
-                                            25
-                                            <div className="prcBar"><span className="prcIcn">&#9873;</span> <span className="prcBtn">Practice</span></div>
-                                            <h5>Dubcity Basketball Practice</h5>
-                                            <p>Eleanor Murrary Fallon Middle School</p>
-                                        </td>
-                                        <td>26</td>
-                                        <td>27</td>
-                                    </tr>
-                                    <tr>
-                                        <td>28</td>
-                                        <td>29</td>
-                                        <td>30</td>
-                                        <td>31</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </table>
+                            </div> */}
+                            <div className="">
+                                <Calendar
+                                    localizer={localizer}
+                                    defaultDate={new Date()}
+                                    defaultView="month"
+                                    events={event}
+                                    style={{ height: "100vh" }}
+                                />
+                                {/* <EventCalendar
+                                    month={7}
+                                    year={2023}
+                                    events={events}
+                                    // onEventClick={(target, eventData, day) => console.log(eventData)}
+                                        /> */}
                             </div>
                         </div>
 

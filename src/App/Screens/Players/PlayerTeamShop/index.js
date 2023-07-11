@@ -54,7 +54,7 @@ function PlayerTeamShop(props) {
     setUserData(null);
     props.history.push("/")
   };
-  const pic = 'https://nodeserver.mydevfactory.com:1447/'
+  const pic = 'https://nodeserver.mydevfactory.com:1448/'
 
   const pic1 = "https://nodeserver.mydevfactory.com:1447/profilepic/"
 
@@ -114,14 +114,15 @@ function PlayerTeamShop(props) {
     console.log("iddddd",id)
     if (user) {
       let header = {
-        'authToken': user.authtoken
+        'token': user.authtoken
 
       }
       console.log('user', user)
 
 
       console.log("id----------->", id)
-      Network('api/team-store-product-list?manager_id=' + user._id + '&team_id=' + id, 'GET', header)
+      // Network('api/team-store-product-list?manager_id=' + user._id + '&team_id=' + id, 'GET', header)
+      Network('api/getAllProductDetails' , 'GET', header)
         .then(async (res) => {
           console.log("teamShopData----", res)
 
@@ -131,10 +132,10 @@ function PlayerTeamShop(props) {
             history.push("/")
             toast.error(res.response_message)
           }
-          setShopData(res.response_data.docs)
-          if(res.response_data.docs.length!=0){
-            teamShopData(res.response_data.docs[0]._id)
-          }
+          setShopData(res.response_data)
+          // if(res.response_data.length!=0){
+          //   teamShopData(res.response_data._id)
+          // }
          
 
 
@@ -159,7 +160,7 @@ function PlayerTeamShop(props) {
             <div className="dashboard-head">
               <div className="teams-select">
                 <select onClick={change} >
-                  { team.map((team)=>{
+                  { team?.map((team)=>{
                     return(
                       <option value={team.team_id._id}>{team.team_id.team_name}</option>
                     )
@@ -168,14 +169,14 @@ function PlayerTeamShop(props) {
               </div>
 
               <div className="profile-head">
-                {profilePic.fname ?
-                  <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div> :
-                  <div className="profile-head-name">Loading...</div>
+                {/* {profilePic.fname ? */}
+                  <div className="profile-head-name"> {user?.fname + " " + user?.lname}</div> :
+                  {/* <div className="profile-head-name">Loading...</div> */}
 
-                }
+                {/* } */}
 
                 <div className="profile-head-img">
-                  {profilePic.profile_image == null ?
+                  {profilePic?.profile_image == null ?
                     <img src={BigUserProfile} alt="" /> :
                     <img src={`${pic1}${profilePic.profile_image}`} alt="" />
                   }
@@ -207,10 +208,12 @@ function PlayerTeamShop(props) {
                 </div>
 
                 <div className="team-shop-list-main">
-                  {shopData.length==0?
+                  {shopData?.length==0?
                   <div className="team-shop-list-main">
                    <div className="team-shop-product-box">
                     <div className="team-shop-product-img"  >
+                  
+                     
                        <Link to={{ pathname: "/AddShopData", state: "GAME" }} >
                       <img src={listImage} alt=""  />
                       </Link>
@@ -345,12 +348,14 @@ function PlayerTeamShop(props) {
 
 
                     :
-                    shopData.map((data) => {
+                    shopData?.map((data) => {
+                      console.log(data,"=-=-=-=-=-==-=-=-0=-=-=-=-")
                       return (
                         <div className="team-shop-product-box">
                           <div className="team-shop-product-img">
                             {data.image == null ? <img src={listImage} alt="" /> :
-                              <img src={`${pic}${data.image}`} alt="" />}
+                              // <img src={`${pic}${data.image}`} alt="" />}
+                              <img src=  {data.image} alt=""  />}
 
                           </div>
                           <div className="team-shop-product-text">
