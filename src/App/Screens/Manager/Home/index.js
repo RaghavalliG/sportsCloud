@@ -40,7 +40,7 @@ import "../../../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
 import "../../../../../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
 import DonutChart from 'react-donut-chart';
 
-import {   momentLocalizer, globalizeLocalizer  } from "react-big-calendar";
+import { momentLocalizer, globalizeLocalizer } from "react-big-calendar";
 import globalize from 'globalize'
 
 
@@ -63,7 +63,7 @@ function ManagerHome(props) {
   // const [loading,setLoading]= useState(false)
   const [photo, setPhoto] = useState()
   const [teamId, setTeamId] = useState("")
-  const [event,setEvent] = useState([]);
+  const [event, setEvent] = useState([]);
   const [schedule, setSchedule] = useState([])
   const [profilePic, setProfilePic] = useState([])
   const [value, onChange] = useState(new Date());
@@ -269,7 +269,7 @@ function ManagerHome(props) {
         url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + teamId + '&page=1&limit=10'
       }
       //console.log('user',user)
-      Network('api/getAllEventAndGamesData?team_id=' + id , 'GET', header)
+      Network('api/getAllEventAndGamesData?team_id=' + id, 'GET', header)
         .then(async (res) => {
           console.log("schedule----", res)
           // if (res.response_code == 4000) {
@@ -280,20 +280,20 @@ function ManagerHome(props) {
           // }
           //console.log("doc data----->",res.response_data.docs)
           setSchedule(res.response_data)
-          var transformEvent=[]
-                console.log (res.response_data,"ohohohoioihjhihhhhj")
-                res.response_data.forEach((item)=>{
+          var transformEvent = []
+          console.log(res.response_data, "ohohohoioihjhihhhhj")
+          res.response_data.forEach((item) => {
 
-                    console.log(item,"90980909")
+            console.log(item, "90980909")
 
-                    transformEvent.push({
+            transformEvent.push({
 
-                        start:new Date(item.date),
-                        end:new Date(item.date)
-                     })
+              start: new Date(item.date),
+              end: new Date(item.date)
+            })
 
-                })
-                setEvent(transformEvent);
+          })
+          setEvent(transformEvent);
 
 
         })
@@ -331,7 +331,7 @@ function ManagerHome(props) {
       }
       console.log('user', user)
 
-      Network('api/get-user-details?user_id'+user._id, 'GET', header)
+      Network('api/get-user-details?user_id' + user._id, 'GET', header)
         .then(async (res) => {
           console.log("new Profile Pic----", res)
 
@@ -400,11 +400,11 @@ function ManagerHome(props) {
                 <select onChange={change} >
 
                   {/* {team == null ? <option> Team1</option> : */}
-                   { (team && team.length > 0 )? team?.map((team) => {
-                      return (
-                        <option key={team?.team_id} value={team.team_id}>{team.team_name}</option>
-                      )
-                    }) :''}
+                  {(team && team.length > 0) ? team?.map((team) => {
+                    return (
+                      <option key={team?.team_id} value={team.team_id}>{team.team_name}</option>
+                    )
+                  }) : ''}
                 </select>
                 <div className="dropBtn">
                   <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
@@ -567,8 +567,8 @@ function ManagerHome(props) {
                   <h2>Team</h2>
                   <a href="#">View All</a>
                 </div>
-                <div className="team-list-section" style={{height:"544px",overflowX:"auto"}}>
-                  {(team && team.length >0) ? team?.map((team) => {
+                <div className="team-list-section" style={{ height: "544px", overflowX: "auto" }}>
+                  {(team && team.length > 0) ? team?.map((team) => {
                     return (
                       <div className="team-list-box">
                         <div className="team-list-box-img">
@@ -584,7 +584,7 @@ function ManagerHome(props) {
                         </div>
                       </div>
                     )
-                  }) : 'No teams found'}
+                  }) : <p className='text-center text-danger'>No teams found</p>}
                   {/* <div className="team-list-box">
                     <div className="team-list-box-img">
                       <img src={photo} alt="" />
@@ -628,11 +628,11 @@ function ManagerHome(props) {
                   {/* <img src={piechat} alt="" /> */}
                   <div style={{ display: 'flex', flexDirection: "row" }}>
                     <h2 style={{ color: "white" }}>Total Income</h2>
-                    <div style={{ marginLeft: "20px" }}>
-                      <select style={{ backgroundColor: "#484848", padding: "10px", marginRight: "10px", borderRadius: "10px" }}>
+                    <div className='d-flex' style={{ flex: 1 }}>
+                      <select className='form-control'>
                         <option> Monthly</option>
                       </select>
-                      <select style={{ backgroundColor: "#484848", padding: "10px", borderRadius: "10px" }}>
+                      <select className='form-control'>
                         <option> Pie Chart</option>
                       </select>
                     </div>
@@ -689,7 +689,7 @@ function ManagerHome(props) {
                 <div className="dashboard-schedule-main-box">
                   <div className="dashboard-schedule-main-box-option">
                     <label className="options-radio">Game
-                      <input type="radio"  name="radio" />
+                      <input type="radio" name="radio" />
                       <span className="checkmark"></span>
                     </label>
 
@@ -707,11 +707,11 @@ function ManagerHome(props) {
                           value={value}
                         /></div> */}
                   <CalendarComponent
-                  // localizer={localizer}
-                  defaultDate={new Date()}
-                  defaultView="month"
-                  events={event}
-                  style={{ height: "50vh" }}/>
+                    // localizer={localizer}
+                    defaultDate={new Date()}
+                    defaultView="month"
+                    events={event}
+                    style={{ height: "50vh" }} />
                   {/* </div>
                   </div> */}
 
@@ -751,32 +751,32 @@ function ManagerHome(props) {
                     <div className="standing-table">
                       <table>
                         <thead>
-                        <tr>
-                          <th>Team</th>
-                          <th>Wins</th>
-                          <th>Losses</th>
-                          <th>Ties</th>
-                        </tr>
+                          <tr>
+                            <th>Team</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                            <th>Ties</th>
+                          </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                          <td>Dubcity  Blue</td>
-                          <td>8</td>
-                          <td>5</td>
-                          <td>0</td>
-                        </tr>
-                        <tr>
-                          <td>Dubcity  Blue</td>
-                          <td>8</td>
-                          <td>5</td>
-                          <td>0</td>
-                        </tr>
-                        <tr>
-                          <td>Dubcity  Blue</td>
-                          <td>8</td>
-                          <td>5</td>
-                          <td>0</td>
-                        </tr>
+                          <tr>
+                            <td>Dubcity  Blue</td>
+                            <td>8</td>
+                            <td>5</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Dubcity  Blue</td>
+                            <td>8</td>
+                            <td>5</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Dubcity  Blue</td>
+                            <td>8</td>
+                            <td>5</td>
+                            <td>0</td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>

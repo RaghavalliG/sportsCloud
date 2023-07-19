@@ -51,12 +51,12 @@ function HomeComponents(props) {
 
   // const [loading,setLoading]= useState(false)
   const [profilePic, setProfilePic] = useState([]);
-  const[invitationlist,setInvitationlist]= useState([])
+  const [invitationlist, setInvitationlist] = useState([])
   const [modelValue, setModelValue] = useState(false)
   const [invite_id, setInviteId] = useState('')
   // console.log("team ka value====>+++++++++++++++++++++++=", team);
   // console.log(" typeof team====>", typeof team);
-  
+
 
   const pic1 = "https://nodeserver.mydevfactory.com:1448/profilepic/";
 
@@ -75,7 +75,7 @@ function HomeComponents(props) {
     updateProfile();
     weather();
     invitationList()
-  
+
   }, []);
   const pic = "https://nodeserver.mydevfactory.com:1448/";
 
@@ -116,13 +116,13 @@ function HomeComponents(props) {
         teamRoster(res?.response_data[0]._id);
       });
 
-      
+
     }
   };
 
   const teamRoster = (id) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log("87676564",id)
+    console.log("87676564", id)
     if (user) {
       let header = {
         token: user.authtoken,
@@ -158,10 +158,10 @@ function HomeComponents(props) {
   const change = (event) => {
     console.log("event+++++++++++++++++++++", event.target.value)
     setTeamDropDown(event.target.value)
-   teamRoster(event.target.value);
+    teamRoster(event.target.value);
     setPlayer([])
-   
-}
+
+  }
 
   const handleChange = (event) => {
     // console.log(
@@ -239,107 +239,107 @@ function HomeComponents(props) {
       });
     });
   };
-    // console.log(user._id,"user.authtoken")
-  const invitationList=()=>{
+  // console.log(user._id,"user.authtoken")
+  const invitationList = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     // console.log(user._id,"user idghkmh")
     axios({
       method: 'get',
       // url: 'https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?PlayerId='+"647f1c8456ee340813ac0e49",
-      url:`https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?playerId=${user._id}`,
+      url: `https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?playerId=${user._id}`,
       headers: {
         "token": (user.authtoken)
-        
+
       },
-    
+
     })
       .then(function (res) {
         //  console.log(res,"9000000000000000000000000000000000009090")
         //  setInvitationlist(res.data.response_data.filter(data=>{
         //   return data.invite_id !=null;
         //  }));
-         res.data.response_data.map((invitation)=>{
+        res.data.response_data.map((invitation) => {
           invitationlist.push(invitation);
-         })
-        
+        })
+
         //  console.log(invitationlist,"dudaessdnjkndrftnryue")
 
-         if(invitationlist && invitationlist.length>0){
+        if (invitationlist && invitationlist.length > 0) {
           setModelValue(true)
-         }
+        }
       })
       .catch(function (res) {
         //  console.log(res)
-           
-    });
+
+      });
   }
- 
-// const handleclick=(invite_id,type)=>{
-//   const user = JSON.parse(localStorage.getItem('user'));
-//   console.log(invite_id);
-// //  const headers = {
-// //     "token": (user.authtoken)
-    
-// //   }
-// //  const body = {
-// //     "invite_id": invite_id,
-// //     "type": type === 'accept' ? 'accepted' : 'rejected'
-// //     // "type":"ACCEPT"
-// //   }
-  
-  
-//   axios({
-//     headers : {
-//       "token": (user.authtoken)
-      
-//     },
-    
-//     method: 'post',
-//     url: 'http://nodeserver.mydevfactory.com:1448/api/acceptOrRejectInviatationByInviteId',
 
-//     data:  {
-//       "invite_id": invite_id,
-//       "type": type === 'accept' ? 'accepted' : 'rejected'
-//       // "type":"ACCEPT"
-//     }
-//   })
- 
-//   .then((res)=>{
-//     console.log(res,"ghghghghghghhghjgghggghfgg")
+  // const handleclick=(invite_id,type)=>{
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   console.log(invite_id);
+  // //  const headers = {
+  // //     "token": (user.authtoken)
 
-//   })
-//   .catch((error)=>{
+  // //   }
+  // //  const body = {
+  // //     "invite_id": invite_id,
+  // //     "type": type === 'accept' ? 'accepted' : 'rejected'
+  // //     // "type":"ACCEPT"
+  // //   }
 
-//   })
-  
-// }
-const handleClick =(invite_id,type)=>{
-  const user = JSON.parse(localStorage.getItem('user'));
-  const api ="https://nodeserver.mydevfactory.com:1448/api/acceptOrRejectInviatationByInviteId"
-   const headers = {
-          "token": (user.authtoken)
-          
-        }
-   const requestbody ={
-    "invite_id": invite_id,
-      "type": type === 'accept' ? 'ACCEPT' : 'REJECT'
-   }      
-  axios
-  .post(api,requestbody,{headers:headers})
-  .then((res)=>{
-    // console.log(res,"ghghghghghghhghjgghggghfgg")
-    if(res.data.success==true){
-      toast.success(res.data.response_message)
-    }else{
-      toast.error(res.data.response_message)
+
+  //   axios({
+  //     headers : {
+  //       "token": (user.authtoken)
+
+  //     },
+
+  //     method: 'post',
+  //     url: 'http://nodeserver.mydevfactory.com:1448/api/acceptOrRejectInviatationByInviteId',
+
+  //     data:  {
+  //       "invite_id": invite_id,
+  //       "type": type === 'accept' ? 'accepted' : 'rejected'
+  //       // "type":"ACCEPT"
+  //     }
+  //   })
+
+  //   .then((res)=>{
+  //     console.log(res,"ghghghghghghhghjgghggghfgg")
+
+  //   })
+  //   .catch((error)=>{
+
+  //   })
+
+  // }
+  const handleClick = (invite_id, type) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const api = "https://nodeserver.mydevfactory.com:1448/api/acceptOrRejectInviatationByInviteId"
+    const headers = {
+      "token": (user.authtoken)
+
     }
-  })
-  .catch((err)=>{
-    toast.error("an error occurred")
+    const requestbody = {
+      "invite_id": invite_id,
+      "type": type === 'accept' ? 'ACCEPT' : 'REJECT'
+    }
+    axios
+      .post(api, requestbody, { headers: headers })
+      .then((res) => {
+        // console.log(res,"ghghghghghghhghjgghggghfgg")
+        if (res.data.success == true) {
+          toast.success(res.data.response_message)
+        } else {
+          toast.error(res.data.response_message)
+        }
+      })
+      .catch((err) => {
+        toast.error("an error occurred")
 
-  })
-  // console.log(requestbody)
-}
+      })
+    // console.log(requestbody)
+  }
 
   return (
     <div>
@@ -349,14 +349,14 @@ const handleClick =(invite_id,type)=>{
           <div className="dashboard-main-content">
             <div className="dashboard-head">
               <div className="teams-select">
-                <select value={teamDropdown}onChange={change} >
-                <option>Select Team</option>
+                <select value={teamDropdown} onChange={change} >
+                  <option>Select Team</option>
                   {team?.map((team) => (
                     <>
-                    return(
+                      return(
                       <option value={team?.accept_invite_team_id}>{team?.accept_invite_team_name}</option>
                       {/* {console.log(item,"item====++++++")} */}
-                    )
+                      )
                     </>
                   ))}
                 </select>
@@ -433,17 +433,17 @@ const handleClick =(invite_id,type)=>{
                   {modelValue ? <Modal show={modelValue} >
 
 
-                                    <Modal.Body>
-                  
-                  {/* // <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> */}
-                  
-                  
-                  
+                    <Modal.Body>
+
+                      {/* // <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> */}
+
+
+
                       <div class="modal-content">
                         <div class="modal-header">
-                        <h4 class="modal-title">Accept Or Reject Invitations</h4>
+                          <h4 class="modal-title">Accept Or Reject Invitations</h4>
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          
+
                         </div>
                         <div class="modal-body">
                           {/* <p>{(invitationlist)?
@@ -456,24 +456,24 @@ const handleClick =(invite_id,type)=>{
                           </>
                           :null
                             }</p> */}
-                            <h2>Invitation List</h2>
-        {invitationlist.map((invitation) => (
-          <div key={invitation.invite_id}>
-            <div>
-            <p>Team Name: {invitation.invite_team_name}</p>
-            </div>
-            <div>
-            <p>Team Manager: {invitation.invite_team_manager_name}</p>
-            </div>
-            <div>
-            <button onClick={() => handleClick(invitation.invite_id, 'accept')}>Accept</button>
-             <button onClick={() =>  handleClick(invitation.invite_id, 'reject')}>Reject</button>
-              {/* <button  value='reject'onClick={() => {setInviteId(invitation.invite_id); handleclick()}}>Reject</button>
+                          <h2>Invitation List</h2>
+                          {invitationlist.map((invitation) => (
+                            <div key={invitation.invite_id}>
+                              <div>
+                                <p>Team Name: {invitation.invite_team_name}</p>
+                              </div>
+                              <div>
+                                <p>Team Manager: {invitation.invite_team_manager_name}</p>
+                              </div>
+                              <div>
+                                <button onClick={() => handleClick(invitation.invite_id, 'accept')}>Accept</button>
+                                <button onClick={() => handleClick(invitation.invite_id, 'reject')}>Reject</button>
+                                {/* <button  value='reject'onClick={() => {setInviteId(invitation.invite_id); handleclick()}}>Reject</button>
               <button  value='accept' onClick={() => {setInviteId(invitation.invite_id); handleclick()}}>Accept</button> */}
-            </div>
-          </div>
-        ))}
-                            
+                              </div>
+                            </div>
+                          ))}
+
                         </div>
                         {/* <div class="modal-actions">
                           <button type="button" class="btn btn-default" >Accept</button>
@@ -483,12 +483,12 @@ const handleClick =(invite_id,type)=>{
                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
                       </div>
-                  
-                  
-                  
-                  </Modal.Body>
 
-</Modal> : ""}
+
+
+                    </Modal.Body>
+
+                  </Modal> : ""}
 
                   <div className="invoice-due">
                     <div className="ionice-due-inner">
@@ -713,7 +713,7 @@ const handleClick =(invite_id,type)=>{
                     </div>
 
                   </div> */}
-                  <CalendarComponent />
+                  <CalendarComponent className="calendar-wrap" />
                 </div>
               </div>
             </div>

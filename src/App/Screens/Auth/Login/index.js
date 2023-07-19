@@ -127,54 +127,51 @@ function LoginComponents(props) {
     <>
       <MyLoader active={loader}>
         <div className="login-container" style={{ flexGrow: 1 }}>
-          <a href="#"><img src={Logo} alt="" /></a>
-          <div style={{ paddingBottom: 60 }}>
-            <div className="modal-dialog custom-modal">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h4 className="modal-title">Login</h4>
+
+          <div className='container-fluid'>
+            <header><a href="#"><img src={Logo} alt="#" className='img-fluid' /></a></header>
+            <div className="login_box">
+              <h4 className=" login_box_header">Login</h4>
+
+
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label>Email</label>
+                  <input type="email" className="form-control" onChange={handleChange} name="email" />
+                  <span style={{ color: "red", fontSize: 12 }}>
+                    {errors.email}
+                  </span>
                 </div>
-
-                <div className="modal-body">
-                  <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                      <label>Email</label>
-                      <input type="email" className="form-control" onChange={handleChange} name="email" />
-                      <span style={{ color: "red", fontSize: 12 }}>
-                        {errors.email}
-                      </span>
-                    </div>
-                    <div className="form-group">
-                      <label>Password</label>
-                      <input type="password" className="form-control" onChange={handleChange} name="password" />
-                      <span style={{ color: "red", fontSize: 12 }}>
-                        {errors.password}
-                      </span>
-                    </div>
-                    <div style={{ position: "absolute", right: 20 }}>
-                      <Link to="/forgetpassword">
-                        <h3 className="forget-title">Forgot Password?</h3>
-                      </Link>
-                    </div>
-                    <div className="btn-set">
-                      <button type="submit" className="btn btn-deflt">Submit</button>
-                    </div>
-                    <div>
-                      <p id="account">
-                        Don't have an account? {"  "}
-                        <Link to="/signup" style={{ color: "white", cursor: "pointer" }}>
-
-                          Sign Up
-
-                        </Link>
-                      </p>
-                    </div>
-                  </form>
+                <div className="form-group">
+                  <label>Password</label>
+                  <input type="password" className="form-control" onChange={handleChange} name="password" />
+                  <span style={{ color: "red", fontSize: 12 }}>
+                    {errors.password}
+                  </span>
                 </div>
-              </div>
+                <div className='text-right'>
+                  <Link to="/forgetpassword">
+                    <h3 className="forget-title">Forgot Password?</h3>
+                  </Link>
+                </div>
+                <div className="btn-set">
+                  <button type="submit" className="btn btn-deflt">Submit</button>
+                </div>
+                <div>
+                  <p id="account">
+                    Don't have an account? {"  "}
+                    <Link to="/signup" style={{ color: "white", cursor: "pointer" }}>
+
+                      Sign Up
+
+                    </Link>
+                  </p>
+                </div>
+              </form>
             </div>
           </div>
         </div>
+
       </MyLoader>
     </>
   );

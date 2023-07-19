@@ -24,6 +24,7 @@ import { Network } from '../../../Services/Api';
 import { ToastContainer, toast } from 'react-toastify';
 import BigUserProfile from "../../../images/big-user-profile.png"
 import { Button } from 'bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 
 function AnotherPlayer(props) {
@@ -367,16 +368,23 @@ function AnotherPlayer(props) {
                             <div className="prefarance-box playerOther">
 
                                 <p>Select the player below from your other terms that you'd like to add th this roster.</p>
-                                <select onChange={teamchange}>
-                                    {dropdown.map((dropdown) => {
 
-                                        return (
+                                <div className='px-4'>
+                                    <Row>
+                                        <Col md={4} sm={12}>
+                                            <select className='form-control ml-0' onChange={teamchange}>
+                                                {dropdown.map((dropdown) => {
 
-                                            <option value={dropdown.team_id}>{dropdown.team_name}</option>
+                                                    return (
 
-                                        )
-                                    })}
-                                </select>
+                                                        <option value={dropdown.team_id}>{dropdown.team_name}</option>
+
+                                                    )
+                                                })}
+                                            </select>
+                                        </Col>
+                                    </Row>
+                                </div>
                                 <div className="playerLists">
 
                                     <div className="playerLstLft">
@@ -468,12 +476,7 @@ function AnotherPlayer(props) {
                                 <div
                                     style={{ display: "flex", justifyContent: "center" }}
                                 >
-                                    <button style={{
-                                        padding: "6px",
-                                        marginTop: "19px",
-                                        borderRadius: "10px",
-                                        backgroundColor: "#EC3525"
-                                    }}
+                                    <button className='btn invite_player_btn'
                                         onClick={PlayerImportData}> Invite Players</button>
                                 </div>
                             </div>

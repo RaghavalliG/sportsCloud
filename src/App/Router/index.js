@@ -96,6 +96,8 @@ import VerifyEmail from '../Screens/Auth/VerifyEmail';
 // import CreateOpponent from '../Screens/Manager/TeamSchedule/CreateOpponent';
 import NewGame from '../Screens/Manager/TeamSchedule/newGame';
 
+import AdminHome from '../Screens/Admin/Home';
+
 export const currentURL = '/projects/suvendu/robins/sportscloud';
 
 //  basename={currentURL}
@@ -104,7 +106,7 @@ function RouterScreen() {
 
 
     const userdata = useSelector((state) => state.userdata);
-    console.log("i am selector",  userdata);
+    console.log("i am selector", userdata);
     const [userMe, setUser] = useState(null);
     const [userType, setUserType] = useState("")
 
@@ -115,7 +117,10 @@ function RouterScreen() {
         setUser(user);
         const userLocal = JSON.parse(localStorage.getItem('user'));
         let userTy = userLocal && userLocal.user_type == 'player' ? true : false
-        setUserType(userTy)
+        if(userLocal && userLocal.user_type){
+            setUserType(userLocal.user_type)
+        }
+        
         let userD = userLocal && userLocal._id ? true : false
         setUser(userD);
     }, [userdata]);
@@ -129,9 +134,11 @@ function RouterScreen() {
             <Switch >
                 {
                     userMe ?
+
                         <>
                             {
-                                userType ?
+
+                                (userType == 'player') ?
 
                                     <>
                                         <Route path='/' component={HomeScreen} exact />
@@ -155,81 +162,88 @@ function RouterScreen() {
                                         <Route path='/PlayerPhotos' component={PlayerPhotos} />
                                         <Route path='/PlayerVideos' component={PlayerVideos} />
                                         <Route path='/PlayerFiles' component={PlayerFiles} />
-                                        
-                                    </>
-                                    :
-                                    <>
-                                        <Route path='/' component={ManagerHome} exact />
-                                        <Route path='/ManagerRoster' component={ManagerRoster} />
-                                        <Route path='/Teamschdule' component={TeamSchdule} />
-                                        {/* <Route path='/Location' component={Location} /> */}
-                                        {/* <Route path='/CreateOpponent' component={CreateOpponent} /> */}
-                                        <Route path='/ManagerTeamShop' component={ManagerTeamShop} />
-                                        <Route path='/preferance' component={Preferance} />
-                                        <Route path='/TeamAssignments' component={TeamAssignments} />
-                                        <Route path='/NewEvent' component={NewEvent} />
-                                        <Route path='/NewGame' component={NewGame} />
-                                        <Route path='/AddPlayer' component={AddPlayer} />
-                                        <Route path='/CreateTeam' component={CreateTeam} />
-                                        <Route path='/ManagerTeamAvailability' component={ManagerTeamAvailability} />
-                                        <Route path='/Scorekeeper' component={TeamScorekeeper} />
-                                        <Route path='/TeamMassage' component={TeamMassage} />
-                                        <Route path='/Inbox' component={Inbox} />
-                                        <Route path='/Sent' component={Sent} />
-                                        <Route path='/Alert' component={Alert} />
-                                        <Route path='/AlertInbox' component={AlertInbox} />
-                                        <Route path='/AlertSent' component={AlertSent} />
-                                        <Route path='/Post' component={Post} />
-                                        <Route path='/NewPost' component={NewPost} />
-                                        <Route path='/TeamMedia' component={TeamMedia} />
-                                        <Route path='/TeamPayment' component={TeamPayment} />
-                                        <Route path='/TeamLiabilityWaiver' component={TeamLiabilityWaiver} />
-                                        <Route path='/MyAccount' component={MyAccount} />
-                                        <Route path='/NavBarSide' component={NavBarSide} />
-                                        <Route path='/Household' component={Household} />
-                                        <Route path='/Preference' component={Preference} />
-                                        <Route path='/LoginAccount' component={LoginAccount} />
-                                        <Route path='/ImportPlayer' component={ImportPlayer} />
-                                        <Route path='/PlayerInfo' component={PlayerInfo} />
-                                        <Route path='/EditLocation' component={EditLocation} />
-                                        <Route path='/NewLocation' component={NewLocation} />
-                                        <Route path='/EditOponent' component={EditOponent} />
-                                        <Route path='/NewOponent' component={NewOponent} />
-                                        <Route path='/Subscribe' component={Subscribe} />
-                                        <Route path='/ManagerViewCalender' component={ManagerViewCalender} />
-                                        <Route path='/TeamSettingHome' component={TeamSettingHome} />
-                                        <Route path='/SettingNav' component={SettingNav} />
-                                        <Route path='/SitePreference' component={SitePreference} />
-                                        <Route path='/Credit' component={Credit} />
-                                        <Route path='/ManageTeam' component={ManageTeam} />
-                                        <Route path='/Biling' component={Biling} />
-                                        <Route path='/AnotherPlayer' component={AnotherPlayer} />
-                                        <Route path='/TeamStatistics' component={TeamStatistics} />
-                                        <Route path='/PlayerStats' component={PlayerStats} />
-                                        <Route path='/GameStats' component={GameStats} />
-                                        <Route path='/ManageStats' component={ManageStats} />
-                                        <Route path='/NewStatistic' component={NewStatistic} />
-                                        <Route path='/RecorderStatistic' component={RecorderStatistic} />
-                                        <Route path='/TeamStats' component={TeamStats} />
-                                        <Route path='/TeamOrganizer' component={TeamOrganizer} /> 
-                                        <Route path='/TeamShedule' component={TeamShedule} />   
-                                        <Route path='/Brackets' component={Brackets} />  
-                                        <Route path='/NewTeam' component={NewTeam} />  
-                                        <Route path='/TeamRegister' component={TeamRegister} />                                      
-                                        <Route path='/TabManager' component={TabManager} />
-                                        <Route path='/Order' component={Order} />
-                                        <Route path='/Photos' component={Photos} />
-                                        <Route path='/Videos' component={Videos} />
-                                        <Route path='/Files' component={Files} />
-                                        <Route path='/ProductDetails' component={ProductDetails} />
-                                        
-                                        
 
                                     </>
+                                    : (userType == 'manager') ?
+                                        <>
+                                            <Route path='/' component={ManagerHome} exact />
+                                            <Route path='/ManagerRoster' component={ManagerRoster} />
+                                            <Route path='/Teamschdule' component={TeamSchdule} />
+                                            {/* <Route path='/Location' component={Location} /> */}
+                                            {/* <Route path='/CreateOpponent' component={CreateOpponent} /> */}
+                                            <Route path='/ManagerTeamShop' component={ManagerTeamShop} />
+                                            <Route path='/preferance' component={Preferance} />
+                                            <Route path='/TeamAssignments' component={TeamAssignments} />
+                                            <Route path='/NewEvent' component={NewEvent} />
+                                            <Route path='/NewGame' component={NewGame} />
+                                            <Route path='/AddPlayer' component={AddPlayer} />
+                                            <Route path='/CreateTeam' component={CreateTeam} />
+                                            <Route path='/ManagerTeamAvailability' component={ManagerTeamAvailability} />
+                                            <Route path='/Scorekeeper' component={TeamScorekeeper} />
+                                            <Route path='/TeamMassage' component={TeamMassage} />
+                                            <Route path='/Inbox' component={Inbox} />
+                                            <Route path='/Sent' component={Sent} />
+                                            <Route path='/Alert' component={Alert} />
+                                            <Route path='/AlertInbox' component={AlertInbox} />
+                                            <Route path='/AlertSent' component={AlertSent} />
+                                            <Route path='/Post' component={Post} />
+                                            <Route path='/NewPost' component={NewPost} />
+                                            <Route path='/TeamMedia' component={TeamMedia} />
+                                            <Route path='/TeamPayment' component={TeamPayment} />
+                                            <Route path='/TeamLiabilityWaiver' component={TeamLiabilityWaiver} />
+                                            <Route path='/MyAccount' component={MyAccount} />
+                                            <Route path='/NavBarSide' component={NavBarSide} />
+                                            <Route path='/Household' component={Household} />
+                                            <Route path='/Preference' component={Preference} />
+                                            <Route path='/LoginAccount' component={LoginAccount} />
+                                            <Route path='/ImportPlayer' component={ImportPlayer} />
+                                            <Route path='/PlayerInfo' component={PlayerInfo} />
+                                            <Route path='/EditLocation' component={EditLocation} />
+                                            <Route path='/NewLocation' component={NewLocation} />
+                                            <Route path='/EditOponent' component={EditOponent} />
+                                            <Route path='/NewOponent' component={NewOponent} />
+                                            <Route path='/Subscribe' component={Subscribe} />
+                                            <Route path='/ManagerViewCalender' component={ManagerViewCalender} />
+                                            <Route path='/TeamSettingHome' component={TeamSettingHome} />
+                                            <Route path='/SettingNav' component={SettingNav} />
+                                            <Route path='/SitePreference' component={SitePreference} />
+                                            <Route path='/Credit' component={Credit} />
+                                            <Route path='/ManageTeam' component={ManageTeam} />
+                                            <Route path='/Biling' component={Biling} />
+                                            <Route path='/AnotherPlayer' component={AnotherPlayer} />
+                                            <Route path='/TeamStatistics' component={TeamStatistics} />
+                                            <Route path='/PlayerStats' component={PlayerStats} />
+                                            <Route path='/GameStats' component={GameStats} />
+                                            <Route path='/ManageStats' component={ManageStats} />
+                                            <Route path='/NewStatistic' component={NewStatistic} />
+                                            <Route path='/RecorderStatistic' component={RecorderStatistic} />
+                                            <Route path='/TeamStats' component={TeamStats} />
+                                            <Route path='/TeamOrganizer' component={TeamOrganizer} />
+                                            <Route path='/TeamShedule' component={TeamShedule} />
+                                            <Route path='/Brackets' component={Brackets} />
+                                            <Route path='/NewTeam' component={NewTeam} />
+                                            <Route path='/TeamRegister' component={TeamRegister} />
+                                            <Route path='/TabManager' component={TabManager} />
+                                            <Route path='/Order' component={Order} />
+                                            <Route path='/Photos' component={Photos} />
+                                            <Route path='/Videos' component={Videos} />
+                                            <Route path='/Files' component={Files} />
+                                            <Route path='/ProductDetails' component={ProductDetails} />
 
+
+
+                                        </>
+                                        :
+                                        <>
+                                            <Route path='/' component={AdminHome} exact />
+                                        </>
                             }
 
+
+
                         </>
+
+
 
 
                         :

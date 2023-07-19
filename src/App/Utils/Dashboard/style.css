@@ -1385,9 +1385,9 @@ footer hr{
     color: #000;
     text-transform: uppercase;
 }
-.modal-content{
+/* .modal-content{
     margin-top: 100px;
-}
+} */
 .modal-body h5{
     text-align: center;
     font-family: 'Work Sans', sans-serif;
