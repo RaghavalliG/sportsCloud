@@ -137,7 +137,7 @@ const TeamScorekeeper = () => {
                             <select onChange={change} >
 
 <option>Select A Team</option>
-{dropdown.map((dropdown) => {
+{dropdown?.map((dropdown) => {
   return (
     <option value={dropdown._id}>{dropdown.team_name}</option>
   )
@@ -171,7 +171,7 @@ const TeamScorekeeper = () => {
                             <div className="teams-select3" style={{ marginRight: "37%" }}>
                                 <select>
                                     <option>Location</option>
-                                    {locationValue.map((data)=>{
+                                    {locationValue?.map((data)=>{
                                         return(
                                             <option>{data.locationName},{data.address}</option>
                                         )

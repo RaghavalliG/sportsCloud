@@ -193,6 +193,7 @@ const ManagerTeamAvailability = () => {
             }
             else {
                 url = 'api/team-player-availability-list?game_event_id=' + id
+                // url = 'api/team-player-availability-list?game_event_id=' + "60be4fb4fc11cd4f8ca2cf8c"
             }
 
             Network(url, 'GET', header)
@@ -221,7 +222,7 @@ const ManagerTeamAvailability = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': user.authtoken
+                'token': user.authtoken
             },
             body: JSON.stringify({
                 "_id": id,
@@ -360,7 +361,7 @@ const ManagerTeamAvailability = () => {
                                     <option >Select Game/Event</option>
                                     {schedule?.map((schedule) => {
                                         return (
-                                            <option value={schedule._id}>{schedule.name}</option>
+                                            <option value={schedule._id}>{schedule.isFlag == 'Game' ?  schedule.game_name : schedule.event_name}</option>
                                         )
                                     })}
                                 </select>

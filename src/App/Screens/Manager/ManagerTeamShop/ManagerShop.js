@@ -54,6 +54,8 @@ function ManagerTeamShop(props) {
   const [modeValue, setModeValue] = useState(false)
   const [uid, setUId] = useState("")
   const [id, setId] = useState("")
+  const [pid, setpId] = useState("")
+  const [pi, setPi] = useState("")
   const[category,setCategory] = useState("")
   const[quantity,setQuantity] = useState("")
   const [reloadKey, setReloadKey] = useState(1)
@@ -72,7 +74,10 @@ function ManagerTeamShop(props) {
     dropdownMenu()
     setTeamDropdown()
     teamShopData()
-    addShopData()
+    // addShopData()
+    // updateProduct()
+
+
     
 
    
@@ -192,7 +197,7 @@ function ManagerTeamShop(props) {
         .then(async (res) => {
           console.log("teamShopData----", res)
 
-          if (res.response_code == 4000) {
+          if (res.response_code == 400) {
             dispatch(logoutUser(null))
             localStorage.removeItem("user");
             history.push("/")
@@ -284,7 +289,22 @@ function ManagerTeamShop(props) {
     },
      data:data
      
-    });
+    }) .then((res) => {
+                console.log("edit shop Image", res)
+                if(res.status==200){
+                    toast.success("Add Succecfull")
+                    console.log("Add Image",res)
+                    teamShopData()
+    
+                }
+    
+                if (res.response_code == 4000) {
+                    dispatch(logoutUser(null))
+                    localStorage.removeItem("user");
+                    history.push("/")
+                    toast.error(res.response_message)
+                }
+            })
 
   }
   const getSize =(data) =>{
@@ -348,59 +368,109 @@ function ManagerTeamShop(props) {
 
   }
 
-  const updateModalValue = (id1, uId) => {
+  const updateModalValue = (pi, pId) => {
     setModeValue(true)
-    setUId(uId)
-    setId(id1)
-    console.log("shopdata-------->", shopData)
+    setpId(pId)
+    setPi(pi)
+    console.log(pi);
+    console.log("shopdata-------->", shopData[pi])
+    setId(shopData[pi]?._id)
+    setName(shopData[pi]?.name)
+    setCategory(shopData[pi]?.category)
+    setDescription(shopData[pi]?.description)
+    setPrice(shopData[pi]?.price)
+    setSize(shopData[pi]?.sizes)
 
   }
 
 
 
 
+//   const updateProduct = () => {
+//     const user = JSON.parse(localStorage.getItem('user'));
+//     const formData = new FormData();
+//     formData.append('image', image ==null ? shopData[id].image :image );
+//     formData.append('team_id', teamDropdown==null ? dropdown[0]._id :teamDropdown);
+//     formData.append('name', name ==null ? shopData[id].name :name);
+//     formData.append('jersey_number', jursey ==null ? shopData[id].jersey_number :jursey);
+//     formData.append('description  ', desciption ==null ? shopData[id].description :desciption);
+//     formData.append('price', price ==null ? shopData[id].price :price);
+//     formData.append('brand  ', brand ==null ? shopData[id].brand :brand);
+//     formData.append('color', color ==null ? shopData[id].color : color);
+//     formData.append('material ', material ==null ? shopData[id].material : material );
+//     formData.append('size', size ==null ? shopData[id].size :size);
+//     formData.append('id', uid );
+//     console.log("team dropdown",teamDropdown==null?dropdown[0]._id :teamDropdown)
+//     console.log("name--->",shopData[id].name)
+//     console.log("brand--->",brand)
+//     const requestOptions = {
+//       method:"POST",
+//         headers: {
+//             'x-access-token': user.authtoken
+//         },
+       
+//     };
+//     console.log("formdata ",formData)
+//     axios('https://nodeserver.mydevfactory.com:1447/api/edit-store-image', 
+//     {
+//       method:"POST",
+//       headers:{
+//           "Content-Type": "multipart/form-data",
+//           'x-access-token': user.authtoken
+          
+//       },
+//       data:formData
+//   })
+//         .then((res) => {
+//             console.log("edit shop Image", res)
+//             if(res.status==200){
+//                 toast.success("Edit Succecfull")
+//                 console.log("edit Image",res)
+//                 setModeValue(false)
+//                 teamShopData(teamDropdown==null?dropdown[0]._id :teamDropdown)
+//             }
+
+//             if (res.response_code == 4000) {
+//                 dispatch(logoutUser(null))
+//                 localStorage.removeItem("user");
+//                 history.push("/")
+//                 toast.error(res.response_message)
+//             }
+//         })
+        
+
+// }
+
   const updateProduct = () => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const formData = new FormData();
-    formData.append('image', image ==null ? shopData[id].image :image );
-    formData.append('team_id', teamDropdown==null ? dropdown[0]._id :teamDropdown);
-    formData.append('name', name ==null ? shopData[id].name :name);
-    formData.append('jersey_number', jursey ==null ? shopData[id].jersey_number :jursey);
-    formData.append('description  ', desciption ==null ? shopData[id].description :desciption);
-    formData.append('price', price ==null ? shopData[id].price :price);
-    formData.append('brand  ', brand ==null ? shopData[id].brand :brand);
-    formData.append('color', color ==null ? shopData[id].color : color);
-    formData.append('material ', material ==null ? shopData[id].material : material );
-    formData.append('size', size ==null ? shopData[id].size :size);
-    formData.append('id', uid );
-    console.log("team dropdown",teamDropdown==null?dropdown[0]._id :teamDropdown)
-    console.log("name--->",shopData[id].name)
-    console.log("brand--->",brand)
-    const requestOptions = {
-      method:"POST",
-        headers: {
-            'x-access-token': user.authtoken
-        },
-       
-    };
-    console.log("formdata ",formData)
-    axios('https://nodeserver.mydevfactory.com:1447/api/edit-store-image', 
-    {
-      method:"POST",
-      headers:{
-          "Content-Type": "multipart/form-data",
-          'x-access-token': user.authtoken
-          
-      },
-      data:formData
-  })
+    const data = {
+      "productId": pid,
+      "name":name,
+      "category":category,
+      "description":desciption,
+      "price":price,
+     "sizes":size
+    }
+    console.log("098765678990",data)
+    
+    
+    axios({
+      method: 'post',
+      url: 'https://nodeserver.mydevfactory.com:1448/api/editProductDetails',
+      headers: {
+        'Content-Type': 'application/json',
+        'token': user.authtoken
+    },
+     data:data
+     
+    })
         .then((res) => {
             console.log("edit shop Image", res)
             if(res.status==200){
                 toast.success("Edit Succecfull")
                 console.log("edit Image",res)
                 setModeValue(false)
-                teamShopData(teamDropdown==null?dropdown[0]._id :teamDropdown)
+                teamShopData()
             }
 
             if (res.response_code == 4000) {
@@ -415,7 +485,11 @@ function ManagerTeamShop(props) {
 }
 
 
+
+
   console.log("dta--->", shopData)
+
+
   return (
     <div>
       <div className="dashboard-container">
@@ -535,7 +609,16 @@ function ManagerTeamShop(props) {
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Category</h2>
-                              <input type="text" className="input-select" onChange={(e) => setCategory(e.target.value)} />
+                              {/* <input type="text" className="input-select" onChange={(e) => setCategory(e.target.value)} /> */}
+                              <select className="input-select" onChange={(e) => setCategory(e.target.value)}>
+                                <option>Select Category</option>
+                                <option  value='full_zip_hoodie'>Full Zip Hoodie</option>
+                                <option  value='jerseys'>Jerseys</option>
+                                <option  value='warm_up_jacket'>Warm Up Jacket</option>
+                                <option  value='jersey_shorts'>Jersey Shorts</option>
+                                <option  value='shirt'>Shirt</option>
+                                <option  value='swingman_team_jersey'>Swingman Team Jersey</option>
+                              </select>
 
                             </div>
                           </div>
@@ -543,6 +626,7 @@ function ManagerTeamShop(props) {
                             <div className="prefarance-form-list">
                               <h2>Description</h2>
                               <input type="text" className="input-select" onChange={(e) => setDescription(e.target.value)} />
+                            
                             </div>
                           </div>
                           <div className="col-md-12">
@@ -767,9 +851,9 @@ function ManagerTeamShop(props) {
 
                     : */
                     // shopData.map((data, id) => {
-                      shopData?.map((data) => {
+                      shopData?.map((data,id) => {
                       return (
-                        <div className="team-shop-product-box">
+                        <div key={reloadKey} className="team-shop-product-box">
                           <div className="team-shop-product-img">
                           <Link to={{ pathname: "/ProductDetails", state: data }} >
                           {data.image == null ? <img src={listImage} alt="" /> :
@@ -789,6 +873,8 @@ function ManagerTeamShop(props) {
 
                               <img src={Delect} style={{ marginLeft: "70%", marginRight: "10px", background: "orangered" }} onClick={() => deleteShopData(data._id)} />
                               <img src={pencil} onClick={(e) => updateModalValue(id, data._id)} />
+                              {/* <button data-toggle="modal" data-target="#assignmentdelect" onClick={(e) =>  deleteShopData(data._id)} ><img src={Delect} style={{ marginLeft: "70%", marginRight: "10px", background: "orangered" }} /></button>
+                              <button id={shopData._id} onClick={(e) => updateModalValue(id, data._id)}><img src={pencil} /></button> */}
                             </div>
                           </div>
                         </div>
@@ -800,42 +886,50 @@ function ManagerTeamShop(props) {
 
                   }
 
-                  {modeValue && shopData.length !=0 ? <Modal show={modeValue} style={{ position: "absolute", top: "206px" }}>
+                  {modeValue && shopData.length > 0 ? 
+                  <Modal show={modeValue} style={{ position: "absolute", top: "206px" }}>
 
                     <Modal.Body>
+                     shopData
                     <div className="prefarance-form playerinfo-form">
                         <h1 style={{ color: "red", fontWeight: "bolder" }}> Edit PRODUCT</h1>
                         <div className="row">
 
-                         
+                        {/* <div className="col-md-12">
+                            <div className="prefarance-form-list">
+                              <h2>Product Id</h2>
+                              <input type="text" className="input-select" onChange={(e) => setId(e.target.value)}  defaultValue={shopData[pi]?._id}/>
+
+                            </div>
+                          </div> */}
 
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Name</h2>
-                              <input type="text" className="input-select" onChange={(e) => setName(e.target.value)}  defaultValue={shopData[id].name}/>
+                              <input type="text" className="input-select" onChange={(e) => setName(e.target.value)}  defaultValue={shopData[pi]?.name}/>
 
                             </div>
                           </div>
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
-                              <h2>Jursey Number</h2>
-                              <input type="text" className="input-select" onChange={(e) => setJursey(e.target.value)} defaultValue={shopData[id].jersey_number} />
+                              <h2>Category</h2>
+                              <input type="text" className="input-select" onChange={(e) => setJursey(e.target.value)} defaultValue={shopData[pi]?.category} />
 
                             </div>
                           </div>
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Description</h2>
-                              <input type="text" className="input-select" onChange={(e) => setDescription(e.target.value)} defaultValue={shopData[id].description}/>
+                              <input type="text" className="input-select" onChange={(e) => setDescription(e.target.value)} defaultValue={shopData[pi]?.description}/>
                             </div>
                           </div>
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Price</h2>
-                              <input type="text" className="input-select" onChange={(e) => setPrice(e.target.value)} defaultValue={shopData[id].price}/>
+                              <input type="text" className="input-select" onChange={(e) => setPrice(e.target.value)} defaultValue={shopData[pi]?.price}/>
                             </div>
                           </div>
-                          <div className="col-md-12">
+                          {/* <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Brand</h2>
                               <input type="text" className="input-select" onChange={(e) => setBrand(e.target.value)} defaultValue={shopData[id].brand}/>
@@ -854,14 +948,14 @@ function ManagerTeamShop(props) {
 
                               </select>
                             </div>
-                          </div>
-                          <div className="col-md-12">
+                          </div> */}
+                          {/* <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Material</h2>
                               <input type="text" className="input-select" onChange={(e) => setMaterial(e.target.value)} defaultValue={shopData[id].material}/>
                             </div>
-                          </div>
-                          <div className="col-md-12">
+                          </div> */}
+                          {/* <div className="col-md-12">
                             <div className="prefarance-form-list">
                               <h2>Size</h2>
 
@@ -875,14 +969,15 @@ function ManagerTeamShop(props) {
                                 <option>3XL</option>
                               </select>
                             </div>
-                          </div>
-                          <div className="col-md-12">
+                          </div> */}
+                           {/* <Sizes getSize={getSize}/> */}
+                          {/* <div className="col-md-12">
                             <div className="update-team-photo" style={{ width: "100%" }}>
                               Choose Image
                               <input type="file" name='img' onChange={(event) => handleChange(event)} />
 
                             </div>
-                          </div>
+                          </div> */}
                          
 
 
@@ -893,7 +988,10 @@ function ManagerTeamShop(props) {
 
 
                       <button className="add-links" style={{ margin: "10px" }} onClick={() => setModeValue(false)}>Cancel</button>
-                      <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }} onClick={updateProduct} >Update</button>
+                      <button className="add-links" style={{ margin: "10px", backgroundColor: "#1d1b1b" }}
+                       onClick={(e)=>updateProduct(e)}
+                      // onClick={updateProduct(pid)}
+                       >Update</button>
                     </Modal.Body>
 
                   </Modal> :"" }

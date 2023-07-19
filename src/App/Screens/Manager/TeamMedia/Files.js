@@ -65,11 +65,11 @@ function Files(props) {
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-name">{user ? user?.fname : null}</div>
                                 <div className="profile-head-img">
                                     {
                                         user ?
-                                            <img src={user.profile_image} alt="" /> :
+                                            <img src={user?.profile_image} alt="" /> :
                                             <img src={UserProfile} alt="" />
                                     }
 
@@ -93,7 +93,7 @@ function Files(props) {
                            <ul>
                                <li><a href="#" onClick={() => history.push("./TeamMedia")}>Stream</a></li>
                                <li><a href="#" onClick={() => history.push("./Photos")}>Photos</a></li>
-                               <li><a href="#" href="#" onClick={() => history.push("./Videos")}>Videos</a></li>
+                               <li><a href="#" onClick={() => history.push("./Videos")}>Videos</a></li>
                                <li><a className="active" href="#">Files</a></li>
                            </ul>
                        </div>

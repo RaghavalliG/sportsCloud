@@ -24,7 +24,8 @@
     top: 20px;
     color: #fff;
 }
-.calBtm{ padding: 15px;}
+.calBtm{ padding: 15px;color: white;}
+.rbc-toolbar{color: white!important; }
 .calInfo{
     width: 100%;
     border-radius: 20px;

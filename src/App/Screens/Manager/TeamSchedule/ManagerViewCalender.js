@@ -21,12 +21,14 @@ import flag from "../../../images/flag.png"
 import UserProfile from "../../../images/user-profile.png"
 import './ManagerViewCalender.css'
 // import EventCalendar from 'react-event-calendar';
-import { Calendar, momentLocalizer } from "react-big-calendar";
+import { Calendar, momentLocalizer, globalizeLocalizer  } from "react-big-calendar";
 import moment from "moment";
+import globalize from 'globalize'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const ManagerViewCalender = () => {
-    const localizer = momentLocalizer(moment);
+    // const localizer = momentLocalizer(moment);
+    const localizer = globalizeLocalizer(globalize)
     // const EventCalendar = require('/../react-event-calendar');
     // var dateTimeObj = moment('2023-07-14T00:00:00.000Z' + '04:00 PM', 'YYYY-MM-DDLT');
     // var dateTime = dateTimeObj.format('YYYY-MM-DDTHH:mm:s');
@@ -435,7 +437,7 @@ const ManagerViewCalender = () => {
                                     defaultDate={new Date()}
                                     defaultView="month"
                                     events={event}
-                                    style={{ height: "100vh" }}
+                                    style={{ height: "200vh" }}
                                 />
                                 {/* <EventCalendar
                                     month={7}

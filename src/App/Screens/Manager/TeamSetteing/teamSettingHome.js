@@ -211,8 +211,8 @@ const TeamSettingHome = () => {
                     <div className="teams-select">
                         <button className="create-new-team" onClick={() => history.push("./CreateTeam")}>Create New Teams</button>
 
-                        <select onChange={change} value={teamDropdown == "" ? dropdown[0]?._id : teamDropdown} >
-                            {dropdown.map((dropdown) => {
+                        <select onChange={change} value={teamDropdown == "" ? dropdown ?._id : teamDropdown} >
+                            {dropdown?.map((dropdown) => {
                                 return (
                                     <option value={dropdown._id}>{dropdown.team_name}</option>
                                 )

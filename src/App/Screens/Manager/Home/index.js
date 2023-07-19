@@ -40,6 +40,9 @@ import "../../../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
 import "../../../../../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
 import DonutChart from 'react-donut-chart';
 
+import {   momentLocalizer, globalizeLocalizer  } from "react-big-calendar";
+import globalize from 'globalize'
+
 
 
 
@@ -60,13 +63,14 @@ function ManagerHome(props) {
   // const [loading,setLoading]= useState(false)
   const [photo, setPhoto] = useState()
   const [teamId, setTeamId] = useState("")
+  const [event,setEvent] = useState([]);
   const [schedule, setSchedule] = useState([])
   const [profilePic, setProfilePic] = useState([])
   const [value, onChange] = useState(new Date());
   const dateValue = new Date(new Date().getFullYear(), new Date().getMonth());
   const minDate = new Date(new Date().getFullYear(), new Date().getMonth(), new Date());
   const maxDate = new Date(new Date().getFullYear(), new Date().getMonth(), 31);
-
+  const localizer = globalizeLocalizer(globalize)
   useEffect(() => {
     // let user = userdata && userdata._id ? true : false;
     // console.log("userMe===>", user);
@@ -82,7 +86,7 @@ function ManagerHome(props) {
     weather()
     teamSelect()
     teamRoster()
-    teamSchedule()
+    teamSchedule('6480285555cf8a5024960668')
     updateProfile()
   }, []);
 
@@ -265,7 +269,7 @@ function ManagerHome(props) {
         url = 'api/get-game-event-list?manager_id=' + user._id + '&team_id=' + teamId + '&page=1&limit=10'
       }
       //console.log('user',user)
-      Network('api/get-game-event-list?manager_id=' + user._id + '&team_id=' + id + '&page=1&limit=10', 'GET', header)
+      Network('api/getAllEventAndGamesData?team_id=' + id , 'GET', header)
         .then(async (res) => {
           console.log("schedule----", res)
           // if (res.response_code == 4000) {
@@ -275,7 +279,21 @@ function ManagerHome(props) {
           //     toast.error(res.response_message)
           // }
           //console.log("doc data----->",res.response_data.docs)
-          setSchedule(res.response_data?.docs)
+          setSchedule(res.response_data)
+          var transformEvent=[]
+                console.log (res.response_data,"ohohohoioihjhihhhhj")
+                res.response_data.forEach((item)=>{
+
+                    console.log(item,"90980909")
+
+                    transformEvent.push({
+
+                        start:new Date(item.date),
+                        end:new Date(item.date)
+                     })
+
+                })
+                setEvent(transformEvent);
 
 
         })
@@ -381,12 +399,12 @@ function ManagerHome(props) {
                 }}>Create New Teams</button>
                 <select onChange={change} >
 
-                  {team == null ? <option> Team1</option> :
-                    team && team.length > 0 && team?.map((team) => {
+                  {/* {team == null ? <option> Team1</option> : */}
+                   { (team && team.length > 0 )? team?.map((team) => {
                       return (
-                        <option key={team.team_id} value={team.team_id}>{team.team_name}</option>
+                        <option key={team?.team_id} value={team.team_id}>{team.team_name}</option>
                       )
-                    })}
+                    }) :''}
                 </select>
                 <div className="dropBtn">
                   <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
@@ -550,7 +568,7 @@ function ManagerHome(props) {
                   <a href="#">View All</a>
                 </div>
                 <div className="team-list-section" style={{height:"544px",overflowX:"auto"}}>
-                  {team?.map((team) => {
+                  {(team && team.length >0) ? team?.map((team) => {
                     return (
                       <div className="team-list-box">
                         <div className="team-list-box-img">
@@ -566,7 +584,7 @@ function ManagerHome(props) {
                         </div>
                       </div>
                     )
-                  })}
+                  }) : 'No teams found'}
                   {/* <div className="team-list-box">
                     <div className="team-list-box-img">
                       <img src={photo} alt="" />
@@ -664,9 +682,9 @@ function ManagerHome(props) {
               <div className="dashboard-schedule-section">
                 <div className="dashboard-schedule-head">
                   <h2>Schedule</h2>
-                  <a href="#" onClick={() => {
+                  <button onClick={() => {
                     history.push('./Teamschdule')
-                  }}>View Full Schedule</a>
+                  }}>View Full Schedule</button>
                 </div>
                 <div className="dashboard-schedule-main-box">
                   <div className="dashboard-schedule-main-box-option">
@@ -688,7 +706,12 @@ function ManagerHome(props) {
                           onChange={onChange}
                           value={value}
                         /></div> */}
-                  <CalendarComponent />
+                  <CalendarComponent
+                  // localizer={localizer}
+                  defaultDate={new Date()}
+                  defaultView="month"
+                  events={event}
+                  style={{ height: "50vh" }}/>
                   {/* </div>
                   </div> */}
 

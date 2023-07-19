@@ -395,11 +395,11 @@ function TeamOrganizer(props) {
                                 </div>
                             </div>
                             <div className="profile-head">
-                                <div className="profile-head-name">{profilePic.fname + " " + profilePic.lname}</div>
+                                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
                                 <div className="profile-head-img">
-                                    {profilePic.profile_image == null ?
+                                    {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic}${profilePic.profile_image}`} alt="" />
+                                        <img src={`${pic}${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>

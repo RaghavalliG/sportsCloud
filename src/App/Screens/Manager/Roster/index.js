@@ -501,8 +501,8 @@ function ManagerRoster(props) {
                             <div className="player-info-head">
                                 <h2 className="page-title">Roster</h2>
                                 <div className="player-info-head-right">
-                                    <button className="edit-btn" style={{ width: "265px" }} onClick={() => history.push('./PlayerInfo')}>Manage My Player Info</button>
-                                    <button className="add-new-family" style={{ width: "324px" }} onClick={() => history.push('./PlayerInfo')}>+ Add or Edit My Family Member</button>
+                                    {/* <button className="edit-btn" style={{ width: "265px" }} onClick={() => history.push('./PlayerInfo')}>Manage My Player Info</button> */}
+                                    {/* <button className="add-new-family" style={{ width: "324px" }} onClick={() => history.push('./PlayerInfo')}>+ Add or Edit My Family Member</button> */}
                                     {/* <button className="edit-btn" style={{ marginLeft: "5px" }} onClick={() => history.push('./Subscribe')}>Export</button> */}
                                     <CsvDownload data={data} headers={headers} filename={`Roster list `} />
                                 </div>
