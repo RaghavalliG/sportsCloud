@@ -129,7 +129,7 @@ function LoginComponents(props) {
         <div className="login-container" style={{ flexGrow: 1 }}>
 
           <div className='container-fluid'>
-            <header><a href="#"><img src={Logo} alt="#" className='img-fluid' /></a></header>
+            <header><a href="/"><img src={Logo} alt="#" className='img-fluid' /></a></header>
             <div className="login_box">
               <h4 className=" login_box_header">Login</h4>
 

@@ -541,7 +541,7 @@ function PlayerSchedule(props) {
                                             <>
                                             <div>
                                               <p>Game name  :  {gamedetails.game_name}</p>
-                                              <p>Opponent : {gamedetails.opponent.opponentsName}</p>
+                                              <p>Opponent : {gamedetails?.opponent?.opponentsName}</p>
                                               <p>Team name  :  {gamedetails.team_id.team_name}</p>
                                               <p>Location name  :  {gamedetails.location.locationName}</p>
                                               <p>Start time  :  {gamedetails.start_time}</p>

@@ -43,7 +43,7 @@ function SideMenuComponents(props) {
   return (
     <div className="dashboard-side-bar">
       <div className="logo">
-        <a href="#"><img src={Logo} alt="" /></a>
+        <a href="/"><img src={Logo} alt="" /></a>
       </div>
       <div className="left-menu-section">
         <div className="nav-header">

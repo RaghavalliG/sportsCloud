@@ -87,7 +87,7 @@ const ImportPlayer = () => {
     const pic1 = 'https://nodeserver.mydevfactory.com:1448/profilepic/'
 
     const handleLogout = () => {
-        
+
         dispatch(logoutUser(null));
         localStorage.removeItem("user");
         // setUserData(null);
@@ -96,8 +96,8 @@ const ImportPlayer = () => {
     const dropdownMenu = () => {
         const user = JSON.parse(localStorage.getItem('user'));
 
-        
-        
+
+
         // console.log(user);
         if (user) {
             let header = {
@@ -191,62 +191,62 @@ const ImportPlayer = () => {
                     <div className="dashboard-main-content">
                         {/* <ManagerHeader change={change}/> */}
                         <div className="dashboard-head">
-            <div className="teams-select">
-                <button className="create-new-team" onClick={() => {
-                    history.push("/CreateTeam")
-                }}>Create New Teams</button>
-                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
-                    {dropdown?.map((dropdown) => {
-                        return (
-                            <option key={dropdown.team_id} id={dropdown.team_id} name={dropdown.team_name} value={dropdown.team_id}>{dropdown.team_name}</option>
-                        )
-                    })}
-                </select>
-                <div className="dropBtn">
-                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
-                        ACCOUNT
-                    </button>
-                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                        <li className="dropdown-item" >{profilePic?.fname + " " + profilePic?.lname} </li>
-                        <Link to={{ pathname: "/MyAccount" }} >
-                            <li className="dropdown-item" >My Account </li>
-                        </Link>
-                        <Link to={{ pathname: "/Credit" }} >
-                            <li className="dropdown-item" >Credits </li>
-                        </Link>
-                        <Link to={{ pathname: "/Household" }} >
-                            <li className="dropdown-item" >My HouseHold </li>
-                        </Link>
-                        <Link to={{ pathname: "/ManageTeam" }} >
-                            <li className="dropdown-item" >Manage My Team </li>
-                        </Link>
-                        <Link to={{ pathname: "/Biling" }} >
-                            <li className="dropdown-item" >Biling & Plans </li>
-                        </Link>
-                        <Link to={{ pathname: "/CreateTeam" }} >
-                            <li className="dropdown-item" >Create New Team </li>
-                        </Link>
-                        <Link to={{ pathname: "/SignOut" }} >
-                            <li className="dropdown-item active" >Sign Out </li>
-                        </Link>
+                            <div className="teams-select">
+                                <button className="create-new-team" onClick={() => {
+                                    history.push("/CreateTeam")
+                                }}>Create New Teams</button>
+                                <select onChange={change} value={teamDropdown == "" ? dropdown[0]?.team_id : teamDropdown} >
+                                    {dropdown?.map((dropdown) => {
+                                        return (
+                                            <option key={dropdown.team_id} id={dropdown.team_id} name={dropdown.team_name} value={dropdown.team_id}>{dropdown.team_name}</option>
+                                        )
+                                    })}
+                                </select>
+                                <div className="dropBtn">
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{ backgroundColor: "#2C2C2C", border: "none" }}>
+                                        ACCOUNT
+                                    </button>
+                                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
+                                        <li className="dropdown-item" >{profilePic?.fname + " " + profilePic?.lname} </li>
+                                        <Link to={{ pathname: "/MyAccount" }} >
+                                            <li className="dropdown-item" >My Account </li>
+                                        </Link>
+                                        <Link to={{ pathname: "/Credit" }} >
+                                            <li className="dropdown-item" >Credits </li>
+                                        </Link>
+                                        <Link to={{ pathname: "/Household" }} >
+                                            <li className="dropdown-item" >My HouseHold </li>
+                                        </Link>
+                                        <Link to={{ pathname: "/ManageTeam" }} >
+                                            <li className="dropdown-item" >Manage My Team </li>
+                                        </Link>
+                                        <Link to={{ pathname: "/Biling" }} >
+                                            <li className="dropdown-item" >Biling & Plans </li>
+                                        </Link>
+                                        <Link to={{ pathname: "/CreateTeam" }} >
+                                            <li className="dropdown-item" >Create New Team </li>
+                                        </Link>
+                                        <Link to={{ pathname: "/SignOut" }} >
+                                            <li className="dropdown-item active" >Sign Out </li>
+                                        </Link>
 
-                    </ul>
-                </div>
-            </div>
-            <div className="profile-head">
-                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
-                <div className="profile-head-img">
-                    {profilePic?.profile_image == null ?
-                        <img src={BigUserProfile} alt="" /> :
-                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
-                    }
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="profile-head">
+                                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
+                                <div className="profile-head-img">
+                                    {profilePic?.profile_image == null ?
+                                        <img src={BigUserProfile} alt="" /> :
+                                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                                    }
 
-                </div>
-            </div>
-            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
+                                </div>
+                            </div>
+                            <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
 
-        </div>
+                        </div>
                         <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
 
                             <div className="tab-content">
@@ -256,7 +256,7 @@ const ImportPlayer = () => {
 
                                         <div className="fileBox">
                                             <span>Import a list of players by uploading a file below:</span>
-                                            <div style={{ display: "flex", paddingBottom: "20px" }}>
+                                            <div className='form-group' >
                                                 {/* <div className="update-team-photo" style={{ width: "20%" }}>
                                 Choose File
                                 <input type="file" name='img' />
@@ -269,7 +269,8 @@ const ImportPlayer = () => {
                                                 </div>
                                                 <div className="fileChoosen">No File Choosen</div>
                                             </div>
-                                            <span style={{ color: "red" }}>Download Our Roster Template</span><span>
+                                            <span className='mb-0' style={{ color: "#EC3525" }}>Download Our Roster Template</span>
+                                            <span className='mb-0'>
 
                                                 |  (Acceptable Formats: .XLS, .XLSX and .CSV)</span>
 

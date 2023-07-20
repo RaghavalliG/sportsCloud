@@ -6,7 +6,7 @@ export default function CsvDownload({ data, headers, filename }) {
 
 
         <CSVLink className="btn" data={data} headers={headers} filename={`${filename}.csv`}>
-            <button className="edit-btn" style={{ marginLeft: "5px" }} >CSV Export</button>
+            <button className="edit-btn start-stream-btn w-auto px-3" >CSV Export</button>
         </CSVLink>
     </>)
 }

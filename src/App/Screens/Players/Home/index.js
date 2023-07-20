@@ -67,7 +67,7 @@ function HomeComponents(props) {
     // console.log("USerData", userdata);
     const userLocal = JSON.parse(localStorage.getItem("user"));
     // console.log("userData after login--->", userLocal);
-    let userD = userLocal && userLocal._id ? true : false;
+    let userD = userLocal && userLocal?._id ? true : false;
     setUser(userD);
     setUserData(userLocal);
     teamSelect();

@@ -76,6 +76,7 @@ ol {
   margin: 0;
   line-height: 21px;
 }
+
 .dashboard-container {
   margin: 0;
   padding: 0;
@@ -1277,8 +1278,11 @@ ol {
   margin-bottom: 1.5%;
 }
 .team-shop-product-img img {
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  margin: inherit;
+  height: 347px;
+  object-fit: contain;
+  max-width: inherit;
 }
 .team-shop-product-text {
   margin-top: 35px;
@@ -2126,20 +2130,32 @@ span {
   padding-bottom: 16px;
 }
 .fileChoosen {
-  text-align: center;
-  padding-top: 51px;
-  padding-left: 10px;
-  color: white;
+  text-align: left;
+  padding-top: 0.5rem;
+  color: #9f9f9f;
+  font-weight: 300;
+  font-size: 1rem;
 }
 .fileBox {
-  padding-bottom: 42px;
   margin-top: 45px;
   border: 1px solid gray;
   border-radius: 12px;
-  padding-top: 33px;
-
-  padding-left: 20px;
+  padding: 20px;
   background-color: #2c2c2c;
+}
+.fileBox span {
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+.fileBox .custom-file-label {
+  border: 1px solid #484848;
+  background: transparent;
+  color: #fffbfb;
+  cursor: pointer;
+}
+.fileBox .custom-file-label::after {
+  color: #bebebe;
+  background-color: #47484a;
 }
 .managerDropdownLink {
   display: flex;
@@ -2148,6 +2164,20 @@ span {
   padding: 18px 25px;
   border-radius: 10px;
   margin-top: 22px;
+}
+.managerDropdownLink .dropdown-item {
+  color: #fff !important;
+}
+.managerDropdownLink .dropdown-item:focus,
+.managerDropdownLink .dropdown-item:hover {
+  color: #fff !important;
+  background: #ec3525;
+}
+.managerDropdownLink .dropdown-menu a:hover {
+  text-decoration: none;
+}
+.managerDropdownLink .dropdown {
+  margin: 0 0.5rem;
 }
 .react-calendar__navigation__label {
   background-color: #484848 !important;
@@ -2302,7 +2332,7 @@ span {
   margin-bottom: 1.5rem;
   letter-spacing: 0em;
   text-align: center;
-  color: #fff;
+  color: #ec3525;
 }
 .modal .modal-content {
   background-color: #424242;
@@ -2331,4 +2361,10 @@ span {
 .plr_dtls_wrp .plr_dtls_itm span {
   flex: 1;
   padding: 0;
+}
+.assignment_wrp .form-control,
+.assignment_wrp .form-control:focus {
+  background: #484848;
+  color: #fff;
+  border: 1px solid #666464;
 }

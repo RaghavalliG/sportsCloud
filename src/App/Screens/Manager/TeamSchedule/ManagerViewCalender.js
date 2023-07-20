@@ -25,6 +25,8 @@ import { Calendar, momentLocalizer, globalizeLocalizer  } from "react-big-calend
 import moment from "moment";
 import globalize from 'globalize'
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import CsvDownload from '../../../Components/Comman/CsvDownload';
+
 
 const ManagerViewCalender = () => {
     // const localizer = momentLocalizer(moment);
@@ -343,7 +345,14 @@ const ManagerViewCalender = () => {
             })
 
     }
-
+    let headers = [
+        // { label: "Event/Game", key: "firstName" },
+        { label: "Event Name", key: "event_name" },
+        // { label: "email", key: "contactInformationEmail" },
+        // { label: "phone", key: "contactInformationPhoneNumber" },
+        // { label: "Gender", key: "playerGender" }
+    ];
+    let data = (schedule && schedule.length>0 )? schedule: [];
     return (
         <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
             <SideMenuComponents manger="manger" />
@@ -395,15 +404,16 @@ const ManagerViewCalender = () => {
                                 <ul>
                                     <li><a className="active" href="#">List View</a></li>
                                     <li onClick={() => {
-                                        history.push("/ViewCalender")
+                                        history.push("/ManagerViewCalender")
                                     }}><a href="#">Calendar View</a></li>
 
                                 </ul>
                             </div>
 
-                            <button className="start-stream-btn">Select Availability</button>
-                            <button className="start-stream-btn">View Preferences</button>
+                            <button className="start-stream-btn" onClick={() => { history.push("/ManagerTeamAvailability") }}>Select Availability</button>
+                            {/* <button className="start-stream-btn">View Preferences</button> */}
                             <button className="start-stream-btn">Subscribe/ Export</button>
+                            <CsvDownload data={data} headers={headers} filename={`Schedule list `} />
                         </div>
                     </div>
 

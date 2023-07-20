@@ -25,6 +25,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import BigUserProfile from "../../../images/big-user-profile.png"
 import { Button } from 'bootstrap';
 import { Col, Row } from 'react-bootstrap';
+import { unique } from 'jquery';
 
 
 function AnotherPlayer(props) {
@@ -46,6 +47,9 @@ function AnotherPlayer(props) {
     const [newNonPlayerData, setNewNonPlayerData] = useState([])
     const [checked, setChecked] = useState([]);
     const [addPlayer, setaddImportPlayers] = useState([]);
+    const [inputFields, setInputFields] = useState([
+        { roster_id: '' }
+    ])
     var res;
 
     useEffect(() => {
@@ -220,11 +224,77 @@ function AnotherPlayer(props) {
 
     }
 
+    function removeDuplicates(players) {
 
+        // Create an array of objects
+        // books = [
+        //     { title: "C++", author: "Bjarne" },
+        //     { title: "Java", author: "James" },
+        //     { title: "Python", author: "Guido" },
+        //     { title: "Java", author: "James" },
+        // ];
+
+        // Declare a new array
+        let newArray = [];
+
+        // Declare an empty object
+        let uniqueObject = {};
+
+        // Loop for the array elements
+        for (let i in players) {
+
+            // Extract the title
+            let roster_id = players[i]['roster_id'];
+
+            
+
+            // Use the title as the index
+            uniqueObject[roster_id] = players[i];
+            // newArray.push(uniqueObject)
+        }
+
+        // Loop to push unique object into array
+        for (let i in uniqueObject) {
+            newArray.push(uniqueObject[i]);
+        }
+
+        // Display the unique objects
+        console.log(newArray);
+        return newArray
+    }
 
     const PlayerImportData = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         console.log(addPlayer);
+        let data = [...inputFields];
+        for (let i in addPlayer) {
+            
+            // console.log(event);
+            let dat = { 'roster_id': '' }
+            dat.roster_id = addPlayer[i]['_id'];
+            data.push(dat);
+            setInputFields(data);
+            console.log(data);
+        }
+
+
+
+        const palyerimport_list = removeDuplicates(data);
+        console.log(palyerimport_list);
+        let players = [];
+        for (let i in palyerimport_list) {
+            if(palyerimport_list[i].roster_id == ''){
+                palyerimport_list.splice(i,1);
+            }
+
+        }
+        // palyerimport_list.map((player,index)=>{
+            // players['roster_id'] = player._id;
+        //    players =  [...players, player._id]
+            // player.roster_id == '' ? player.splice(index,1) : ''   
+
+        // })
+        // console.log(players);
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -237,21 +307,21 @@ function AnotherPlayer(props) {
                 // 'team_id': teamDropdown,
                 'fromTeamId': teamdroplist,
                 'toTeamId': teamDropdown ? teamDropdown : dropdown[0].team_id,
-                "data": []
+                "data": palyerimport_list
 
             })
         };
-        // fetch('https://nodeserver.mydevfactory.com:1448/api/createRoasterFromAnotherTeam', requestOptions)
-        //     .then(response => response.json())
-        //     .then((res) => {
-        //         console.log("Import  Data", res)
-        //         if (res.response_code == 400) {
-        //             dispatch(logoutUser(null))
-        //             localStorage.removeItem("user");
-        //             history.push("/")
-        //             toast.error(res.response_message)
-        //         }
-        //     })
+            fetch('https://nodeserver.mydevfactory.com:1448/api/createRoasterFromAnotherTeam', requestOptions)
+                .then(response => response.json())
+                .then((res) => {
+                    console.log("Import  Data", res)
+                    if (res.response_code == 400) {
+                        dispatch(logoutUser(null))
+                        localStorage.removeItem("user");
+                        history.push("/")
+                        toast.error(res.response_message)
+                    }
+                })
 
     }
 
@@ -296,6 +366,21 @@ function AnotherPlayer(props) {
         console.log("new", teamdroplist);
         console.log("old", teamDropdown);
         console.log(player)
+    }
+    const handleFormChange = (event) => {
+        let data = [...inputFields];
+        console.log(event);
+        let dat = [{ 'roster_id': '' }]
+        dat[event.target.name] = event.target.value;
+        data.push(dat);
+        setInputFields(data);
+        console.log(data);
+        // console.log(data.length);
+        // // const obj = event.target.name : event.target.value;
+        // // console.log(data.push(obj))
+        // console.log(data);
+        // getAssignments(data);
+
     }
 
     return (
@@ -400,11 +485,12 @@ function AnotherPlayer(props) {
                                                         }
                                                         <span>{player.firstName}{player.lastName}</span>
                                                     </span>
-                                                    <span><input id={player._id} value={`${player.firstName} ${player.lastName}`} type="checkbox" style={{ width: "20px", height: "20px" }}
+                                                    <span><input id={player._id} value={`${player.firstName} ${player.lastName}`} name='roster_id' type="checkbox" style={{ width: "20px", height: "20px" }}
                                                         onClick={() => {
                                                             setId([...id, player._id])
                                                         }
                                                         }
+                                                        // onChange={event => handleFormChange(event)}
                                                     // onChange={setId([...id, player._id])} 
                                                     /></span>
                                                 </div>
