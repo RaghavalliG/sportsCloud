@@ -78,7 +78,7 @@ function TeamSchdule(props) {
 
   const handleLogout = () => {
     //console.log("pruyuuuuuu", props);
-    // dispatch(logoutUser(null));
+    dispatch(logoutUser(null));
     localStorage.removeItem("user");
     setUserData(null);
     props.history.push("/");

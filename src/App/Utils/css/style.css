@@ -1277,12 +1277,13 @@ ol {
   padding: 20px;
   margin-bottom: 1.5%;
 }
-.team-shop-product-img img {
-  width: 100%;
-  margin: inherit;
+.team-shop-list-main .team-shop-product-img img {
+  width: 347px;
   height: 347px;
   object-fit: contain;
   max-width: inherit;
+  margin: auto;
+  display: block;
 }
 .team-shop-product-text {
   margin-top: 35px;
@@ -1319,6 +1320,14 @@ ol {
   line-height: 24px;
   color: #ec3525;
   margin-top: 14px;
+}
+.team-shop-product-text .product-action {
+  margin-left: auto;
+}
+.team-shop-product-text .product-action .edit-icon {
+  filter: invert(75%) sepia(85%) saturate(3509%) hue-rotate(352deg)
+    brightness(102%) contrast(90%);
+  margin-right: 0.5rem;
 }
 .team-shop-product-text .product-size {
   font-style: normal;
@@ -1981,7 +1990,6 @@ ol {
 }
 .playerinfo-form .input-select {
   width: 100%;
-
   border: 1px solid #2c2c2c;
   border-radius: 10px;
   height: 60px;
@@ -1989,7 +1997,7 @@ ol {
   padding: 0 25px;
   font-size: 15px;
   color: #a7a7a7;
-  background: none;
+  background: #424242;
 }
 
 .player-profile-img img {

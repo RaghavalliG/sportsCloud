@@ -1,17 +1,18 @@
-.login-container{
-    background-color: #2c2c2c;
- }
- .login-text{
-     text-align: center;
-     color: #fff;
- }
- #account {
-     text-align: center;
-     margin-top: 15px;
-     color: gray;
-   }
-   .forget-title{
-     color: #fff;
-     font-size: 18px;
-     font-weight: 500;
- }
+.login-container {
+  background-color: #2c2c2c;
+}
+.login-text {
+  text-align: center;
+  color: #fff;
+}
+#account {
+  text-align: center;
+  margin-top: 15px;
+  color: gray;
+  font-size: 1rem;
+}
+.forget-title {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+}

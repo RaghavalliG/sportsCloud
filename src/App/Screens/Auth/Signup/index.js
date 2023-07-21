@@ -46,6 +46,7 @@ function SignUpComponents(props) {
   const [errors, setError] = useState({});
   const [sports, setsports] = useState("cricket");
   const [userType, setUserType] = useState("player");
+  const[genderType,setGendartype] = useState("MALE")
   const [loader, setLoader] = useState(false);
 
   const handleSubmit = (event) => {
@@ -196,9 +197,11 @@ function SignUpComponents(props) {
     <>
       <MyLoader active={loader}>
         <div className="signup-container" style={{ flexGrow: 1 }}>
-          <a href="#">
-            <img src={Logo} alt="" />
-          </a>
+          <header className="text-center pt-4">
+            <a href="#">
+              <img src={Logo} alt="" />
+            </a>
+          </header>
           <div style={{ paddingBottom: 50 }}>
             <div className="login_box">
               <h4 class=" login_box_header">Register</h4>
@@ -229,7 +232,7 @@ function SignUpComponents(props) {
                 </div>
                 <div className="form-group">
                   <label>Gender</label>
-                  <input
+                  {/* <input
                     type="text"
                     className="form-control"
                     onChange={handleChange}
@@ -237,16 +240,24 @@ function SignUpComponents(props) {
                   />
                   <span style={{ color: "red", fontSize: 12, padding: 0 }}>
                     {errors.gender}
-                  </span>
-                </div>
-
-                {/* <div className="form-group">
+                  </span> */}
+                 {/* <div className="form-group">
                     <label>Team Name</label>
                     <input type="text" className="form-control" onChange={handleChange} name="teamName" />
                     <span style={{ color: "red", fontSize: 12, padding:0 }}>
                       {errors.teamName}
                     </span>
                   </div> */}
+                   <select
+                    onChange={(value) => setGendartype(value.target.value)}
+                    name="gendertype"
+                    className="form-control"
+                  >
+                  
+                  <option  value='MALE'>MALE</option>
+                  <option  value='FEMALE'>FEMALE</option>
+                  </select>
+                </div>
 
                 <div className="form-group">
                   <label>Sports</label>
@@ -255,13 +266,17 @@ function SignUpComponents(props) {
                     name="SportsName"
                     className="form-control"
                   >
-                    {sportsName.map((item) => {
+                    {/* {sportsName.map((item) => {
                       return (
                         <option value={item.value} name="Sports">
                           {item.name}
                         </option>
                       );
-                    })}
+                    })} */}
+                     <option  value='cricket'>Cricket</option>
+                  <option  value='football'>Football</option>
+
+
                   </select>
                 </div>
                 <div className="form-group">
@@ -271,13 +286,16 @@ function SignUpComponents(props) {
                     name="usertype"
                     className="form-control"
                   >
-                    {userTypeName.map((item) => {
+                    {/* {userTypeName.map((item) => {
                       return (
                         <option value={item.value} name="usertype">
                           {item.name}
                         </option>
                       );
-                    })}
+                    })} */}
+                     {/* <option>Select User Type</option> */}
+                                <option  value='player'>PLAYER</option>
+                                <option  value='manager'>MANAGER</option>
                   </select>
                 </div>
                 <div className="form-group">

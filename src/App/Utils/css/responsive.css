@@ -5,6 +5,10 @@
   .plr_dtls_wrp .plr_dtls_itm {
     font-size: 1.125rem;
   }
+  .team-shop-list-main .team-shop-product-img img {
+    width: 100%;
+    height: 240px;
+  }
 }
 
 @media (max-width: 992px) {

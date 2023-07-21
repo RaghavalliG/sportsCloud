@@ -92,7 +92,7 @@ function ManagerRoster(props) {
   const pic1 = "https://nodeserver.mydevfactory.com:1448/profilepic/";
 
   const handleLogout = () => {
-    // dispatch(logoutUser(null));
+    dispatch(logoutUser(null));
     localStorage.removeItem("user");
     setUserData(null);
     props.history.push("/");

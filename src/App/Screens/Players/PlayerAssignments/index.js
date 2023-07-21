@@ -87,7 +87,7 @@ function PlayerAssignments(props) {
         const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
             let header = {
-                'authToken': user.authtoken
+                'token': user.authtoken
 
             }
             console.log('user', user)
@@ -497,7 +497,7 @@ function PlayerAssignments(props) {
                             <div className="teams-select">
                                 <select onClick={change1}>
                                     <option>Select Team</option>
-                                    {team.map((team) => {
+                                    {team?.map((team) => {
                                         return (
                                             <option value={team.team_id._id}>{team.team_id.team_name}</option>
                                         )
@@ -544,7 +544,7 @@ function PlayerAssignments(props) {
 
                                     <select onChange={change} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }} >
                                         <option>Select A Team</option>
-                                        {dropdown.map((dropdown) => {
+                                        {dropdown?.map((dropdown) => {
                                             return (
                                                 <option value={dropdown._id}>{dropdown.team_name}</option>
                                             )
@@ -555,7 +555,7 @@ function PlayerAssignments(props) {
 
                                     <select style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }} onChange={gameEventId}>
                                         <option >Select Game/Event</option>
-                                        {schedule.map((schedule) => {
+                                        {schedule?.map((schedule) => {
                                             return (
                                                 <option value={schedule._id}>{schedule.name}</option>
                                             )
@@ -578,7 +578,7 @@ function PlayerAssignments(props) {
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Location</h2>
                                     <select onClick={selectLocation} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option  >Select Location</option>
-                                        {locationData.map((locationData) => {
+                                        {locationData?.map((locationData) => {
                                             return (
                                                 <option value={locationData.locationName}>{locationData.locationName}</option>
                                             )
@@ -592,7 +592,7 @@ function PlayerAssignments(props) {
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Volenteer</h2>
                                     <select onClick={volenteerId} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option>Select Volenteer</option>
-                                        {volenteerData.member_id != null ? volenteerData.map((volenteerData) => {
+                                        {volenteerData?.member_id != null ? volenteerData?.map((volenteerData) => {
                                             return (
                                                 <option value={`${volenteerData.member_id.fname}${volenteerData.member_id.lname}`}>{volenteerData.member_id.fname}{volenteerData.member_id.lname}</option>
                                             )
@@ -619,7 +619,7 @@ function PlayerAssignments(props) {
 
                                         <option>Select a Team</option>
 
-                                        {team.map((team) => {
+                                        {team?.map((team) => {
                                             return (
                                                 <option value={team.team_id._id}>{team.team_id.team_name}</option>
                                             )
@@ -631,7 +631,7 @@ function PlayerAssignments(props) {
                                     <select style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }} onChange={gameEventId}>
                                         <option >{assignment[id].eventGameDetails.name}</option>
 
-                                        {schedule.map((schedule) => {
+                                        {schedule?.map((schedule) => {
                                             return (
                                                 <option value={schedule._id}>{schedule.name}</option>
                                             )
@@ -654,7 +654,7 @@ function PlayerAssignments(props) {
                                     <select onClick={selectLocation} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option  > {assignment[id].location}</option>
 
-                                        {locationData.map((locationData) => {
+                                        {locationData?.map((locationData) => {
                                             return (
                                                 <option value={locationData.locationName}>{locationData.locationName}</option>
                                             )
@@ -668,7 +668,7 @@ function PlayerAssignments(props) {
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Volenteer</h2>
                                     <select onClick={volenteerId} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option>{assignment[id].volunteer}</option>
-                                        {volenteerData.member_id != null ? volenteerData.map((volenteerData) => {
+                                        {volenteerData.member_id != null ? volenteerData?.map((volenteerData) => {
                                             return (
                                                 <option value={`${volenteerData.member_id.fname}${volenteerData.member_id.lname}`}>{volenteerData.member_id.fname}{volenteerData.member_id.lname}</option>
                                             )
@@ -696,7 +696,7 @@ function PlayerAssignments(props) {
                                             <th>Assignments</th>
                                             <th>Volunteer</th>
                                         </tr>
-                                        {assignment.map((assignment, id) => {
+                                        {assignment?.map((assignment, id) => {
                                             return (
                                                 <tr >
                                                     <td>

@@ -22,7 +22,7 @@ import DatePicker from "react-datepicker";
 const TeamImportPlayer = () => {
     return (
         <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
-            <SideMenuComponents manger="manger" />
+            <SideMenuComponents  />
 
 
             <div className="tab-content">

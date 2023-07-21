@@ -62,15 +62,14 @@ function ForgetComponents(props) {
   return (
     <>
       <div className="login-container" style={{ flexGrow: 1 }}>
-        <div className="container-fluid">
-          <header>
-            {" "}
+        <div className="container">
+          <header className="text-center pt-4">
             <a href="#">
               <img src={Logo} alt="#" className="img-fluid" />
             </a>
           </header>
           <div className="login_box">
-            <h4 className="login_box_header">Forget Password</h4>
+            <h4 className="login_box_header">Forgot Password</h4>
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
                 <div className="form-group">

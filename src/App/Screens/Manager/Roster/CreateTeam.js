@@ -234,28 +234,28 @@ const CreateTeam = (props) => {
                                         ACCOUNT
                                     </button>
                                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ backgroundColor: "#484848", listStyle: "none", margin: "14px" }}>
-                                        <li className="dropdown-item" href="#">Jayanta Karmakar</li>
+                                        <li className="dropdown-item" href="#">{profilePic?.fname + " " + profilePic?.lname}</li>
                                         <Link to={{ pathname: "/MyAccount" }} >
                                             <li className="dropdown-item" href="#">My Account</li>
                                         </Link>
-                                        <Link to={{ pathname: "/Credit" }} >
+                                        {/* <Link to={{ pathname: "/Credit" }} >
                                             <li className="dropdown-item" href="#">Credits</li>
-                                        </Link>
+                                        </Link> */}
                                         <Link to={{ pathname: "/Household" }} >
                                             <li className="dropdown-item" href="#">My HouseHold</li>
                                         </Link>
                                         <Link to={{ pathname: "/ManageTeam" }} >
                                             <li className="dropdown-item" href="#">Manage My Team</li>
                                         </Link>
-                                        <Link to={{ pathname: "/Biling" }} >
+                                        {/* <Link to={{ pathname: "/Biling" }} >
                                             <li className="dropdown-item" href="#">Biling & Plans</li>
-                                        </Link>
+                                        </Link> */}
                                         <Link to={{ pathname: "/CreateTeam" }} >
                                             <li className="dropdown-item" href="#">Create New Team</li>
                                         </Link>
-                                        <Link to={{ pathname: "/SignOut" }} >
+                                        {/* <Link to={{ pathname: "/SignOut" }} >
                                             <li className="dropdown-item active" href="#">Sign Out</li>
-                                        </Link>
+                                        </Link> */}
 
                                     </ul>
                                 </div>
@@ -367,7 +367,7 @@ const CreateTeam = (props) => {
                                         <div className="col-md-12" style={{ display: "flex", flexDirection: "row" }}>
                                             <div className="col-md-6">
                                                 <div className="prefarance-form-list">
-                                                    <button className="add-links">CANCEL</button>
+                                                    <button className="add-links" onClick={()=>  history.goBack()}>CANCEL</button>
 
                                                 </div>
                                             </div>

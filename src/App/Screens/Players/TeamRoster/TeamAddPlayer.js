@@ -24,6 +24,7 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { logoutUser } from "../../../Redux/Actions/auth";
 import validator from 'validator'
+import BigUserProfile from "../../../images/big-user-profile.png"
 
 
 const TeamAddPlayer = () => {
@@ -32,6 +33,7 @@ const TeamAddPlayer = () => {
     const dispatch = useDispatch()
     const [startDate, setStartDate] = useState(new Date());
     const [userMe, setUser] = useState(null);
+    const [profilePic, setProfilePic] = useState([])
     const [user, setUserData] = useState({});
     const [fname, setFName] = useState()
     const [lname, setLName] = useState()
@@ -57,6 +59,9 @@ const TeamAddPlayer = () => {
     const [valueDropDown, setValueDropDown] = useState("")
     const [eventType, setEventType] = useState()
 
+    const pic1 = "https://nodeserver.mydevfactory.com:1448/profilepic/"
+
+
     useEffect(() => {
 
         const userLocal = JSON.parse(localStorage.getItem("user"));
@@ -69,7 +74,7 @@ const TeamAddPlayer = () => {
 
 
     }, []);
-    
+
 
     const playerData = () => {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -239,13 +244,13 @@ const TeamAddPlayer = () => {
                     // if(res.response_data.length!=0){
 
                     // }
-                   
+
 
                 })
         }
     }
 
-    
+
 
     const change = (event) => {
         console.log("event", event.target.value)
@@ -255,11 +260,16 @@ const TeamAddPlayer = () => {
 
 
     return (
+        
+           
         <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
+           
 
-            <SideMenuComponents manger="manger" />
+            <SideMenuComponents  />
             <div className="dashboard-main-content">
                 
+
+
                 <div className="prefarance-box" style={{ overflow: "auto" }} >
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="nav-item">
@@ -447,6 +457,7 @@ const TeamAddPlayer = () => {
                 </div>
             </div>
         </div>
+     
 
 
     )

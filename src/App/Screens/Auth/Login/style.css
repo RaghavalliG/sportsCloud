@@ -10,11 +10,12 @@
   text-align: center;
   margin-top: 15px;
   color: #bebebe;
+  font-size: 1rem;
 }
 .forget-title {
   color: #fff;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 400;
 }
 .login_box {
   background: #595959;
@@ -22,7 +23,7 @@
   margin: auto;
   border-radius: 1rem;
   padding: 1.5rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 .login_box .login_box_header {
   font-size: 2rem;
@@ -52,6 +53,9 @@
 }
 .login_box .form-control,
 .login_box .form-control:focus {
-  background: transparent;
+  background: #595959;
   color: #fff;
+}
+.login_box .form-group span {
+  padding: 0;
 }

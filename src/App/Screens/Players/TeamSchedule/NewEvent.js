@@ -18,7 +18,7 @@ import flag from "../../../images/flag.png"
 const NewEvent = () => {
     return (
         <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
-            <SideMenuComponents manger="manger" />
+            <SideMenuComponents/>
             <ul className="nav nav-tabs" role="tablist">
                 <li className="nav-item">
                     <a className="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"><h1 style={{ color: "white", fontSize: "35px" }}>New Event</h1> </a>

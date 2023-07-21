@@ -36,6 +36,29 @@ const ImportPlayer = () => {
     const [teamDropdown, setTeamDropDown] = useState("");
     const [profilePic, setProfilePic] = useState([])
 
+    const pic = "https://nodeserver.mydevfactory.com:1448/";
+
+    const pic1 = "https://nodeserver.mydevfactory.com:1448/profilepic/";
+
+
+
+    const updateProfile = () => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) {
+            let header = {
+                token: user.authtoken,
+            };
+            console.log("user", user);
+
+            Network("api/get-user-details?user_id=" + user._id, "get", header).then(
+                async (res) => {
+                    console.log("new Profile Pic----", res);
+                    setProfilePic(res.response_data);
+                }
+            );
+        }
+    };
+
     const handleImport = (event) => {
         console.log(event)
         const files = event.target.files;
@@ -80,11 +103,11 @@ const ImportPlayer = () => {
         // // teamRoster();
         dropdownMenu();
         // setTeamDropDown()
-        // updateProfile()
+        updateProfile()
 
 
     }, []);
-    const pic1 = 'https://nodeserver.mydevfactory.com:1448/profilepic/'
+    // const pic1 = 'https://nodeserver.mydevfactory.com:1448/profilepic/'
 
     const handleLogout = () => {
 
@@ -174,8 +197,13 @@ const ImportPlayer = () => {
                         history.push("/")
                         toast.error(res.response_message)
                     } else {
-                        toast.success(res.response_message)
-                        // history.goBack();
+                        
+                        if(res.response_data.already_existing_user && res.response_data.already_existing_user.length > 0){
+                            toast.error("There are some users which are already existed Please check.")
+                        }else{
+                            toast.success(res.response_message)
+                        }
+                        history.goBack();
                     }
                 })
         }
@@ -238,7 +266,7 @@ const ImportPlayer = () => {
                                 <div className="profile-head-img">
                                     {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                                        <img src={`${profilePic?.profile_image}`} alt="" />
                                     }
 
                                 </div>
@@ -277,8 +305,18 @@ const ImportPlayer = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <button
+                    type="btn"
+                    onClick={() => history.goBack()}
+                    className="btn btn-deflt ml-2"
+                    style={{ background: "#8A8A8A" }}
+                  >
+                    Back
+                  </button> 
                             </div>
+                           
                         </div>
+                        
                     </div>
                 </div>
             </div>

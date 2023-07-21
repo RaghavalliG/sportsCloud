@@ -203,7 +203,7 @@ const ViewCalender = () => {
             className="prefarance-box player-info"
             style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}
         >
-            <SideMenuComponents manger="manger" />
+            <SideMenuComponents />
             <div className="dashboard-main-content">
                 <div className="dashboard-head">
                     <div className="teams-select">

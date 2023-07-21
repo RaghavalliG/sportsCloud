@@ -1813,9 +1813,19 @@ ol {
   padding: 0 25px;
   font-size: 15px;
   color: #a7a7a7;
-  background: none;
+  background: #424242;
 }
-
+.playerinfo-form label {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.playerinfo-form .nb-txt {
+  font-size: 0.85rem;
+  color: #c6c5c5;
+  display: block;
+  margin-top: 0.5rem;
+}
 .player-profile-img img {
   width: 70px;
   height: 70px;

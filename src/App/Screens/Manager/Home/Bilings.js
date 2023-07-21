@@ -51,7 +51,7 @@ function Biling(props) {
         <div>
             <div className="dashboard-container">
                 <div className="dashboard-main">
-                    <SideMenuComponents />
+                    <SideMenuComponents manger="manger" />
                     <div className="dashboard-main-content">
                         <div className="dashboard-head">
                             <div className="teams-select">

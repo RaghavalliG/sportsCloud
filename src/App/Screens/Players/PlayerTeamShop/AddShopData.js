@@ -19,7 +19,7 @@ import flag from "../../../images/flag.png"
 const AddShopData = () => {
     return (
         <div className="prefarance-box player-info" style={{ height: "100%", marginTop: "0px", borderRadius: "0px" }}>
-            <SideMenuComponents manger="manger" />
+            <SideMenuComponents  />
 
             <div className="tab-content">
                 <div className="tab-pane active" id="tabs-1" role="tabpanel">

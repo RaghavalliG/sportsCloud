@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { EyeFill, ZoomIn } from 'react-bootstrap-icons';
+import { EyeFill, ZoomIn } from "react-bootstrap-icons";
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,7 +25,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { logoutUser } from "../../../Redux/Actions/auth";
 import BigUserProfile from "../../../images/big-user-profile.png";
 import Modal from "react-bootstrap/Modal";
-import axios from 'axios'
+import axios from "axios";
 
 function PlayerSchedule(props) {
   const history = useHistory();
@@ -52,11 +52,11 @@ function PlayerSchedule(props) {
   const [volenteerUpdate, setVolenteerUpdate] = useState("");
   const [flag, setFlagList] = useState([]);
   const [flagId, setFlagId] = useState("");
-  const[eventditailsmodel,seteventDitailsmodel]= useState(false)
-  const[gameditailsmodel,setgameDitailsmodel]= useState(false)
-  const [eventdetails,setEventdetails]=useState({})
-  const [gamedetails,setGamedetails]=useState({})
-  const [id1, setId1] = useState("")
+  const [eventditailsmodel, seteventDitailsmodel] = useState(false);
+  const [gameditailsmodel, setgameDitailsmodel] = useState(false);
+  const [eventdetails, setEventdetails] = useState({});
+  const [gamedetails, setGamedetails] = useState({});
+  const [id1, setId1] = useState("");
   const pic = "https://nodeserver.mydevfactory.com:1447/profilepic/";
 
   useEffect(() => {
@@ -72,8 +72,8 @@ function PlayerSchedule(props) {
     teamSelect();
     teamSchedule();
     updateProfile();
-    eventDitails()
-    gameDitails()
+    eventDitails();
+    gameDitails();
   }, []);
 
   const handleLogout = () => {
@@ -273,83 +273,72 @@ function PlayerSchedule(props) {
         }
       });
   };
-  const ditailsmodelvalue =(id,flag)=>{
-   setId1(id)
-    flag=="Event" ? eventDitails(id) : gameDitails(id)
-    if(flag=="Event"){ 
-      seteventDitailsmodel(true)
-    }else{
-      setgameDitailsmodel(true)
+  const ditailsmodelvalue = (id, flag) => {
+    setId1(id);
+    flag == "Event" ? eventDitails(id) : gameDitails(id);
+    if (flag == "Event") {
+      seteventDitailsmodel(true);
+    } else {
+      setgameDitailsmodel(true);
     }
-    console.log(flag,"======>>>>>>>>flag value")
-}
+    console.log(flag, "======>>>>>>>>flag value");
+  };
 
-
-  const eventDitails=(id)=>{
-    const user = JSON.parse(localStorage.getItem('user'));
-    console.log(id,"redgfdgfgfdgfcddsdfs")
+  const eventDitails = (id) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(id, "redgfdgfgfdgfcddsdfs");
     axios({
-      method: 'get',
-    
-      url:"https://nodeserver.mydevfactory.com:1448/api/getDetailsByEventId?events_id="+id,
+      method: "get",
+
+      url:
+        "https://nodeserver.mydevfactory.com:1448/api/getDetailsByEventId?events_id=" +
+        id,
       //'https://nodeserver.mydevfactory.com:1448/api/getRoasterDetailsById?rosterId=' + id,
       headers: {
-        "token": (user.authtoken)
-        
+        token: user.authtoken,
       },
-    
     })
       .then(function (res) {
-        console.log(res,"978767564554343456767475784789567856756")
-        setEventdetails(res.data.response_data)
-       
-        
-         if(res.response_code == 200){
-          seteventDitailsmodel(false  )
-        //   teamRoster(teamDropdown)
-          
-          
-         }
-        
+        console.log(res, "978767564554343456767475784789567856756");
+        setEventdetails(res.data.response_data);
+
+        if (res.response_code == 200) {
+          seteventDitailsmodel(false);
+          //   teamRoster(teamDropdown)
+        }
       })
       .catch(function (res) {
         //  console.log(res)
-           
-    });
-  }
+      });
+  };
 
-  const gameDitails=(id)=>{
-    const user = JSON.parse(localStorage.getItem('user'));
-    console.log(id,"redgfdgfgfdgfcddsdfs")
+  const gameDitails = (id) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(id, "redgfdgfgfdgfcddsdfs");
     axios({
-      method: 'get',
-    
-      url:"https://nodeserver.mydevfactory.com:1448/api/getGameDetailsByGameId?game_id="+id,
+      method: "get",
+
+      url:
+        "https://nodeserver.mydevfactory.com:1448/api/getGameDetailsByGameId?game_id=" +
+        id,
       //'https://nodeserver.mydevfactory.com:1448/api/getRoasterDetailsById?rosterId=' + id,
       headers: {
-        "token": (user.authtoken)
-        
+        token: user.authtoken,
       },
-    
     })
       .then(function (res) {
-        console.log(res,"game ditails")
-        setGamedetails(res.data.response_data)
-       
-        
-         if(res.response_code == 200){
-          setgameDitailsmodel(false  )
-        //   teamRoster(teamDropdown)
-          
-          
-         }
-        
+        console.log(res, "game ditails");
+        setGamedetails(res.data.response_data);
+
+        if (res.response_code == 200) {
+          setgameDitailsmodel(false);
+          //   teamRoster(teamDropdown)
+        }
       })
       .catch(function (res) {
         //  console.log(res)
-           
-    });
-  }
+      });
+  };
 
   const selectFlag = (event) => {
     setFlagId(event.target.value);
@@ -461,7 +450,9 @@ function PlayerSchedule(props) {
                               {/* <img src={schedule.display_icon.image} alt="" style={{ height: "50px", width: "50px", borderRadius: "50%" }} /> */}
                               <button className="practice">
                                 {/* {item?.game_name} */}
-                                {item.isFlag ==  "Event" ? item?.event_name : item?.game_name}
+                                {item.isFlag == "Event"
+                                  ? item?.event_name
+                                  : item?.game_name}
                               </button>
                               {console.log(item, "<><><><><><>")}
                             </div>
@@ -479,10 +470,7 @@ function PlayerSchedule(props) {
                               {item.location.address}
                             </span>
                           </td>
-                          <td>
-                          {/* {item.assignment} */}
-
-                          </td>
+                          <td>{/* {item.assignment} */}</td>
                           <td>
                             {/* <div className="last-row">
                                  <p>Avaneesh Shett</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteScheduleData(schedule._id)}><img src={Delect} />
@@ -493,7 +481,9 @@ function PlayerSchedule(props) {
                             <div className="last-row">
                               {/* <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deletePlayerData(player._id)} ><img src={Delect} /></button> */}
                               <button
-                                onClick={() => ditailsmodelvalue(item._id,item.isFlag)}
+                                onClick={() =>
+                                  ditailsmodelvalue(item._id, item.isFlag)
+                                }
                               >
                                 <EyeFill style={{ color: "white" }} />
                               </button>
@@ -504,66 +494,10 @@ function PlayerSchedule(props) {
                     })}
                   </table>
                   {/* //ditailsmodel */}
-                 
-                                {eventditailsmodel ? <Modal show={eventditailsmodel} style={{ position: "absolute", top: "206px" }}>
-                                <Modal.Body>
-                                        <div className="prefarance-form playerinfo-form">
-                                            <h1 style={{ color: "red", paddingBottom: "20px", fontWeight: "bold" }}>event Details</h1>
-                                            {eventdetails ?
-                                            <>
-                                            <div>
-                                              <p>arrival time:{eventdetails.arrival_time}</p>
-                                              <p>Team name  :  {eventdetails.team_id.team_name}</p>
-                                              <p>Location name  :  {eventdetails.location.locationName}</p>
-                                              <p>Start time  :  {eventdetails.start_time}</p>
-                                              <p>End time  :  {eventdetails.end_time}</p>
-                                              <p>Arrival time  :  {eventdetails.arrival_time}</p>
-                                              <p>Event duration  :  {eventdetails.duration}</p>
 
-                                            </div>
-                                            </>
-                                            :""
-                                            }
-                                         
-
-                                             <button className="add-links" style={{ margin: "10px" }} onClick={() => seteventDitailsmodel(false)}>Close</button>
-                                            </div>
-                                            </Modal.Body>
-                                </Modal>:""}
-
-                                {/* //////game model */}
-
-                                {gameditailsmodel ? <Modal show={gameditailsmodel} style={{ position: "absolute", top: "206px" }}>
-                                <Modal.Body>
-                                        <div className="prefarance-form playerinfo-form">
-                                            <h1 style={{ color: "red", paddingBottom: "20px", fontWeight: "bold" }}>game Details</h1>
-                                            {gamedetails ?
-                                            <>
-                                            <div>
-                                              <p>Game name  :  {gamedetails.game_name}</p>
-                                              <p>Opponent : {gamedetails?.opponent?.opponentsName}</p>
-                                              <p>Team name  :  {gamedetails.team_id.team_name}</p>
-                                              <p>Location name  :  {gamedetails.location.locationName}</p>
-                                              <p>Start time  :  {gamedetails.start_time}</p>
-                                              <p>End time  :  {gamedetails.end_time}</p>
-                                              <p>Arrival time  :  {gamedetails.arrival_time}</p>
-                                              <p>Game Duration  :  {gamedetails.duration}</p>
-                                             
-
-                                            </div>
-                                            </>
-                                            :""
-                                            }
-                                         
-
-                                             <button className="add-links" style={{ margin: "10px" }} onClick={() => setgameDitailsmodel(false)}>Close</button>
-                                            </div>
-                                            </Modal.Body>
-                                </Modal>:""}
-
-                  {modeValue && schedule.length != 0 ? (
+                  {eventditailsmodel ? (
                     <Modal
-                      show={modeValue}
+                      show={eventditailsmodel}
                       style={{ position: "absolute", top: "206px" }}
                     >
                       <Modal.Body>
@@ -575,12 +509,123 @@ function PlayerSchedule(props) {
                               fontWeight: "bold",
                             }}
                           >
-                            Edit Game/Event
+                            event Details
                           </h1>
+                          {eventdetails ? (
+                            <>
+                              <div>
+                                <p>arrival time:{eventdetails.arrival_time}</p>
+                                <p>
+                                  Team name : {eventdetails.team_id.team_name}
+                                </p>
+                                <p>
+                                  Location name :{" "}
+                                  {eventdetails.location.locationName}
+                                </p>
+                                <p>Start time : {eventdetails.start_time}</p>
+                                <p>End time : {eventdetails.end_time}</p>
+                                <p>
+                                  Arrival time : {eventdetails.arrival_time}
+                                </p>
+                                <p>Event duration : {eventdetails.duration}</p>
+                              </div>
+                            </>
+                          ) : (
+                            ""
+                          )}
+
+                          <button
+                            className="add-links"
+                            style={{ margin: "10px" }}
+                            onClick={() => seteventDitailsmodel(false)}
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* //////game model */}
+
+                  {gameditailsmodel ? (
+                    <Modal show={gameditailsmodel} size="md">
+                      <Modal.Body>
+                        <div className="prefarance-form playerinfo-form">
+                          <h1 className="m-title">Game Details</h1>
+                          {gamedetails ? (
+                            <>
+                              <div className="plr_dtls_wrp">
+                                <div className="plr_dtls_itm">
+                                  <label>Game name :</label>
+                                  <span>{gamedetails.game_name}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>Opponent :</label>
+                                  <span>
+                                    {gamedetails?.opponent?.opponentsName}
+                                  </span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>Team name :</label>
+                                  <span>{gamedetails.team_id.team_name}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>Location name :</label>
+                                  <span>
+                                    {gamedetails.location.locationName}
+                                  </span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>Start time :</label>
+                                  <span>{gamedetails.start_time}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>End time :</label>
+                                  <span>{gamedetails.end_time}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>Arrival time :</label>
+                                  <span>{gamedetails.arrival_time}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>Game Duration :</label>
+                                  <span>{gamedetails.duration}</span>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            ""
+                          )}
+                          <div className="text-center mt-3">
+                            <button
+                              className="add-links"
+                              onClick={() => setgameDitailsmodel(false)}
+                            >
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
+                  ) : (
+                    ""
+                  )}
+
+                  {modeValue && schedule.length != 0 ? (
+                    <Modal show={modeValue} size="md">
+                      <Modal.Body>
+                        <div className="prefarance-form playerinfo-form">
+                          <h1 className="m-title">Edit Game/Event</h1>
                           <div className="row">
                             <div className="col-md-12">
                               <div className="prefarance-form-list">
-                                <h2> Name of Event/Game</h2>
+                                <label className="input-label">
+                                  {" "}
+                                  Name of Event/Game
+                                </label>
                                 <input
                                   type="text"
                                   className="input-select"
@@ -594,7 +639,7 @@ function PlayerSchedule(props) {
                             </div>
                             <div className="col-md-12">
                               <div className="prefarance-form-list">
-                                <h2> date</h2>
+                                <label className="input-label">Date</label>
                                 <input
                                   type="date"
                                   className="input-select"
@@ -614,7 +659,7 @@ function PlayerSchedule(props) {
                             </div>
                             <div className="col-md-12">
                               <div className="prefarance-form-list">
-                                <h2> Time</h2>
+                                <label className="input-label">Time</label>
                                 <input
                                   type="time"
                                   className="input-select"
@@ -628,7 +673,7 @@ function PlayerSchedule(props) {
                             </div>
                             <div className="col-md-12">
                               <div className="prefarance-form-list">
-                                <h2> Location</h2>
+                                <label className="input-label">Location</label>
                                 <input
                                   type="text"
                                   className="input-select"
@@ -642,7 +687,9 @@ function PlayerSchedule(props) {
                             </div>
                             <div className="col-md-12">
                               <div className="prefarance-form-list">
-                                <h2> Assignment</h2>
+                                <label className="input-label">
+                                  Assignment
+                                </label>
                                 <input
                                   type="text"
                                   className="input-select"
@@ -657,7 +704,9 @@ function PlayerSchedule(props) {
 
                             <div className="col-md-12">
                               <div className="prefarance-form-list">
-                                <h2> Name of Volenteer</h2>
+                                <label className="input-label">
+                                  Name of Volenteer
+                                </label>
                                 <input
                                   type="text"
                                   className="input-select"
@@ -697,20 +746,23 @@ function PlayerSchedule(props) {
                           </div>
                         </div>
 
-                        <button
-                          className="add-links"
-                          style={{ margin: "10px" }}
-                          onClick={() => setModeValue(false)}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          className="add-links"
-                          style={{ margin: "10px", backgroundColor: "#1d1b1b" }}
-                          onClick={updateGameEvent}
-                        >
-                          Update
-                        </button>
+                        <div className="text-center mt-3">
+                          <button
+                            className="add-links mr-2"
+                            onClick={() => setModeValue(false)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="add-links"
+                            style={{
+                              backgroundColor: "#1d1b1b",
+                            }}
+                            onClick={updateGameEvent}
+                          >
+                            Update
+                          </button>
+                        </div>
                       </Modal.Body>
                     </Modal>
                   ) : (

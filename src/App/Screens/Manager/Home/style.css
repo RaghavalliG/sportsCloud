@@ -1769,7 +1769,9 @@ ol {
   outline: 0;
   margin-left: 12px;
 }
-
+.player-info-head.availability .teams-select select {
+  height: 50px;margin-left: auto;
+}
 .prefarance-box.player-info ul.nav-tabs {
   padding: 30px 20px;
 }
@@ -1789,7 +1791,6 @@ ol {
 }
 .playerinfo-form .input-select {
   width: 100%;
-
   border: 1px solid #2c2c2c;
   border-radius: 10px;
   height: 60px;
@@ -1797,7 +1798,7 @@ ol {
   padding: 0 25px;
   font-size: 15px;
   color: #a7a7a7;
-  background: none;
+  background: #424242;
 }
 
 .player-profile-img img {

@@ -431,20 +431,20 @@ function ManagerHome(props) {
                         </a>
                       </li>
                     </Link>
-                    <Link to={{ pathname: "/Credit" }}>
+                    {/* <Link to={{ pathname: "/Credit" }}>
                       <li>
                         <a className="dropdown-item" href="#">
                           Credits
                         </a>
                       </li>
-                    </Link>
-                    <Link to={{ pathname: "/Household" }}>
+                    </Link> */}
+                    {/* <Link to={{ pathname: "/Household" }}>
                       <li>
                         <a className="dropdown-item" href="#">
                           My HouseHold
                         </a>
                       </li>
-                    </Link>
+                    </Link> */}
                     <Link to={{ pathname: "/ManageTeam" }}>
                       <li>
                         <a className="dropdown-item" href="#">
@@ -452,13 +452,13 @@ function ManagerHome(props) {
                         </a>
                       </li>
                     </Link>
-                    <Link to={{ pathname: "/Biling" }}>
+                    {/* <Link to={{ pathname: "/Biling" }}>
                       <li>
                         <a className="dropdown-item" href="#">
                           Biling & Plans
                         </a>
                       </li>
-                    </Link>
+                    </Link> */}
                     <Link to={{ pathname: "/CreateTeam" }}>
                       <li>
                         <a className="dropdown-item" href="#">
@@ -466,13 +466,13 @@ function ManagerHome(props) {
                         </a>
                       </li>
                     </Link>
-                    <Link to={{ pathname: "/SignOut" }}>
+                    {/* <Link to={{ pathname: "/SignOut" }}>
                       <li>
                         <a className="dropdown-item active" href="#">
                           Sign Out
                         </a>
                       </li>
-                    </Link>
+                    </Link> */}
                   </ul>
                 </div>
               </div>
