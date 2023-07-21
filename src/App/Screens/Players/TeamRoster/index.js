@@ -554,9 +554,10 @@ function TeamRoster(props) {
                                     <table>
 
                                         <tr>
-                                            <th>Male/Female</th>
+                                            
                                             <th>Photo</th>
                                             <th>Name</th>
+                                            <th>Male/Female</th>
                                             <th>Jursey No</th>
                                             <th>contact Info</th>
                                             <th>Position</th>
@@ -577,15 +578,7 @@ function TeamRoster(props) {
 
                                                                                 <tr>
 
-                                                                                    <td>
-
-                                                                                        <div className="game-name">
-
-                                                                                            {(player.playerGender) ? player.playerGender : null}
-                                                                                            {/* {(player.member_id.gender)==Male ? player.member_id.gender : null} */}
-                                                                                        </div>
-
-                                                                                    </td>
+                                                                                    
                                                                                     <td onClick={() => imageModalOpen(i, player.member_id._id)}>
                                                                                         {player.member_id?.profile_image == null ?
                                                                                             <img src={UserProfile} alt="" /> :
@@ -594,6 +587,15 @@ function TeamRoster(props) {
                                                                                     </td>
                                                                                     <td>
                                                                                         <span>{player.firstName}{player.lastName}</span>
+                                                                                    </td>
+                                                                                    <td>
+
+                                                                                        <div className="game-name">
+
+                                                                                            {(player.playerGender) ? player.playerGender : null}
+                                                                                            {/* {(player.member_id.gender)==Male ? player.member_id.gender : null} */}
+                                                                                        </div>
+
                                                                                     </td>
                                                                                     <td>
                                                                                         <span>{player.jerseyNumber}</span>
@@ -980,17 +982,17 @@ function TeamRoster(props) {
 
                                                     <div className='plr_dtls_wrp'>
 
-                                                        <div className='plr_dtls_itm'> <label>Player ID: </label><span> {ditails._id}</span></div>
+                                                        {/* <div className='plr_dtls_itm'> <label>Player ID: </label><span> {ditails._id}</span></div> */}
                                                         <div className='plr_dtls_itm'> <label>Player Name: </label><span> {` ${ditails.firstName} ${ditails.lastName} `}</span></div>
                                                         <div className='plr_dtls_itm'> <label>Player gender: </label><span> {ditails.playerGender}</span></div>
-                                                        <div className='plr_dtls_itm'> <label>Team ID: </label><span>{ditails.teamId}</span></div>
-                                                        <div className='plr_dtls_itm'> <label>Manager ID: </label><span>{ditails.managerId}</span></div>
+                                                        {/* <div className='plr_dtls_itm'> <label>Team ID: </label><span>{ditails.teamId}</span></div> */}
+                                                        {/* <div className='plr_dtls_itm'> <label>Manager ID: </label><span>{ditails.managerId}</span></div> */}
                                                         <div className='plr_dtls_itm'> <label>Email: </label><span>{ditails.contactInformationEmail}</span></div>
                                                         <div className='plr_dtls_itm'> <label>Address: </label><span>{ditails.contactInformationAddress}</span></div>
                                                         <div className='plr_dtls_itm'> <label>City: </label><span>{ditails.contactInformationCity}</span></div>
                                                         <div className='plr_dtls_itm'> <label>State: </label><span>{ditails.contactInformationState}</span></div>
                                                         <div className='plr_dtls_itm'> <label>Zip: </label><span>{ditails.contactInformationZipCode}</span></div>
-                                                        <div className='plr_dtls_itm'> <label>Membaer Type: </label><span>{ditails.nonPlayer == false ? "Player" : "nonplayer"}</span></div>
+                                                        <div className='plr_dtls_itm'> <label>Member Type: </label><span>{ditails.nonPlayer == false ? "Player" : "nonplayer"}</span></div>
                                                         <div className='plr_dtls_itm'> <label>Birth day: </label><span>{ditails.playerBirthday}</span></div>
                                                         <div className='plr_dtls_itm'> <label>Position: </label><span>{ditails.position}</span></div>
                                                         <div className='plr_dtls_itm'> <label>Jersey no: </label><span>{ditails.jerseyNumber}</span></div>
