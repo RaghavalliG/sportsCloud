@@ -644,6 +644,14 @@ function AnotherPlayer(props) {
                   }}
                 >
                   <button
+                    type="btn"
+                    onClick={() => history.goBack()}
+                    className="btn btn-deflt ml-2"
+                    style={{ background: "#8A8A8A" }}
+                  >
+                    Back
+                  </button>
+                  <button
                     className="btn invite_player_btn"
                     onClick={PlayerImportData}
                   >

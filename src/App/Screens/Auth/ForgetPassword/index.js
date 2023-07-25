@@ -32,7 +32,7 @@ function ForgetComponents(props) {
     Network("api/generate-otp", "post", obj)
       .then(async (res) => {
         console.log("res success verify otp--->", res);
-        if (res.response_code == 2000) {
+        if (res.response_code == 200) {
           toast.success(res.response_message);
           history.push({
             pathname: "/verifyotp",
@@ -70,6 +70,9 @@ function ForgetComponents(props) {
           </header>
           <div className="login_box">
             <h4 className="login_box_header">Forgot Password</h4>
+            <p className="subtxt_login">
+              Enter your email, you will receive a code by email
+            </p>
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
                 <div className="form-group">

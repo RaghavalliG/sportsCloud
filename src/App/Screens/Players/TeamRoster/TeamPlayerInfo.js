@@ -35,6 +35,7 @@ const TeamPlayerInfo = () => {
     const [team, setTeam] = useState([]);
     const [teamDropdown, setTeamDropDown] = useState("");
     const [profilePic, setProfilePic] = useState([])
+    // const [user, setUserData] = useState({});
 
     const pic = "https://nodeserver.mydevfactory.com:1448/";
 
@@ -185,7 +186,9 @@ const TeamPlayerInfo = () => {
                                     <div className="profile-head-img">
                                         {profilePic?.profile_image == null ?
                                             <img src={BigUserProfile} alt="" /> :
-                                            <img src={`${profilePic?.profile_image}`} alt="" />
+                                            // <img src={`${profilePic?.profile_image}`} alt="" />
+                                            <img src={profilePic?.profile_image} alt="" />
+                                            
                                         }
 
                                     </div>

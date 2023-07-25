@@ -417,9 +417,13 @@ const ManagerTeamAvailability = () => {
                           style={{ display: "flex", paddingLeft: "40%" }}
                           key={data._id}
                         >
-                          <button className="focus1">GOING</button>
-                          <button className="focus2">MAY BE</button>
-                          <button className="focus3">NO</button>
+                          <button className="btn acceptbtn focus1">
+                            GOING
+                          </button>
+                          <button className="btn acceptbtn focus2">
+                            MAY BE
+                          </button>
+                          <button className="btn acceptbtn focus3">NO</button>
 
                           {/* <Button variant="light" >Going</Button>{' '}
                                                     <Button  onClick={(e)=>{

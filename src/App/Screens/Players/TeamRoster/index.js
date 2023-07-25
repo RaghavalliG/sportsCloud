@@ -471,7 +471,7 @@ function TeamRoster(props) {
     const allPlayers = newplayerdata.concat(newNonPlayerData);
     let data = (allPlayers && allPlayers.length > 0) ? allPlayers : [];
 
-
+console.log(team);
     return (
         <div>
             <div className="dashboard-container">
@@ -508,7 +508,8 @@ function TeamRoster(props) {
                                 <div className="profile-head-img">
                                     {profilePic?.profile_image == null ?
                                         <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                                        // <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                                        <img src={user?.profile_image} alt="" />
                                     }
 
                                 </div>
@@ -981,11 +982,15 @@ function TeamRoster(props) {
                                                 <>
 
                                                     <div className='plr_dtls_wrp'>
-
+                                                       
                                                         {/* <div className='plr_dtls_itm'> <label>Player ID: </label><span> {ditails._id}</span></div> */}
                                                         <div className='plr_dtls_itm'> <label>Player Name: </label><span> {` ${ditails.firstName} ${ditails.lastName} `}</span></div>
                                                         <div className='plr_dtls_itm'> <label>Player gender: </label><span> {ditails.playerGender}</span></div>
-                                                        {/* <div className='plr_dtls_itm'> <label>Team ID: </label><span>{ditails.teamId}</span></div> */}
+                                                        <div className='plr_dtls_itm'> <label>Team Name: </label><span> {
+                                                            (team && team.length>0) ? team.map((teamone)=>{
+                                                            return(  teamone.accept_invite_team_id ==   ditails.teamId ? teamone.accept_invite_team_name : '')
+                                                            }) : ''
+                                                        }</span></div>
                                                         {/* <div className='plr_dtls_itm'> <label>Manager ID: </label><span>{ditails.managerId}</span></div> */}
                                                         <div className='plr_dtls_itm'> <label>Email: </label><span>{ditails.contactInformationEmail}</span></div>
                                                         <div className='plr_dtls_itm'> <label>Address: </label><span>{ditails.contactInformationAddress}</span></div>

@@ -41,7 +41,7 @@ function VerifyOtpComponents(props) {
             history.push({
               pathname: '/resetpassword',
               state: {
-                id: 7,
+                // id: 7,
                 userId: res.response_data._id,
                 otp_type: "forgot_password"
               }
@@ -92,6 +92,7 @@ function VerifyOtpComponents(props) {
                   />
                 </div>
                 <div className="btn-set">
+                  
                   <button type="submit" className="btn btn-deflt">Submit</button>
                 </div>
               </form>

@@ -1770,7 +1770,8 @@ ol {
   margin-left: 12px;
 }
 .player-info-head.availability .teams-select select {
-  height: 50px;margin-left: auto;
+  height: 50px;
+  margin-left: auto;
 }
 .prefarance-box.player-info ul.nav-tabs {
   padding: 30px 20px;
@@ -3566,3 +3567,14 @@ button.add-links {
 }
 
 /* --------RecordStatistic-end-------- */
+.acceptbtn {
+  background: #ec3525;
+  color: #fff;
+  border-radius: 30px;
+  margin-right: 0.5rem;
+  padding: 0.35rem 1.5rem;
+}
+.acceptbtn:hover {
+  color: #fff;
+  background: #ff2613;
+}

@@ -370,11 +370,13 @@ function PlayerSchedule(props) {
                   {user?.fname + " " + user?.lname}
                 </div>
                 <div className="profile-head-img">
-                  {profilePic?.profile_image == null ? (
+                <img src={user?.profile_image} alt="" />
+                  {/* {profilePic?.profile_image == null ? (
                     <img src={BigUserProfile} alt="" />
                   ) : (
-                    <img src={`${pic}${profilePic?.profile_image}`} alt="" />
-                  )}
+                    // <img src={`${pic}${profilePic?.profile_image}`} alt="" />
+                    <img src={user?.profile_image} alt="" />
+                  )} */}
                 </div>
               </div>
               <div className="login-account">

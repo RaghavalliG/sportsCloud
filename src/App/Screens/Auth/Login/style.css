@@ -31,6 +31,13 @@
   text-align: center;
   color: #fff;
 }
+.login_box .subtxt_login {
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  margin-top: 1rem;
+  font-weight: 200;
+}
 .login_box label {
   font-weight: 400;
   font-size: 1rem;

@@ -595,10 +595,7 @@ function ManagerTeamShop(props) {
                   <Modal show={modalValue}>
                     <Modal.Body>
                       <div className="prefarance-form playerinfo-form">
-                        <h1 style={{ color: "red", fontWeight: "bolder" }}>
-                          {" "}
-                          ADD PRODUCT
-                        </h1>
+                        <h1 className="m-title">Add Product</h1>
                         <div className="row">
                           {/* <div className="col-md-12">
                             <div className="prefarance-form-list">
@@ -615,17 +612,17 @@ function ManagerTeamShop(props) {
 
                             </div>
                           </div> */}
-                          <div className="col-md-12">
-                            <div className="prefarance-form-list">
-                              {/* <h2>manager id</h2> */}
-                              {/* <input type="text" className="input-select" onChange={(e) => setName(e.target.value)} /> */}
-                              {/* <p>{user?._id}</p> */}
-                            </div>
-                          </div>
+                          {/* <div className="col-md-12">
+                            <div className="prefarance-form-list"> */}
+                          {/* <h2>manager id</h2> */}
+                          {/* <input type="text" className="input-select" onChange={(e) => setName(e.target.value)} /> */}
+                          {/* <p>{user?._id}</p> */}
+                          {/* </div>
+                          </div> */}
 
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
-                              <h2>Name</h2>
+                              <label className="input-label">Name</label>
                               <input
                                 type="text"
                                 className="input-select"
@@ -635,7 +632,7 @@ function ManagerTeamShop(props) {
                           </div>
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
-                              <h2>Category</h2>
+                              <label className="input-label">Category</label>
                               {/* <input type="text" className="input-select" onChange={(e) => setCategory(e.target.value)} /> */}
                               <select
                                 className="input-select"
@@ -661,7 +658,7 @@ function ManagerTeamShop(props) {
                           </div>
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
-                              <h2>Description</h2>
+                              <label className="input-label">Description</label>
                               <input
                                 type="text"
                                 className="input-select"
@@ -671,7 +668,7 @@ function ManagerTeamShop(props) {
                           </div>
                           <div className="col-md-12">
                             <div className="prefarance-form-list">
-                              <h2>Price</h2>
+                              <label className="input-label">Price</label>
                               <input
                                 type="text"
                                 className="input-select"
@@ -729,9 +726,9 @@ function ManagerTeamShop(props) {
                           </div>
                           </div>
                           <button style={{ color: "red", fontSize: "15px", float: "right" }}>Add More..</button> */}
-
-                          <Sizes getSize={getSize} />
-
+                          <div className="col-md-12">
+                            <Sizes getSize={getSize} />
+                          </div>
                           {/* <div className="col-md-12">
                             <div className="update-team-photo" style={{ width: "100%" }}>
                               Choose Image
@@ -740,7 +737,7 @@ function ManagerTeamShop(props) {
                             </div>
                           </div> */}
                           <div className="col-md-12">
-                            <div className="prefarance-form-list">
+                            <div className="prefarance-form-list text-center">
                               <button
                                 className="add-links"
                                 onClick={() => setModalValue(false)}

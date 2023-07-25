@@ -38,7 +38,7 @@ function ResetComponents(props) {
       Network("api/reset-password", "post", obj)
         .then(async (res) => {
           console.log("res success verify otp--->", res);
-          if (res.response_code == 2000) {
+          if (res.response_code == 200) {
             toast.success(res.response_message);
             history.push("/");
           } else {

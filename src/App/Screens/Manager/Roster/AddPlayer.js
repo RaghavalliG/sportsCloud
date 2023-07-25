@@ -122,8 +122,8 @@ const AddPlayer = () => {
         position: position,
         managerAccess: nonplayerCheck == false ? false : "",
         nonPlayer: nonplayerCheck == false ? false : "",
-        assignment: "aaa",
-        uniform: "ab",
+        // assignment: "aaa",
+        // uniform: "ab",
       }),
     };
 
@@ -308,7 +308,7 @@ const AddPlayer = () => {
           toast.error(res.response_message);
         }
         //console.log("doc data----->",res.response_data.docs)
-        setSchedule(res.response_data.docs);
+        // setSchedule(res.response_data?.docs);
       });
     }
   };
@@ -422,7 +422,7 @@ const AddPlayer = () => {
               >
                 <li>
                   <a className="dropdown-item" href="#">
-                    Jayanta Karmakar
+                    {profilePic?.fname + " " + profilePic?.lname}
                   </a>
                 </li>
                 <Link to={{ pathname: "/MyAccount" }}>
@@ -432,20 +432,20 @@ const AddPlayer = () => {
                     </a>
                   </li>
                 </Link>
-                <Link to={{ pathname: "/Credit" }}>
+                {/* <Link to={{ pathname: "/Credit" }}>
                   <li>
                     <a className="dropdown-item" href="#">
                       Credits
                     </a>
                   </li>
-                </Link>
-                <Link to={{ pathname: "/Household" }}>
+                </Link> */}
+                {/* <Link to={{ pathname: "/Household" }}>
                   <li>
                     <a className="dropdown-item" href="#">
                       My HouseHold
                     </a>
                   </li>
-                </Link>
+                </Link> */}
                 <Link to={{ pathname: "/ManageTeam" }}>
                   <li>
                     <a className="dropdown-item" href="#">
@@ -453,13 +453,13 @@ const AddPlayer = () => {
                     </a>
                   </li>
                 </Link>
-                <Link to={{ pathname: "/Biling" }}>
+                {/* <Link to={{ pathname: "/Biling" }}>
                   <li>
                     <a className="dropdown-item" href="#">
                       Biling & Plans
                     </a>
                   </li>
-                </Link>
+                </Link> */}
                 <Link to={{ pathname: "/CreateTeam" }}>
                   <li>
                     <a className="dropdown-item" href="#">
@@ -467,13 +467,13 @@ const AddPlayer = () => {
                     </a>
                   </li>
                 </Link>
-                <Link to={{ pathname: "/SignOut" }}>
+                {/* <Link to={{ pathname: "/SignOut" }}>
                   <li>
                     <a className="dropdown-item active" href="#">
                       Sign Out
                     </a>
                   </li>
-                </Link>
+                </Link> */}
               </ul>
             </div>
           </div>
@@ -727,14 +727,11 @@ const AddPlayer = () => {
                     <div className="col-md-6">
                       <div className="prefarance-form-list">
                         <label>Birthday</label>
-                        <div className="input-select">
-                          <input
-                            type="date"
-                            className="input-select"
-                            onChange={(e) => setBirthday(e.target.value)}
-                            style={{ border: "none" }}
-                          />
-                        </div>
+                        <input
+                          type="date"
+                          className="input-select"
+                          onChange={(e) => setBirthday(e.target.value)}
+                        />
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -757,7 +754,7 @@ const AddPlayer = () => {
                         />
                       </div>
                     </div>
-                    <div className="col-md-6">
+                    {/* <div className="col-md-6">
                       <div className="prefarance-form-list">
                         <label>Assignment</label>
                         <input
@@ -776,7 +773,7 @@ const AddPlayer = () => {
                           onChange={(e) => setUniform(e.target.value)}
                         />
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="col-md-6 mb-3">
                       <div className="prefarance-form-list">
@@ -788,7 +785,7 @@ const AddPlayer = () => {
                         <span style={{ color: "white" }}>Invite to join </span>
                       </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-6  mb-3">
                       <div className="prefarance-form-list">
                         <button className="add-links" onClick={history.goBack}>
                           CANCEL

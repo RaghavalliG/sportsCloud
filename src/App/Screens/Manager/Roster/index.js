@@ -66,8 +66,8 @@ function ManagerRoster(props) {
   const [memberType, setMemberType] = useState("");
   const [newplayerdata, setNewPlayerData] = useState([]);
   const [newNonPlayerData, setNewNonPlayerData] = useState([]);
-  const [male, setMale] = useState(0);
-  const [female, setFemale] = useState(0);
+  const [nonplayerCount, setnonplayerCount] = useState(0);
+  const [playerCount, setplayerCount] = useState(0);
 
   // const [Nonplayer,setNonPlayer]= useState([]);
 
@@ -106,10 +106,10 @@ function ManagerRoster(props) {
       };
       console.log("user", user);
 
-      Network("api/get-user-details?user_id=" + user._id, "get", header).then(
+      Network("api/getUserDetailsById?user_id=" + user._id, "get", header).then(
         async (res) => {
           console.log("new Profile Pic----", res);
-          setProfilePic(res.response_data);
+          setProfilePic(res.response_data.userDetailsObj);
         }
       );
     }
@@ -161,11 +161,11 @@ function ManagerRoster(props) {
       let header = {
         token: user.authtoken,
       };
-      console.log("user", user);
+      // console.log("user", user);
 
       Network("api/player-list-by-team-id?team_id=" + id, "GET", header).then(
         async (res) => {
-          console.log("teamRoster----", res);
+          // console.log("teamRoster----", res);
 
           if (res.response_code == 400) {
             dispatch(logoutUser(null));
@@ -180,17 +180,37 @@ function ManagerRoster(props) {
               return data._id != null;
             })
           );
+          let playerCount = genderCount(res.response_data.player);
+          setplayerCount(playerCount)
+          // console.log(playerCount)
+
           setNonPlayer(res.response_data.non_player);
           setNewNonPlayerData(
             res.response_data.non_player.filter((data) => {
               return data._id != null;
             })
           );
+          let nonplayerCount = genderCount(res.response_data.non_player);
+          setnonplayerCount(nonplayerCount);
+          // console.log(nonplayerCount)
           // history.goBack();
         }
       );
     }
   };
+
+  const genderCount = (obj) => {
+    // console.log(obj);
+    let male = 0;
+    let female = 0;
+    for (let i = 0; i < obj.length; i++) {
+      if (obj[i].playerGender === 'male') male++;
+      if (obj[i].playerGender === 'female') female++;
+    }
+    // console.log(male);
+    // console.log(female);
+    return {'male': male , 'female' : female };
+  }
 
   const deletePlayerData = (id) => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -319,27 +339,27 @@ function ManagerRoster(props) {
         nonPlayer: memberType == "player" ? "" : true,
       }),
     };
-    fetch(
-      "https://nodeserver.mydevfactory.com:1448/api/editRoasterdetailsById",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        console.log("update Player data", res);
-        if (res.response_code == 200) {
-          toast.success("Edit Player data succesful");
-          setModeValue(false);
-          setModeValue1(false);
-          // teamRoster(teamDropdown);
-        }
+    // fetch(
+    //   "https://nodeserver.mydevfactory.com:1448/api/editRoasterdetailsById",
+    //   requestOptions
+    // )
+    //   .then((response) => response.json())
+    //   .then((res) => {
+    //     console.log("update Player data", res);
+    //     if (res.response_code == 200) {
+    //       toast.success("Edit Player data succesful");
+    //       setModeValue(false);
+    //       setModeValue1(false);
+    //       // teamRoster(teamDropdown);
+    //     }
 
-        if (res.response_code == 400) {
-          dispatch(logoutUser(null));
-          localStorage.removeItem("user");
-          history.push("/");
-          toast.error(res.response_message);
-        }
-      });
+    //     if (res.response_code == 400) {
+    //       dispatch(logoutUser(null));
+    //       localStorage.removeItem("user");
+    //       history.push("/");
+    //       toast.error(res.response_message);
+    //     }
+    //   });
   };
   const imageModalOpen = (id1, uId) => {
     setImageModal(true);
@@ -546,7 +566,7 @@ function ManagerRoster(props) {
                     right: "3%",
                   }}
                 >
-                  Total Player {resData?.total_player}(Men:3,Women:2)
+                  Total Player {resData?.total_player} ({`Men : ${playerCount.male} , Women: ${playerCount.female}`})
                 </span>
               </div>
               <div className="prefarance-box">
@@ -558,7 +578,7 @@ function ManagerRoster(props) {
                         <th>Name</th>
                         <th>Jursey No</th>
                         <th>Male/Female</th>
-                        
+
                         <th>contact Info</th>
                         <th>Position</th>
                         <th>Actions</th>
@@ -616,9 +636,9 @@ function ManagerRoster(props) {
                                         </div>
                                       </td>
                                       <td key="col5">
-                                        
-                                      <span>{player.contactInformationEmail}</span> <br/>
-                                        <span>{player.contactInformationCity } </span>
+
+                                        <span>{player.contactInformationEmail}</span> <br />
+                                        <span>{player.contactInformationCity} </span>
                                         <span>{player.contactInformationState} </span>
                                         <span>{player.contactInformationZipCode} </span>
                                       </td>
@@ -671,7 +691,7 @@ function ManagerRoster(props) {
                               <select
                                 className="input-select"
                                 onChange={(e) => setGender(e.target.value)}
-                                value={newplayerdata[id].playerGender}
+                                value={newplayerdata[id]?.playerGender}
                               >
                                 <option key="gender">Select</option>
                                 <option key="male" value="male">
@@ -856,13 +876,14 @@ function ManagerRoster(props) {
                               <select
                                 className="input-select"
                                 onChange={(e) => setMemberType(e.target.value)}
+                                defaultValue='player'
                               >
                                 <option key="membertype">Select</option>
                                 <option key="player" value="player" selected>
                                   PLAYER
                                 </option>
-                                <option key="manager" value="manager">
-                                  MANAGER
+                                <option key="nonplayer" value="nonplayer">
+                                  NON - Player
                                 </option>
                               </select>
                             </div>
@@ -1146,13 +1167,13 @@ function ManagerRoster(props) {
                                 <option
                                   key="nonplayer"
                                   value="nonplayer"
-                                  selected
+                                  
                                 >
                                   NON - PLAYER
                                 </option>
-                                <option key="manager" value="manager">
+                                {/* <option key="manager" value="manager">
                                   MANAGER
-                                </option>
+                                </option> */}
                               </select>
                             </div>
                           </div>
@@ -1198,7 +1219,7 @@ function ManagerRoster(props) {
                     right: "3%",
                   }}
                 >
-                  Total Player {resData?.total_non_players}(Men:3,Women:2)
+                  Total Player {resData?.total_non_players} ({`Men : ${nonplayerCount.male} , Women: ${nonplayerCount.female}`})
                 </span>
               </div>
               <div className="prefarance-box">
@@ -1239,8 +1260,8 @@ function ManagerRoster(props) {
                                           />
                                         ) : (
                                           <img
-                                            key={nonPlayer._id}
-                                            src={`${nonPlayer._id.profile_image}`}
+                                            key={nonPlayer.member_id}
+                                            src={`${nonPlayer.member_id.profile_image}`}
                                             alt=""
                                             style={{
                                               height: "50px",
@@ -1263,13 +1284,14 @@ function ManagerRoster(props) {
                                         <div className="game-name">
                                           {nonPlayer?.playerGender
                                             ? nonPlayer?.playerGender
-                                            : null}
+                                            : '-'}
                                         </div>
                                       </td>
                                       <td key="col5">
-                                        {nonPlayer.firstName}
-                                        <br></br>
-                                        {nonPlayer.email}
+                                      <span>{nonPlayer.contactInformationEmail}</span> <br />	
+                                        <span>{nonPlayer.contactInformationCity} </span>	
+                                        <span>{nonPlayer.contactInformationState} </span>	
+                                        <span>{nonPlayer.contactInformationZipCode} </span>
                                       </td>
                                       <td key="col6">
                                         <div className="last-row">

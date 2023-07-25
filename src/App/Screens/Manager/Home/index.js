@@ -318,11 +318,11 @@ function ManagerHome(props) {
       };
       console.log("user", user);
 
-      Network("api/get-user-details?user_id" + user._id, "GET", header).then(
+      Network("api/getUserDetailsById?user_id=" + user._id, "GET", header).then(
         async (res) => {
           console.log("new Profile Pic----", res);
 
-          setProfilePic(res.response_data);
+          setProfilePic(res.response_data.userDetailsObj);
           setLoader(true);
         }
       );
@@ -390,12 +390,12 @@ function ManagerHome(props) {
                   {/* {team == null ? <option> Team1</option> : */}
                   {team && team.length > 0
                     ? team?.map((team) => {
-                        return (
-                          <option key={team?.team_id} value={team.team_id}>
-                            {team.team_name}
-                          </option>
-                        );
-                      })
+                      return (
+                        <option key={team?.team_id} value={team.team_id}>
+                          {team.team_name}
+                        </option>
+                      );
+                    })
                     : ""}
                 </select>
                 <div className="dropBtn">
@@ -489,7 +489,7 @@ function ManagerHome(props) {
                   {profilePic?.profile_image == null ? (
                     <img src={BigUserProfile} alt="" />
                   ) : (
-                    <img src={`${profilePic?.profile_image}`} alt="" />
+                    <img src={`${profilePic?.profile_image}`} alt="ser" />
                   )}
                 </div>
               </div>
@@ -639,7 +639,7 @@ function ManagerHome(props) {
               <div className="dashboard-top-content-right">
                 <div className="team-list-head">
                   <h2>Team</h2>
-                  <a href="#">View All</a>
+                  <a href="/ManageTeam">View All</a>
                 </div>
                 <div
                   className="team-list-section"

@@ -175,7 +175,7 @@ function HomeComponents(props) {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       let header = {
-        authToken: user.authtoken,
+        "token": user.authtoken,
       };
       // console.log("user", user);
 
@@ -197,15 +197,17 @@ function HomeComponents(props) {
   const uploadImage = (value) => {
     const formData = new FormData();
     formData.append("profile_image", value);
+    formData.append("user_id", user._id);
     // console.log("image--->", value);
 
     axios(
-      "https://nodeserver.mydevfactory.com:1448/api/update-user-profile-image",
+      // "https://nodeserver.mydevfactory.com:1448/api/update-user-profile-image",
+      "https://nodeserver.mydevfactory.com:1448/api/editPlayerDetailsById",
       {
         method: "POST",
         headers: {
           "Content-Type": "multipart/form-data",
-          "x-access-token": user.authtoken,
+          "token": user.authtoken,
         },
         data: formData,
       }
@@ -379,7 +381,12 @@ function HomeComponents(props) {
                   {profilePic?.profile_image == null ? (
                     <img src={BigUserProfile} alt="" />
                   ) : (
-                    <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                    // <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                    <img
+                    src={profilePic?.profile_image}
+                    alt=""
+                    
+                    />
                   )}
                 </div>
               </div>
@@ -407,9 +414,14 @@ function HomeComponents(props) {
                       {profilePic?.profile_image == null ? (
                         <img src={BigUserProfile} alt="" />
                       ) : (
+                        // <img
+                        //   src={`${pic1}${profilePic?.profile_image}`}
+                        //   alt=""
+                        // />
                         <img
-                          src={`${pic1}${profilePic?.profile_image}`}
-                          alt=""
+                        src={profilePic?.profile_image}
+                        alt=""
+                        
                         />
                       )}
                     </div>
@@ -576,7 +588,7 @@ function HomeComponents(props) {
               <div className="dashboard-top-content-right">
                 <div className="team-list-head">
                   <h2>Team Roster</h2>
-                  <a href="#">View All</a>
+                  <a href="/teamroster">View All</a>
                 </div>
                 <div className="team-list-section">
                   {newplayerdata?.map((player) => {
@@ -691,7 +703,7 @@ function HomeComponents(props) {
               <div className="dashboard-schedule-section">
                 <div className="dashboard-schedule-head">
                   <h2>Schedule</h2>
-                  <a href="#">View Full Schedule</a>
+                  <a href="/playerschdule">View Full Schedule</a>
                 </div>
                 <div className="dashboard-schedule-main-box">
                   <div className="dashboard-schedule-main-box-option">
