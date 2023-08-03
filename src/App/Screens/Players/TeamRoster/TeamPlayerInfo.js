@@ -46,19 +46,25 @@ const TeamPlayerInfo = () => {
     const updateProfile = () => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (user) {
-            let header = {
-                token: user.authtoken,
-            };
-            console.log("user", user);
-
-            Network("api/get-user-details?user_id=" + user._id, "get", header).then(
-                async (res) => {
-                    console.log("new Profile Pic----", res);
-                    setProfilePic(res.response_data);
-                }
-            );
+          let header = {
+            "token": user.authtoken,
+          };
+          // console.log("user", user);
+    
+          Network("api/getUserDetailsById?user_id=" + user?._id, "GET", header).then(
+            async (res) => {
+              // console.log("new Profile Pic----", res);
+              if (res.response_code == 400) {
+                dispatch(logoutUser(null));
+                localStorage.removeItem("user");
+                history.push("/");
+                toast.error(res.response_message);
+              }
+              setProfilePic(res.response_data.userDetailsObj);
+            }
+          );
         }
-    };
+      };
     const handleLogout = () => {
 
         dispatch(logoutUser(null));
@@ -182,17 +188,23 @@ const TeamPlayerInfo = () => {
                                     </div>
                                 </div>
                                 <div className="profile-head">
-                                    <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
-                                    <div className="profile-head-img">
-                                        {profilePic?.profile_image == null ?
-                                            <img src={BigUserProfile} alt="" /> :
-                                            // <img src={`${profilePic?.profile_image}`} alt="" />
-                                            <img src={profilePic?.profile_image} alt="" />
-                                            
-                                        }
-
-                                    </div>
-                                </div>
+              {console.log(profilePic.lname,"3740000000000000000>>>>")}
+                {profilePic?.fname ? (
+                  <div className="profile-head-name">
+                   
+                    {profilePic?.fname + " " + profilePic?.lname}
+                  </div>
+                ) : (
+                  <div className="profile-head-name">{profilePic?.fname} {profilePic?.lname}</div>
+                )}
+                <div className="profile-head-img">
+                  {profilePic?.profile_image == null ? (
+                    <img src={BigUserProfile} alt="" />
+                  ) : (
+                    <img src={profilePic?.profile_image} alt="" />
+                  )}
+                </div>
+              </div>
                                 <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
 
                         </div>

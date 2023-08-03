@@ -65,11 +65,11 @@ function PlayerPhotos(props) {
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{user ? user.fname : null}</div>
+                                <div className="profile-head-name">{user?.fname} {user?.lname}</div>
                                 <div className="profile-head-img">
                                     {
                                         user ?
-                                            <img src={user.profile_image} alt="" /> :
+                                            <img src={user?.profile_image} alt="" /> :
                                             <img src={UserProfile} alt="" />
                                     }
 

@@ -1,0 +1,61 @@
+@font-face {
+    font-family: "Random Grotesque Standard Bold";
+    src: url("../font/RG-StandardBold.woff2") format("woff2"), url("../font/RG-StandardBold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Random Grotesque Slim Book';
+    src: url('../font/RG-SlimBook.woff2') format('woff2'),
+        url('../font/RG-SlimBook.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Random Grotesque Standard';
+    src: url('../font/RG-StandardBold.woff2') format('woff2'),
+        url('../font/RG-StandardBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Random Grotesque Standard Medium';
+    src: url('../font/RG-StandardMedium.woff2') format('woff2'),
+        url('../font/RG-StandardMedium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Random Grotesque Standard Book';
+    src: url('../font/RG-StandardBook.woff2') format('woff2'),
+        url('../font/RG-StandardBook.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Random Grotesque Spacious Book';
+    src: url('../font/RG-SpaciousBook.woff2') format('woff2'),
+        url('../font/RG-SpaciousBook.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+
+@import 'partials/variables';
+@import 'partials/mixin';
+@import 'partials/common';
+@import 'partials/header';
+@import 'partials/layout';
+@import 'partials/footer';
+@import 'partials/responsive';

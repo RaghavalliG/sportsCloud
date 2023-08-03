@@ -19,7 +19,7 @@ import { logoutUser } from "../../Redux/Actions/auth";
 
 
 
-const ManagerHeader = ({change}) => {
+const ManagerHeader = () => {
     const history = useHistory()
     const dispatch = useDispatch()
     const [userMe, setUser] = useState(null);
@@ -37,7 +37,7 @@ const ManagerHeader = ({change}) => {
         let userD = userLocal && userLocal._id ? true : false;
         setUser(userD);
         setUserData(userLocal);
-      
+
         dropdownMenu();
         // setTeamDropDown()
         updateProfile()
@@ -50,7 +50,7 @@ const ManagerHeader = ({change}) => {
     const pic1 = 'https://nodeserver.mydevfactory.com:1448/profilepic/'
 
     const handleLogout = () => {
-        
+
         dispatch(logoutUser(null));
         localStorage.removeItem("user");
         setUserData(null);
@@ -67,10 +67,10 @@ const ManagerHeader = ({change}) => {
             }
             console.log('user', user)
 
-            Network('api/get-user-details?user_id=' + user._id, 'get', header)
+            Network('api/getUserDetailsById?user_id=' + user._id, 'get', header)
                 .then(async (res) => {
                     console.log("new Profile Pic----", res)
-                    setProfilePic(res.response_data)
+                    setProfilePic(res.response_data.userDetailsObj)
 
                 })
         }
@@ -102,17 +102,16 @@ const ManagerHeader = ({change}) => {
 
     }
 
-    // const change = (event) => {
-    //     console.log("event", event)
-    //     console.log("event", event.target.name)
-    //     console.log("event", event.target.id)
-    //     console.log("event", event.target.key)
-    //     setTeamDropDown(event.target.value)
-    //     // setPlayer([])
-    //     // teamRoster(event.target.value);
+    const change = (event) => {
+        
+        console.log("event", event.target.value)
+        setTeamDropDown(event.target.value)
+        // setPlayer([])
+        // teamRoster(event.target.value);
+        return teamDropdown;
 
-    // }
-
+    }
+// console.log('dropdoe', teamDropdown)
     return (
         <div className="dashboard-head">
             <div className="teams-select">
@@ -162,7 +161,7 @@ const ManagerHeader = ({change}) => {
                 <div className="profile-head-img">
                     {profilePic?.profile_image == null ?
                         <img src={BigUserProfile} alt="" /> :
-                        <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                        <img src={`${profilePic?.profile_image}`} alt="" />
                     }
 
                 </div>

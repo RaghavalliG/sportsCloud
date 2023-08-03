@@ -9,6 +9,44 @@
     width: 100%;
     height: 240px;
   }
+  .dashboard-container .team-list-head {
+    padding: 1rem 1.25rem;
+  }
+  .dashboard-container .invoice-due h2,
+  .dashboard-container .team-list-head h2 {
+    font-size: 1.25rem;
+  }
+  .dashboard-container .dublin-weather {
+    padding: 1.25rem;
+  }
+  .dashboard-container .manager-player-section {
+    padding: 20px;
+    border-radius: 0.85rem;
+    flex-wrap: wrap;
+  }
+  .dashboard-container .manager-player-section h3 {
+    font-size: 1.135rem;
+  }
+  .dashboard-container .teams-select select,
+  .dashboard-container .teams-select button.create-new-team,
+  .dashboard-container .dropBtn button {
+    height: auto;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+  .dashboard-container .page-header {
+    flex-wrap: wrap;
+  }
+  .product-details-wrap .off-txt {
+    font-size: 1rem;
+  }
+  .product-details-wrap .prd-title {
+    font-size: 1.5rem;
+    line-height: inherit;
+  }
+  .teams-select3 select {
+    height: 48px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -79,6 +117,26 @@
 }
 } */
 
+@media (max-width: 1199px) {
+  .dashboard-container .dashboard-head {
+    flex-wrap: wrap;
+    padding-bottom: 1rem;
+  }
+  .dashboard-container .dashboard-head .teams-select {
+    width: 100%;
+    flex: inherit;
+    margin-bottom: 0.5rem;
+  }
+  .dashboard-container .dashboard-head .profile-head {
+    margin-left: inherit;
+  }
+  .dashboard-container .page-header .streming-head-right {
+    flex-wrap: wrap;
+  }
+  .dashboard-container .page-header .streming-head-right .start-stream-btn {
+    margin-top: 10px;
+  }
+}
 @media (max-width: 1024px) {
   .dashboard-side-bar {
     width: 25%;
@@ -98,15 +156,12 @@
     padding-left: 15px;
     padding-right: 15px;
   }
-  .dashboard-main {
-    flex-direction: column;
-  }
   /* .dashboard-side-bar{
         width: 100%;
     } */
-  .dashboard-head {
+  /* .dashboard-head {
     flex-direction: column;
-  }
+  } */
   .teams-select {
     width: 100%;
   }
@@ -126,15 +181,14 @@
     margin-top: 10px;
     width: auto;
   }
-  .dashboard-top-content {
+  /* .dashboard-top-content {
     flex-direction: column;
-  }
-  .dashboard-top-content-left {
+  } */
+
+  .dashboard-container .dashboard-top-content-left {
     width: 100%;
   }
-  .dashboard-top-content-left-top {
-    flex-direction: column;
-  }
+
   .team-profile {
     width: 100%;
   }
@@ -262,10 +316,10 @@
     font-weight: normal;
     font-size: 12px;
   }
-  .standing-table {
+  .dashboard-container .standing-table {
     overflow: auto;
   }
-  .standing-table table {
+  .dashboard-container .standing-table table {
     width: 500px;
   }
   .footer {
@@ -301,7 +355,7 @@
   .nav-header button span:last-child {
     margin-bottom: 0;
   }
-  .menulist {
+  /* .menulist {
     display: none;
     position: absolute;
     left: 0;
@@ -310,7 +364,7 @@
     background: #2c2c2c;
     z-index: 99;
     padding: 0 10px 0 0;
-  }
+  } */
   .menulist ul li a {
     padding-top: 14px;
     padding-bottom: 14px;
@@ -332,11 +386,6 @@
     justify-content: space-between;
     flex-wrap: wrap;
   }
-  .dublin-weather-bottom-boxes {
-    width: 48%;
-    margin-bottom: 10px;
-  }
-
   .player-schedule-section {
     flex-direction: column;
     margin-top: 5px;
@@ -433,9 +482,6 @@
   .login-account {
     margin-left: 0;
   }
-  .my-order-section a {
-    margin: 0 auto;
-  }
   .team-shop-list-box {
     padding: 20px 15px;
   }
@@ -471,10 +517,6 @@
     text-align: center;
     padding: 15px;
   }
-  .player-info-head {
-    flex-direction: column;
-    justify-content: space-between;
-  }
   .player-info-head-right {
     text-align: center;
   }
@@ -484,9 +526,40 @@
   .update-team-photo {
     height: 15px;
   }
+  .dashboard-container .dashboard-top-content {
+    flex-wrap: wrap;
+  }
+  .dashboard-container .team-profile {
+    height: auto;
+  }
+  .dashboard-container .dashboard-top-content-right {
+    margin: 24px 0 0 0px;
+  }
+  .dashboard-container .record-standing-box,
+  .dashboard-container .dashboard-schedule-section,
+  .dashboard-container .save-travel,
+  .dashboard-container .teamsnap-section {
+    margin-top: 0;
+  }
+  .dashboard-container .record-standing-box {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  .modal .modal-content .modal-body {
+    padding: 1.7rem;
+  }
+  .prefarance-form .m-title {
+    font-size: 1.5rem;
+  }
+  .plr_dtls_wrp .plr_dtls_itm {
+    font-size: 1rem;
+  }
+  .dashboard-container .player-info-head {
+    flex-wrap: wrap;
+  }
 }
 
-@media (min-width: 767px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .menulist {
     display: contents;
     position: relative;
@@ -524,7 +597,6 @@
     justify-content: space-around;
     flex-direction: row;
     width: auto;
-    height: 323px;
   }
   .team-profile-img {
     width: 74px;
@@ -553,10 +625,10 @@
     color: #fff;
     text-align: center;
     line-height: 50px;
-    margin-top: -3px;
+    /* margin-top: -3px; */
     position: relative;
-    width: 150px;
-    margin-left: -18px;
+    /* width: 150px;
+    margin-left: -18px; */
   }
   .team-profile-name {
     font-weight: 500;
@@ -600,7 +672,6 @@
     justify-content: center;
     text-align: center;
     margin-top: 0px;
-    height: 107%;
   }
   .teams-select select {
     width: 203px;
@@ -659,7 +730,7 @@
     text-align: center;
     line-height: 45px;
     text-decoration: none;
-    width: 195px;
+    min-width: inherit;
   }
   .dashboard-schedule-head {
     display: flex;
@@ -695,12 +766,12 @@
     font-size: 16px;
     color: #fff;
     text-align: center;
-    line-height: 22px !important;
+    /* line-height: 22px !important; */
     text-decoration: none;
     margin-left: 5px;
   }
 }
-@media (min-width: 550px) and (max-width: 767px) {
+@media (max-width: 767px) {
   .dashboard-main {
     display: flex;
     align-content: center;
@@ -712,19 +783,40 @@
     display: flex;
     align-items: center;
     width: auto;
-    flex-direction: column;
+    /* flex-direction: column; */
   }
-  .streming-head-right {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  .dashboard-container .teams-select select {
+    width: 185px;
+    height: 48px;
+  }
+  .dashboard-side-bar.menuClose {
+    width: 56px;
+  }
+  .dashboard-container .record-standing-box {
+    max-height: inherit;
+    overflow-y: inherit;
+    width: 100%;
+  }
+  .dashboard-container .myteam-teamsnap-section {
     flex-wrap: wrap;
   }
-  .logo {
-    padding: 0 15px;
-    width: 26vh;
+  .dashboard-container .invoice-due {
+    margin-top: 0;
   }
-  .menulist {
+  .dashboard-container .dashboard-schedule-main-box {
+    padding: 0 20px 20px 20px;
+  }
+  .dashboard-container .record-save-box {
+    width: 100%;
+  }
+  .dashboard-container .dashboard-schedule-section,
+  .dashboard-container .save-travel,
+  .dashboard-container .teamsnap-section {
+    margin: 24px 0 0 0;
+    padding: 1.25rem;
+  }
+
+  /* .menulist {
     display: block;
     position: absolute;
     left: 0;
@@ -733,11 +825,10 @@
     background: #2c2c2c;
     z-index: 99;
     padding: 0 10px 0 0;
-  }
+  } */
   .menulist ul {
     margin: 0;
     padding: 0;
-    margin-left: -17px;
   }
 
   .dashboard-side-bar {
@@ -792,19 +883,7 @@
     margin: 0;
     padding: 0;
   }
-  .dashboard-schedule-head a {
-    background: #ec3525;
-    border-radius: 25px;
-    padding: 0 25px;
-    height: 45px;
-    font-weight: 400;
-    font-size: 13px !important;
-    color: #fff;
-    text-align: center;
-    line-height: 45px;
-    text-decoration: none;
-    margin-left: 5px !important;
-  }
+
   .dashboard-schedule-head {
     display: flex;
     align-items: center;
@@ -849,240 +928,259 @@
     flex-direction: row;
     align-content: stretch;
   }
-  .teamsnap-section-head a {
-    background: #ec3525;
-    border-radius: 25px;
-    padding: 0 34px;
-    height: 45px;
-    font-weight: 400;
-    font-size: 16px;
-    color: #fff;
-    text-align: center;
-    line-height: 22px !important;
-    text-decoration: none;
+  .dublin-weather-bottom-boxes {
+    width: 49%;
+  }
+  .dashboard-container .menulist ul li {
+    padding: 18px 8px 18px 50px;
+    background-size: 24px;
+    background-position: 14px center;
+  }
+  .dashboard-container .menulist ul li.active {
+    background-size: 24px;
+    padding: 18px 10px 18px 50px;
+    background-position: 14px center;
+  }
+  .dashboard-side-bar.menuClose .menulist ul li {
+    padding: 20px 10px 20px 46px;
+  }
+  .dashboard-container .dublin-weather-bottom-boxes {
+    width: 48%;
+    margin-bottom: 20px;
   }
 }
 
-@media (min-width: 350px) and (max-width: 550px) {
-  .dashboard-main {
-    display: flex;
-    align-content: center;
-    align-items: stretch;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    width: fit-content;
+@media (max-width: 668px) {
+  /* side drawer start */
+  .dashboard-container .dashboard-side-bar {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    height: 100%;
+    width: 75%;
   }
-  .teams-select {
-    display: flex;
-    align-items: center;
-    width: auto;
-    flex-direction: column;
-  }
-  .logo {
-    padding: 0 15px;
-    width: 147px;
-  }
-  .menulist {
-    display: block;
-    position: absolute;
+  .dashboard-side-bar.menuOpen {
     left: 0;
-    top: 108px;
-    width: 18%;
-    background: #2c2c2c;
-    z-index: 99;
-    padding: 0 10px 0 0;
   }
-  .menulist ul {
-    margin: 0;
-    padding: 0;
-    width: 143px;
+  .dashboard-side-bar.menuClose {
+    left: -75%;
   }
-  .dashboard-side-bar {
-    width: 32%;
-    background: #2c2c2c;
-    padding: 0px 0px 20px;
+  .dashboard-side-bar.menuClose .menulist ul li {
+    font-size: 14px;
   }
-  .invoice-due {
-    width: 19%;
-    margin-left: 5%;
-    background: #484848;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-left: 0;
+  .dashboard-side-bar .menulist {
+    margin-top: 1rem;
   }
-  .team-profile {
-    width: 196%;
-    background: #595959;
-    border-radius: 20px;
-    padding: 44px 20px 30px;
-    margin-left: 62px;
+  .dashboard-side-bar .toggle-menu {
+    top: 1rem;
+    right: -1.4rem;
+    border-radius: 0 0.5rem 0.5rem 0;
   }
-  .dashboard-top-content-left-top {
-    display: flex;
-    justify-content: space-between;
-    margin-left: -12px;
-    width: 311%;
-  }
-  .dashboard-top-content-right {
-    width: 91.5% !important;
-    margin-left: 2.5%;
-    background: #484848;
-    box-shadow: 0px 4px 7px 3px rgb(0 0 0 / 5%);
-    border-radius: 20px;
-  }
-  .team-list-section {
-    padding: 0px 15px 22px;
-    width: fit-content;
-  }
+  /* side drawer end */
 
-  .record-standing-box {
-    background: #484848;
-    border-radius: 20px;
-    width: 80%;
-    padding: 30px 25px 30px;
-    display: contents;
+  .dashboard-container .dashboard-head {
+    padding: 0rem;
+    flex-wrap: wrap;
   }
-  .dashboard-schedule-section {
-    background: #484848;
-    border-radius: 20px;
-    width: fit-content;
-    display: inline-table;
+  .dashboard-container .dashboard-head .profile-head {
+    margin-left: inherit;
+    margin-top: 0;
   }
-  .dashboard-schedule-head h2 {
-    font-weight: 500;
-    font-size: 20px;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-  }
-  .dashboard-schedule-head a {
-    background: #ec3525;
-    border-radius: 25px;
-    padding: 0 25px;
-    height: 45px;
-    font-weight: 400;
-    font-size: 13px;
-    color: #fff;
-    text-align: center;
-    line-height: 45px;
-    text-decoration: none;
-    width: 212px;
-    margin-left: 10px;
-  }
-  .dashboard-schedule-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 26px;
-  }
-  .record-save-box {
-    background: #484848;
-    border-radius: 20px;
-    width: fit-content;
-    padding: 30px 25px 30px;
-    display: contents;
-  }
-  .save-travel {
-    background: #484848;
-    border-radius: 20px;
-    width: fit-content;
-    padding: 30px 25px 30px;
-  }
-  .team-profile-img {
-    width: 74px;
-    height: 74px;
-    border-radius: 50%;
-    margin: 0 auto;
-    overflow: hidden;
-    background: #f45648;
-  }
-  .team-profile-img img {
-    width: 74px;
-    height: 74px;
-    object-fit: cover;
-    border: 5px solid #fff;
-    border-radius: 50%;
-  }
-  .standing-tb-section {
-    background: #484848;
-    padding: 30px 25px 30px;
-    border-radius: 20px;
-    overflow: hidden;
-    display: inline-block;
-    width: 220%;
-  }
-  .dashboard-top-content-left-bottom {
-    width: 174%;
-    margin-left: 11px;
-  }
-  .menulist ul li a {
-    font-size: 15px;
-    text-decoration: none;
-    color: #e1e1e1;
-    display: block;
-    position: relative;
-    padding: 22px 15px 22px 69px;
-    border-radius: 0px 35px 35px 0;
-    transition: 0.5s;
-  }
-  .menulist ul li {
-    list-style-type: none;
-    margin: 0px 0 10px -14px;
-    padding: 0;
-  }
-  .prefarance-box.player-info ul.nav-tabs {
-    width: 157px;
-  }
-  .team-shop-list-main {
-    margin-top: 35px;
-    display: flex;
+  .dashboard-container .dashboard-head .teams-select {
+    width: 100%;
+    flex: inherit;
+    margin-bottom: 1rem;
     justify-content: space-between;
     flex-wrap: wrap;
-    flex-direction: column;
-    /* align-items: center; */
-    width: 320%;
   }
-  .save-travel {
-    background: #484848;
-    border-radius: 20px;
-    width: 100.5% !important;
-    padding: 30px 25px 30px;
+  .dashboard-container .teams-select select,
+  .dashboard-container .teams-select button.create-new-team {
+    width: auto;
+    margin-right: 0;
+    height: 48px;
+    padding: 0.8rem 1rem;
   }
-  .teamsnap-section {
-    background: #484848;
-    border-radius: 20px;
-    width: 101.5% !important;
+  .dashboard-container .prefarance-box {
+    margin-top: 1rem !important;
+    flex-wrap: wrap;
+    min-height: inherit;
+    height: inherit;
+    display: inherit;
   }
-  .teamsnap-section-head a {
-    background: #ec3525;
-    border-radius: 25px;
-    padding: 0 10px !important;
-    height: 45px;
-    font-weight: 400;
-    font-size: 16px;
-    color: #fff;
+  .dashboard-container .prefarance-box.player-info ul.nav-tabs {
+    width: 100%;
+  }
+  .dashboard-container .prefarance-box .tab-content {
+    width: 100%;
+  }
+  .dashboard-container .dropBtn button {
+    height: 48px;
+  }
+  .dashboard-container .dashboard-main-content {
+    padding: 1rem;
+  }
+  .dashboard-container .invoice-due {
+    margin: 1rem 0 0 0;
+  }
+  .dashboard-container .dashboard-top-content-left-bottom,
+  .dashboard-container .player-schedule-section,
+  .dashboard-container .record-save-section,
+  .dashboard-container .myteam-teamsnap-section,
+  .dashboard-container .dashboard-top-content-right,
+  .dashboard-container .dashboard-schedule-section,
+  .dashboard-container .save-travel,
+  .dashboard-container .teamsnap-section {
+    margin-top: 1rem;
+  }
+  .dashboard-top-content-left-top {
+    flex-wrap: wrap;
+  }
+  .dashboard-container .team-profile {
+    width: 100%;
+  }
+  .dashboard-container .teamsnap-section .teamsnap-section-head {
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .dashboard-container .record-standing-box {
+    padding: 1.25rem;
+  }
+  .dashboard-container .dashboard-schedule-head {
+    padding: 0 0 1rem 0;
+  }
+  .dashboard-container .dashboard-schedule-main-box {
+    padding: 0;
+  }
+  .dashboard-container .teamsnap-section-main {
+    padding: 0;
+    margin-top: 1rem;
+  }
+  .dashboard-container .update-team-photo {
+    margin-top: 1.25rem;
+  }
+  .dashboard-container .dublin-weather h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .dashboard-container .record-save-box {
+    padding: 1.25rem;
+  }
+  .dashboard-container .dashboard-schedule-head h2 {
+    font-size: 1.25rem;
+  }
+  .dashboard-container .enter-result {
+    margin-top: 30px;
+  }
+  .dashboard-container .record-main-top h4 {
+    font-size: 1.25rem;
+    margin: 30px 0 8px 0;
+  }
+  .dashboard-container .team-list-box-img img {
+    width: 80px;
+    height: 80px;
+  }
+  .dashboard-container .player-info-head {
+    flex-wrap: wrap;
+  }
+  .dashboard-container .player-info-head .page-title {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .dashboard-container .player-info-head-right {
+    width: 100%;
+  }
+  .dashboard-container
+    .player-info-head
+    .player-info-head-right
+    button.add-new-family,
+  .dashboard-container
+    .player-info-head
+    .player-info-head-right
+    button.edit-btn {
+    margin: 0.8rem 0;
+    width: 100% !important;
+    display: block;
+    height: auto;
+    padding: 10px;
+  }
+  .dashboard-head {
+    position: relative;
+  }
+
+  .dashboard-container .dropBtn {
+    width: 100%;
+  }
+  .dashboard-container .teams-select select,
+  .dashboard-container .teams-select button.create-new-team,
+  .dashboard-container .dropBtn button {
+    width: 100%;
     text-align: center;
-    line-height: 45px;
-    text-decoration: none;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    height: auto;
+    min-height: 48px;
+    background-position: 98% center !important;
   }
-  .teamsnap-section-head a {
-    background: #ec3525;
-    border-radius: 25px;
-    padding: 0 25px;
-    height: 45px;
-    font-weight: 400;
-    font-size: 16px;
-    color: #fff;
+  .dashboard-container .team-shop-product-box {
+    width: 48%;
+    margin-bottom: 4%;
+  }
+  .dashboard-container .prefarance-box ul.nav-tabs {
+    width: 100%;
+    border: none;
+  }
+  .dashboard-container .prefarance-form-list-box {
+    flex-wrap: wrap;
+  }
+  .dashboard-container .prefarance-form-list-box .input-select {
+    width: 100%;
+  }
+  .dashboard-container .prefarance-form-list-box p {
+    padding: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .dashboard-container .streming-head-right {
+    flex-wrap: wrap;
+  }
+  .dashboard-container .streming-head-right .stream-tab {
+    margin-bottom: 0.5rem;
+  }
+  .dashboard-container .strame-chat-section {
+    flex-wrap: wrap;
+  }
+  .dashboard-container .strame-main {
+    padding: 1rem;
+    width: 100%;
+    min-height: inherit;
+    border-radius: 0.75rem 0.75rem 0 0;
+  }
+  .dashboard-container .chat-main {
+    width: 100%;
+    border-radius: 0 0 0.75rem 0.75rem;
+  }
+  .dashboard-container .chat-main .chat-main-input {
+    position: inherit;
+    top: inherit;
+    bottom: inherit;
+    left: inherit;
+    margin-top: 1rem;
+  }
+  .product-details-wrap .size-chart-wrp .prefarance-form-list {
     text-align: center;
-    line-height: 25px !important;
-    text-decoration: none;
+    margin-bottom: 1rem;
   }
-  .dashboard-side-bar {
-    width: 31% !important;
-    background: #2c2c2c;
-    padding: 0px 0px 20px;
+  .product-details-wrap .thumb_img_cont {
+    margin-bottom: 1rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .dashboard-container .prefarance-form-list button.add-links {
+    width: 100% !important;
+    margin: 0.5rem 0 !important;
+  }
+  .dashboard-container .team-shop-product-box {
+    width: 100%;
+    margin-bottom: 1rem;
   }
 }

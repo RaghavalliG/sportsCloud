@@ -48,7 +48,7 @@ function PlayerTeamShop(props) {
 
   const handleLogout = () => {
     console.log("pruyuuuuuu", props);
-    // dispatch(logoutUser(null));
+    dispatch(logoutUser(null));
     localStorage.removeItem("user");
     setUserData(null);
     props.history.push("/");
@@ -61,20 +61,20 @@ function PlayerTeamShop(props) {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       let header = {
-        authToken: user.authtoken,
+        "token": user.authtoken,
       };
-      console.log("user", user);
+      // console.log("user", user);
 
-      Network("api/get-user-details?user_id=" + user._id, "GET", header).then(
+      Network("api/getUserDetailsById?user_id=" + user?._id, "GET", header).then(
         async (res) => {
-          console.log("new Profile Pic----", res);
-          if (res.response_code == 4000) {
+          // console.log("new Profile Pic----", res);
+          if (res.response_code == 400) {
             dispatch(logoutUser(null));
             localStorage.removeItem("user");
             history.push("/");
             toast.error(res.response_message);
           }
-          setProfilePic(res.response_data);
+          setProfilePic(res.response_data.userDetailsObj);
         }
       );
     }
@@ -159,18 +159,20 @@ function PlayerTeamShop(props) {
               </div>
 
               <div className="profile-head">
-                {/* {profilePic.fname ? */}
-                <div className="profile-head-name">
-                  {" "}
-                  {user?.fname + " " + user?.lname}
-                </div>{" "}
-                :{/* <div className="profile-head-name">Loading...</div> */}
-                {/* } */}
+              {console.log(profilePic.lname,"3740000000000000000>>>>")}
+                {profilePic?.fname ? (
+                  <div className="profile-head-name">
+                   
+                    {profilePic?.fname + " " + profilePic?.lname}
+                  </div>
+                ) : (
+                  <div className="profile-head-name">{profilePic?.fname} {profilePic?.lname}</div>
+                )}
                 <div className="profile-head-img">
                   {profilePic?.profile_image == null ? (
                     <img src={BigUserProfile} alt="" />
                   ) : (
-                    <img src={`${pic1}${profilePic.profile_image}`} alt="" />
+                    <img src={profilePic?.profile_image} alt="" />
                   )}
                 </div>
               </div>
@@ -193,7 +195,7 @@ function PlayerTeamShop(props) {
 
             <div className="team-shop-page">
               <div className="my-order-section">
-                <a href="#">My Orders</a>
+                <a href="./orders">My Orders</a>
               </div>
               <div className="team-shop-list-box">
                 <div className="sort-by-section">
@@ -212,11 +214,13 @@ function PlayerTeamShop(props) {
                     <div className="team-shop-list-main">
                       <div className="team-shop-product-box">
                         <div className="team-shop-product-img">
-                          <Link
+                          {/* <Link
                             to={{ pathname: "/AddShopData", state: "GAME" }}
                           >
                             <img src={listImage} alt="" />
-                          </Link>
+                           
+                            
+                          </Link> */}
                         </div>
                         <div className="team-shop-product-text">
                           <h2 className="product-title">Nike Edition</h2>
@@ -365,12 +369,22 @@ function PlayerTeamShop(props) {
                       return (
                         <div className="team-shop-product-box">
                           <div className="team-shop-product-img">
+                              
+                          <Link
+                            // to={{ pathname: "/AddShopData/productId="+data._id, state: "GAME" }}
+                            to={{ pathname: "/AddShopData", state: data }}
+                          >
                             {data.image == null ? (
                               <img src={listImage} alt="" />
                             ) : (
                               // <img src={`${pic}${data.image}`} alt="" />}
                               <img src={data.image} alt="" />
                             )}
+                           
+                            
+                          </Link>
+                        
+                           
                           </div>
                           <div className="team-shop-product-text">
                             <h2 className="product-title">{data.brand}</h2>

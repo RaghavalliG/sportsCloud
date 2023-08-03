@@ -22,6 +22,7 @@ import LiabilityWaiver from "../Screens/Players/liabilityWaiver"
 import TeamAvailability from '../Screens/Players/TeamAvailability/TeamAvailability';
 import Scorekeeper from '../Screens/Players/ScoreKeeper/ScoreKeeper';
 import AddShopData from '../Screens/Players/PlayerTeamShop/AddShopData';
+import Order from '../Screens/Players/PlayerTeamShop/Order';
 import ViewCalender from '../Screens/Players/TeamSchedule/ViewCalender'
 import TeamPlayerInfo from '../Screens/Players/TeamRoster/TeamPlayerInfo';
 import TeamPlayerInfoNav from '../Screens/Players/TeamRoster/TeamPlayerInfoNav';
@@ -82,7 +83,7 @@ import Brackets from '../Screens/Manager/TeamOrganizer/Brackets';
 import NewTeam from '../Screens/Manager/TeamOrganizer/NewTeam';
 import TeamRegister from '../Screens/Manager/TeamOrganizer/TeamRegister';
 import TabManager from '../Screens/Manager/TeamSetteing/TabManager';
-import Order from "../Screens/Manager/ManagerTeamShop/order";
+import orders from "../Screens/Manager/ManagerTeamShop/order";
 import Photos from "../Screens/Manager/TeamMedia/Photos";
 import Videos from "../Screens/Manager/TeamMedia/Videos";
 import Files from "../Screens/Manager/TeamMedia/Files";
@@ -162,6 +163,7 @@ function RouterScreen() {
                                         <Route path='/PlayerPhotos' component={PlayerPhotos} />
                                         <Route path='/PlayerVideos' component={PlayerVideos} />
                                         <Route path='/PlayerFiles' component={PlayerFiles} />
+                                        <Route path='/orders' component={Order} />
 
                                     </>
                                     : (userType == 'manager') ?

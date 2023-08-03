@@ -35,6 +35,7 @@ const ImportPlayer = () => {
     const [dropdown, setDropdown] = useState([]);
     const [teamDropdown, setTeamDropDown] = useState("");
     const [profilePic, setProfilePic] = useState([])
+    const [loader, setLoader] = useState(false);
 
     const pic = "https://nodeserver.mydevfactory.com:1448/";
 
@@ -50,10 +51,11 @@ const ImportPlayer = () => {
             };
             console.log("user", user);
 
-            Network("api/get-user-details?user_id=" + user._id, "get", header).then(
+            Network("api/getUserDetailsById?user_id=" + user._id, "get", header).then(
                 async (res) => {
                     console.log("new Profile Pic----", res);
-                    setProfilePic(res.response_data);
+                    setProfilePic(res.response_data.userDetailsObj);
+                    setLoader(true);
                 }
             );
         }
@@ -197,10 +199,10 @@ const ImportPlayer = () => {
                         history.push("/")
                         toast.error(res.response_message)
                     } else {
-                        
-                        if(res.response_data.already_existing_user && res.response_data.already_existing_user.length > 0){
+
+                        if (res.response_data.already_existing_user && res.response_data.already_existing_user.length > 0) {
                             toast.error("There are some users which are already existed Please check.")
-                        }else{
+                        } else {
                             toast.success(res.response_message)
                         }
                         history.goBack();
@@ -262,13 +264,20 @@ const ImportPlayer = () => {
                                 </div>
                             </div>
                             <div className="profile-head">
-                                <div className="profile-head-name">{profilePic?.fname + " " + profilePic?.lname}</div>
-                                <div className="profile-head-img">
-                                    {profilePic?.profile_image == null ?
-                                        <img src={BigUserProfile} alt="" /> :
-                                        <img src={`${profilePic?.profile_image}`} alt="" />
-                                    }
+                                {loader ? (
+                                    <div className="profile-head-name">
+                                        {profilePic?.fname + " " + profilePic?.lname}
+                                    </div>
+                                ) : (
+                                    <div className="profile-head-name">Loading...</div>
+                                )}
 
+                                <div className="profile-head-img">
+                                    {profilePic?.profile_image == null ? (
+                                        <img src={BigUserProfile} alt="" />
+                                    ) : (
+                                        <img src={`${profilePic?.profile_image}`} alt="ser" />
+                                    )}
                                 </div>
                             </div>
                             <div className="login-account"><ul><li><a href="#" data-toggle="modal" data-target="#myModallogin" onClick={handleLogout}>Logout</a></li></ul></div>
@@ -306,17 +315,15 @@ const ImportPlayer = () => {
                                     </div>
                                 </div>
                                 <button
-                    type="btn"
-                    onClick={() => history.goBack()}
-                    className="btn btn-deflt ml-2"
-                    style={{ background: "#8A8A8A" }}
-                  >
-                    Back
-                  </button> 
+                          className="add-links"
+                          onClick={() => history.goBack()}
+                        >
+                          CANCEL
+                        </button>
                             </div>
-                           
+
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

@@ -78,7 +78,7 @@ function PlayerSchedule(props) {
 
   const handleLogout = () => {
     console.log("pruyuuuuuu", props);
-    // dispatch(logoutUser(null));
+    dispatch(logoutUser(null));
     localStorage.removeItem("user");
     setUserData(null);
     props.history.push("/");
@@ -88,14 +88,20 @@ function PlayerSchedule(props) {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       let header = {
-        authToken: user.authtoken,
+        "token": user.authtoken,
       };
-      console.log("user", user);
+      // console.log("user", user);
 
-      Network("api/get-user-details?user_id=" + user._id, "GET", header).then(
+      Network("api/getUserDetailsById?user_id=" + user?._id, "GET", header).then(
         async (res) => {
-          console.log("new Profile Pic----", res);
-          setProfilePic(res.response_data);
+          // console.log("new Profile Pic----", res);
+          if (res.response_code == 400) {
+            dispatch(logoutUser(null));
+            localStorage.removeItem("user");
+            history.push("/");
+            toast.error(res.response_message);
+          }
+          setProfilePic(res.response_data.userDetailsObj);
         }
       );
     }
@@ -366,11 +372,26 @@ function PlayerSchedule(props) {
               </div>
 
               <div className="profile-head">
-                <div className="profile-head-name">
-                  {user?.fname + " " + user?.lname}
-                </div>
+              {profilePic?.fname ? (
+                  <div className="profile-head-name">
+                   
+                    {profilePic?.fname + " " + profilePic?.lname}
+                  </div>
+                ) : (
+                  <div className="profile-head-name">{profilePic?.fname} {profilePic?.lname}</div>
+                )}
                 <div className="profile-head-img">
-                <img src={user?.profile_image} alt="" />
+                {profilePic?.profile_image == null ? (
+                    <img src={BigUserProfile} alt="" />
+                  ) : (
+                    // <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                    <img
+                    src={profilePic?.profile_image}
+                    alt=""
+                    
+                    />
+                  )}
+                  {/* <img src={user?.profile_image} alt="" /> */}
                   {/* {profilePic?.profile_image == null ? (
                     <img src={BigUserProfile} alt="" />
                   ) : (
@@ -456,7 +477,6 @@ function PlayerSchedule(props) {
                                   ? item?.event_name
                                   : item?.game_name}
                               </button>
-                              {console.log(item, "<><><><><><>")}
                             </div>
                           </td>
                           {/* <td><span>{`${new Date(item.date).getDate()}/${new Date(item.date).getMonth()}/${new Date(item.date).getFullYear()}`}</span></td> */}
@@ -498,51 +518,58 @@ function PlayerSchedule(props) {
                   {/* //ditailsmodel */}
 
                   {eventditailsmodel ? (
-                    <Modal
-                      show={eventditailsmodel}
-                      style={{ position: "absolute", top: "206px" }}
-                    >
+                    <Modal show={eventditailsmodel} size="md">
                       <Modal.Body>
                         <div className="prefarance-form playerinfo-form">
-                          <h1
-                            style={{
-                              color: "red",
-                              paddingBottom: "20px",
-                              fontWeight: "bold",
-                            }}
-                          >
-                            event Details
-                          </h1>
+                          <h1 className="m-title">Event Details</h1>
                           {eventdetails ? (
                             <>
-                              <div>
-                                <p>arrival time:{eventdetails.arrival_time}</p>
-                                <p>
-                                  Team name : {eventdetails.team_id.team_name}
-                                </p>
-                                <p>
-                                  Location name :{" "}
-                                  {eventdetails.location.locationName}
-                                </p>
-                                <p>Start time : {eventdetails.start_time}</p>
-                                <p>End time : {eventdetails.end_time}</p>
-                                <p>
-                                  Arrival time : {eventdetails.arrival_time}
-                                </p>
-                                <p>Event duration : {eventdetails.duration}</p>
+                              <div className="plr_dtls_wrp">
+                                <div className="plr_dtls_itm">
+                                  <label> Arrival Time:</label>
+                                  <span> {eventdetails.arrival_time}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label> Team Name :</label>
+                                  <span>{eventdetails.team_id.team_name}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label> Location Name :</label>
+                                  <span>
+                                    {eventdetails.location.locationName}
+                                  </span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label> Start time :</label>
+                                  <span>{eventdetails.start_time}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>End time :</label>
+                                  <span>{eventdetails.end_time}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label> Arrival time :</label>
+                                  <span>{eventdetails.arrival_time}</span>
+                                </div>
+                                <div className="plr_dtls_itm">
+                                  <label>Event duration :</label>
+                                  <span> {eventdetails.duration}</span>
+                                </div>
                               </div>
                             </>
                           ) : (
                             ""
                           )}
 
-                          <button
-                            className="add-links"
-                            style={{ margin: "10px" }}
-                            onClick={() => seteventDitailsmodel(false)}
-                          >
-                            Close
-                          </button>
+                          <div className="text-center">
+                            <button
+                              className="add-links"
+                              style={{ margin: "10px" }}
+                              onClick={() => seteventDitailsmodel(false)}
+                            >
+                              Close
+                            </button>
+                          </div>
                         </div>
                       </Modal.Body>
                     </Modal>
@@ -625,7 +652,6 @@ function PlayerSchedule(props) {
                             <div className="col-md-12">
                               <div className="prefarance-form-list">
                                 <label className="input-label">
-                                  {" "}
                                   Name of Event/Game
                                 </label>
                                 <input

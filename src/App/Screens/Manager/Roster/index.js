@@ -181,7 +181,7 @@ function ManagerRoster(props) {
             })
           );
           let playerCount = genderCount(res.response_data.player);
-          setplayerCount(playerCount)
+          setplayerCount(playerCount);
           // console.log(playerCount)
 
           setNonPlayer(res.response_data.non_player);
@@ -204,13 +204,13 @@ function ManagerRoster(props) {
     let male = 0;
     let female = 0;
     for (let i = 0; i < obj.length; i++) {
-      if (obj[i].playerGender === 'male') male++;
-      if (obj[i].playerGender === 'female') female++;
+      if (obj[i].playerGender === "male") male++;
+      if (obj[i].playerGender === "female") female++;
     }
     // console.log(male);
     // console.log(female);
-    return {'male': male , 'female' : female };
-  }
+    return { male: male, female: female };
+  };
 
   const deletePlayerData = (id) => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -559,14 +559,9 @@ function ManagerRoster(props) {
               <div className="manager-player-section">
                 <h3>Players</h3>
 
-                <span
-                  style={{
-                    color: "white",
-                    position: "absolute",
-                    right: "3%",
-                  }}
-                >
-                  Total Player {resData?.total_player} ({`Men : ${playerCount.male} , Women: ${playerCount.female}`})
+                <span>
+                  Total Player {resData?.total_player} (
+                  {`Men : ${playerCount.male} , Women: ${playerCount.female}`})
                 </span>
               </div>
               <div className="prefarance-box">
@@ -579,7 +574,7 @@ function ManagerRoster(props) {
                         <th>Jursey No</th>
                         <th>Male/Female</th>
 
-                        <th>contact Info</th>
+                        <th>Contact Info</th>
                         <th>Position</th>
                         <th>Actions</th>
                       </tr>
@@ -595,11 +590,11 @@ function ManagerRoster(props) {
                                     <tr key={player._id}>
                                       <td
                                         key="col1"
-                                        onClick={() =>
-                                          imageModalOpen(i, player._id)
-                                        }
+                                        // onClick={() =>
+                                        //   imageModalOpen(i, player._id)
+                                        // }
                                       >
-                                        {player?.profile_image == null ? (
+                                        {player?.profileImage == null ? (
                                           <img
                                             key={player._id}
                                             src={UserProfile}
@@ -608,7 +603,7 @@ function ManagerRoster(props) {
                                         ) : (
                                           <img
                                             key={player.member_id}
-                                            src={`${pic1}${player.member_id.profile_image}`}
+                                            src={`${player.profileImage}`}
                                             alt=""
                                             style={{
                                               height: "50px",
@@ -625,26 +620,42 @@ function ManagerRoster(props) {
                                         </span>
                                       </td>
                                       <td key="col3">
-                                        <span>{player.jerseyNumber}</span>
+                                        <span>
+                                          {player.jerseyNumber
+                                            ? player.jerseyNumber
+                                            : "-"}
+                                        </span>
                                       </td>
                                       <td key="col4">
                                         <div className="game-name">
                                           {player.playerGender
                                             ? player.playerGender
-                                            : null}
+                                            : " - "}
                                           {/* {(player.member_id.gender)==Male ? player.member_id.gender : null} */}
                                         </div>
                                       </td>
                                       <td key="col5">
-
-                                        <span>{player.contactInformationEmail}</span> <br />
-                                        <span>{player.contactInformationCity} </span>
-                                        <span>{player.contactInformationState} </span>
-                                        <span>{player.contactInformationZipCode} </span>
+                                        <span>
+                                          {player.contactInformationEmail}
+                                        </span>{" "}
+                                        <br />
+                                        <span>
+                                          {player.contactInformationCity}{" "}
+                                        </span>
+                                        <span>
+                                          {player.contactInformationState}{" "}
+                                        </span>
+                                        <span>
+                                          {player.contactInformationZipCode}{" "}
+                                        </span>
                                       </td>
                                       <td id="col6">
                                         <div className="last-row">
-                                          <p>{player.position}</p>
+                                          <p>
+                                            {player.position
+                                              ? player.position
+                                              : "-"}
+                                          </p>
                                         </div>
                                       </td>
                                       <td>
@@ -876,7 +887,7 @@ function ManagerRoster(props) {
                               <select
                                 className="input-select"
                                 onChange={(e) => setMemberType(e.target.value)}
-                                defaultValue='player'
+                                defaultValue="player"
                               >
                                 <option key="membertype">Select</option>
                                 <option key="player" value="player" selected>
@@ -1164,11 +1175,7 @@ function ManagerRoster(props) {
                                 <option key="player" value="player">
                                   PLAYER
                                 </option>
-                                <option
-                                  key="nonplayer"
-                                  value="nonplayer"
-                                  
-                                >
+                                <option key="nonplayer" value="nonplayer">
                                   NON - PLAYER
                                 </option>
                                 {/* <option key="manager" value="manager">
@@ -1178,9 +1185,7 @@ function ManagerRoster(props) {
                             </div>
                           </div>
                         </div>
-                        <div
-                          className="text-center mt-3"
-                        >
+                        <div className="text-center mt-3">
                           <button
                             className="add-links"
                             onClick={() => setModeValue1(false)}
@@ -1212,14 +1217,10 @@ function ManagerRoster(props) {
                                     <li><a href="#">Edit</a></li>
                                     <li><a href="#">Import</a></li>
                                 </ul> */}
-                <span
-                  style={{
-                    color: "white",
-                    position: "absolute",
-                    right: "3%",
-                  }}
-                >
-                  Total Player {resData?.total_non_players} ({`Men : ${nonplayerCount.male} , Women: ${nonplayerCount.female}`})
+                <span>
+                  Total Player {resData?.total_non_players} (
+                  {`Men : ${nonplayerCount.male} , Women: ${nonplayerCount.female}`}
+                  )
                 </span>
               </div>
               <div className="prefarance-box">
@@ -1231,7 +1232,7 @@ function ManagerRoster(props) {
                         <th>Name</th>
                         <th>Jursey No</th>
                         <th>Male/Female</th>
-                        <th>contact Info</th>
+                        <th>Contact Info</th>
                         <th>Position</th>
                         <th>Actions</th>
                       </tr>
@@ -1248,11 +1249,11 @@ function ManagerRoster(props) {
                                     <tr key={nonPlayer._id}>
                                       <td
                                         key="col1"
-                                        onClick={() =>
-                                          imageModalOpen(i, nonPlayer?._id)
-                                        }
+                                        // onClick={() =>
+                                        //   imageModalOpen(i, nonPlayer?._id)
+                                        // }
                                       >
-                                        {nonPlayer?.profile_image == null ? (
+                                        {nonPlayer?.profileImage == null ? (
                                           <img
                                             key={nonPlayer._id}
                                             src={UserProfile}
@@ -1260,8 +1261,8 @@ function ManagerRoster(props) {
                                           />
                                         ) : (
                                           <img
-                                            key={nonPlayer.member_id}
-                                            src={`${nonPlayer.member_id.profile_image}`}
+                                            key={nonPlayer._id}
+                                            src={`${nonPlayer.profileImage}`}
                                             alt=""
                                             style={{
                                               height: "50px",
@@ -1278,24 +1279,41 @@ function ManagerRoster(props) {
                                         </span>
                                       </td>
                                       <td key="col3">
-                                        <span>{nonPlayer.jerseyNumber}</span>
+                                        <span>
+                                          {nonPlayer.jerseyNumber
+                                            ? nonPlayer.jerseyNumber
+                                            : "-"}
+                                        </span>
                                       </td>
                                       <td key="col4">
                                         <div className="game-name">
                                           {nonPlayer?.playerGender
                                             ? nonPlayer?.playerGender
-                                            : '-'}
+                                            : "-"}
                                         </div>
                                       </td>
                                       <td key="col5">
-                                      <span>{nonPlayer.contactInformationEmail}</span> <br />	
-                                        <span>{nonPlayer.contactInformationCity} </span>	
-                                        <span>{nonPlayer.contactInformationState} </span>	
-                                        <span>{nonPlayer.contactInformationZipCode} </span>
+                                        <span>
+                                          {nonPlayer.contactInformationEmail}
+                                        </span>{" "}
+                                        <br />
+                                        <span>
+                                          {nonPlayer.contactInformationCity}{" "}
+                                        </span>
+                                        <span>
+                                          {nonPlayer.contactInformationState}{" "}
+                                        </span>
+                                        <span>
+                                          {nonPlayer.contactInformationZipCode}{" "}
+                                        </span>
                                       </td>
                                       <td key="col6">
                                         <div className="last-row">
-                                          <p>{nonPlayer.position}</p>
+                                          <p>
+                                            {nonPlayer.position
+                                              ? nonPlayer.position
+                                              : "-"}
+                                          </p>
                                         </div>
                                       </td>
                                       <td>

@@ -27,6 +27,7 @@ import { Network } from '../../../Services/Api';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { logoutUser } from "../../../Redux/Actions/auth";
+import BigUserProfile from "../../../images/big-user-profile.png";
 
 
 function PlayerAssignments(props) {
@@ -53,6 +54,7 @@ function PlayerAssignments(props) {
     const [modeValue, setModeValue] = useState(false)
     const [id, setId] = useState("")
     const [team, setTeam] = useState([]);
+    const [profilePic, setProfilePic] = useState([]);
 
 
 
@@ -73,14 +75,37 @@ function PlayerAssignments(props) {
         LocationData()
         VolenteerData()
         updateAssignmentData()
+        updateProfile()
     }, []);
 
     const handleLogout = () => {
         console.log("pruyuuuuuu", props);
-        // dispatch(logoutUser(null));
+        dispatch(logoutUser(null));
         localStorage.removeItem("user");
         setUserData(null);
         props.history.push("/")
+    };
+    const updateProfile = () => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) {
+            let header = {
+                "token": user.authtoken,
+            };
+            // console.log("user", user);
+
+            Network("api/getUserDetailsById?user_id=" + user?._id, "GET", header).then(
+                async (res) => {
+                    // console.log("new Profile Pic----", res);
+                    if (res.response_code == 400) {
+                        dispatch(logoutUser(null));
+                        localStorage.removeItem("user");
+                        history.push("/");
+                        toast.error(res.response_message);
+                    }
+                    setProfilePic(res.response_data.userDetailsObj);
+                }
+            );
+        }
     };
 
     const AssignmentData = () => {
@@ -204,7 +229,7 @@ function PlayerAssignments(props) {
                         history.push("/")
                         toast.error(res.response_message)
                     }
-                    console.log("schedule----->",res.response_data.docs)
+                    console.log("schedule----->", res.response_data.docs)
                     setSchedule(res.response_data.docs)
 
 
@@ -508,14 +533,27 @@ function PlayerAssignments(props) {
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{user ? user.fname : null}</div>
-                                <div className="profile-head-img">
-                                    {
-                                        user ?
-                                            <img src={user.profile_image} alt="" /> :
-                                            <img src={UserProfile} alt="" />
-                                    }
+                                {console.log(profilePic.lname, "3740000000000000000>>>>")}
+                                {profilePic?.fname ? (
+                                    <div className="profile-head-name">
 
+                                        {profilePic?.fname + " " + profilePic?.lname}
+                                    </div>
+                                ) : (
+                                    <div className="profile-head-name">{profilePic?.fname} {profilePic?.lname}</div>
+                                )}
+
+                                <div className="profile-head-img">
+                                    {profilePic?.profile_image == null ? (
+                                        <img src={BigUserProfile} alt="" />
+                                    ) : (
+                                        // <img src={`${pic1}${profilePic?.profile_image}`} alt="" />
+                                        <img
+                                            src={profilePic?.profile_image}
+                                            alt=""
+
+                                        />
+                                    )}
                                 </div>
                             </div>
                             <div className="login-account">
@@ -640,16 +678,16 @@ function PlayerAssignments(props) {
                                     </select>
 
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Date</h2>
-                                  
-                                        <input  defaultValue={assignment[id].date}  onChange={(e) => setStartDate(e.target.value)} style={{ width: "80%", height: "52px", borderRadius: "10px" }} />
-                                
+
+                                    <input defaultValue={assignment[id].date} onChange={(e) => setStartDate(e.target.value)} style={{ width: "80%", height: "52px", borderRadius: "10px" }} />
+
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Time</h2>
-                                  
-                                       
-                                        <input type="time"  onChange={(e)=>setTime(e.target.value)} style={{ width: "80%", height: "52px", borderRadius: "10px" }}
-                                            defaultValue={assignment[id].time}
-                                           />
-                                    
+
+
+                                    <input type="time" onChange={(e) => setTime(e.target.value)} style={{ width: "80%", height: "52px", borderRadius: "10px" }}
+                                        defaultValue={assignment[id].time}
+                                    />
+
                                     <h2 style={{ color: "#524646", padding: "10px" }}>Location</h2>
                                     <select onClick={selectLocation} style={{ width: "80%", height: "46px", borderRadius: "10px", backgroundColor: "white" }}>
                                         <option  > {assignment[id].location}</option>
@@ -715,7 +753,7 @@ function PlayerAssignments(props) {
                                                         <span>{assignment.location}</span>
                                                     </td>
                                                     <td>{assignment.assignment}
-                                                        
+
                                                     </td>
                                                     <td>
                                                         <div className="last-row">

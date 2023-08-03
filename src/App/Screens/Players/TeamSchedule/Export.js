@@ -24,6 +24,7 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import { logoutUser } from "../../../Redux/Actions/auth";
 import CsvDownload from '../../../Components/Comman/CsvDownload';
+import BigUserProfile from "../../../images/big-user-profile.png";
 
 
 
@@ -41,7 +42,8 @@ function Export(props) {
     const [teamDropdown, setTeamDropDown] = useState("")
     const [team, setTeam] = useState([]);
     const [schedule, setSchedule] = useState([]);
-    
+    const [profilePic, setProfilePic] = useState([]);
+
 
     useEffect(() => {
         // let user = userdata && userdata._id ? true : false;
@@ -55,8 +57,9 @@ function Export(props) {
         setUserData(userLocal);
         teamSelect()
         teamRoster();
-       
-       
+        updateProfile();
+
+
 
     }, []);
 
@@ -64,14 +67,14 @@ function Export(props) {
 
     const handleLogout = () => {
         console.log("pruyuuuuuu", props);
-        // dispatch(logoutUser(null));
+        dispatch(logoutUser(null));
         localStorage.removeItem("user");
         setUserData(null);
         props.history.push("/")
     };
     const teamRoster = (id) => {
         const user = JSON.parse(localStorage.getItem('user'));
-        console.log("id---->",id)
+        console.log("id---->", id)
         if (user) {
             let header = {
                 'token': user.authtoken
@@ -123,88 +126,110 @@ function Export(props) {
     //                 // if(res.response_data.length!=0){
     //                     teamRoster(res.response_data[0]._id);
     //                 // }
-                   
+
 
     //             })
     //     }
     // }
 
+    const updateProfile = () => {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (user) {
+            let header = {
+                "token": user.authtoken,
+            };
+            // console.log("user", user);
+
+            Network("api/getUserDetailsById?user_id=" + user?._id, "GET", header).then(
+                async (res) => {
+                    // console.log("new Profile Pic----", res);
+                    if (res.response_code == 400) {
+                        dispatch(logoutUser(null));
+                        localStorage.removeItem("user");
+                        history.push("/");
+                        toast.error(res.response_message);
+                    }
+                    setProfilePic(res.response_data.userDetailsObj);
+                }
+            );
+        }
+    };
 
     const teamSelect = () => {
         const user = JSON.parse(localStorage.getItem("user"));
         if (user) {
-          let header = {
-            token: user.authtoken,
-          };
-          console.log("user", user);
-    
-          Network(
-            "api/getAllAcceptedTeamListByPlayerId?playerId=" + user._id,
-            "GET",
-            header
-          ).then(async (res) => {
-            console.log("res----", res);
-            if (res.response_code == 4000) {
-              dispatch(logoutUser(null));
-              localStorage.removeItem("user");
-              history.push("/");
-              toast.error(res.response_message);
-            }
-    
-            setTeam(res.response_data);
-            // if(res.response_data.length!=0){
-            teamSchedule(res?.response_data[0]._id);
-            // }
-          });
-        }
-      };
+            let header = {
+                token: user.authtoken,
+            };
+            console.log("user", user);
 
-      const teamSchedule = (id) => {
+            Network(
+                "api/getAllAcceptedTeamListByPlayerId?playerId=" + user._id,
+                "GET",
+                header
+            ).then(async (res) => {
+                console.log("res----", res);
+                if (res.response_code == 4000) {
+                    dispatch(logoutUser(null));
+                    localStorage.removeItem("user");
+                    history.push("/");
+                    toast.error(res.response_message);
+                }
+
+                setTeam(res.response_data);
+                // if(res.response_data.length!=0){
+                teamSchedule(res?.response_data[0]._id);
+                // }
+            });
+        }
+    };
+
+    const teamSchedule = (id) => {
         const user = JSON.parse(localStorage.getItem("user"));
         console.log("id<<<<<", id);
         if (user) {
-          let header = {
-            token: user.authtoken,
-          };
-          console.log("user", user);
-    
-          Network(
-            // 'api/get-game-event-list-for-player?user_id='+user._id+'&page=1&limit=10',
-            // "api/getAllEventAndGamesData?team_id="+"645cc97e6612dc1e4cd97597",
-            "api/getAllEventAndGamesData?team_id=" + id,
-            // +'&page=1&limit=10',
-            "GET",
-            header
-          ).then(async (res) => {
-            console.log("schedule----", res);
-    
-            if (res.response_code == 4000) {
-              dispatch(logoutUser(null));
-              localStorage.removeItem("user");
-              history.push("/");
-              toast.error(res.response_message);
-            }
-            setSchedule(res.response_data);
-          });
-        }
-      };
+            let header = {
+                token: user.authtoken,
+            };
+            console.log("user", user);
 
-    
+            Network(
+                // 'api/get-game-event-list-for-player?user_id='+user._id+'&page=1&limit=10',
+                // "api/getAllEventAndGamesData?team_id="+"645cc97e6612dc1e4cd97597",
+                "api/getAllEventAndGamesData?team_id=" + id,
+                // +'&page=1&limit=10',
+                "GET",
+                header
+            ).then(async (res) => {
+                console.log("schedule----", res);
+
+                if (res.response_code == 4000) {
+                    dispatch(logoutUser(null));
+                    localStorage.removeItem("user");
+                    history.push("/");
+                    toast.error(res.response_message);
+                }
+                setSchedule(res.response_data);
+            });
+        }
+    };
+
+
 
     const change = (event) => {
         console.log("event", event.target.value);
-    setTeamDropDown(event.target.value);
-    teamSchedule(event.target.value);
+        setTeamDropDown(event.target.value);
+        teamSchedule(event.target.value);
     }
     let headers = [
-    //   schedule?.isFlag ==  "Event"? 
+        //   schedule?.isFlag ==  "Event"? 
         // { label: "Event/Game Name", key: schedule?.isFlag ==  "Event"? "event_name" :"game_name"}
         { label: "Event/Game Name", key: "event_name" },
-    // {label:"Event/Game name",key:["event_name","game_name"]}
+        // {label:"Event/Game name",key:["event_name","game_name"]}
 
     ];
 
-    let data = (schedule && schedule.length>0 )? schedule: [];
+    let data = (schedule && schedule.length > 0) ? schedule : [];
 
 
 
@@ -220,32 +245,39 @@ function Export(props) {
                     <div className="dashboard-main-content">
                         <div className="dashboard-head">
                             <div className="teams-select">
-                               
+
 
                                 <select onClick={change}>
                                     <option>Select Team</option>
                                     {team?.map((team) => {
                                         return (
                                             <option value={team.accept_invite_team_id}>
-                                            {team.accept_invite_team_name}
-                                          </option>
+                                                {team.accept_invite_team_name}
+                                            </option>
                                         )
                                     })}
 
 
                                 </select>
-                              
+
                             </div>
 
                             <div className="profile-head">
-                                <div className="profile-head-name">{user ? user.fname : user.lname}</div>
-                                <div className="profile-head-img">
-                                    {
-                                        user ?
-                                            <img src={user.profile_image} alt="" /> :
-                                            <img src={UserProfile} alt="" />
-                                    }
+                                {console.log(profilePic.lname, "3740000000000000000>>>>")}
+                                {profilePic?.fname ? (
+                                    <div className="profile-head-name">
 
+                                        {profilePic?.fname + " " + profilePic?.lname}
+                                    </div>
+                                ) : (
+                                    <div className="profile-head-name">{profilePic?.fname} {profilePic?.lname}</div>
+                                )}
+                                <div className="profile-head-img">
+                                    {profilePic?.profile_image == null ? (
+                                        <img src={BigUserProfile} alt="" />
+                                    ) : (
+                                        <img src={profilePic?.profile_image} alt="" />
+                                    )}
                                 </div>
                             </div>
                             <div className="login-account">
@@ -265,18 +297,18 @@ function Export(props) {
                             <div className="prefarance-box" style={{ overflowX: "hidden" }}>
                                 <div className="team-payment team-assesment" >
                                     <div className="prefarance-form playerinfo-form">
-                                        <span style={{paddingLeft:"21px"}}>TeamSnap offers several ways to access or export your schedule data:</span>
+                                        <span style={{ paddingLeft: "21px" }}>TeamSnap offers several ways to access or export your schedule data:</span>
 
                                         <div className="row" style={{ padding: "21px" }}>
                                             <div className="col-md-12">
                                                 <div className="prefarance-form-list">
-                                                    <h1 style={{color:"white"}}>iCal</h1>
-                                                    <p style={{ color: "gray",paddingTop:"15px",paddingBottom:"15px" }}>If you use Apple iCal, Microsoft Outlook 2007+ or any iCal-compatible desktop calendar application you can "subscribe"
+                                                    <h1 style={{ color: "white" }}>iCal</h1>
+                                                    <p style={{ color: "gray", paddingTop: "15px", paddingBottom: "15px" }}>If you use Apple iCal, Microsoft Outlook 2007+ or any iCal-compatible desktop calendar application you can "subscribe"
 
                                                         to your TeamSanp Schedule and have your full schedule of games and events show up automatically in your calendar. Just click this button:</p>
-                                                    <button className="add-links" style={{width:"276px",marginRight:"10px"}}>Subscribe to full Calender</button>
-                                                    <button className="add-links" style={{width:"276px",marginRight:"10px"}}>Subscribe to Games only</button>
-                                                    <p style={{ color: "gray",paddingTop:"15px" }}>If you use Google Calendar, another web-based calendar, or just want to do things manually, you can also copy and paste the link directly into your calendar program (normally in the "Subscribe By URL" area):</p>
+                                                    <button className="add-links" style={{ width: "276px", marginRight: "10px" }}>Subscribe to full Calender</button>
+                                                    <button className="add-links" style={{ width: "276px", marginRight: "10px" }}>Subscribe to Games only</button>
+                                                    <p style={{ color: "gray", paddingTop: "15px" }}>If you use Google Calendar, another web-based calendar, or just want to do things manually, you can also copy and paste the link directly into your calendar program (normally in the "Subscribe By URL" area):</p>
                                                 </div>
                                             </div>
                                             <div className="col-md-12">

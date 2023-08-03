@@ -1163,7 +1163,7 @@ ol {
   width: 28%;
   border-right: 1px solid #2c2c2c;
   padding: 30px 30px;
-  flex-direction: inherit;
+  flex-direction: column;
   border-bottom: none;
 }
 .prefarance-box .nav-tabs .nav-link {
@@ -1759,7 +1759,7 @@ ol {
 }
 
 .player-info-head .player-info-head-right button.add-new-family {
-  width: 267px;
+  width: auto;
   height: 50px;
   border-radius: 25px;
   background: #ec3525;
@@ -1768,6 +1768,7 @@ ol {
   border: none;
   outline: 0;
   margin-left: 12px;
+  padding: 0.5rem 1rem;
 }
 
 .prefarance-box.player-info ul.nav-tabs {

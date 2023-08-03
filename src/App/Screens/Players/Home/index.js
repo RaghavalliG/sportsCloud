@@ -92,7 +92,7 @@ function HomeComponents(props) {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       let header = {
-        token: user.authtoken,
+        token: user?.authtoken,
       };
       // console.log("user+++++++++++", user._id
       // );
@@ -100,7 +100,7 @@ function HomeComponents(props) {
       Network(
         // "api/player-joined-team-list?player_id=" + user._id,
         // "api/getAllAcceptedTeamListByPlayerId?playerId=" +"644a463b556e970345ff5be5",
-        "api/getAllAcceptedTeamListByPlayerId?playerId=" + user._id,
+        "api/getAllAcceptedTeamListByPlayerId?playerId=" + user?._id,
         "GET",
         header
       ).then(async (res) => {
@@ -113,7 +113,7 @@ function HomeComponents(props) {
         }
 
         setTeam(res.response_data);
-        teamRoster(res?.response_data[0]._id);
+        teamRoster(res?.response_data[0]?._id);
       });
 
 
@@ -147,7 +147,7 @@ function HomeComponents(props) {
         setPlayer(res.response_data.player);
         setNewPlayerData(
           res.response_data.player.filter((data) => {
-            return data._id != null;
+            return data?._id != null;
           })
         );
       });
@@ -179,16 +179,16 @@ function HomeComponents(props) {
       };
       // console.log("user", user);
 
-      Network("api/get-user-details?user_id=" + user._id, "GET", header).then(
+      Network("api/getUserDetailsById?user_id=" + user?._id, "GET", header).then(
         async (res) => {
           // console.log("new Profile Pic----", res);
-          if (res.response_code == 4000) {
+          if (res.response_code == 400) {
             dispatch(logoutUser(null));
             localStorage.removeItem("user");
             history.push("/");
             toast.error(res.response_message);
           }
-          setProfilePic(res.response_data);
+          setProfilePic(res.response_data.userDetailsObj);
         }
       );
     }
@@ -197,7 +197,7 @@ function HomeComponents(props) {
   const uploadImage = (value) => {
     const formData = new FormData();
     formData.append("profile_image", value);
-    formData.append("user_id", user._id);
+    formData.append("user_id", user?._id);
     // console.log("image--->", value);
 
     axios(
@@ -207,7 +207,7 @@ function HomeComponents(props) {
         method: "POST",
         headers: {
           "Content-Type": "multipart/form-data",
-          "token": user.authtoken,
+          "token": user?.authtoken,
         },
         data: formData,
       }
@@ -248,9 +248,9 @@ function HomeComponents(props) {
     axios({
       method: 'get',
       // url: 'https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?PlayerId='+"647f1c8456ee340813ac0e49",
-      url: `https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?playerId=${user._id}`,
+      url: `https://nodeserver.mydevfactory.com:1448/api/getInvitationByPlayerId?playerId=${user?._id}`,
       headers: {
-        "token": (user.authtoken)
+        "token": (user?.authtoken)
 
       },
 
@@ -319,7 +319,7 @@ function HomeComponents(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     const api = "https://nodeserver.mydevfactory.com:1448/api/acceptOrRejectInviatationByInviteId"
     const headers = {
-      "token": (user.authtoken)
+      "token": (user?.authtoken)
 
     }
     const requestbody = {
@@ -369,12 +369,14 @@ function HomeComponents(props) {
               </div>
               --> */}
               <div className="profile-head">
+              {console.log(profilePic.lname,"3740000000000000000>>>>")}
                 {profilePic?.fname ? (
                   <div className="profile-head-name">
+                   
                     {profilePic?.fname + " " + profilePic?.lname}
                   </div>
                 ) : (
-                  <div className="profile-head-name">{user?.fname} {user?.lname}</div>
+                  <div className="profile-head-name">{profilePic?.fname} {profilePic?.lname}</div>
                 )}
 
                 <div className="profile-head-img">

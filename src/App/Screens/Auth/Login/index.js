@@ -100,14 +100,19 @@ function LoginComponents(props) {
         .then(async (res) => {
           // console.log("res success login--->", res);
           if (res.response_code == 200) {
-            if (res.response_data.authtoken != "") {
+            // console.log('response_')
+            // console.log(res.response_data.authtoken)
+            // console.log(res.response_data.authtoken != "" && res.response_data.authtoken != null)
+            if (res.response_data.authtoken != "" && res.response_data.authtoken != null) {
+              // console.log('response_au')
               toast.success(res.response_message);
               setLoader(false);
               localStorage.setItem("user", JSON.stringify(res.response_data));
               dispatch(loginUser(res.response_data));
               props.history.push("/");
             } else {
-              toast.success(res.response_message);
+              // console.log('response_no')
+              toast.error(res.response_message);
             }
           } else {
             toast.error(res.response_message);

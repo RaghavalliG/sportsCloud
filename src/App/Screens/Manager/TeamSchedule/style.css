@@ -2313,6 +2313,7 @@ button.add-links {
   color: #ffffff;
   margin: 0;
   padding: 0;
+  margin-right: auto;
 }
 .manager-player-section ul {
   padding: 0;

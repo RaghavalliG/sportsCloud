@@ -53,7 +53,7 @@ const TeamAvailability = () => {
     updateProfile();
   }, []);
   const handleLogout = () => {
-    // dispatch(logoutUser(null));
+    dispatch(logoutUser(null));
     localStorage.removeItem("user");
     setUserData(null);
     history.push("/");
@@ -63,14 +63,20 @@ const TeamAvailability = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       let header = {
-        authToken: user.authtoken,
+        "token": user.authtoken,
       };
-      console.log("user", user);
+      // console.log("user", user);
 
-      Network("api/get-user-details?user_id=" + user._id, "GET", header).then(
+      Network("api/getUserDetailsById?user_id=" + user?._id, "GET", header).then(
         async (res) => {
-          console.log("new Profile Pic----", res);
-          setProfilePic(res.response_data);
+          // console.log("new Profile Pic----", res);
+          if (res.response_code == 400) {
+            dispatch(logoutUser(null));
+            localStorage.removeItem("user");
+            history.push("/");
+            toast.error(res.response_message);
+          }
+          setProfilePic(res.response_data.userDetailsObj);
         }
       );
     }
@@ -160,14 +166,23 @@ const TeamAvailability = () => {
               </div>
 
               <div className="profile-head">
-                <div className="profile-head-name">
-                  {profilePic?.fname + " " + profilePic?.lname}
-                </div>
+              {console.log(profilePic.lname,"3740000000000000000>>>>")}
+                {profilePic?.fname ? (
+                  <div className="profile-head-name">
+                   
+                    {profilePic?.fname + " " + profilePic?.lname}
+                  </div>
+                ) : (
+                  <div className="profile-head-name">{profilePic?.fname} {profilePic?.lname}</div>
+                )}
                 <div className="profile-head-img">
+                {console.log(profilePic,"profilepic===>>>")}
                   {profilePic?.profile_image == null ? (
+                   
                     <img src={BigUserProfile} alt="" />
                   ) : (
-                    <img src={`${pic}${profilePic?.profile_image}`} alt="" />
+                    <img src={profilePic?.profile_image} alt="" />
+                    
                   )}
                 </div>
               </div>
