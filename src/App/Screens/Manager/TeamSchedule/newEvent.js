@@ -51,7 +51,7 @@ const NewEvent = () => {
   const [uniform, setUniform] = useState();
   const [teamId, setTeamId] = useState();
   const [dropdown, setDropdown] = useState([]);
-  const [teamDropdown, setTeamDropDown] = useState("");
+  const [teamDropdown, setTeamDropDown] = useState(localStorage.getItem('ManagerTeamId'));
   const [ownDropdown, setOwnDropDown] = useState("");
   const [opnentDropdown, setOponentDropDown] = useState("");
   const [check, setCheck] = useState("false");
@@ -129,6 +129,7 @@ const NewEvent = () => {
   const eventCreate = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const eventType = localStorage.getItem("eventType");
+    const teamId = localStorage.getItem('ManagerTeamId')
     const requestOptions = {
       method: "POST",
       headers: {

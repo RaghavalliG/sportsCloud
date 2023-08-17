@@ -98,7 +98,7 @@ function LoginComponents(props) {
       //   .catch(error => console.log('error', error));
       Network("api/login", "post", obj)
         .then(async (res) => {
-          // console.log("res success login--->", res);
+          console.log("res success login--->", res);
           if (res.response_code == 200) {
             // console.log('response_')
             // console.log(res.response_data.authtoken)

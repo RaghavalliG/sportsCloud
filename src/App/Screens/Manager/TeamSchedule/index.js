@@ -30,6 +30,7 @@ import Subscribe from "./Subscribe";
 import Modal from "react-bootstrap/Modal";
 import BigUserProfile from "../../../images/big-user-profile.png";
 import CsvDownload from "../../../Components/Comman/CsvDownload";
+import ManagerHeader from "../../../Components/Header/ManagerHeader";
 
 function TeamSchdule(props) {
   const history = useHistory();
@@ -55,14 +56,18 @@ function TeamSchdule(props) {
   const [volenteerUpdate, setVolenteerUpdate] = useState("");
   const [flag, setFlagList] = useState([]);
   const [flagId, setFlagId] = useState("");
+  const [availModal, setAvailModal] = useState();
+  const [availSportModal, setAvailSportModal] = useState("");
+  const [sportId, setSportId] = useState('');
+  const [availDataModal, setAvailDataModal] = useState();
 
   const pic = "https://nodeserver.mydevfactory.com:1448/";
 
   useEffect(() => {
     // let user = userdata && userdata._id ? true : false;
     // //console.log("userMe===>", user);
-    dropdownMenu();
-    setTeamDropDown();
+    // dropdownMenu();
+
     // setUser(user);
     // //console.log("USerData", userdata);
     const userLocal = JSON.parse(localStorage.getItem("user"));
@@ -72,17 +77,18 @@ function TeamSchdule(props) {
     setUserData(userLocal);
     flagList();
     updateProfile();
-
-    // teamSchedule();
+    const team_id = localStorage.getItem("ManagerTeamId");
+    setTeamDropDown(team_id);
+    teamSchedule(team_id);
   }, []);
 
-  const handleLogout = () => {
-    //console.log("pruyuuuuuu", props);
-    dispatch(logoutUser(null));
-    localStorage.removeItem("user");
-    setUserData(null);
-    props.history.push("/");
-  };
+  // const handleLogout = () => {
+  //   //console.log("pruyuuuuuu", props);
+  //   dispatch(logoutUser(null));
+  //   localStorage.removeItem("user");
+  //   setUserData(null);
+  //   props.history.push("/");
+  // };
   const updateProfile = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
@@ -100,36 +106,38 @@ function TeamSchdule(props) {
     }
   };
 
-  const dropdownMenu = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      let header = {
-        token: user.authtoken,
-      };
-      //console.log('user',user)
+  // const dropdownMenu = () => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   if (user) {
+  //     let header = {
+  //       token: user.authtoken,
+  //     };
+  //     //console.log('user',user)
 
-      Network(
-        "api/getAllTeamName?teamManagerId=" + user._id,
-        "GET",
-        header
-      ).then(async (res) => {
-        console.log("dropdown----", res);
-        if (res.response_code == 400) {
-          dispatch(logoutUser(null));
-          localStorage.removeItem("user");
-          history.push("/");
-          toast.error(res.response_message);
-        }
-        setDropdown(res.response_data);
+  //     Network(
+  //       "api/getAllTeamName?teamManagerId=" + user._id,
+  //       "GET",
+  //       header
+  //     ).then(async (res) => {
+  //       console.log("dropdown----", res);
+  //       if (res.response_code == 400) {
+  //         dispatch(logoutUser(null));
+  //         localStorage.removeItem("user");
+  //         history.push("/");
+  //         toast.error(res.response_message);
+  //       }
+  //       setDropdown(res.response_data);
 
-        teamSchedule(res.response_data[0].team_id);
-      });
-    }
-  };
-  const change = (event) => {
-    console.log("event", event.target.value);
-    setTeamDropDown(event.target.value);
-    teamSchedule(event.target.value);
+  //       teamSchedule(res.response_data[0].team_id);
+  //     });
+  //   }
+  // };
+  const change = (value) => {
+    console.log("eventssss", value);
+    setTeamDropDown(value);
+    teamSchedule(value);
+    // setPlayer([])
+    // teamRoster(event.target.value);
   };
 
   const teamSchedule = (id) => {
@@ -158,7 +166,7 @@ function TeamSchdule(props) {
           "&page=1&limit=10";
       }
       //console.log('user',user)
-      var teamid = id ? id : "6480285555cf8a5024960668";
+      // var teamid = id ? id :   "6480285555cf8a5024960668";
       Network("api/getAllEventAndGamesData?team_id=" + id, "GET", header).then(
         async (res) => {
           console.log("schedule----", res);
@@ -195,12 +203,17 @@ function TeamSchdule(props) {
     }
   };
 
-  const deleteScheduleData = (id) => {
+  const deleteScheduleData = (id, flag) => {
     const user = JSON.parse(localStorage.getItem("user"));
     console.log("id-------------->", id);
     const a = window.confirm("Are you sure you wish to delete this Data?");
     console.log("delete click");
     if (a == true) {
+      if (flag == 'Game') {
+        var url = 'https://nodeserver.mydevfactory.com:1448/api/deleteGameDetailsById';
+      } else {
+        var url = 'https://nodeserver.mydevfactory.com:1448/api/deleteEventDetailsById'
+      }
       const requestOptions = {
         method: "POST",
         headers: {
@@ -212,19 +225,20 @@ function TeamSchdule(props) {
         }),
       };
       fetch(
-        "https://nodeserver.mydevfactory.com:1447/api/delete-game-event",
+        url,
         requestOptions
       )
         .then((response) => response.json())
         .then((res) => {
           console.log("delete Schedule  data", res);
-          if (res.response_code == 2000) {
+          if (res.response_code == 200) {
             console.log("deleted data", res);
+            toast.success(res.response_message);
           }
-          if (res.response_code == 4000) {
-            dispatch(logoutUser(null));
-            localStorage.removeItem("user");
-            history.push("/");
+          if (res.response_code == 400) {
+            // dispatch(logoutUser(null));
+            // localStorage.removeItem("user");
+            // history.push("/");
             toast.error(res.response_message);
           }
 
@@ -232,6 +246,79 @@ function TeamSchdule(props) {
         });
     }
   };
+
+  const setAvailability = (flag, sport_id, availData) => {
+    setAvailModal(true)
+    setAvailSportModal(flag)
+    setSportId(sport_id)
+    console.log(availData)
+    // if(availData.length > 0){
+    setAvailDataModal(availData)
+    // }
+    // setAvailDataModal(availData)
+
+  };
+  const updateAvailability = () => {
+
+  }
+  const addAvailability = (status) => {
+    console.log('add');
+    const user = JSON.parse(localStorage.getItem("user"));
+    const ManagerRosterId = localStorage.getItem("ManagerRosterId")
+    console.log("id-------------->", id);
+    // const a = window.confirm("Are you sure you wish to delete this Data?");
+    // console.log("delete click");
+    // if (a == true) {
+    if (availSportModal == 'Game') {
+      var url = 'https://nodeserver.mydevfactory.com:1448/api/addGameAvailabilityByGameId';
+      var data = {
+
+        game_id: sportId,
+        assignment_volunteer_roster_id: ManagerRosterId,
+        at_an_event: status
+      };
+    } else {
+      var url = 'https://nodeserver.mydevfactory.com:1448/api/addEventAvailabilityByEventId';
+
+      var data = {
+
+        event_id: sportId,
+        assignment_volunteer_roster_id: ManagerRosterId,
+        at_an_event: status
+      };
+    }
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "token": user.authtoken,
+      },
+      body: JSON.stringify(data),
+    };
+    fetch(
+      url,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((res) => {
+        console.log("Schedule  data", res);
+        if (res.response_code == 200) {
+          console.log(" data", res);
+          toast.success(res.response_message);
+        }
+        if (res.response_code == 400) {
+          // dispatch(logoutUser(null));
+          // localStorage.removeItem("user");
+          // history.push("/");
+          toast.error(res.response_message);
+        }
+
+        // teamSchedule(teamDropdown);
+      });
+    // }
+
+
+  }
 
   const updateModalValue = (id1, uId) => {
     teamSchedule(teamDropdown == null ? dropdown[0]._id : teamDropdown);
@@ -306,7 +393,8 @@ function TeamSchdule(props) {
         <div className="dashboard-main">
           <SideMenuComponents manger="manger" />
           <div className="dashboard-main-content">
-            <div className="dashboard-head">
+            <ManagerHeader change={change} />
+            {/* <div className="dashboard-head">
               <div className="teams-select">
                 <button
                   className="create-new-team"
@@ -434,7 +522,7 @@ function TeamSchdule(props) {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
 
             <div className="prefarance-page">
               <div className="page-header">
@@ -628,32 +716,32 @@ function TeamSchdule(props) {
                 <div className="team-payment team-assesment">
                   <table>
                     <tr>
-                        <th></th>
+                      <th></th>
                       <th>Game/ Event</th>
                       <th>Date Time</th>
                       {/* <th>Time</th> */}
                       <th>Location</th>
-                      {/* <th>Assignments</th> */}
+                      <th></th>
                       <th>Actions</th>
                     </tr>
 
                     {schedule?.map((schedule, id) => {
                       return (
                         <tr>
-                            <td> {schedule.isFlag == 'Game' ? 
-                              <img
+                          <td> {schedule.isFlag == 'Game' ?
+                            <img
                               src={Cricket}
                               alt="cricket-icon"
                               className="img-fluid"
                               style={{ 'max-width': 50 }}
 
                             />
-                              :
-                              <img
-                                src={flagIcon}
-                                alt="flag-icon"
-                                className=""
-                              />}</td>
+                            :
+                            <img
+                              src={flagIcon}
+                              alt="flag-icon"
+                              className=""
+                            />}</td>
                           <td>
                             <div className="flag-prac">
                               {/* <img
@@ -665,9 +753,9 @@ function TeamSchdule(props) {
                                   borderRadius: "50%",
                                 }}
                               /> */}
-                             
+
                               <button className="practice">
-                                {schedule.isFlag == 'Game' ? schedule.game_name:schedule.event_name}
+                                {schedule.isFlag == 'Game' ? schedule.game_name : schedule.event_name}
                               </button>
                             </div>
                           </td>
@@ -676,20 +764,27 @@ function TeamSchdule(props) {
                           </td>
                           {/* <td><span>{`${new Date(schedule.date).getDate()}/${new Date(schedule.date).getMonth()}/${new Date(schedule.date).getFullYear()}`}</span></td> */}
                           {/* <td> */}
-                            {/* <span>{schedule.time.startTime}-{schedule.time.endTime}</span> */}
+                          {/* <span>{schedule.time.startTime}-{schedule.time.endTime}</span> */}
                           {/* </td> */}
                           <td>
                             <span>{schedule.location.locationName},</span>
                             <span>{schedule.location.address}</span>
                           </td>
+                          <td> <div className="last-row">
+                            <button style={{ color: '#ec3525' }}
+                              data-toggle="modal"
+                              data-target="#setAvailability"
+                              onClick={() => setAvailability(schedule.isFlag, schedule._id, schedule.roster_availability)}
+                            >Set Availability</button></div></td>
                           {/* <td>{schedule.assignment}</td> */}
                           <td>
                             <div className="last-row">
                               {/* <p>Avaneesh Shett</p>{" "} */}
+
                               <button
                                 data-toggle="modal"
                                 data-target="#assignmentdelect"
-                                onClick={() => deleteScheduleData(schedule._id)}
+                                onClick={() => deleteScheduleData(schedule._id, schedule.isFlag)}
                               >
                                 <img src={Delect} />
                               </button>{" "}
@@ -706,6 +801,34 @@ function TeamSchdule(props) {
                       );
                     })}
                   </table>
+
+                  {availModal ? (
+                    <Modal show={availModal} size="md">
+                      <Modal.Body>
+                        <div className="prefarance-form playerinfo-form">
+                          <h2 className="m-title">Set Availability</h2>
+                          <div className="row">
+                            <div className="col-md-12">
+                              <button className="btn acceptbtn focus1" onClick={() => { availDataModal.length > 0 ? updateAvailability('going') : addAvailability('going') }}>
+                                GOING
+                              </button>
+                              <button className="btn acceptbtn focus2" onClick={() => { availDataModal.length > 0 ? updateAvailability('maybe') : addAvailability('maybe') }}>
+                                MAY BE
+                              </button>
+                              <button className="btn acceptbtn focus3" onClick={() => { availDataModal.length > 0 ? updateAvailability('not') : addAvailability('not') }}>NO</button>
+                            </div></div>
+                          <div className="text-center mt-3">
+                            <button
+                              className="add-links"
+                              onClick={() => setAvailModal(false)}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </Modal.Body>
+                    </Modal>)
+                    : ''}
 
                   {modeValue && schedule.length != 0 ? (
                     <Modal show={modeValue} size="md">

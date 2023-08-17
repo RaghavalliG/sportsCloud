@@ -51,7 +51,7 @@ const NewGame = () => {
   const [uniform, setUniform] = useState();
   const [teamId, setTeamId] = useState();
   const [dropdown, setDropdown] = useState([]);
-  const [teamDropdown, setTeamDropDown] = useState("");
+  const [teamDropdown, setTeamDropDown] = useState(localStorage.getItem('ManagerTeamId'));
   const [ownDropdown, setOwnDropDown] = useState("");
   const [opnentDropdown, setOponentDropDown] = useState("");
   const [check, setCheck] = useState("false");

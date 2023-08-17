@@ -91,17 +91,17 @@ const ManagerTeamAvailability = () => {
     setUserData(userLocal);
     dropdownMenu();
     teamSchedule();
-    GameEventList();
+    // GameEventList();
     setColor();
   }, []);
   const handleLogout = () => {
-    // dispatch(logoutUser(null));
+    dispatch(logoutUser(null));
     localStorage.removeItem("user");
     setUserData(null);
     history.push("/");
   };
 
-  const pic = "https://nodeserver.mydevfactory.com:1447/";
+  const pic = "https://nodeserver.mydevfactory.com:1448/";
 
   const dropdownMenu = () => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -163,7 +163,7 @@ const ManagerTeamAvailability = () => {
     }
   };
 
-  const GameEventList = (id) => {
+  const GameEventList = (array) => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       let header = {
@@ -171,16 +171,16 @@ const ManagerTeamAvailability = () => {
       };
 
       let url = "";
-      if (id == null) {
-        url = "api/team-player-availability-list?game_event_id=" + gameEvent;
+      if (array[0] == 'Game') {
+        url = "api/getRosterAvailableDetailsByGameId?game_id=" + array[1];
       } else {
-        url = "api/team-player-availability-list?game_event_id=" + id;
+        url = "api/getRosterAvailableDetailsByEventId?events_id=" + array[1];
         // url = 'api/team-player-availability-list?game_event_id=' + "60be4fb4fc11cd4f8ca2cf8c"
       }
 
       Network(url, "GET", header).then(async (res) => {
         console.log("gameEvent list----", res);
-        if (res.response_code == 4000) {
+        if (res.response_code == 400) {
           dispatch(logoutUser(null));
           localStorage.removeItem("user");
           history.push("/");
@@ -228,9 +228,10 @@ const ManagerTeamAvailability = () => {
   };
 
   const gameEventId = (e) => {
-    setGameEvent(e.target.value);
-    GameEventList(e.target.value);
-    console.log("game event", e.target.value);
+    const myArray = e.target.value.split("-");
+    setGameEvent(myArray[1]);
+    GameEventList(myArray);
+    console.log("game event", myArray);
   };
 
   const colorChange = (e, id, dataId1) => {
@@ -336,7 +337,7 @@ const ManagerTeamAvailability = () => {
                   <option>Select Game/Event</option>
                   {schedule?.map((schedule) => {
                     return (
-                      <option value={schedule._id}>
+                      <option value={`${schedule.isFlag}-${schedule._id}`}>
                         {schedule.isFlag == "Game"
                           ? schedule.game_name
                           : schedule.event_name}

@@ -43,7 +43,7 @@ const PlayerInfoNav = (props) => {
                
             </li>
 
-            <li className="nav-item" className="nav-item"  >
+            <li className="nav-item"   >
                 <a className="nav-link" data-toggle="tab" href="#tabs-4" role="tab"  >Player Links and Files</a>
                
             </li>

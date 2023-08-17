@@ -82,21 +82,52 @@ const TeamAvailability = () => {
     }
   };
 
+  // const teamSelect = () => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   if (user) {
+  //     let header = {
+  //       authToken: user.authtoken,
+  //     };
+  //     console.log("user", user);
+
+  //     Network(
+  //       "api/player-joined-team-list?player_id=" + user._id,
+  //       "GET",
+  //       header
+  //     ).then(async (res) => {
+  //       console.log("res----", res);
+  //       if (res.response_code == 4000) {
+  //         dispatch(logoutUser(null));
+  //         localStorage.removeItem("user");
+  //         history.push("/");
+  //         toast.error(res.response_message);
+  //       }
+
+  //       setTeam(res.response_data);
+  //       // if(res.response_data.length!=0){
+  //       teamSchedule(res.response_data[0]._id);
+  //       // }
+  //     });
+  //   }
+  // };
+
   const teamSelect = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       let header = {
-        authToken: user.authtoken,
+        token: user.authtoken,
       };
       console.log("user", user);
 
       Network(
-        "api/player-joined-team-list?player_id=" + user._id,
+        // 'api/getAllAcceptedTeamListByPlayerId?playerId=' + "644a463b556e970345ff5be5",
+        "api/getAllAcceptedTeamListByPlayerId?playerId=" + user._id,
+        // "api/getAllAcceptedTeamListByPlayerId?playerId=" +"644a463b556e970345ff5be5",
         "GET",
         header
       ).then(async (res) => {
         console.log("res----", res);
-        if (res.response_code == 4000) {
+        if (res.response_code == 400) {
           dispatch(logoutUser(null));
           localStorage.removeItem("user");
           history.push("/");
@@ -105,7 +136,7 @@ const TeamAvailability = () => {
 
         setTeam(res.response_data);
         // if(res.response_data.length!=0){
-        teamSchedule(res.response_data[0]._id);
+        // teamRoster(res?.response_data[0]._id);
         // }
       });
     }
@@ -157,9 +188,12 @@ const TeamAvailability = () => {
                   <option>Select Team</option>
                   {team?.map((team) => {
                     return (
-                      <option value={team.team_id._id}>
-                        {team.team_id.team_name}
-                      </option>
+                      // <option value={team.team_id._id}>
+                      //   {team.team_id.team_name}
+                      // </option>
+                      <option value={team?.accept_invite_team_id}>
+                      {team?.accept_invite_team_name}
+                    </option>
                     );
                   })}
                 </select>

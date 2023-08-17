@@ -573,12 +573,12 @@ function ManagerTeamShop(props) {
             </div>
 
             <div className="team-shop-page">
-              <div
+              {/* <div
                 className="my-order-section"
                 onClick={() => history.push("./Order")}
               >
                 <a href="#">My Orders</a>
-              </div>
+              </div> */}
               <div className="team-shop-list-box">
                 <div className="sort-by-section">
                   <div className="sort-by-section-main">

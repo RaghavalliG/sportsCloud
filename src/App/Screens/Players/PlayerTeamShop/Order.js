@@ -38,6 +38,7 @@ const Order = (props) => {
   const [profilePic, setProfilePic] = useState([]);
   const [cart, setCart] = useState([]);
   const [sizeDropdown, setSizeDropDown] = useState("");
+  const [cartQuantity, setCartQuantity] = useState();
 
   const pic1 = "https://nodeserver.mydevfactory.com:1447/profilepic/";
 
@@ -149,6 +150,7 @@ const Order = (props) => {
           console.log(res.data.response_data, "reponse data565r65656");
           console.log(cart, "----->>>>");
           setSizeDropDown();
+          
         }
         if ((res.data.success = false)) {
           toast.error(res.data.response_message);
@@ -304,6 +306,31 @@ const Order = (props) => {
     editCart(cartId, event.target.value, "size");
   };
 
+  const incrementQuantity = (cartId,currentQuantity) => {
+    // console.log("event+++++++++++++++++++++", event.target.value);
+    const newQuantity = currentQuantity + 1
+    setCart((prevItems) =>
+      prevItems.map((item) =>
+        item.cartId === cartId ? { ...item, quantity: newQuantity} : item
+      )
+    );
+    editCart(cartId, newQuantity, "quantity");
+  };
+
+  const decrementQuantity = (cartId,currentQuantity) => {
+ 
+    if (currentQuantity > 1) {
+      const newQuantity = currentQuantity - 1;
+      setCart((prevItems) =>
+        prevItems.map((item) =>
+          item.cartId === cartId ? { ...item, quantity: newQuantity } : item
+        )
+      );
+      editCart(cartId, newQuantity, "quantity");
+    }
+
+  };
+
   return (
     <div>
       <div className="dashboard-container">
@@ -395,8 +422,8 @@ const Order = (props) => {
                                 Size:
                                 <select
                                   className="form-control"
-                                //   value={item.productSize}
-                                 value={item.productAvailableSizes.size}
+                                  value={item.productSize}
+                                //  value={item.productAvailableSizes.size}
                                   onChange={(event) =>
                                     change(event, item.cartId)
                                   }
@@ -423,9 +450,9 @@ const Order = (props) => {
                                                             </h3> */}
 
                               <div className="crt-action">
-                                <span className="cursor">-</span>
+                                <span className="cursor"  onClick={() => decrementQuantity(item.cartId,item.quantity)}>-</span>
                                 <span> {item.quantity}</span>
-                                <span className="cursor">+</span>
+                                <span className="cursor" onClick={() => incrementQuantity(item.cartId,item.quantity)}>+</span>
                               </div>
                             </div>
                             <div className="cart-price-prt">

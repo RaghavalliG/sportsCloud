@@ -49,19 +49,26 @@ function PlayerSchedule(props) {
   const [timeUpdate, setTimeUpdate] = useState("");
   const [locationDetails, setLocationDetails] = useState("");
   const [assignmentUpdate, setAssignmentupdate] = useState("");
-  const [volenteerUpdate, setVolenteerUpdate] = useState("");
+  const [volenteerUpdate, setVolenteerUpdate] = useState(""); 
   const [flag, setFlagList] = useState([]);
   const [flagId, setFlagId] = useState("");
   const [eventditailsmodel, seteventDitailsmodel] = useState(false);
   const [gameditailsmodel, setgameDitailsmodel] = useState(false);
+  const [availableditailsmodel, setavailableDitailsmodel] = useState(false);
+  const [availablitydetails, setAvalablitydetails] = useState({});
+  const [gameavailablitydetails, setgameAvalablitydetails] = useState({});
+  const [gameavailableditailsmodel, setgameavailableDitailsmodel] = useState(false);
+
   const [eventdetails, setEventdetails] = useState({});
   const [gamedetails, setGamedetails] = useState({});
   const [id1, setId1] = useState("");
+  const[id2,setId2]=useState("")
   const pic = "https://nodeserver.mydevfactory.com:1447/profilepic/";
+
 
   useEffect(() => {
     // let user = userdata && userdata._id ? true : false;
-    // console.log("userMe===>", user);
+   // console.log("userMe===>");
     setUser(user);
     // console.log("USerData", userdata);
     const userLocal = JSON.parse(localStorage.getItem("user"));
@@ -70,10 +77,11 @@ function PlayerSchedule(props) {
     setUser(userD);
     setUserData(userLocal);
     teamSelect();
-    teamSchedule();
+    //teamSchedule();
     updateProfile();
     eventDitails();
     gameDitails();
+    // eventavailabilityDitails()
   }, []);
 
   const handleLogout = () => {
@@ -109,11 +117,12 @@ function PlayerSchedule(props) {
 
   const teamSelect = () => {
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log("user", user);
     if (user) {
       let header = {
         token: user.authtoken,
       };
-      console.log("user", user);
+    
 
       Network(
         "api/getAllAcceptedTeamListByPlayerId?playerId=" + user._id,
@@ -129,8 +138,10 @@ function PlayerSchedule(props) {
         }
 
         setTeam(res.response_data);
+        console.log("res.response_data",res.response_data)
         // if(res.response_data.length!=0){
-        teamSchedule(res?.response_data[0]._id);
+        //teamSchedule(res?.response_data[0]._id);
+        teamSchedule(res?.response_data[0].accept_invite_team_id)
         // }
       });
     }
@@ -138,7 +149,7 @@ function PlayerSchedule(props) {
 
   const teamSchedule = (id) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log("id<<<<<", id);
+    console.log("id<<<<<",`api/getAllEventAndGamesData?team_id=${id}`,);
     if (user) {
       let header = {
         token: user.authtoken,
@@ -158,16 +169,41 @@ function PlayerSchedule(props) {
         if (res.response_code == 4000) {
           dispatch(logoutUser(null));
           localStorage.removeItem("user");
-          history.push("/");
+          history.push("/")
           toast.error(res.response_message);
         }
         setSchedule(res.response_data);
+        //console.log("res",res.response_data)
+        
       });
     }
   };
   const change = (event) => {
     console.log("event", event.target.value);
     setTeamDropDown(event.target.value);
+
+    const selectedTeamObject =team.find(
+      (item) => item.accept_invite_team_id === event.target.value
+    );
+    // const selectedTeamObject = dropdown.find(
+    //   team.map(team => team.accept_invite_team_id === event.target.value)
+    
+    // );
+    console.log (selectedTeamObject,"===>>selectteamobject")
+   
+      console.log(selectedTeamObject?.accept_invite_team_id
+        ,"===>>190")
+
+
+    
+
+    localStorage.setItem("PlayerrTeamName", selectedTeamObject?.accept_invite_team_name);
+    localStorage.setItem("PlayerTeamId", selectedTeamObject?.accept_invite_team_id);
+    localStorage.setItem(
+      "PlayerRosterId",
+      selectedTeamObject?.accept_invite_id
+    );
+    // setTeamDropDown(event.target.value);
     teamSchedule(event.target.value);
   };
   const flagList = () => {
@@ -229,13 +265,13 @@ function PlayerSchedule(props) {
     }
   };
 
-  const updateModalValue = (id1, uId) => {
-    teamSchedule(teamDropdown == null ? dropdown[0]._id : teamDropdown);
-    setModeValue(true);
-    setUId(uId);
-    setId(id1);
-    console.log("idddddd-------->", id1);
-  };
+  // const updateModalValue = (id1, uId) => {
+  //   teamSchedule(teamDropdown == null ? dropdown[0]._id : teamDropdown);
+  //   setModeValue(true);
+  //   setUId(uId);
+  //   setId(id1);
+  //   console.log("idddddd-------->", id1);
+  // };
   console.log("idddddd-------->22", id);
 
   const updateGameEvent = () => {
@@ -284,6 +320,7 @@ function PlayerSchedule(props) {
     flag == "Event" ? eventDitails(id) : gameDitails(id);
     if (flag == "Event") {
       seteventDitailsmodel(true);
+      
     } else {
       setgameDitailsmodel(true);
     }
@@ -350,6 +387,92 @@ function PlayerSchedule(props) {
     setFlagId(event.target.value);
   };
 
+
+  const eventavailabilityDitails = (id,add) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const playerarosteraid= localStorage.getItem("PlayerRosterId")
+    console.log(id, "redgfdgfgfdgfcddsdfs");
+    axios({
+      method: "post",
+
+      url:
+        "https://nodeserver.mydevfactory.com:1448/api/addEventAvailabilityByEventId" 
+        ,
+      //'https://nodeserver.mydevfactory.com:1448/api/getRoasterDetailsById?rosterId=' + id,
+      headers: {
+        token: user.authtoken,
+      },
+      data:{
+        event_id:id,
+        assignment_volunteer_roster_id:playerarosteraid,
+        at_an_event:add
+      }
+    })
+      .then(function (res) {
+        console.log(res, "978767564554343456767475784789567856756");
+        setAvalablitydetails(res.data.response_data);
+        // setavailableDitailsmodel(true)
+
+        if (res.response_code == 200) {
+          // seteventDitailsmodel(false);
+          //   teamRoster(teamDropdown)
+        }
+      })
+      .catch(function (res) {
+        //  console.log(res)
+      });
+  };
+  const gameavailabilityDitails = (id,add) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const playerarosteraid= localStorage.getItem("PlayerRosterId")
+    console.log(id, "redgfdgfgfdgfcddsdfs");
+    axios({
+      method: "post",
+
+      url:
+        "https://nodeserver.mydevfactory.com:1448/api/addGameAvailabilityByGameId" 
+        ,
+      //'https://nodeserver.mydevfactory.com:1448/api/getRoasterDetailsById?rosterId=' + id,
+      headers: {
+        token: user.authtoken,
+      },
+      data:{
+        game_id:id,
+        assignment_volunteer_roster_id:playerarosteraid,
+        at_an_event:add
+      }
+    })
+      .then(function (res) {
+        console.log(res, "978767564554343456767475784789567856756");
+        // setEventdetails(res.data.response_data);
+        setgameAvalablitydetails(res.data.response_data);
+        // setgameavailableDitailsmodel(true)
+
+        if (res.response_code == 200) {
+          // seteventDitailsmodel(false);
+          //   teamRoster(teamDropdown)
+        }
+      })
+      .catch(function (res) {
+        //  console.log(res)
+      });
+  };
+
+  const availablemodelvalue = (id, flag) => {
+    setId2(id);
+    // flag == "Event" ? eventavailabilityDitails(id) : gameavailabilityDitails(id);
+    if (flag == "Event") {
+      
+      setavailableDitailsmodel(true)
+    } else {
+
+       setgameavailableDitailsmodel(true)
+    }
+    console.log(flag, "======>>>>>>>>flag value");
+  };
+
+
+
   return (
     <div>
       <div className="dashboard-container">
@@ -359,11 +482,11 @@ function PlayerSchedule(props) {
             <div className="dashboard-head">
               <div className="teams-select">
                 <select onClick={change}>
-                  <option>Select Team</option>
-                  {team?.map((team) => {
-                    console.log("676767555", team);
+                  {/* <option>Select Team</option> */}
+                  {team?.map((team,index) => {
+                    //console.log("676767555", team);
                     return (
-                      <option value={team.accept_invite_team_id}>
+                      <option key={index} value={team.accept_invite_team_id}>
                         {team.accept_invite_team_name}
                       </option>
                     );
@@ -492,7 +615,13 @@ function PlayerSchedule(props) {
                               {item.location.address}
                             </span>
                           </td>
-                          <td>{/* {item.assignment} */}</td>
+                          <td>
+                          <button
+                                onClick={() =>
+                                  availablemodelvalue(item._id, item.isFlag)
+                                }
+                              >Set Availability
+                              </button></td>
                           <td>
                             {/* <div className="last-row">
                                  <p>Avaneesh Shett</p> <button data-toggle="modal" data-target="#assignmentdelect" onClick={() => deleteScheduleData(schedule._id)}><img src={Delect} />
@@ -796,6 +925,68 @@ function PlayerSchedule(props) {
                   ) : (
                     ""
                   )}
+
+                   {availableditailsmodel ? (
+                    <Modal show={availableditailsmodel} size="md">
+                      <Modal.Body>
+                        <div className="prefarance-form playerinfo-form">
+                          <h1 className="m-title">Set Availability</h1>
+                          {/* {availablitydetails ? ( */}
+                            <>
+                             <div>
+                                <button onClick={() => eventavailabilityDitails(id2, 'going')}>Going</button>
+                                <button onClick={() => eventavailabilityDitails(id2, 'maybe')}>Maybe</button>
+                                <button onClick={() => eventavailabilityDitails(id2, 'no')}>No</button>
+                               
+                              </div> 
+                            </>
+                          {/* ) : (
+                            ""
+                          )} */}
+
+                          <div className="text-center">
+                            <button
+                              className="add-links"
+                              style={{ margin: "10px" }}
+                              onClick={() => setavailableDitailsmodel(false)}
+                            >
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
+                     ) : (
+                      <Modal show={gameavailableditailsmodel} size="md">
+                      <Modal.Body>
+                        <div className="prefarance-form playerinfo-form">
+                          <h1 className="m-title">Set Availability</h1>
+                          {/* {availablitydetails ? ( */}
+                            <>
+                             <div>
+                                <button onClick={() => gameavailabilityDitails(id2, 'going')}>Going</button>
+                                <button onClick={() => gameavailabilityDitails(id2, 'maybe')}>Maybe</button>
+                                <button onClick={() => gameavailabilityDitails(id2, 'no')}>No</button>
+                               
+                              </div> 
+                            </>
+                          {/* ) : (
+                            ""
+                          )} */}
+
+                          <div className="text-center">
+                            <button
+                              className="add-links"
+                              style={{ margin: "10px" }}
+                              onClick={() => setgameavailableDitailsmodel(false)}
+                            >
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </Modal.Body>
+                    </Modal>
+                    )}
                 </div>
               </div>
             </div>
